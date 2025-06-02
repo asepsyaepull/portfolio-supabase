@@ -13,7 +13,6 @@ export default function Hero() {
         <div className="min-h-screen bg-gray-950 relative">
             {/* Background elemen dengan absolute positioning */}
             <BackgroundBeams className="absolute inset-0 z-0" />
-
             {/* Konten utama dengan z-index lebih tinggi */}
             <div className="container mx-auto px-4 md:px-28 min-h-screen relative z-10 overflow-visible">
                 <div className="flex flex-col md:flex-row w-full min-h-screen overflow-visible">
@@ -27,7 +26,7 @@ export default function Hero() {
                                 opacity: 1,
                             }}
                             className={cn(
-                                "relative mb-6 max-w-2xl text-left text-4xl leading-normal font-semibold tracking-tight text-white md:text-7xl dark:text-zinc-100",
+                                "relative mb-6 max-w-2xl text-left text-3xl leading-normal font-semibold tracking-tight text-white md:text-7xl dark:text-zinc-100",
                             )}
                             layout
                         >
@@ -35,11 +34,10 @@ export default function Hero() {
                                 I'm Asep Syaepul <ContainerTextFlip words={words} />
                             </div>
                         </motion.h1>
-                        );
                         <div className="flex flex-wrap items-center text-white gap-4 transition-transform">
-                            <p className="text-lg md:text-2xl font-normal">
+                            <span className="text-md md:text-xl font-normal">
                                 passionate who loves to create beautiful and functional digital experiences. With a keen eye for detail and a commitment to quality, I strive to bring ideas to life through innovative design and cutting-edge technology.
-                            </p>
+                            </span>
                         </div>
                         <div className="flex flex-wrap gap-4">
                             <Button
