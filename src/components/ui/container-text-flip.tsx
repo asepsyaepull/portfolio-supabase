@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect, useId } from "react";
 
-import { motion } from "motion/react";
+import { motion } from "framer-motion"; // Perbaikan import dari motion/react ke framer-motion
 import { cn } from "@/lib/utils";
 
 export interface ContainerTextFlipProps {
@@ -16,6 +16,8 @@ export interface ContainerTextFlipProps {
   textClassName?: string;
   /** Duration of the transition animation in milliseconds */
   animationDuration?: number;
+  /** Theme variant (light, dark, or custom) */
+  variant?: "light" | "dark" | "custom";
 }
 
 export function ContainerTextFlip({
@@ -24,6 +26,7 @@ export function ContainerTextFlip({
   className,
   textClassName,
   animationDuration = 700,
+  variant = "dark",
 }: ContainerTextFlipProps) {
   const id = useId();
   const [currentWordIndex, setCurrentWordIndex] = useState(0);
@@ -60,11 +63,21 @@ export function ContainerTextFlip({
       animate={{ width }}
       transition={{ duration: animationDuration / 2000 }}
       className={cn(
-        "relative inline-block rounded-lg pt-2 pb-3 text-center text-4xl font-bold text-black md:text-7xl dark:text-white",
-        "[background:linear-gradient(to_bottom,#f3f4f6,#e5e7eb)]",
-        "shadow-[inset_0_-1px_#d1d5db,inset_0_0_0_1px_#d1d5db,_0_4px_8px_#d1d5db]",
-        "dark:[background:linear-gradient(to_bottom,#374151,#1f2937)]",
-        "dark:shadow-[inset_0_-1px_#10171e,inset_0_0_0_1px_hsla(205,89%,46%,.24),_0_4px_8px_#00000052]",
+        "relative inline-block rounded-lg px-2 text-start text-3xl font-bold md:text-5xl transition-none",
+        // Default styling
+        "text-black",
+        // Light variant (updated to match modern design systems)
+        variant === "light" && [
+          "bg-gradient-to-b from-gray-100 to-gray-200",
+          "shadow-[inset_0_-1px_#d1d5db,inset_0_0_0_1px_#e5e7eb,_0_4px_8px_rgba(0,0,0,0.05)]"
+        ],
+        // Dark variant (updated to match modern dark themes)
+        variant === "dark" && [
+          "text-white",
+          "bg-gradient-to-b from-gray-800 to-gray-900",
+          "shadow-[inset_0_-1px_#1f2937,inset_0_0_0_1px_rgba(59,130,246,0.24),_0_4px_8px_rgba(0,0,0,0.5)]"
+        ],
+        // Allow custom styling via className
         className,
       )}
       key={words[currentWordIndex]}
@@ -72,9 +85,9 @@ export function ContainerTextFlip({
       <motion.div
         transition={{
           duration: animationDuration / 1000,
-          ease: "easeInOut",
+          ease: "easeOut",
         }}
-        className={cn("inline-block", textClassName)}
+        className={cn("inline-block px-4", textClassName)}
         ref={textRef}
         layoutId={`word-div-${words[currentWordIndex]}-${id}`}
       >
