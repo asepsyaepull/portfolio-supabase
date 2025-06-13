@@ -55,7 +55,24 @@ const config: Config = {
   			lg: 'var(--radius)',
   			md: 'calc(var(--radius) - 2px)',
   			sm: 'calc(var(--radius) - 4px)'
-  		}
+		  },
+		  animation: {
+			  move: "move 5s linear infinite",
+			  marquee: 'marquee 15s linear infinite'
+		  },
+		  keyframes: {
+			  move: {
+				  "0%": { transform: "translateX(-200px)" },
+				  "100%": { transform: "translateX(200px)" },
+			  },
+			  marquee: {
+				  'from': { transform: 'translateX(0%)' },
+				  'to': { transform: 'translateX(-50%)' }
+			  }
+		  },
+		  translate: {
+			  '101': '101%',
+		  },
   	}
   },
   plugins: [require("tailwindcss-animate")],
