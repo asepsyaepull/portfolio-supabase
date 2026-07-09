@@ -35,14 +35,31 @@ export default function Lanyard({
   fov = 20,
   transparent = true,
 }: LanyardProps) {
+  const [mobileFov, setMobileFov] = useState(fov);
+  
+  useEffect(() => {
+    const handleResize = () => {
+      // Increase FOV on small screens to zoom out and prevent the card from filling the screen
+      if (window.innerWidth < 768) {
+        setMobileFov(35);
+      } else {
+        setMobileFov(fov);
+      }
+    };
+    handleResize();
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, [fov]);
+
   return (
-    <div className="relative z-0 w-full h-screen flex justify-center items-center transform scale-100 origin-center">
+    <div className="relative z-0 w-full h-[300px] md:h-screen flex justify-center items-center overflow-visible">
       <Canvas
-        camera={{ position, fov }}
+        camera={{ position, fov: mobileFov }}
         gl={{ alpha: transparent }}
         onCreated={({ gl }) =>
           gl.setClearColor(new THREE.Color(0x000000), transparent ? 0 : 1)
         }
+        className="overflow-visible"
       >
         <ambientLight intensity={Math.PI} />
         <Physics gravity={gravity} timeStep={1 / 60}>
@@ -110,11 +127,9 @@ function Band({ maxSpeed = 50, minSpeed = 0 }: BandProps) {
     linearDamping: 4,
   };
 
-  // Gunakan path langsung di useGLTF dan useTexture
   const { nodes, materials } = useGLTF("/assets/lanyard/card.glb") as any;
   const texture = useTexture("/assets/lanyard/lanyard.png");
 
-  // Set texture properties setelah dimuat
   useEffect(() => {
     if (texture) {
       texture.wrapS = texture.wrapT = THREE.RepeatWrapping;
@@ -133,18 +148,13 @@ function Band({ maxSpeed = 50, minSpeed = 0 }: BandProps) {
   const [dragged, drag] = useState<false | THREE.Vector3>(false);
   const [hovered, hover] = useState(false);
 
-  const [isSmall, setIsSmall] = useState<boolean>(() => {
-    if (typeof window !== "undefined") {
-      return window.innerWidth < 1024;
-    }
-    return false;
-  });
+  const [isSmall, setIsSmall] = useState<boolean>(false);
 
   useEffect(() => {
     const handleResize = (): void => {
       setIsSmall(window.innerWidth < 1024);
     };
-
+    handleResize();
     window.addEventListener("resize", handleResize);
     return (): void => window.removeEventListener("resize", handleResize);
   }, []);

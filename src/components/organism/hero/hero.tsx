@@ -1,105 +1,190 @@
-import React, { useEffect, useState } from "react";
-import { motion } from "framer-motion"; // Perbaikan import
-import { ArrowRightCircle, ArrowRightIcon } from "lucide-react";
-import { BackgroundBeams } from "@/components/ui/background-beams";
-import { ContainerTextFlip } from "@/components/ui/container-text-flip";
-import { cn } from "@/lib/utils";
-import { Button } from "@/components/ui/moving-border";
-import Lanyard from "@/components/molecules/Lanyard/Lanyard";
-import { Marquee } from "@/components/molecules/marquee/marquee";
-import AnimatedShinyText from '../../ui/animated-shiny-text';
-import { Badge } from "@/components/ui/badge"
+"use client";
+import { HoverBorderGradient } from "@/components/ui/hover-border-gradient";
+import { SmoothTypingText } from "@/components/ui/smooth-typing-text";
+import { motion } from "framer-motion";
+import { ChevronRight } from "lucide-react";
+import { memo, useEffect, useRef, useState } from "react";
+import { FigmaHoverInspector } from "./figma-inspector";
+import { StylizedProfile } from "./stylized-profile";
 
-export default function Hero() {
+const Hero = () => {
     const [isMounted, setIsMounted] = useState(false);
+    const containerRef = useRef<HTMLDivElement>(null);
 
-    // Define the words array for ContainerTextFlip
-    const words = ["Frontend Developer", "UI/UX Designer", "Product Designer", "Creative Coder"];
-
-    // Tunggu sampai komponen dimount di client-side
     useEffect(() => {
         setIsMounted(true);
     }, []);
 
+    const containerVariants = {
+        hidden: { opacity: 0 },
+        visible: {
+            opacity: 1,
+            transition: {
+                staggerChildren: 0.1,
+            },
+        },
+    };
+
+    const itemVariants = {
+        hidden: { opacity: 0, y: 20 },
+        visible: {
+            opacity: 1,
+            y: 0,
+            transition: {
+                duration: 0.6,
+                ease: [0.22, 1, 0.36, 1],
+            },
+        },
+    };
+
+    if (!isMounted) return <div className="min-h-screen bg-gray-950" />;
+
     return (
-        <div className="min-h-screen bg-gray-950 relative">
-            {/* Background elemen dengan absolute positioning */}
-            <BackgroundBeams className="absolute inset-0 z-0" />
+        <div
+            ref={containerRef}
+            className="min-h-[95vh] bg-zinc-50 dark:bg-gray-950 relative flex items-center justify-center overflow-hidden selection:bg-lime-500/30 transition-colors duration-300"
+        >
+            {/* Design System Grid Background */}
+            <div className="absolute inset-0 z-0">
+                <div className="absolute inset-0 bg-[radial-gradient(#d4d4d8_1px,transparent_1px)] dark:bg-[radial-gradient(#27272a_1px,transparent_1px)] [background-size:32px_32px] [mask-image:radial-gradient(ellipse_50%_50%_at_50%_50%,#000_70%,transparent_100%)] opacity-50 dark:opacity-30 transition-colors duration-300" />
 
-            {/* Konten utama dengan z-index lebih tinggi */}
-            <div className="container mx-auto px-4 md:px-28 relative z-10 overflow-visible">
-                <div className="flex flex-col md:flex-row w-full overflow-visible">
-                    {/* Kolom kiri - Konten Utama */}
-                    <div className="flex-1 flex flex-col justify-center gap-6 py-20 md:py-0 overflow-visible">
-                        {isMounted ? (
-                            <motion.h1
-                                initial={{ opacity: 0 }}
-                                animate={{ opacity: 1 }}
-                                className={cn(
-                                    "relative mb-2 max-w-4xl text-start text-3xl leading-normal font-semibold tracking-tight text-white md:text-5xl dark:text-zinc-100",
-                                )}
-                            >
-                                <div className="flex flex-col gap-4">
-                                    <div className="z-10 flex">
-                                        <div
-                                            className={cn(
-                                                "group rounded-full border border-gray-800 text-base text-white transition-all ease-in hover:cursor-pointer hover:bg-gray-900 dark:border-white/5 dark:bg-neutral-900 dark:hover:bg-neutral-800",
-                                            )}
-                                        >
-                                            <AnimatedShinyText className="inline-flex items-center justify-center px-4 py-1 transition ease-out text-white hover:text-neutral-300 hover:duration-300 hover:dark:text-neutral-400">
-                                                <span>✨ Available for work </span>
-                                                <ArrowRightIcon className="ml-1 size-3 transition-transform duration-300 ease-in-out group-hover:translate-x-0.5" />
-                                            </AnimatedShinyText>
-                                        </div>
-                                    </div>
-                                    <span>I'm Asep Syaepul </span>
-                                    <div className="flex items-center gap-2">
-                                        {/* Gunakan ContainerTextFlip untuk efek flip pada teks */}
-                                        <span className="text-lime-500 text-4xl">I am</span>
-                                        <ContainerTextFlip words={words} className="flex py-2 px-3" textClassName="text-white text-3xl" />
-                                    </div>
-                                </div>
-                            </motion.h1>
-                        ) : (
-                            <h1 className={cn(
-                                "relative mb-6 max-w-4xl text-start text-3xl leading-normal font-semibold tracking-tight text-white md:text-5xl dark:text-zinc-100",
-                            )}>
-                                <div className="flex flex-col gap-8">
-                                    I'm Asep Syaepul {words[0]}
-                                </div>
-                            </h1>
-                        )}
-                        <div className="text-md md:text-lg font-normal text-white">
-                            From the inception of a project to its completion, we employ a comprehensive and holistic approach.
-                        </div>
-                        <div className="flex flex-wrap gap-4">
-                            <Button
-                                variant="default"
-                                className="flex justify-center items-center bg-lime-500 text-white text-md px-8 py-6 hover:bg-lime-600 hover:text-white transition-all rounded-full">
-                                WHAT I DO <ArrowRightCircle className="ml-4" />
-                            </Button>
-                            <Button
-                                variant="ghost"
-                                className="flex justify-center items-center text-white text-md hover:border-lime-600 hover:bg-lime-600 hover:text-white transition-all rounded-full px-8 py-6">
-                                VIEW WORK <ArrowRightCircle className="ml-4" />
-                            </Button>
-                        </div>
-                    </div>
-
-                    {/* Kolom kanan - Lanyard */}
-                    <div className="hidden md:flex flex-1 items-center justify-center overflow-visible relative">
-                        {isMounted && (
-                            <div className="w-full h-full overflow-visible">
-                                <Lanyard position={[0, 0, 14]} gravity={[0, -30, 0]} />
-                            </div>
-                        )}
-                    </div>
-                </div>
-                {/* Scroll Velocity Section */}
-                <div className="absolute  bottom-0 left-0 w-full overflow-visible py-6">
-                    <Marquee />
-                </div>
+                {/* Subtle Radial Glows */}
+                <div className="absolute top-1/4 left-1/4 w-[600px] h-[600px] bg-lime-500/10 rounded-full blur-[140px] pointer-events-none" />
+                <div className="absolute bottom-1/4 right-1/4 w-[500px] h-[500px] bg-blue-500/5 rounded-full blur-[140px] pointer-events-none" />
             </div>
+
+            {/* Figma-style Inspector Overlay */}
+            <FigmaHoverInspector containerRef={containerRef} />
+
+            <div className="container mx-auto px-4 md:px-24 relative z-20 w-full grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+                {/* Left Column - Text Content */}
+                <motion.div
+                    initial="hidden"
+                    animate="visible"
+                    variants={containerVariants}
+                    className="flex flex-col items-start text-left w-full pt-20 md:pt-0 lg:col-span-7"
+                >
+                    {/* Status & Location Badge */}
+                    <motion.div variants={itemVariants} className="mb-6 flex flex-wrap gap-3">
+                        <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-lime-500/10 border border-lime-500/20 text-lime-600 dark:text-lime-400 text-[10px] font-bold tracking-widest uppercase transition-colors">
+                            <span className="relative flex h-2 w-2">
+                                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-lime-400 dark:bg-lime-400 opacity-75"></span>
+                                <span className="relative inline-flex rounded-full h-2 w-2 bg-lime-500"></span>
+                            </span>
+                            Available for work
+                        </div>
+                    </motion.div>
+
+                    {/* Loud Typography Headline */}
+                    <motion.h1
+                        variants={itemVariants}
+                        className="text-5xl md:text-[5.2rem] font-black tracking-tighter text-zinc-900 dark:text-white mb-4 leading-[0.95] uppercase transition-colors"
+                    >
+                        Design <br />
+                        <span className="text-lime-600 dark:text-lime-500 italic font-serif normal-case">&</span> Engineering.
+                    </motion.h1>
+
+                    <motion.div variants={itemVariants} className="mt-6 mb-10 flex flex-col gap-6">
+                        <p className="text-lg md:text-xl text-zinc-600 dark:text-zinc-400 max-w-xl leading-relaxed transition-colors">
+                            Hi, I'm <span className="text-zinc-900 dark:text-white font-bold underline decoration-lime-500/50 decoration-2 underline-offset-4">Asep</span>. A Seasoned <span className="text-zinc-800 dark:text-zinc-200">UI/UX Designer & Developer</span> with over 7 years of experience in designing user-centered products.
+                        </p>
+
+                        <div className="flex flex-wrap items-center justify-start gap-4">
+                            <span className="text-zinc-500 dark:text-zinc-500 text-[10px] uppercase tracking-[0.2em] font-black transition-colors">Core Stack</span>
+                            <SmoothTypingText
+                                words={["React.js & Next.js", "TypeScript", "Tailwind CSS", "Figma (Advanced)", "Design Systems"]}
+                                className="bg-white/80 dark:bg-zinc-900/80 border border-zinc-200 dark:border-white/10 rounded-xl px-4 py-2 shadow-xl shadow-lime-500/5 min-w-[280px] transition-colors"
+                                textClassName="text-lime-600 dark:text-lime-500 text-sm font-black uppercase tracking-widest transition-colors"
+                                typingSpeed={100}
+                                deletingSpeed={45}
+                                duration={2500}
+                            />
+                        </div>
+                    </motion.div>
+
+                    {/* Actions & Social Proof */}
+                    <motion.div variants={itemVariants} className="flex flex-col gap-12 w-full">
+                        <div className="flex flex-wrap items-center justify-start gap-6">
+                            <HoverBorderGradient
+                                containerClassName="rounded-full shadow-lg shadow-lime-500/10"
+                                as="button"
+                                className="bg-lime-500 text-black flex items-center space-x-2 px-10 py-5 font-black text-sm transition-all hover:scale-[1.05] active:scale-[0.98]"
+                            >
+                                <span>VIEW MY WORK</span>
+                                <ChevronRight className="ml-1 h-5 w-5" />
+                            </HoverBorderGradient>
+
+                            <button className="text-zinc-900 dark:text-white font-black text-sm flex items-center gap-3 px-10 py-5 rounded-full border border-zinc-300 dark:border-white/10 bg-white/50 dark:bg-white/5 hover:bg-zinc-100 dark:hover:bg-white/10 transition-all active:scale-[0.98] uppercase tracking-widest">
+                                <span>Get in touch</span>
+                                <div className="w-2 h-2 rounded-full bg-lime-500 animate-pulse" />
+                            </button>
+                        </div>
+
+                        {/* Social Proof Stats from Resume */}
+                        <div className="flex gap-12 border-t border-zinc-200 dark:border-white/5 pt-10 transition-colors">
+                            <div className="flex flex-col gap-1">
+                                <span className="text-3xl font-black text-zinc-900 dark:text-white leading-none transition-colors">7+</span>
+                                <span className="text-[10px] font-bold text-zinc-500 dark:text-zinc-600 uppercase tracking-widest transition-colors">Years UI/UX</span>
+                            </div>
+                            <div className="flex flex-col gap-1">
+                                <span className="text-3xl font-black text-zinc-900 dark:text-white leading-none transition-colors">25%</span>
+                                <span className="text-[10px] font-bold text-zinc-500 dark:text-zinc-600 uppercase tracking-widest transition-colors">Adoption Growth</span>
+                            </div>
+                            <div className="flex flex-col gap-1">
+                                <span className="text-3xl font-black text-zinc-900 dark:text-white leading-none transition-colors">28%</span>
+                                <span className="text-[10px] font-bold text-zinc-500 dark:text-zinc-600 uppercase tracking-widest transition-colors">User Satisfaction</span>
+                            </div>
+                        </div>
+                    </motion.div>
+                </motion.div>
+
+                {/* Right Column - Visual Concept */}
+                <motion.div
+                    initial={{ opacity: 0, scale: 0.9 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    transition={{ delay: 0.4, duration: 1, ease: "easeOut" }}
+                    className="hidden lg:flex w-full justify-end items-center lg:col-span-5"
+                >
+                    <StylizedProfile />
+                </motion.div>
+            </div>
+
+
+            {/* Scroll Indicator */}
+            <motion.button
+                aria-label="Scroll to next section"
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 1.6, duration: 0.8, ease: "easeOut" }}
+                className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2.5 cursor-pointer group z-20 opacity-50 hover:opacity-100 transition-all duration-500 hover:scale-105"
+                onClick={() => {
+                    const nextSection = document.getElementById("skills-section");
+                    if (nextSection) {
+                        nextSection.scrollIntoView({ behavior: "smooth" });
+                    }
+                }}
+            >
+                <div className="w-6 h-10 rounded-full border border-zinc-800 group-hover:border-lime-500/50 flex justify-center p-1.5 bg-zinc-950/50 backdrop-blur-sm transition-colors duration-300 relative overflow-hidden">
+                    <motion.div
+                        animate={{
+                            y: [0, 14],
+                            opacity: [1, 0],
+                        }}
+                        transition={{
+                            duration: 2,
+                            repeat: Infinity,
+                            ease: "linear",
+                        }}
+                        className="w-1.5 h-1.5 rounded-full bg-lime-500 shadow-[0_0_6px_#84cc16]"
+                    />
+                </div>
+
+                <span className="text-[9px] uppercase tracking-[0.35em] text-zinc-500 group-hover:text-lime-400 font-bold transition-colors duration-300 select-none">
+                    Scroll
+                </span>
+            </motion.button>
         </div>
     );
-}
+};
+
+export default memo(Hero);

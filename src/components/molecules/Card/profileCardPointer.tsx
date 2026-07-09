@@ -1,5 +1,6 @@
 'use client';
 import { FollowerPointerCard } from "@/components/ui/following-pointer";
+import Image from "next/image";
 
 // Tambahkan data blog content yang hilang
 const blogContent = {
@@ -15,9 +16,11 @@ const blogContent = {
 function TitleComponent({ title, avatar }: { title: string, avatar: string }) {
     return (
         <div className="flex items-center gap-2">
-            <img
+            <Image
                 src={avatar}
                 alt={title}
+                width={24}
+                height={24}
                 className="h-6 w-6 rounded-full"
             />
             <span className="text-sm font-medium">{title}</span>
@@ -36,11 +39,12 @@ export function ProfileCardPointer() {
                     />
                 }
             >
-                <div className="group relative h-full overflow-hidden rounded-2xl border border-zinc-100 bg-white transition duration-200 hover:shadow-xl">
-                    <div className="relative aspect-[10/12] w-full overflow-hidden rounded-tl-lg rounded-tr-lg bg-gray-700">
-                        <img
+                <div className="group relative h-full overflow-hidden rounded-2xl border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-900 transition-colors duration-300 hover:shadow-xl">
+                    <div className="relative aspect-[10/12] w-full overflow-hidden rounded-tl-lg rounded-tr-lg bg-zinc-200 dark:bg-zinc-800 transition-colors duration-300">
+                        <Image
                             src={blogContent.image}
                             alt="thumbnail"
+                            fill
                             className="h-full w-full transform object-cover transition duration-200 group-hover:scale-95 group-hover:rounded-2xl"
                         />
                     </div>

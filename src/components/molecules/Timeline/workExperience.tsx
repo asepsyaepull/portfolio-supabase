@@ -1,156 +1,61 @@
 import React from "react";
 import { Timeline } from "@/components/ui/timeline";
+import supabase from "@/lib/db";
 
-export function WorkExperience() {
-    const data = [
-        {
-            title: "Dec 2024 - May 2025",
-            subtitle: "UI/UX Designer",
-            content: (
-                <div>
-                    <p className="mb-8 text-xs font-normal text-neutral-800 md:text-sm dark:text-neutral-200">
-                        Built and launched Aceternity UI and Aceternity UI Pro from scratch
+export async function WorkExperience() {
+    const { data: experiences, error } = await supabase
+        .from("experiences")
+        .select("*")
+        .order("order_idx", { ascending: true });
+
+    if (error) {
+        console.error("Error fetching experiences:", error);
+    }
+
+    const data = (experiences || []).map((exp) => ({
+        title: exp.title,
+        subtitle: exp.subtitle,
+        content: (
+            <div className="flex flex-col gap-4">
+                {exp.content_paragraphs?.map((paragraph: string, idx: number) => (
+                    <p key={idx} className="text-zinc-600 dark:text-zinc-400 text-sm md:text-base leading-relaxed transition-colors">
+                        {paragraph}
                     </p>
-                    <div className="grid grid-cols-2 gap-4">
-                        <img
-                            src="https://assets.aceternity.com/templates/startup-1.webp"
-                            alt="startup template"
-                            width={500}
-                            height={500}
-                            className="h-20 w-full rounded-lg object-cover shadow-[0_0_24px_rgba(34,_42,_53,_0.06),_0_1px_1px_rgba(0,_0,_0,_0.05),_0_0_0_1px_rgba(34,_42,_53,_0.04),_0_0_4px_rgba(34,_42,_53,_0.08),_0_16px_68px_rgba(47,_48,_55,_0.05),_0_1px_0_rgba(255,_255,_255,_0.1)_inset] md:h-44 lg:h-60"
-                        />
-                        <img
-                            src="https://assets.aceternity.com/templates/startup-2.webp"
-                            alt="startup template"
-                            width={500}
-                            height={500}
-                            className="h-20 w-full rounded-lg object-cover shadow-[0_0_24px_rgba(34,_42,_53,_0.06),_0_1px_1px_rgba(0,_0,_0,_0.05),_0_0_0_1px_rgba(34,_42,_53,_0.04),_0_0_4px_rgba(34,_42,_53,_0.08),_0_16px_68px_rgba(47,_48,_55,_0.05),_0_1px_0_rgba(255,_255,_255,_0.1)_inset] md:h-44 lg:h-60"
-                        />
-                        <img
-                            src="https://assets.aceternity.com/templates/startup-3.webp"
-                            alt="startup template"
-                            width={500}
-                            height={500}
-                            className="h-20 w-full rounded-lg object-cover shadow-[0_0_24px_rgba(34,_42,_53,_0.06),_0_1px_1px_rgba(0,_0,_0,_0.05),_0_0_0_1px_rgba(34,_42,_53,_0.04),_0_0_4px_rgba(34,_42,_53,_0.08),_0_16px_68px_rgba(47,_48,_55,_0.05),_0_1px_0_rgba(255,_255,_255,_0.1)_inset] md:h-44 lg:h-60"
-                        />
-                        <img
-                            src="https://assets.aceternity.com/templates/startup-4.webp"
-                            alt="startup template"
-                            width={500}
-                            height={500}
-                            className="h-20 w-full rounded-lg object-cover shadow-[0_0_24px_rgba(34,_42,_53,_0.06),_0_1px_1px_rgba(0,_0,_0,_0.05),_0_0_0_1px_rgba(34,_42,_53,_0.04),_0_0_4px_rgba(34,_42,_53,_0.08),_0_16px_68px_rgba(47,_48,_55,_0.05),_0_1px_0_rgba(255,_255,_255,_0.1)_inset] md:h-44 lg:h-60"
-                        />
-                    </div>
-                </div>
-            ),
-        },
-        {
-            title: "Oct 2023 - Aug 2024",
-            subtitle: "Sr. Product Designer",
-            content: (
-                <div>
-                    <p className="mb-8 text-xs font-normal text-neutral-800 md:text-sm dark:text-neutral-200">
-                        Work Experience
-                    </p>
-                    <p className="mb-8 text-xs font-normal text-neutral-800 md:text-sm dark:text-neutral-200">
-                        Lorem ipsum is for people who are too lazy to write copy. But we are
-                        not. Here are some more example of beautiful designs I built.
-                    </p>
-                    <div className="grid grid-cols-2 gap-4">
-                        <img
-                            src="https://assets.aceternity.com/pro/hero-sections.png"
-                            alt="hero template"
-                            width={500}
-                            height={500}
-                            className="h-20 w-full rounded-lg object-cover shadow-[0_0_24px_rgba(34,_42,_53,_0.06),_0_1px_1px_rgba(0,_0,_0,_0.05),_0_0_0_1px_rgba(34,_42,_53,_0.04),_0_0_4px_rgba(34,_42,_53,_0.08),_0_16px_68px_rgba(47,_48,_55,_0.05),_0_1px_0_rgba(255,_255,_255,_0.1)_inset] md:h-44 lg:h-60"
-                        />
-                        <img
-                            src="https://assets.aceternity.com/features-section.png"
-                            alt="feature template"
-                            width={500}
-                            height={500}
-                            className="h-20 w-full rounded-lg object-cover shadow-[0_0_24px_rgba(34,_42,_53,_0.06),_0_1px_1px_rgba(0,_0,_0,_0.05),_0_0_0_1px_rgba(34,_42,_53,_0.04),_0_0_4px_rgba(34,_42,_53,_0.08),_0_16px_68px_rgba(47,_48,_55,_0.05),_0_1px_0_rgba(255,_255,_255,_0.1)_inset] md:h-44 lg:h-60"
-                        />
-                        <img
-                            src="https://assets.aceternity.com/pro/bento-grids.png"
-                            alt="bento template"
-                            width={500}
-                            height={500}
-                            className="h-20 w-full rounded-lg object-cover shadow-[0_0_24px_rgba(34,_42,_53,_0.06),_0_1px_1px_rgba(0,_0,_0,_0.05),_0_0_0_1px_rgba(34,_42,_53,_0.04),_0_0_4px_rgba(34,_42,_53,_0.08),_0_16px_68px_rgba(47,_48,_55,_0.05),_0_1px_0_rgba(255,_255,_255,_0.1)_inset] md:h-44 lg:h-60"
-                        />
-                        <img
-                            src="https://assets.aceternity.com/cards.png"
-                            alt="cards template"
-                            width={500}
-                            height={500}
-                            className="h-20 w-full rounded-lg object-cover shadow-[0_0_24px_rgba(34,_42,_53,_0.06),_0_1px_1px_rgba(0,_0,_0,_0.05),_0_0_0_1px_rgba(34,_42,_53,_0.04),_0_0_4px_rgba(34,_42,_53,_0.08),_0_16px_68px_rgba(47,_48,_55,_0.05),_0_1px_0_rgba(255,_255,_255,_0.1)_inset] md:h-44 lg:h-60"
-                        />
-                    </div>
-                </div>
-            ),
-        },
-        {
-            title: "May 2022 - Apr 2023",
-            subtitle: "UI/UX Designer",
-            content: (
-                <div>
-                    <p className="mb-4 text-xs font-normal text-neutral-800 md:text-sm dark:text-neutral-200">
-                        Deployed 5 new components on Aceternity today
-                    </p>
-                    <div className="mb-8">
-                        <div className="flex items-center gap-2 text-xs text-neutral-700 md:text-sm dark:text-neutral-300">
-                            ✅ Card grid component
-                        </div>
-                        <div className="flex items-center gap-2 text-xs text-neutral-700 md:text-sm dark:text-neutral-300">
-                            ✅ Startup template Aceternity
-                        </div>
-                        <div className="flex items-center gap-2 text-xs text-neutral-700 md:text-sm dark:text-neutral-300">
-                            ✅ Random file upload lol
-                        </div>
-                        <div className="flex items-center gap-2 text-xs text-neutral-700 md:text-sm dark:text-neutral-300">
-                            ✅ Himesh Reshammiya Music CD
-                        </div>
-                        <div className="flex items-center gap-2 text-xs text-neutral-700 md:text-sm dark:text-neutral-300">
-                            ✅ Salman Bhai Fan Club registrations open
-                        </div>
-                    </div>
-                    <div className="grid grid-cols-2 gap-4">
-                        <img
-                            src="https://assets.aceternity.com/pro/hero-sections.png"
-                            alt="hero template"
-                            width={500}
-                            height={500}
-                            className="h-20 w-full rounded-lg object-cover shadow-[0_0_24px_rgba(34,_42,_53,_0.06),_0_1px_1px_rgba(0,_0,_0,_0.05),_0_0_0_1px_rgba(34,_42,_53,_0.04),_0_0_4px_rgba(34,_42,_53,_0.08),_0_16px_68px_rgba(47,_48,_55,_0.05),_0_1px_0_rgba(255,_255,_255,_0.1)_inset] md:h-44 lg:h-60"
-                        />
-                        <img
-                            src="https://assets.aceternity.com/features-section.png"
-                            alt="feature template"
-                            width={500}
-                            height={500}
-                            className="h-20 w-full rounded-lg object-cover shadow-[0_0_24px_rgba(34,_42,_53,_0.06),_0_1px_1px_rgba(0,_0,_0,_0.05),_0_0_0_1px_rgba(34,_42,_53,_0.04),_0_0_4px_rgba(34,_42,_53,_0.08),_0_16px_68px_rgba(47,_48,_55,_0.05),_0_1px_0_rgba(255,_255,_255,_0.1)_inset] md:h-44 lg:h-60"
-                        />
-                        <img
-                            src="https://assets.aceternity.com/pro/bento-grids.png"
-                            alt="bento template"
-                            width={500}
-                            height={500}
-                            className="h-20 w-full rounded-lg object-cover shadow-[0_0_24px_rgba(34,_42,_53,_0.06),_0_1px_1px_rgba(0,_0,_0,_0.05),_0_0_0_1px_rgba(34,_42,_53,_0.04),_0_0_4px_rgba(34,_42,_53,_0.08),_0_16px_68px_rgba(47,_48,_55,_0.05),_0_1px_0_rgba(255,_255,_255,_0.1)_inset] md:h-44 lg:h-60"
-                        />
-                        <img
-                            src="https://assets.aceternity.com/cards.png"
-                            alt="cards template"
-                            width={500}
-                            height={500}
-                            className="h-20 w-full rounded-lg object-cover shadow-[0_0_24px_rgba(34,_42,_53,_0.06),_0_1px_1px_rgba(0,_0,_0,_0.05),_0_0_0_1px_rgba(34,_42,_53,_0.04),_0_0_4px_rgba(34,_42,_53,_0.08),_0_16px_68px_rgba(47,_48,_55,_0.05),_0_1px_0_rgba(255,_255,_255,_0.1)_inset] md:h-44 lg:h-60"
-                        />
-                    </div>
-                </div>
-            ),
-        },
-    ];
+                ))}
+            </div>
+        ),
+    }));
+
     return (
         <div className="relative w-full overflow-clip">
             <Timeline data={data} />
+        </div>
+    );
+}
+
+export function WorkExperienceSkeleton() {
+    return (
+        <div className="w-full flex flex-col gap-10 md:px-10 py-10 animate-pulse">
+            {[1, 2, 3].map((idx) => (
+                <div key={idx} className="flex justify-start md:gap-10">
+                    <div className="hidden md:flex flex-col w-1/3 gap-3 pt-4">
+                        <div className="h-6 w-3/4 bg-zinc-200 dark:bg-zinc-800 rounded"></div>
+                        <div className="h-4 w-1/2 bg-zinc-200 dark:bg-zinc-800 rounded"></div>
+                    </div>
+                    <div className="flex flex-col w-full md:w-2/3 gap-4 border-l-2 border-zinc-200 dark:border-zinc-800 pl-8 relative">
+                        <div className="absolute w-4 h-4 rounded-full bg-zinc-300 dark:bg-zinc-700 -left-[9px] top-4"></div>
+                        
+                        <div className="md:hidden flex flex-col gap-2 mb-4">
+                            <div className="h-6 w-3/4 bg-zinc-200 dark:bg-zinc-800 rounded"></div>
+                            <div className="h-4 w-1/2 bg-zinc-200 dark:bg-zinc-800 rounded"></div>
+                        </div>
+
+                        <div className="h-4 w-full bg-zinc-100 dark:bg-zinc-800/50 rounded"></div>
+                        <div className="h-4 w-full bg-zinc-100 dark:bg-zinc-800/50 rounded"></div>
+                        <div className="h-4 w-5/6 bg-zinc-100 dark:bg-zinc-800/50 rounded"></div>
+                    </div>
+                </div>
+            ))}
         </div>
     );
 }

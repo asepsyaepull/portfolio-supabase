@@ -5,6 +5,7 @@ import { AnimatePresence, motion } from "framer-motion"; // Perbaikan import
 import { useOutsideClick } from "@/hooks/use-outside-click";
 import type { IProjects } from "@/types/project";
 import supabase from "@/lib/db";
+import Image from "next/image";
 
 // Tambahkan interface untuk menyesuaikan dengan format cards
 interface CardItem {
@@ -16,12 +17,18 @@ interface CardItem {
     content: React.ReactNode | (() => React.ReactNode);
 }
 
-export const ProjectCard: React.FC = () => {
-    const [projects, setProjects] = useState<IProjects[]>([]);
-    const [isLoading, setIsLoading] = useState(true);
+interface ProjectCardProps {
+    initialProjects?: IProjects[];
+}
+
+export const ProjectCard: React.FC<ProjectCardProps> = ({ initialProjects }) => {
+    const [projects, setProjects] = useState<IProjects[]>(initialProjects || []);
+    const [isLoading, setIsLoading] = useState(!initialProjects);
     const [error, setError] = useState<string | null>(null);
 
     useEffect(() => {
+        if (initialProjects) return;
+
         const fetchProjects = async () => {
             try {
                 setIsLoading(true);
@@ -187,7 +194,7 @@ export const ProjectCard: React.FC = () => {
                             className="w-full max-w-[500px] h-full md:h-fit md:max-h-[90%] flex flex-col bg-white dark:bg-neutral-900 sm:rounded-3xl overflow-hidden"
                         >
                             <motion.div layoutId={`image-${active.title}-${id}`}>
-                                <img
+                                <Image
                                     width={200}
                                     height={200}
                                     src={active.src}
@@ -253,7 +260,7 @@ export const ProjectCard: React.FC = () => {
                     >
                         <div className="flex gap-4 flex-col w-full">
                             <motion.div layoutId={`image-${project.name}-${id}`}>
-                                <img
+                                <Image
                                     width={100}
                                     height={100}
                                     src={project.image}
