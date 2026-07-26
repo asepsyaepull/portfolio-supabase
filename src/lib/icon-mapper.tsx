@@ -19,7 +19,13 @@ import {
   SiThreedotjs,
   SiNodedotjs,
   SiVuedotjs,
-  SiJavascript
+  SiJavascript,
+  SiFigma,
+  SiPython,
+  SiGo,
+  SiPostgresql,
+  SiDocker,
+  SiGit
 } from "react-icons/si";
 
 // Map string to Tabler Icon components (for Projects)
@@ -36,16 +42,22 @@ const TablerIconMap: Record<string, React.ElementType> = {
 
 // Map string to React Icons / Simple Icons (for Skills)
 const SimpleIconMap: Record<string, React.ElementType> = {
-  SiReact: SiReact,
-  SiNextdotjs: SiNextdotjs,
-  SiTailwindcss: SiTailwindcss,
-  SiTypescript: SiTypescript,
-  SiFramer: SiFramer,
-  SiSupabase: SiSupabase,
-  SiThreedotjs: SiThreedotjs,
-  SiNodedotjs: SiNodedotjs,
-  SiVuedotjs: SiVuedotjs,
-  SiJavascript: SiJavascript
+  SiReact,
+  SiNextdotjs,
+  SiTailwindcss,
+  SiTypescript,
+  SiFramer,
+  SiSupabase,
+  SiThreedotjs,
+  SiNodedotjs,
+  SiVuedotjs,
+  SiJavascript,
+  SiFigma,
+  SiPython,
+  SiGo,
+  SiPostgresql,
+  SiDocker,
+  SiGit
 };
 
 export const getTablerIcon = (iconName: string, className?: string) => {

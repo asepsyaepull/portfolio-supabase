@@ -26,7 +26,7 @@ export function CtaSection() {
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.1 }}
-            className="text-center mt-4 text-zinc-600 dark:text-zinc-400 max-w-lg mx-auto transition-colors"
+            className="text-center mt-4 text-zinc-700 dark:text-zinc-400 max-w-lg mx-auto transition-colors font-medium"
         >
             Whether you have a fully-formed idea or just a spark of inspiration,
             I'm here to help you bring it to life with clean code and exceptional design.
@@ -41,7 +41,7 @@ export function CtaSection() {
             <Link href="/contact">
                 <HoverBorderGradient
                     containerClassName="rounded-full"
-                    as="button"
+                    as="div"
                     className="bg-white dark:bg-gray-950 text-lime-600 dark:text-lime-500 flex items-center space-x-2 px-8 py-4 font-bold transition-colors"
                 >
                     <span>LET'S GET STARTED</span>

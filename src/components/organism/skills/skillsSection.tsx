@@ -2,7 +2,7 @@
 import React, { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import { HoverBorderGradient } from "@/components/ui/hover-border-gradient";
-import supabase from "@/lib/db";
+import { createClient } from "@/lib/supabase/client";
 import { Skill } from "@/types/database";
 import { getSimpleIcon } from "@/lib/icon-mapper";
 
@@ -13,6 +13,7 @@ export function SkillsSection() {
   useEffect(() => {
     async function fetchSkills() {
       try {
+        const supabase = createClient();
         const { data, error } = await supabase
           .from("skills")
           .select("*")

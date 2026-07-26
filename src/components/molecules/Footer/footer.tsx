@@ -1,7 +1,14 @@
 import React from "react";
 import { IconBrandGithub, IconBrandInstagram, IconBrandLinkedin, IconBrandX } from "@tabler/icons-react";
-import dynamic from "next/dynamic";
 import { HoverBorderGradient } from "@/components/ui/hover-border-gradient";
+import Link from "next/link";
+
+const socials = [
+//   { icon: IconBrandX, href: "https://twitter.com/", label: "X (Twitter)" },
+  { icon: IconBrandLinkedin, href: "https://linkedin.com/in/asepsyaepul", label: "LinkedIn" },
+  { icon: IconBrandGithub, href: "https://github.com/asepsyaepull", label: "GitHub" },
+//   { icon: IconBrandInstagram, href: "https://instagram.com/", label: "Instagram" },
+];
 
 export default function Footer() {
     return (
@@ -13,30 +20,16 @@ export default function Footer() {
                         <p className="text-sm text-zinc-500 dark:text-zinc-400 mb-4 transition-colors">Follow me on social media for updates and more.</p>
                     </div>
                     <div className="flex flex-wrap gap-2">
-                        <HoverBorderGradient
-                            containerClassName="rounded-full"
-                            as="button"
-                            className="px-2 py-2 bg-transparent text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-white hover:bg-lime-500/20 dark:hover:bg-lime-500/20 transition-colors duration-300">
-                            <span className="flex items-center gap-2 text-sm"><IconBrandX className="w-5 h-5" /></span>
-                        </HoverBorderGradient>
-                        <HoverBorderGradient
-                            containerClassName="rounded-full"
-                            as="button"
-                            className="px-2 py-2 bg-transparent text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-white hover:bg-lime-500/20 dark:hover:bg-lime-500/20 transition-colors duration-300">
-                            <span className="flex items-center gap-2 text-sm"><IconBrandLinkedin className="w-5 h-5" /></span>
-                        </HoverBorderGradient>
-                        <HoverBorderGradient
-                            containerClassName="rounded-full"
-                            as="button"
-                            className="px-2 py-2 bg-transparent text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-white hover:bg-lime-500/20 dark:hover:bg-lime-500/20 transition-colors duration-300">
-                            <span className="flex items-center gap-2 text-sm"><IconBrandGithub className="w-5 h-5" /></span>
-                        </HoverBorderGradient>
-                        <HoverBorderGradient
-                            containerClassName="rounded-full"
-                            as="button"
-                            className="px-2 py-2 bg-transparent text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-white hover:bg-lime-500/20 dark:hover:bg-lime-500/20 transition-colors duration-300">
-                            <span className="flex items-center gap-2 text-sm"><IconBrandInstagram className="w-5 h-5" /></span>
-                        </HoverBorderGradient>
+                        {socials.map((Social, idx) => (
+                            <Link key={idx} href={Social.href} target="_blank" rel="noopener noreferrer" aria-label={Social.label}>
+                                <HoverBorderGradient
+                                    containerClassName="rounded-full"
+                                    as="div"
+                                    className="px-2 py-2 bg-transparent text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-white hover:bg-lime-500/20 dark:hover:bg-lime-500/20 transition-colors duration-300">
+                                    <span className="flex items-center gap-2 text-sm"><Social.icon className="w-5 h-5" /></span>
+                                </HoverBorderGradient>
+                            </Link>
+                        ))}
                     </div>
                 </div>
                 <div className="flex flex-col md:flex-row justify-between items-center border-t border-zinc-200 dark:border-white/5 pt-8 transition-colors">
@@ -44,9 +37,7 @@ export default function Footer() {
                         © {new Date().getFullYear()} Asep Syaepul. All rights reserved.
                     </div>
                     <div className="flex text-sm space-x-6 mt-4 md:mt-0 font-medium text-zinc-500 dark:text-zinc-400">
-                        <a href="#" className="hover:text-lime-600 dark:hover:text-lime-500 transition-colors">Privacy Policy</a>
-                        <a href="#" className="hover:text-lime-600 dark:hover:text-lime-500 transition-colors">Terms of Service</a>
-                        <a href="#" className="hover:text-lime-600 dark:hover:text-lime-500 transition-colors">Contact</a>
+                        <Link href="/contact" className="hover:text-lime-600 dark:hover:text-lime-500 transition-colors">Let's Colaborate</Link>
                     </div>
                 </div>
             </div>

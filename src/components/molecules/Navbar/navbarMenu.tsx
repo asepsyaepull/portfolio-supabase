@@ -46,14 +46,16 @@ export function NavbarMenu() {
                     <NavItems items={navItems} />
                     <div className="flex items-center gap-4">
                         <ThemeToggle />
-                        <HoverBorderGradient
-                            containerClassName="rounded-full hidden md:block"
-                            as="button"
-                            className="bg-lime-500 text-black dark:bg-lime-500 dark:text-black flex items-center space-x-2 px-4 py-2"
-                        >
-                            <span className="text-xs font-bold tracking-tighter">LET'S COLLABORATE</span>
-                            <ArrowRight className="h-4 w-4" />
-                        </HoverBorderGradient>
+                        <Link href="/contact" className="hidden md:block">
+                            <HoverBorderGradient
+                                containerClassName="rounded-full"
+                                as="div"
+                                className="bg-lime-500 text-black dark:bg-lime-500 dark:text-black flex items-center space-x-2 px-4 py-2"
+                            >
+                                <span className="text-xs font-bold tracking-tighter">LET'S COLLABORATE</span>
+                                <ArrowRight className="h-4 w-4" />
+                            </HoverBorderGradient>
+                        </Link>
                     </div>
                 </NavBody>
 
@@ -86,14 +88,16 @@ export function NavbarMenu() {
                             </Link>
                         ))}
                         <div className="flex w-full flex-col gap-4">
-                            <HoverBorderGradient
-                                containerClassName="rounded-full w-full"
-                                as="button"
-                                className="bg-lime-500 text-black dark:bg-lime-500 dark:text-black flex items-center justify-center space-x-2 px-4 py-3"
-                            >
-                                <span className="text-xs font-bold tracking-tighter">LET'S COLLABORATE</span>
-                                <ArrowRight className="h-4 w-4" />
-                            </HoverBorderGradient>
+                            <Link href="/contact" onClick={() => setIsMobileMenuOpen(false)}>
+                                <HoverBorderGradient
+                                    containerClassName="rounded-full w-full"
+                                    as="div"
+                                    className="bg-lime-500 text-black dark:bg-lime-500 dark:text-black flex items-center justify-center space-x-2 px-4 py-3"
+                                >
+                                    <span className="text-xs font-bold tracking-tighter">LET'S COLLABORATE</span>
+                                    <ArrowRight className="h-4 w-4" />
+                                </HoverBorderGradient>
+                            </Link>
                         </div>
                     </MobileNavMenu>
                 </MobileNav>

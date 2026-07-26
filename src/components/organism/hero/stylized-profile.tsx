@@ -45,7 +45,7 @@ export const StylizedProfile = () => {
           className="relative w-full h-full rounded-[2rem] overflow-hidden bg-zinc-100 dark:bg-zinc-900 border border-zinc-200 dark:border-white/10 group transition-colors"
         >
           <Image
-            src="/assets/images/profile.PNG"
+            src="/assets/images/profile.png"
             alt="Asep Syaepul Rohman"
             fill
             priority

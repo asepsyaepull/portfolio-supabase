@@ -67,7 +67,7 @@ export const BentoGridItem = ({
                 {title}
             </div>
         </div>
-        <div className="font-sans font-normal text-zinc-600 dark:text-zinc-400 text-xs transition-colors">
+        <div className="font-sans font-normal text-zinc-600 dark:text-zinc-400 text-xs transition-colors line-clamp-2 leading-relaxed">
           {description}
         </div>
       </motion.div>

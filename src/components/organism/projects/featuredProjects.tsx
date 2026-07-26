@@ -11,7 +11,7 @@ import {
 import { motion } from "framer-motion";
 import { cn } from "@/lib/utils";
 import Image from "next/image";
-import supabase from "@/lib/db";
+import { createClient } from "@/lib/supabase/client";
 import { Project } from "@/types/database";
 import { getTablerIcon } from "@/lib/icon-mapper";
 
@@ -24,10 +24,13 @@ export function FeaturedProjects() {
   useEffect(() => {
     async function fetchProjects() {
       try {
+        const supabase = createClient();
         const { data, error } = await supabase
           .from("projects")
           .select("*")
-          .order("order_index", { ascending: true });
+          .eq("is_featured", true)
+          .order("order_index", { ascending: true })
+          .order("created_at", { ascending: false });
 
         if (error) throw error;
         
@@ -73,10 +76,10 @@ export function FeaturedProjects() {
                 {projects.map((item, i) => (
                     <BentoGridItem
                     key={item.id}
-                    title={item.title}
+                    title={item.name}
                     description={item.description}
-                    header={<Skeleton src={item.image_url} overlap={item.image_overlap} />}
-                    icon={getTablerIcon(item.icon_name, "h-4 w-4 text-lime-500")}
+                    header={<Skeleton src={item.image} overlap={item.image_overlap} />}
+                    icon={getTablerIcon(item.icon_name || "", "h-4 w-4 text-lime-500")}
                     className={i === 3 ? "md:col-span-2" : ""}
                     />
                 ))}
@@ -95,7 +98,7 @@ const Skeleton = ({ src, overlap = "none" }: { src?: string, overlap?: "top" | "
             width={800}
             height={600}
             className={cn(
-                "absolute inset-0 w-full h-full object-cover transition duration-500 group-hover/bento:scale-105",
+                "absolute inset-0 w-full h-full object-cover object-top transition duration-700 ease-out group-hover/bento:scale-[1.03]",
                 overlap === "top" && "-mt-10",
                 overlap === "bottom" && "-mb-10"
             )}
@@ -112,45 +115,65 @@ const Skeleton = ({ src, overlap = "none" }: { src?: string, overlap?: "top" | "
 const fallbackProjects: Project[] = [
   {
     id: 1,
-    title: "Symbolix.ai",
+    name: "Symbolix.ai",
+    slug: "symbolix-ai",
+    category: "UI/UX Design",
     description: "End-to-end UI/UX redesign and frontend implementation for an advanced ERP & POS system, converting complex logic into intuitive interfaces.",
-    image_url: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=1600&auto=format&fit=crop",
+    image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=1600&auto=format&fit=crop",
+    tech_stack: ["React", "TypeScript"],
+    is_featured: true,
     image_overlap: "top",
     icon_name: "IconClipboardCopy",
     order_index: 1,
   },
   {
     id: 2,
-    title: "TRACtoGO",
+    name: "TRACtoGO",
+    slug: "tractogo",
+    category: "Mobile App",
     description: "Complete redesign of web and mobile applications for the leading vehicle rental service, reducing design-to-development time by 30%.",
-    image_url: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?q=80&w=800&auto=format&fit=crop",
+    image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?q=80&w=800&auto=format&fit=crop",
+    tech_stack: ["React Native", "TypeScript"],
+    is_featured: true,
     image_overlap: "none",
     icon_name: "IconFileBroken",
     order_index: 2,
   },
   {
     id: 3,
-    title: "Isuzu Link",
+    name: "Isuzu Link",
+    slug: "isuzu-link",
+    category: "Web App",
     description: "Design of key frontend features contributing to a 25% growth in new user adoption for the automotive service ecosystem.",
-    image_url: "https://images.unsplash.com/photo-1481627834876-b7833e8f5570?q=80&w=800&auto=format&fit=crop",
+    image: "https://images.unsplash.com/photo-1481627834876-b7833e8f5570?q=80&w=800&auto=format&fit=crop",
+    tech_stack: ["Next.js", "TypeScript"],
+    is_featured: true,
     image_overlap: "bottom",
     icon_name: "IconSignature",
     order_index: 3,
   },
   {
     id: 4,
-    title: "PT Liftech Digital Transformation",
+    name: "PT Liftech Digital Transformation",
+    slug: "pt-liftech",
+    category: "Digital Transformation",
     description: "Full-cycle digital transformation managing everything from UI/UX auditing and wireframing to technical deployment using TypeScript.",
-    image_url: "https://images.unsplash.com/photo-1558655146-d09347e92766?q=80&w=800&auto=format&fit=crop",
+    image: "https://images.unsplash.com/photo-1558655146-d09347e92766?q=80&w=800&auto=format&fit=crop",
+    tech_stack: ["TypeScript", "Next.js"],
+    is_featured: true,
     image_overlap: "top",
     icon_name: "IconTableColumn",
     order_index: 4,
   },
   {
     id: 5,
-    title: "OMS Crewdible",
+    name: "OMS Crewdible",
+    slug: "oms-crewdible",
+    category: "Web App",
     description: "Revamp of the Order Management System increasing conversion rates by 24% while ensuring full responsive performance.",
-    image_url: "https://images.unsplash.com/photo-1677442136019-21780ecad995?q=80&w=1600&auto=format&fit=crop",
+    image: "https://images.unsplash.com/photo-1677442136019-21780ecad995?q=80&w=1600&auto=format&fit=crop",
+    tech_stack: ["React", "Node.js"],
+    is_featured: true,
     image_overlap: "none",
     icon_name: "IconArrowWaveRightUp",
     order_index: 5,

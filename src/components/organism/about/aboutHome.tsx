@@ -68,7 +68,7 @@ export default function AboutHome() {
 
                         {/* Beam segment 1: Node1 → Node2 */}
                         <div className="absolute top-1/2 left-[calc(100%/6)] w-[calc(200%/6)] -translate-y-1/2">
-                            <div className="flex h-full w-full shrink-0 items-center justify-center overflow-visible [--beam-color-1:#f97316] [--beam-color-2:#fb923c] [--beam-color-3:#ef4444] dark:[--path-color:#27272a] [--path-color:#e4e4e7]">
+                            <div className="flex h-full w-full shrink-0 items-center justify-center overflow-visible [--beam-color-1:#f97316] [--beam-color-2:#fb923c] [--beam-color-3:#ef4444] [--path-color:#e4e4e7] dark:[--path-color:#27272a]">
                                 <svg className="h-12 w-full" viewBox="0 0 600 80" fill="none" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none">
                                     <defs>
                                         <linearGradient id="fadeMask1" x1="0%" y1="0%" x2="100%" y2="0%">
@@ -127,7 +127,7 @@ export default function AboutHome() {
 
                         {/* Beam segment 2: Node2 → Node3 */}
                         <div className="absolute top-1/2 left-[calc(300%/6)] w-[calc(200%/6)] -translate-y-1/2">
-                            <div className="flex h-full w-full shrink-0 items-center justify-center overflow-visible [--beam-color-1:#f97316] [--beam-color-2:#fb923c] [--beam-color-3:#ef4444] dark:[--path-color:#27272a] [--path-color:#e4e4e7]">
+                            <div className="flex h-full w-full shrink-0 items-center justify-center overflow-visible [--beam-color-1:#f97316] [--beam-color-2:#fb923c] [--beam-color-3:#ef4444] [--path-color:#e4e4e7] dark:[--path-color:#27272a]">
                                 <svg className="h-12 w-full" viewBox="0 0 600 80" fill="none" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none">
                                     <defs>
                                         <linearGradient id="fadeMask2" x1="0%" y1="0%" x2="100%" y2="0%">

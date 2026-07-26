@@ -3,8 +3,8 @@
 import React, { useEffect, useId, useRef, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion"; // Perbaikan import
 import { useOutsideClick } from "@/hooks/use-outside-click";
-import type { IProjects } from "@/types/project";
-import supabase from "@/lib/db";
+import { Project } from "@/types/database";
+import { createClient } from "@/lib/supabase/client";
 import Image from "next/image";
 
 // Tambahkan interface untuk menyesuaikan dengan format cards
@@ -18,11 +18,11 @@ interface CardItem {
 }
 
 interface ProjectCardProps {
-    initialProjects?: IProjects[];
+    initialProjects?: Project[];
 }
 
 export const ProjectCard: React.FC<ProjectCardProps> = ({ initialProjects }) => {
-    const [projects, setProjects] = useState<IProjects[]>(initialProjects || []);
+    const [projects, setProjects] = useState<Project[]>(initialProjects || []);
     const [isLoading, setIsLoading] = useState(!initialProjects);
     const [error, setError] = useState<string | null>(null);
 
@@ -32,6 +32,7 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({ initialProjects }) => 
         const fetchProjects = async () => {
             try {
                 setIsLoading(true);
+                const supabase = createClient();
                 const { data, error } = await supabase.from("projects").select("*").limit(10);
 
                 if (error) {
@@ -56,8 +57,8 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({ initialProjects }) => 
     const id = useId();
     const ref = useRef<HTMLDivElement>(null);
 
-    // Fungsi untuk mengkonversi IProjects menjadi format CardItem
-    const convertProjectToCard = (project: IProjects): CardItem => {
+    // Fungsi untuk mengkonversi Project menjadi format CardItem
+    const convertProjectToCard = (project: Project): CardItem => {
         return {
             title: project.name,
             description: project.description,
@@ -127,20 +128,26 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({ initialProjects }) => 
                 {/* Contoh data dummy untuk testing */}
                 <button // Perbaikan: Tambahkan tipe button
                     onClick={() => {
-                        const dummyData: IProjects[] = [
+                        const dummyData: Project[] = [
                             {
                                 id: 1,
                                 name: "Portfolio Website",
+                                slug: "portfolio-website",
                                 description: "A personal portfolio website built with Next.js",
                                 category: "Web Development",
-                                image: "https://images.unsplash.com/photo-1517694712202-14dd9538aa97"
+                                image: "https://images.unsplash.com/photo-1517694712202-14dd9538aa97",
+                                tech_stack: ["Next.js", "TypeScript"],
+                                is_featured: true,
                             },
                             {
                                 id: 2,
                                 name: "E-commerce App",
+                                slug: "e-commerce-app",
                                 description: "A full-stack e-commerce application",
                                 category: "Full Stack",
-                                image: "https://images.unsplash.com/photo-1560472354-b33ff0c44a43"
+                                image: "https://images.unsplash.com/photo-1560472354-b33ff0c44a43",
+                                tech_stack: ["React", "Node.js"],
+                                is_featured: false,
                             }
                         ];
                         setProjects(dummyData);
@@ -251,7 +258,7 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({ initialProjects }) => 
                 ) : null}
             </AnimatePresence>
             <ul className="max-w-2xl mx-auto w-full grid grid-cols-1 md:grid-cols-2 items-start gap-4">
-                {projects.map((project: IProjects) => (
+                {projects.map((project: Project) => (
                     <motion.div
                         layoutId={`card-${project.name}-${id}`}
                         key={project.id}

@@ -49,15 +49,15 @@ export const Timeline = ({ data }: { data: TimelineEntry[] }) => {
     >
       <div className="relative max-w-7xl mx-auto pb-20">
         {data.map((item, index) => (
-          <TimelineItem 
-            key={index} 
-            item={item} 
-            index={index} 
-            total={data.length} 
-            progress={smoothProgress} 
+          <TimelineItem
+            key={index}
+            item={item}
+            index={index}
+            total={data.length}
+            progress={smoothProgress}
           />
         ))}
-        
+
         {/* Background Track Line */}
         <div
           style={{ height: height + "px" }}
@@ -77,22 +77,22 @@ export const Timeline = ({ data }: { data: TimelineEntry[] }) => {
   );
 };
 
-const TimelineItem = ({ 
-    item, 
-    index, 
-    total, 
-    progress 
-}: { 
-    item: TimelineEntry, 
-    index: number, 
-    total: number, 
-    progress: any 
+const TimelineItem = ({
+    item,
+    index,
+    total,
+    progress
+}: {
+    item: TimelineEntry,
+    index: number,
+    total: number,
+    progress: any
 }) => {
     const [isPassed, setIsPassed] = useState(false);
-    
+
     // Calculate the threshold for this specific point
     // Each item's threshold is its position relative to the total length
-    const threshold = index / (total - 0.5); 
+    const threshold = index / (total - 0.5);
 
     useEffect(() => {
         return progress.on("change", (latest: number) => {
@@ -105,53 +105,60 @@ const TimelineItem = ({
     }, [progress, threshold]);
 
     return (
-        <div className="flex justify-start pt-10 md:pt-40 md:gap-10 group">
+        <div className="flex justify-start pt-10 md:pt-40 md:gap-10 relative">
             <div className="sticky flex flex-col md:flex-row z-40 items-center top-40 self-start max-w-xs lg:max-w-sm md:w-full">
-                <div className="h-10 absolute left-3 md:left-3 w-10 rounded-full bg-zinc-50 dark:bg-gray-950 border border-black/10 dark:border-white/10 flex items-center justify-center transition-all duration-500">
-                    <div 
-                        className={cn(
-                            "h-3 w-3 rounded-full border border-black/10 dark:border-white/10 transition-all duration-500",
-                            isPassed ? "bg-lime-500 scale-125 shadow-[0_0_15px_rgba(132,204,22,0.5)]" : "bg-zinc-300 dark:bg-zinc-800 scale-100"
-                        )} 
-                    />
-                </div>
-                <div className="flex flex-col md:items-start items-center gap-2">
-                    <h2 
-                        className={cn(
-                            "hidden md:block text-xl md:pl-20 md:text-3xl font-bold transition-colors duration-500",
-                            isPassed ? "text-zinc-900 dark:text-zinc-100" : "text-zinc-400 dark:text-zinc-500"
-                        )}
+                <div className={cn(
+                    "h-10 absolute left-3 md:left-3 w-10 rounded-full bg-white dark:bg-zinc-950 flex items-center justify-center transition-colors duration-300",
+                    isPassed ? "shadow-[0_0_15px_rgba(163,230,53,0.3)]" : ""
+                )}>
+                    <motion.div
+                        initial={false}
+                        animate={{
+                            backgroundColor: isPassed ? "rgb(163, 230, 53)" : "transparent",
+                            borderColor: isPassed ? "rgb(163, 230, 53)" : "rgb(228, 228, 231)",
+                        }}
+                        className="h-4 w-4 rounded-full border-2 dark:border-zinc-700 p-2 transition-colors duration-300 relative"
                     >
+                        {isPassed && (
+                            <motion.div
+                                initial={{ scale: 0 }}
+                                animate={{ scale: [1, 1.5, 1] }}
+                                transition={{ duration: 1, repeat: Infinity, repeatType: "reverse" }}
+                                className="absolute inset-0 rounded-full bg-lime-500/30"
+                            />
+                        )}
+                    </motion.div>
+                </div>
+
+                {/* Title inside the dot on mobile */}
+                <div className="md:hidden flex flex-col pl-20">
+                    <h3 className="text-2xl font-bold text-zinc-900 dark:text-zinc-100 transition-colors">
                         {item.title}
-                    </h2>
+                    </h3>
                     {item.subtitle && (
-                        <h3 className="hidden md:block text-sm md:pl-20 md:text-base font-medium text-lime-600/80 dark:text-lime-500/80">
+                        <p className="text-lime-600 dark:text-lime-500 font-mono text-sm tracking-wider mt-1 transition-colors">
                             {item.subtitle}
-                        </h3>
+                        </p>
+                    )}
+                </div>
+
+                {/* Title beside the dot on desktop */}
+                <div className="hidden md:flex flex-col ml-20 w-full">
+                    <h3 className="text-2xl lg:text-4xl font-bold text-zinc-900 dark:text-zinc-100 transition-colors">
+                        {item.title}
+                    </h3>
+                    {item.subtitle && (
+                        <p className="text-lime-600 dark:text-lime-500 font-mono text-sm lg:text-base tracking-wider mt-2 transition-colors">
+                            {item.subtitle}
+                        </p>
                     )}
                 </div>
             </div>
 
-            <div className="relative pl-20 pr-4 md:pl-4 w-full">
-                <h3 
-                    className={cn(
-                        "md:hidden block text-2xl mb-2 text-left font-bold transition-colors duration-500",
-                        isPassed ? "text-zinc-900 dark:text-zinc-100" : "text-zinc-400 dark:text-zinc-500"
-                    )}
-                >
-                    {item.title}
-                </h3>
-                {item.subtitle && (
-                    <h2 className="md:hidden block text-base mb-4 text-left font-medium text-lime-600 dark:text-lime-500">
-                        {item.subtitle}
-                    </h2>
-                )}
-                <motion.div
-                    animate={{ opacity: isPassed ? 1 : 0.4 }}
-                    transition={{ duration: 0.5 }}
-                >
+            <div className="relative pl-20 pr-4 md:pl-4 w-full mt-8 md:mt-0">
+                <div className="text-zinc-600 dark:text-zinc-400 text-sm md:text-base leading-relaxed transition-colors prose prose-zinc dark:prose-invert">
                     {item.content}
-                </motion.div>
+                </div>
             </div>
         </div>
     );

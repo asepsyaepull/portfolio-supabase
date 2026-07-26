@@ -3,6 +3,7 @@ import { HoverBorderGradient } from "@/components/ui/hover-border-gradient";
 import { SmoothTypingText } from "@/components/ui/smooth-typing-text";
 import { motion } from "framer-motion";
 import { ChevronRight } from "lucide-react";
+import Link from "next/link";
 import { memo, useEffect, useRef, useState } from "react";
 import { FigmaHoverInspector } from "./figma-inspector";
 import { StylizedProfile } from "./stylized-profile";
@@ -84,17 +85,17 @@ const Hero = () => {
                         <span className="text-lime-600 dark:text-lime-500 italic font-serif normal-case">&</span> Engineering.
                     </motion.h1>
 
-                    <motion.div variants={itemVariants} className="mt-6 mb-10 flex flex-col gap-6">
-                        <p className="text-lg md:text-xl text-zinc-600 dark:text-zinc-400 max-w-xl leading-relaxed transition-colors">
-                            Hi, I'm <span className="text-zinc-900 dark:text-white font-bold underline decoration-lime-500/50 decoration-2 underline-offset-4">Asep</span>. A Seasoned <span className="text-zinc-800 dark:text-zinc-200">UI/UX Designer & Developer</span> with over 7 years of experience in designing user-centered products.
+                    <motion.div variants={itemVariants} className="mt-6 mb-8 flex flex-col gap-5">
+                        <p className="text-lg md:text-xl text-zinc-700 dark:text-zinc-300 max-w-xl leading-relaxed transition-colors">
+                            Hi, I'm <span className="text-zinc-900 dark:text-white font-bold underline decoration-lime-500/50 decoration-2 underline-offset-4">Asep</span>. A <span className="text-zinc-900 dark:text-zinc-100 font-medium">Design Technologist & Frontend Engineer</span> blending pixel-perfect aesthetics with robust technical architecture. Over 7 years of crafting digital products.
                         </p>
 
-                        <div className="flex flex-wrap items-center justify-start gap-4">
+                        <div className="flex flex-wrap items-center justify-start gap-3">
                             <span className="text-zinc-500 dark:text-zinc-500 text-[10px] uppercase tracking-[0.2em] font-black transition-colors">Core Stack</span>
                             <SmoothTypingText
                                 words={["React.js & Next.js", "TypeScript", "Tailwind CSS", "Figma (Advanced)", "Design Systems"]}
-                                className="bg-white/80 dark:bg-zinc-900/80 border border-zinc-200 dark:border-white/10 rounded-xl px-4 py-2 shadow-xl shadow-lime-500/5 min-w-[280px] transition-colors"
-                                textClassName="text-lime-600 dark:text-lime-500 text-sm font-black uppercase tracking-widest transition-colors"
+                                className="bg-white/80 dark:bg-zinc-900/80 border border-zinc-200 dark:border-white/10 rounded-xl px-4 py-2 shadow-xl shadow-lime-500/5 min-w-[240px] transition-colors"
+                                textClassName="text-lime-600 dark:text-lime-500 text-sm font-bold tracking-widest transition-colors"
                                 typingSpeed={100}
                                 deletingSpeed={45}
                                 duration={2500}
@@ -103,21 +104,26 @@ const Hero = () => {
                     </motion.div>
 
                     {/* Actions & Social Proof */}
-                    <motion.div variants={itemVariants} className="flex flex-col gap-12 w-full">
-                        <div className="flex flex-wrap items-center justify-start gap-6">
-                            <HoverBorderGradient
-                                containerClassName="rounded-full shadow-lg shadow-lime-500/10"
-                                as="button"
-                                className="bg-lime-500 text-black flex items-center space-x-2 px-10 py-5 font-black text-sm transition-all hover:scale-[1.05] active:scale-[0.98]"
-                            >
-                                <span>VIEW MY WORK</span>
-                                <ChevronRight className="ml-1 h-5 w-5" />
-                            </HoverBorderGradient>
+                    <motion.div variants={itemVariants} className="flex flex-col gap-10 w-full">
+                        <div className="flex flex-wrap items-center justify-start gap-4">
+                            <Link href="/projects">
+                                <HoverBorderGradient
+                                    containerClassName="rounded-full shadow-lg shadow-lime-500/20"
+                                    as="div"
+                                    className="bg-lime-500 text-black flex items-center space-x-2 px-8 py-4 font-bold text-sm transition-all hover:scale-[1.05] active:scale-[0.98]"
+                                >
+                                    <span>View My Work</span>
+                                    <ChevronRight className="ml-1 h-5 w-5" />
+                                </HoverBorderGradient>
+                            </Link>
 
-                            <button className="text-zinc-900 dark:text-white font-black text-sm flex items-center gap-3 px-10 py-5 rounded-full border border-zinc-300 dark:border-white/10 bg-white/50 dark:bg-white/5 hover:bg-zinc-100 dark:hover:bg-white/10 transition-all active:scale-[0.98] uppercase tracking-widest">
+                            <Link
+                                href="/contact"
+                                className="text-zinc-700 dark:text-zinc-200 font-bold text-sm flex items-center gap-3 px-8 py-4 rounded-full border border-zinc-200 dark:border-white/10 bg-white dark:bg-white/5 hover:bg-zinc-50 dark:hover:bg-white/10 transition-all active:scale-[0.98] shadow-sm"
+                            >
                                 <span>Get in touch</span>
                                 <div className="w-2 h-2 rounded-full bg-lime-500 animate-pulse" />
-                            </button>
+                            </Link>
                         </div>
 
                         {/* Social Proof Stats from Resume */}

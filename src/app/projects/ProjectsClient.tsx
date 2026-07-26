@@ -53,9 +53,9 @@ export default function ProjectsClient({ projects }: { projects: Project[] }) {
                     fill
                     sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                     priority={idx < 2}
-                    className="object-cover transition-transform duration-700 group-hover:scale-105 opacity-40 group-hover:opacity-60"
+                    className="object-cover object-top transition-transform duration-700 ease-out group-hover:scale-105"
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-zinc-950 via-zinc-900/40 to-transparent transition-colors duration-300" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent transition-colors duration-300" />
                   <div className="absolute bottom-10 left-10 right-10">
                     <span className="text-lime-500 text-xs font-bold tracking-[0.2em] uppercase mb-3 block">{project.category}</span>
                     <h3 className="text-white text-3xl font-bold mb-4">{project.name}</h3>

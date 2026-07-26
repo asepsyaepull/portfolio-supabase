@@ -1,6 +1,9 @@
+"use client";
+
 import React from 'react'
 import NavbarMenu from '@/components/molecules/Navbar/navbarMenu'
 import Footer from '@/components/molecules/Footer/footer';
+import { usePathname } from 'next/navigation';
 
 type AppShellProps = {
     children: React.ReactNode;
@@ -8,11 +11,16 @@ type AppShellProps = {
 
 const AppShell = (props:AppShellProps) => {
     const { children } = props;
+    const pathname = usePathname();
+
+    // Check if current route is an admin or login route
+    const isAdminOrLogin = pathname?.startsWith('/admin') || pathname?.startsWith('/login');
+
   return (
     <div>
-        <NavbarMenu />
+        {!isAdminOrLogin && <NavbarMenu />}
         {children}
-        <Footer />
+        {!isAdminOrLogin && <Footer />}
     </div>
   )
 }

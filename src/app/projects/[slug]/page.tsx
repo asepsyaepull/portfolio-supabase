@@ -1,14 +1,27 @@
-import supabase from "@/lib/db";
+import { createClient } from "@/lib/supabase/server";
+import { createClient as createSupabaseJsClient } from "@supabase/supabase-js";
 import { notFound } from "next/navigation";
 import Image from "next/image";
 import Link from "next/link";
-import { IconExternalLink, IconBriefcase, IconTarget, IconRocket, IconArrowLeft } from "@tabler/icons-react";
+import { IconExternalLink, IconBriefcase, IconTarget, IconRocket, IconArrowLeft, IconUser, IconCalendar, IconTags, IconTools } from "@tabler/icons-react";
 import { HoverBorderGradient } from "@/components/ui/hover-border-gradient";
+import ReactMarkdown from "react-markdown";
+import remarkGfm from "remark-gfm";
+import rehypeRaw from "rehype-raw";
 
 import { Metadata, ResolvingMetadata } from "next";
 
+// Define an admin client without cookies for static generation (build time)
+const getStaticClient = () => {
+  return createSupabaseJsClient(
+    process.env.NEXT_PUBLIC_SUPABASE_URL as string,
+    process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY as string
+  );
+};
+
 // Generate Static Params for build time optimization (optional but good)
 export async function generateStaticParams() {
+  const supabase = getStaticClient();
   const { data: projects } = await supabase.from("projects").select("slug");
   return (projects || []).map((project) => ({
     slug: project.slug,
@@ -20,7 +33,8 @@ export async function generateMetadata(
   parent: ResolvingMetadata
 ): Promise<Metadata> {
   const { slug } = await params;
-  
+
+  const supabase = await createClient();
   const { data: project } = await supabase
     .from("projects")
     .select("name, description, image")
@@ -59,7 +73,8 @@ export async function generateMetadata(
 
 export default async function ProjectDetailPage({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
-  
+
+  const supabase = await createClient();
   const { data: project, error } = await supabase
     .from("projects")
     .select("*")
@@ -69,6 +84,15 @@ export default async function ProjectDetailPage({ params }: { params: Promise<{ 
   if (error || !project) {
     notFound();
   }
+
+  const cleanLongDescription = project.long_description || "";
+  
+  // Build props from database fields
+  const props: Record<string, string> = {};
+  if (project.role) props['Role'] = project.role;
+  if (project.timeline) props['Timeline'] = project.timeline;
+  if (project.tags) props['Tags'] = project.tags;
+  if (project.tools) props['Tools'] = project.tools;
 
   return (
     <div className="min-h-screen bg-zinc-50 dark:bg-gray-950 pt-32 pb-20 transition-colors duration-300">
@@ -117,41 +141,58 @@ export default async function ProjectDetailPage({ params }: { params: Promise<{ 
                   {/* Left column - main details */}
                   <div className="md:col-span-2 flex flex-col gap-12">
                       <section className="flex flex-col gap-4">
-                          <div className="flex items-center gap-3 text-zinc-900 dark:text-white font-bold text-xl md:text-2xl transition-colors">
-                              <IconTarget className="text-lime-600 dark:text-lime-500 transition-colors" size={24} /> The Challenge
+                          <div className="prose prose-zinc dark:prose-invert prose-p:leading-relaxed prose-a:text-lime-600 dark:prose-a:text-lime-500 prose-img:rounded-2xl prose-img:shadow-lg max-w-none text-zinc-600 dark:text-zinc-400">
+                              <ReactMarkdown
+                                  remarkPlugins={[remarkGfm]}
+                                  rehypePlugins={[rehypeRaw]}
+                                  components={{
+                                      img: ({ node, ...props }) => {
+                                          // Fix URLs with spaces that aren't encoded properly
+                                          const src = props.src?.replace(/ /g, '%20');
+                                          return <img {...props} src={src} loading="lazy" alt={props.alt || ""} />;
+                                      }
+                                  }}
+                              >
+                                  {cleanLongDescription}
+                              </ReactMarkdown>
                           </div>
-                          <p className="text-zinc-600 dark:text-zinc-400 text-base md:text-lg leading-relaxed transition-colors">
-                              {project.problem}
-                          </p>
-                      </section>
-
-                      <section className="flex flex-col gap-4">
-                          <div className="flex items-center gap-3 text-zinc-900 dark:text-white font-bold text-xl md:text-2xl transition-colors">
-                              <IconRocket className="text-lime-600 dark:text-lime-500 transition-colors" size={24} /> The Solution
-                          </div>
-                          <p className="text-zinc-600 dark:text-zinc-400 text-base md:text-lg leading-relaxed transition-colors">
-                              {project.solution}
-                          </p>
-                      </section>
-
-                      <section className="flex flex-col gap-4">
-                          <div className="flex items-center gap-3 text-zinc-900 dark:text-white font-bold text-xl md:text-2xl transition-colors">
-                              <IconBriefcase className="text-lime-600 dark:text-lime-500 transition-colors" size={24} /> My Role & Impact
-                          </div>
-                          <p className="text-zinc-600 dark:text-zinc-400 text-base md:text-lg leading-relaxed transition-colors">
-                              {project.long_description}
-                          </p>
                       </section>
                   </div>
 
                   {/* Right column - sidebar / CTA */}
                   <div className="flex flex-col gap-8 md:pt-2">
-                        <div className="p-6 rounded-3xl bg-zinc-50 dark:bg-zinc-950/50 border border-black/5 dark:border-white/5 flex flex-col gap-2 transition-colors">
-                            <h4 className="text-xs font-bold text-zinc-500 dark:text-zinc-400 uppercase tracking-widest">Platform</h4>
-                            <p className="text-zinc-900 dark:text-white font-medium mb-4">Web & Mobile App</p>
-                            
-                            <h4 className="text-xs font-bold text-zinc-500 dark:text-zinc-400 uppercase tracking-widest">Category</h4>
-                            <p className="text-zinc-900 dark:text-white font-medium">{project.category}</p>
+                        <div className="p-6 rounded-3xl bg-zinc-50 dark:bg-zinc-950/50 border border-black/5 dark:border-white/5 flex flex-col gap-6 transition-colors">
+                            {Object.entries(props).length > 0 ? (
+                                Object.entries(props).map(([key, value]) => {
+                                    const Icon = key === 'Role' ? IconUser : key === 'Timeline' ? IconCalendar : key === 'Tags' ? IconTags : IconTools;
+                                    return (
+                                        <div key={key} className="flex flex-col gap-1.5">
+                                            <div className="flex items-center gap-2 text-zinc-500 dark:text-zinc-400">
+                                                <Icon size={16} stroke={2.5} />
+                                                <h4 className="text-xs font-bold uppercase tracking-widest">{key}</h4>
+                                            </div>
+                                            <p className="text-zinc-900 dark:text-white font-medium text-sm leading-relaxed">{value}</p>
+                                        </div>
+                                    );
+                                })
+                            ) : (
+                                <>
+                                    <div className="flex flex-col gap-1.5">
+                                        <div className="flex items-center gap-2 text-zinc-500 dark:text-zinc-400">
+                                            <IconTarget size={16} stroke={2.5} />
+                                            <h4 className="text-xs font-bold uppercase tracking-widest">Platform</h4>
+                                        </div>
+                                        <p className="text-zinc-900 dark:text-white font-medium text-sm">Web & Mobile App</p>
+                                    </div>
+                                    <div className="flex flex-col gap-1.5">
+                                        <div className="flex items-center gap-2 text-zinc-500 dark:text-zinc-400">
+                                            <IconBriefcase size={16} stroke={2.5} />
+                                            <h4 className="text-xs font-bold uppercase tracking-widest">Category</h4>
+                                        </div>
+                                        <p className="text-zinc-900 dark:text-white font-medium text-sm">{project.category}</p>
+                                    </div>
+                                </>
+                            )}
                         </div>
                         
                         {project.link && project.link !== "#" ? (

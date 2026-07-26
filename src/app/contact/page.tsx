@@ -7,21 +7,20 @@ import { Input, TextArea } from "@/components/ui/input";
 import { HoverBorderGradient } from "@/components/ui/hover-border-gradient";
 import { cn } from "@/lib/utils";
 
-import { useState, useTransition } from "react";
+import { useTransition } from "react";
+import { toast } from "sonner";
 import { submitContactForm } from "./actions";
 
 export default function ContactPage() {
   const [isPending, startTransition] = useTransition();
-  const [message, setMessage] = useState<{ type: "success" | "error", text: string } | null>(null);
 
   const handleSubmit = async (formData: FormData) => {
-    setMessage(null);
     startTransition(async () => {
       const result = await submitContactForm(formData);
       if (result.error) {
-        setMessage({ type: "error", text: result.error });
+        toast.error(result.error);
       } else if (result.success) {
-        setMessage({ type: "success", text: "Pesan Anda berhasil dikirim! Saya akan segera membalasnya." });
+        toast.success("Pesan Anda berhasil dikirim! Saya akan segera membalasnya.");
         const form = document.getElementById("contact-form") as HTMLFormElement;
         form.reset();
       }
@@ -109,15 +108,6 @@ export default function ContactPage() {
                 <label className="text-zinc-600 dark:text-zinc-400 text-xs font-bold uppercase ml-1 mb-2 transition-colors">Message</label>
                 <TextArea name="message" placeholder="Tell me about your project..." required disabled={isPending} />
               </LabelInputContainer>
-
-              {message && (
-                <div className={cn(
-                  "p-4 rounded-xl text-sm font-medium",
-                  message.type === "success" ? "bg-emerald-500/10 text-emerald-600 dark:text-emerald-400" : "bg-red-500/10 text-red-600 dark:text-red-400"
-                )}>
-                  {message.text}
-                </div>
-              )}
 
               <div className="pt-4">
                   <HoverBorderGradient

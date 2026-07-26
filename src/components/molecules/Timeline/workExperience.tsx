@@ -1,8 +1,9 @@
 import React from "react";
 import { Timeline } from "@/components/ui/timeline";
-import supabase from "@/lib/db";
+import { createClient } from "@/lib/supabase/server";
 
 export async function WorkExperience() {
+    const supabase = await createClient();
     const { data: experiences, error } = await supabase
         .from("experiences")
         .select("*")
@@ -44,7 +45,7 @@ export function WorkExperienceSkeleton() {
                     </div>
                     <div className="flex flex-col w-full md:w-2/3 gap-4 border-l-2 border-zinc-200 dark:border-zinc-800 pl-8 relative">
                         <div className="absolute w-4 h-4 rounded-full bg-zinc-300 dark:bg-zinc-700 -left-[9px] top-4"></div>
-                        
+
                         <div className="md:hidden flex flex-col gap-2 mb-4">
                             <div className="h-6 w-3/4 bg-zinc-200 dark:bg-zinc-800 rounded"></div>
                             <div className="h-4 w-1/2 bg-zinc-200 dark:bg-zinc-800 rounded"></div>

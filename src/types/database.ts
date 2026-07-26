@@ -1,10 +1,23 @@
 export interface Project {
   id: number;
-  title: string;
+  name: string;
+  slug: string;
+  category: string;
   description: string;
-  image_url: string;
-  image_overlap: "top" | "bottom" | "none";
-  icon_name: string;
+  image: string;
+  tech_stack: string[];
+  is_featured: boolean;
+  role?: string;
+  timeline?: string;
+  tags?: string;
+  tools?: string;
+  long_description?: string;
+  problem?: string;
+  solution?: string;
+  link?: string;
+  image_url?: string;
+  image_overlap?: "top" | "bottom" | "none";
+  icon_name?: string;
   created_at?: string;
   order_index?: number;
 }

@@ -1,6 +1,6 @@
 "use server";
 
-import supabase from "@/lib/db";
+import { createClient } from "@/lib/supabase/server";
 
 export async function submitContactForm(formData: FormData) {
   const name = formData.get("name") as string;
@@ -12,6 +12,7 @@ export async function submitContactForm(formData: FormData) {
     return { error: "Semua kolom wajib diisi!" };
   }
 
+  const supabase = await createClient();
   const { error } = await supabase.from("contacts").insert([
     {
       name,

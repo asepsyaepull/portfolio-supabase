@@ -5,8 +5,8 @@ import Image from "next/image";
 // Tambahkan data blog content yang hilang
 const blogContent = {
     author: "Asep Syaepul",
-    authorAvatar: "/assets/images/profile.PNG",
-    image: "/assets/images/profile.PNG",
+    authorAvatar: "/assets/images/profile.png",
+    image: "/assets/images/profile.png",
     title: "Portfolio Project",
     description: "A showcase of my skills and projects",
     date: "June 2023"
