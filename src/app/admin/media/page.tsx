@@ -8,14 +8,14 @@ import Image from "next/image";
 
 interface FileObject {
   name: string;
-  id: string;
-  updated_at: string;
-  created_at: string;
-  last_accessed_at: string;
+  id: string | null;
+  updated_at: string | null;
+  created_at: string | null;
+  last_accessed_at: string | null;
   metadata: {
     size: number;
     mimetype: string;
-  };
+  } | null;
   url?: string;
 }
 
@@ -150,7 +150,7 @@ export default function AdminMediaPage() {
                 </p>
                 <div className="flex items-center justify-between text-[10px] text-zinc-500">
                   <span>{formatSize(file.metadata?.size || 0)}</span>
-                  <span>{new Date(file.created_at).toLocaleDateString()}</span>
+                  <span>{file.created_at ? new Date(file.created_at).toLocaleDateString() : "-"}</span>
                 </div>
               </div>
             </div>
