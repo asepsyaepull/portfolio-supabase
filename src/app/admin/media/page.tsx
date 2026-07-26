@@ -6,21 +6,10 @@ import { IconTrash, IconCopy, IconPhoto } from "@tabler/icons-react";
 import { toast } from "sonner";
 import Image from "next/image";
 
-interface FileObject {
-  name: string;
-  id: string | null;
-  updated_at: string | null;
-  created_at: string | null;
-  last_accessed_at: string | null;
-  metadata: {
-    size: number;
-    mimetype: string;
-  } | null;
-  url?: string;
-}
+type FileWithUrl = { url: string; [key: string]: any };
 
 export default function AdminMediaPage() {
-  const [files, setFiles] = useState<FileObject[]>([]);
+  const [files, setFiles] = useState<FileWithUrl[]>([]);
   const [loading, setLoading] = useState(true);
   const supabase = createClient();
 
