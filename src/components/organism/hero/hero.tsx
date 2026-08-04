@@ -67,7 +67,7 @@ const Hero = () => {
                 >
                     {/* Status & Location Badge */}
                     <motion.div variants={itemVariants} className="mb-6 flex flex-wrap gap-3">
-                        <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-lime-500/10 border border-lime-500/20 text-lime-600 dark:text-lime-400 text-[10px] font-bold tracking-widest uppercase transition-colors">
+                        <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-lime-500/20 border border-lime-500/30 text-lime-700 dark:text-lime-400 text-[10px] font-bold tracking-widest uppercase transition-colors">
                             <span className="relative flex h-2 w-2">
                                 <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-lime-400 dark:bg-lime-400 opacity-75"></span>
                                 <span className="relative inline-flex rounded-full h-2 w-2 bg-lime-500"></span>

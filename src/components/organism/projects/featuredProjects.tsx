@@ -22,6 +22,14 @@ export function FeaturedProjects() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
+    const timer = setTimeout(() => {
+      if (loading) {
+        console.warn("Fetch timed out, using fallback projects.");
+        setProjects(fallbackProjects);
+        setLoading(false);
+      }
+    }, 5000);
+
     async function fetchProjects() {
       try {
         const supabase = createClient();
@@ -44,12 +52,15 @@ export function FeaturedProjects() {
         console.warn("Using fallback projects due to fetch error:", err);
         setProjects(fallbackProjects);
       } finally {
+        clearTimeout(timer);
         setLoading(false);
       }
     }
 
     fetchProjects();
-  }, []);
+
+    return () => clearTimeout(timer);
+  }, [loading]);
 
   return (
     <section className="py-20 bg-zinc-50 dark:bg-gray-950 transition-colors duration-300">

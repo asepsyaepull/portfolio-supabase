@@ -11,6 +11,14 @@ export function SkillsSection() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
+    const timer = setTimeout(() => {
+      if (loading) {
+        console.warn("Fetch timed out, using fallback skills.");
+        setSkills(fallbackSkills);
+        setLoading(false);
+      }
+    }, 5000);
+
     async function fetchSkills() {
       try {
         const supabase = createClient();
@@ -30,15 +38,18 @@ export function SkillsSection() {
         console.warn("Using fallback skills due to fetch error:", err);
         setSkills(fallbackSkills);
       } finally {
+        clearTimeout(timer);
         setLoading(false);
       }
     }
 
     fetchSkills();
-  }, []);
+
+    return () => clearTimeout(timer);
+  }, [loading]);
 
   return (
-    <div id="skills-section" className="py-20 bg-zinc-50 dark:bg-gray-950 transition-colors duration-300">
+    <div id="skills-section" className="py-20 bg-zinc-50 dark:bg-gray-950 transition-colors duration-300 scroll-mt-24">
       <div className="container mx-auto px-4 md:px-24">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
