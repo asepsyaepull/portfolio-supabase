@@ -30,7 +30,7 @@ function TitleComponent({ title, avatar }: { title: string, avatar: string }) {
 
 export function ProfileCardPointer() {
     return (
-        <div className="w-80 max-w-md h-96">
+        <div className="w-full max-w-xs sm:max-w-sm h-96">
             <FollowerPointerCard
                 title={
                     <TitleComponent

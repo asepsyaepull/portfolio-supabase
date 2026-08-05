@@ -196,7 +196,7 @@ export default function AboutHome() {
                         whileInView={{ opacity: 1, y: 0 }}
                         viewport={{ once: true }}
                         transition={{ duration: 0.6 }}
-                        className="flex flex-col items-center min-w-[200px]"
+                        className="flex flex-col items-center min-w-[120px] w-full max-w-[200px]"
                     >
                         {/* Mobile container with side buttons */}
                         <div
@@ -323,7 +323,7 @@ export default function AboutHome() {
                         whileInView={{ opacity: 1, y: 0 }}
                         viewport={{ once: true }}
                         transition={{ duration: 0.6, delay: 0.1 }}
-                        className="flex flex-col items-center min-w-[260px]"
+                        className="flex flex-col items-center min-w-[200px] w-full max-w-[260px]"
                     >
                         {/* Laptop 3D perspective hover container */}
                         <div
@@ -339,7 +339,7 @@ export default function AboutHome() {
                                     y: macLidHover ? 0 : 5
                                 }}
                                 transition={{ type: "spring", stiffness: 180, damping: 18 }}
-                                className="w-[320px] h-[200px] border-4 border-zinc-200 dark:border-zinc-800 rounded-t-xl bg-white dark:bg-zinc-950 p-1.5 relative shadow-xl overflow-hidden transition-colors"
+                                className="w-full max-w-[320px] h-[200px] border-4 border-zinc-200 dark:border-zinc-800 rounded-t-xl bg-white dark:bg-zinc-950 p-1.5 relative shadow-xl overflow-hidden transition-colors"
                                 style={{ transformOrigin: "bottom center" }}
                             >
                                 {/* Screen background glow */}
@@ -397,7 +397,7 @@ export default function AboutHome() {
                             </motion.div>
 
                             {/* MacBook Base Keyboard */}
-                            <div className="w-[370px] h-[10px] bg-zinc-300 dark:bg-zinc-800 rounded-b-xl relative z-10 shadow-md transition-colors">
+                            <div className="w-full max-w-[370px] h-[10px] bg-zinc-300 dark:bg-zinc-800 rounded-b-xl relative z-10 shadow-md transition-colors">
                                 {/* Trackpad notch */}
                                 <div className="w-[56px] h-[4px] bg-zinc-200 dark:bg-zinc-900 mx-auto rounded-b-sm border-t border-zinc-300 dark:border-zinc-700/50 transition-colors" />
                             </div>
@@ -417,13 +417,13 @@ export default function AboutHome() {
                         whileInView={{ opacity: 1, y: 0 }}
                         viewport={{ once: true }}
                         transition={{ duration: 0.6, delay: 0.2 }}
-                        className="flex flex-col items-center min-w-[240px]"
+                        className="flex flex-col items-center min-w-[200px] w-full max-w-[260px]"
                     >
                         {/* iPad container in Landscape Mode */}
                         <div
                             onMouseEnter={() => setIpadHover(true)}
                             onMouseLeave={() => setIpadHover(false)}
-                            className="relative group cursor-pointer"
+                            className="relative group cursor-pointer w-full max-w-[260px] flex justify-center"
                         >
                             {/* Top/Lock Button (iPad Side) */}
                             <div className="absolute right-12 top-[-3px] w-8 h-[3px] bg-zinc-300 dark:bg-zinc-800 rounded-t transition-colors" />
@@ -432,7 +432,7 @@ export default function AboutHome() {
                             <div className="absolute right-[-3px] top-[60px] w-[3px] h-6 bg-zinc-300 dark:bg-zinc-800 rounded-r transition-colors" />
 
                             {/* Device body */}
-                            <div className="w-[260px] h-[180px] border-[4.5px] border-zinc-200 dark:border-zinc-800 rounded-[20px] bg-white dark:bg-zinc-950 p-2 relative flex flex-col justify-between overflow-hidden shadow-2xl shadow-black/10 dark:shadow-black/80 ring-1 ring-zinc-200 dark:ring-zinc-700/30 transition-colors">
+                            <div className="w-full h-[180px] border-[4.5px] border-zinc-200 dark:border-zinc-800 rounded-[20px] bg-white dark:bg-zinc-950 p-2 relative flex flex-col justify-between overflow-hidden shadow-2xl shadow-black/10 dark:shadow-black/80 ring-1 ring-zinc-200 dark:ring-zinc-700/30 transition-colors">
                                 {/* Screen background glow */}
                                 <div className="absolute inset-0 bg-gradient-to-tl from-blue-500/5 via-transparent to-lime-500/5 pointer-events-none" />
 

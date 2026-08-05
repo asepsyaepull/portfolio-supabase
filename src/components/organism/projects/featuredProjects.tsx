@@ -110,8 +110,8 @@ const Skeleton = ({ src, overlap = "none" }: { src?: string, overlap?: "top" | "
             height={600}
             className={cn(
                 "absolute inset-0 w-full h-full object-cover object-top transition duration-700 ease-out group-hover/bento:scale-[1.03]",
-                overlap === "top" && "-mt-10",
-                overlap === "bottom" && "-mb-10"
+                overlap === "top" && "md:-mt-10",
+                overlap === "bottom" && "md:-mb-10"
             )}
         />
     ) : (
