@@ -79,7 +79,7 @@ const Hero = () => {
                     {/* Loud Typography Headline */}
                     <motion.h1
                         variants={itemVariants}
-                        className="text-5xl md:text-[5.2rem] font-black tracking-tighter text-zinc-900 dark:text-white mb-4 leading-[0.95] uppercase transition-colors"
+                        className="text-5xl sm:text-6xl md:text-[5.2rem] font-black tracking-tighter text-zinc-900 dark:text-white mb-4 leading-[0.95] uppercase transition-colors"
                     >
                         Design <br />
                         <span className="text-lime-600 dark:text-lime-500 italic font-serif normal-case">&</span> Engineering.
