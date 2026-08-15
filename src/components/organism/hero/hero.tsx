@@ -43,7 +43,7 @@ const Hero = () => {
     return (
         <div
             ref={containerRef}
-            className="min-h-[100vh] bg-zinc-50 dark:bg-gray-950 relative flex items-center justify-center overflow-hidden selection:bg-lime-500/30 transition-colors duration-300"
+            className="min-h-[100dvh] bg-zinc-50 dark:bg-gray-950 relative flex items-center justify-center overflow-hidden selection:bg-lime-500/30 transition-colors duration-300"
         >
             {/* Design System Grid Background */}
             <div className="absolute inset-0 z-0">
@@ -57,16 +57,16 @@ const Hero = () => {
             {/* Figma-style Inspector Overlay */}
             <FigmaHoverInspector containerRef={containerRef} />
 
-            <div className="container mx-auto px-4 md:px-24 relative z-20 w-full grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+            <div className="container mx-auto px-4 md:px-24 relative z-20 w-full grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-12 items-center">
                 {/* Left Column - Text Content */}
                 <motion.div
                     initial="hidden"
                     animate="visible"
                     variants={containerVariants}
-                    className="flex flex-col items-start text-left w-full pt-20 md:pt-0 pb-20 lg:pb-0 lg:col-span-7"
+                    className="flex flex-col items-start text-left w-full pt-16 md:pt-0 pb-8 lg:pb-0 lg:col-span-7"
                 >
                     {/* Status & Location Badge */}
-                    <motion.div variants={itemVariants} className="mb-6 flex flex-wrap gap-3">
+                    <motion.div variants={itemVariants} className="mb-4 sm:mb-6 flex flex-wrap gap-3">
                         <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-lime-500/10 border border-lime-500/30 text-lime-700 dark:text-lime-400 text-[10px] font-bold tracking-widest uppercase transition-colors">
                             <span className="relative flex h-2 w-2">
                                 <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-lime-500 dark:bg-lime-400 opacity-75"></span>
@@ -79,35 +79,35 @@ const Hero = () => {
                     {/* Loud Typography Headline */}
                     <motion.h1
                         variants={itemVariants}
-                        className="text-5xl sm:text-6xl md:text-[5.2rem] font-black tracking-tighter text-zinc-900 dark:text-white mb-4 leading-[0.95] uppercase transition-colors"
+                        className="text-4xl sm:text-6xl md:text-[5.2rem] font-black tracking-tighter text-zinc-900 dark:text-white mb-3 sm:mb-4 leading-[0.95] uppercase transition-colors"
                     >
                         Design <br />
                         <span className="text-lime-600 dark:text-lime-500 italic font-serif normal-case">&</span> Engineering.
                     </motion.h1>
 
-                    <motion.div variants={itemVariants} className="mt-6 mb-8 flex flex-col gap-5">
-                        <p className="text-lg md:text-xl text-zinc-700 dark:text-zinc-300 max-w-xl leading-relaxed transition-colors">
+                    <motion.div variants={itemVariants} className="mt-4 sm:mt-6 mb-6 sm:mb-8 flex flex-col gap-5">
+                        <p className="text-base sm:text-lg md:text-xl text-zinc-700 dark:text-zinc-300 max-w-xl leading-relaxed transition-colors">
                             Hi, I'm <span className="text-zinc-900 dark:text-white font-bold underline decoration-lime-500/50 decoration-2 underline-offset-4">Asep</span>. A <span className="text-zinc-900 dark:text-zinc-100 font-medium">Design Technologist & Frontend Engineer</span> blending pixel-perfect aesthetics with robust technical architecture. Over 7 years of crafting digital products.
                         </p>
                     </motion.div>
 
                     {/* Actions & Social Proof */}
-                    <motion.div variants={itemVariants} className="flex flex-col gap-10 w-full">
-                        <div className="flex flex-wrap items-center justify-start gap-4">
+                    <motion.div variants={itemVariants} className="flex flex-col gap-6 sm:gap-10 w-full">
+                        <div className="flex flex-wrap items-center justify-start gap-3 sm:gap-4">
                             <Link href="/projects">
                                 <HoverBorderGradient
                                     containerClassName="rounded-full shadow-lg shadow-lime-500/20"
                                     as="div"
-                                    className="bg-lime-500 text-black flex items-center space-x-2 px-8 py-4 font-bold text-sm transition-all hover:scale-[1.05] active:scale-[0.98]"
+                                    className="bg-lime-500 text-black flex items-center space-x-2 px-6 sm:px-8 py-3.5 sm:py-4 font-bold text-xs sm:text-sm transition-all hover:scale-[1.05] active:scale-[0.98]"
                                 >
                                     <span>View My Work</span>
-                                    <ChevronRight className="ml-1 h-5 w-5" />
+                                    <ChevronRight className="ml-1 h-4 w-4 sm:h-5 sm:w-5" />
                                 </HoverBorderGradient>
                             </Link>
 
                             <Link
                                 href="/contact"
-                                className="text-zinc-700 dark:text-zinc-200 font-bold text-sm flex items-center gap-3 px-8 py-4 rounded-full border border-zinc-200 dark:border-white/10 bg-white dark:bg-white/5 hover:bg-zinc-50 dark:hover:bg-white/10 transition-all active:scale-[0.98] shadow-sm"
+                                className="text-zinc-700 dark:text-zinc-200 font-bold text-xs sm:text-sm flex items-center gap-2.5 px-6 sm:px-8 py-3.5 sm:py-4 rounded-full border border-zinc-200 dark:border-white/10 bg-white dark:bg-white/5 hover:bg-zinc-50 dark:hover:bg-white/10 transition-all active:scale-[0.98] shadow-sm"
                             >
                                 <span>Get in touch</span>
                                 <div className="w-2 h-2 rounded-full bg-lime-500 animate-pulse" />
@@ -115,18 +115,18 @@ const Hero = () => {
                         </div>
 
                         {/* Social Proof Stats from Resume */}
-                        <div className="flex gap-8 sm:gap-12 border-t border-zinc-200 dark:border-white/5 pt-10 transition-colors">
+                        <div className="flex gap-6 sm:gap-12 border-t border-zinc-200 dark:border-white/5 pt-6 sm:pt-10 transition-colors">
                             <div className="flex flex-col gap-1">
-                                <span className="text-3xl font-black text-zinc-900 dark:text-white leading-none transition-colors">7+</span>
-                                <span className="text-[10px] font-bold text-zinc-500 dark:text-zinc-600 uppercase tracking-widest transition-colors">Years UI/UX</span>
+                                <span className="text-2xl sm:text-3xl font-black text-zinc-900 dark:text-white leading-none transition-colors">7+</span>
+                                <span className="text-[9px] sm:text-[10px] font-bold text-zinc-500 dark:text-zinc-600 uppercase tracking-widest transition-colors">Years UI/UX</span>
                             </div>
                             <div className="flex flex-col gap-1">
-                                <span className="text-3xl font-black text-zinc-900 dark:text-white leading-none transition-colors">25%</span>
-                                <span className="text-[10px] font-bold text-zinc-500 dark:text-zinc-600 uppercase tracking-widest transition-colors">Adoption Growth</span>
+                                <span className="text-2xl sm:text-3xl font-black text-zinc-900 dark:text-white leading-none transition-colors">25%</span>
+                                <span className="text-[9px] sm:text-[10px] font-bold text-zinc-500 dark:text-zinc-600 uppercase tracking-widest transition-colors">Adoption Growth</span>
                             </div>
                             <div className="flex flex-col gap-1">
-                                <span className="text-3xl font-black text-zinc-900 dark:text-white leading-none transition-colors">28%</span>
-                                <span className="text-[10px] font-bold text-zinc-500 dark:text-zinc-600 uppercase tracking-widest transition-colors">User Satisfaction</span>
+                                <span className="text-2xl sm:text-3xl font-black text-zinc-900 dark:text-white leading-none transition-colors">28%</span>
+                                <span className="text-[9px] sm:text-[10px] font-bold text-zinc-500 dark:text-zinc-600 uppercase tracking-widest transition-colors">User Satisfaction</span>
                             </div>
                         </div>
                     </motion.div>
@@ -150,7 +150,7 @@ const Hero = () => {
                 initial={{ opacity: 0, y: 10 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 1.6, duration: 0.8, ease: "easeOut" }}
-                className="absolute bottom-3 md:bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-1.5 md:gap-2.5 cursor-pointer group z-20 opacity-60 hover:opacity-100 transition-all duration-500 scale-90 md:scale-100"
+                className="absolute bottom-3 md:bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center justify-center gap-1.5 md:gap-2.5 cursor-pointer group z-20 opacity-60 hover:opacity-100 transition-opacity duration-300"
                 onClick={() => {
                     const nextSection = document.getElementById("skills-section");
                     if (nextSection) {
@@ -173,7 +173,7 @@ const Hero = () => {
                     />
                 </div>
 
-                <span className="text-[8px] md:text-[9px] uppercase tracking-[0.3em] text-zinc-500 group-hover:text-lime-400 font-bold transition-colors duration-300 select-none">
+                <span className="text-[8px] md:text-[9px] uppercase tracking-[0.3em] pl-[0.3em] text-zinc-500 group-hover:text-lime-400 font-bold transition-colors duration-300 select-none text-center">
                     Scroll
                 </span>
             </motion.button>
