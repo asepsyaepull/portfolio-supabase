@@ -67,9 +67,9 @@ const Hero = () => {
                 >
                     {/* Status & Location Badge */}
                     <motion.div variants={itemVariants} className="mb-6 flex flex-wrap gap-3">
-                        <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-lime-500/20 border border-lime-500/30 text-lime-700 dark:text-lime-400 text-[10px] font-bold tracking-widest uppercase transition-colors">
+                        <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-lime-500/10 border border-lime-500/30 text-lime-700 dark:text-lime-400 text-[10px] font-bold tracking-widest uppercase transition-colors">
                             <span className="relative flex h-2 w-2">
-                                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-lime-400 dark:bg-lime-400 opacity-75"></span>
+                                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-lime-500 dark:bg-lime-400 opacity-75"></span>
                                 <span className="relative inline-flex rounded-full h-2 w-2 bg-lime-500"></span>
                             </span>
                             Available for work
@@ -89,18 +89,6 @@ const Hero = () => {
                         <p className="text-lg md:text-xl text-zinc-700 dark:text-zinc-300 max-w-xl leading-relaxed transition-colors">
                             Hi, I'm <span className="text-zinc-900 dark:text-white font-bold underline decoration-lime-500/50 decoration-2 underline-offset-4">Asep</span>. A <span className="text-zinc-900 dark:text-zinc-100 font-medium">Design Technologist & Frontend Engineer</span> blending pixel-perfect aesthetics with robust technical architecture. Over 7 years of crafting digital products.
                         </p>
-
-                        <div className="flex flex-wrap items-center justify-start gap-3">
-                            <span className="text-zinc-500 dark:text-zinc-500 text-[10px] uppercase tracking-[0.2em] font-black transition-colors">Core Stack</span>
-                            <SmoothTypingText
-                                words={["React.js & Next.js", "TypeScript", "Tailwind CSS", "Figma (Advanced)", "Design Systems"]}
-                                className="bg-white/80 dark:bg-zinc-900/80 border border-zinc-200 dark:border-white/10 rounded-xl px-4 py-2 shadow-xl shadow-lime-500/5 min-w-[240px] transition-colors"
-                                textClassName="text-lime-600 dark:text-lime-500 text-sm font-bold tracking-widest transition-colors"
-                                typingSpeed={100}
-                                deletingSpeed={45}
-                                duration={2500}
-                            />
-                        </div>
                     </motion.div>
 
                     {/* Actions & Social Proof */}
