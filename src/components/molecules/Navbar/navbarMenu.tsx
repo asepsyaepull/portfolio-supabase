@@ -92,7 +92,7 @@ export function NavbarMenu() {
                                 <HoverBorderGradient
                                     containerClassName="rounded-full w-full"
                                     as="div"
-                                    className="bg-lime-500 text-black dark:bg-lime-500 dark:text-black flex items-center justify-center space-x-2 px-4 py-3"
+                                    className="w-full bg-lime-500 text-black dark:bg-lime-500 dark:text-black flex items-center justify-center space-x-2 px-4 py-3"
                                 >
                                     <span className="text-xs font-bold tracking-tighter">LET'S COLLABORATE</span>
                                     <ArrowRight className="h-4 w-4" />

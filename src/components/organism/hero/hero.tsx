@@ -43,7 +43,7 @@ const Hero = () => {
     return (
         <div
             ref={containerRef}
-            className="min-h-[95vh] bg-zinc-50 dark:bg-gray-950 relative flex items-center justify-center overflow-hidden selection:bg-lime-500/30 transition-colors duration-300"
+            className="min-h-[100vh] bg-zinc-50 dark:bg-gray-950 relative flex items-center justify-center overflow-hidden selection:bg-lime-500/30 transition-colors duration-300"
         >
             {/* Design System Grid Background */}
             <div className="absolute inset-0 z-0">
@@ -63,7 +63,7 @@ const Hero = () => {
                     initial="hidden"
                     animate="visible"
                     variants={containerVariants}
-                    className="flex flex-col items-start text-left w-full pt-20 md:pt-0 lg:col-span-7"
+                    className="flex flex-col items-start text-left w-full pt-20 md:pt-0 pb-20 lg:pb-0 lg:col-span-7"
                 >
                     {/* Status & Location Badge */}
                     <motion.div variants={itemVariants} className="mb-6 flex flex-wrap gap-3">
@@ -115,7 +115,7 @@ const Hero = () => {
                         </div>
 
                         {/* Social Proof Stats from Resume */}
-                        <div className="flex gap-12 border-t border-zinc-200 dark:border-white/5 pt-10 transition-colors">
+                        <div className="flex gap-8 sm:gap-12 border-t border-zinc-200 dark:border-white/5 pt-10 transition-colors">
                             <div className="flex flex-col gap-1">
                                 <span className="text-3xl font-black text-zinc-900 dark:text-white leading-none transition-colors">7+</span>
                                 <span className="text-[10px] font-bold text-zinc-500 dark:text-zinc-600 uppercase tracking-widest transition-colors">Years UI/UX</span>
@@ -150,7 +150,7 @@ const Hero = () => {
                 initial={{ opacity: 0, y: 10 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 1.6, duration: 0.8, ease: "easeOut" }}
-                className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2.5 cursor-pointer group z-20 opacity-50 hover:opacity-100 transition-all duration-500 hover:scale-105"
+                className="absolute bottom-3 md:bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-1.5 md:gap-2.5 cursor-pointer group z-20 opacity-60 hover:opacity-100 transition-all duration-500 scale-90 md:scale-100"
                 onClick={() => {
                     const nextSection = document.getElementById("skills-section");
                     if (nextSection) {
@@ -158,10 +158,10 @@ const Hero = () => {
                     }
                 }}
             >
-                <div className="w-6 h-10 rounded-full border border-zinc-800 group-hover:border-lime-500/50 flex justify-center p-1.5 bg-zinc-950/50 backdrop-blur-sm transition-colors duration-300 relative overflow-hidden">
+                <div className="w-5 h-9 md:w-6 md:h-10 rounded-full border border-zinc-700 dark:border-zinc-800 group-hover:border-lime-500/50 flex justify-center p-1 md:p-1.5 bg-white/50 dark:bg-zinc-950/50 backdrop-blur-sm transition-colors duration-300 relative overflow-hidden">
                     <motion.div
                         animate={{
-                            y: [0, 14],
+                            y: [0, 12],
                             opacity: [1, 0],
                         }}
                         transition={{
@@ -173,7 +173,7 @@ const Hero = () => {
                     />
                 </div>
 
-                <span className="text-[9px] uppercase tracking-[0.35em] text-zinc-500 group-hover:text-lime-400 font-bold transition-colors duration-300 select-none">
+                <span className="text-[8px] md:text-[9px] uppercase tracking-[0.3em] text-zinc-500 group-hover:text-lime-400 font-bold transition-colors duration-300 select-none">
                     Scroll
                 </span>
             </motion.button>

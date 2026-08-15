@@ -10,6 +10,7 @@ import {
 
 import React, { useRef, useState } from "react";
 import Link from "next/link";
+import { MenuToggleIcon } from "@/components/ui/menu-toggle-icon";
 
 
 interface NavbarProps {
@@ -214,14 +215,24 @@ export const MobileNavMenu = ({
 export const MobileNavToggle = ({
   isOpen,
   onClick,
+  className,
 }: {
   isOpen: boolean;
   onClick: () => void;
+  className?: string;
 }) => {
-  return isOpen ? (
-    <IconX className="text-zinc-900 dark:text-white cursor-pointer" onClick={onClick} />
-  ) : (
-      <IconMenu2 className="text-zinc-900 dark:text-white cursor-pointer" onClick={onClick} />
+  return (
+    <button
+      type="button"
+      onClick={onClick}
+      aria-label={isOpen ? "Close menu" : "Open menu"}
+      className={cn(
+        "p-1.5 rounded-lg text-zinc-900 dark:text-white hover:bg-zinc-100 dark:hover:bg-zinc-800/60 transition-colors cursor-pointer flex items-center justify-center",
+        className
+      )}
+    >
+      <MenuToggleIcon open={isOpen} className="w-6 h-6" duration={500} />
+    </button>
   );
 };
 

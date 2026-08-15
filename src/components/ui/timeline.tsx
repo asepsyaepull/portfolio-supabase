@@ -106,9 +106,9 @@ const TimelineItem = ({
 
     return (
         <div className="flex justify-start pt-10 md:pt-40 md:gap-10 relative">
-            <div className="sticky flex flex-col md:flex-row z-40 items-center top-40 self-start max-w-xs lg:max-w-sm md:w-full">
+            <div className="sticky flex flex-col md:flex-row z-30 items-center top-40 self-start max-w-xs lg:max-w-sm md:w-full">
                 <div className={cn(
-                    "h-10 absolute left-3 md:left-3 w-10 rounded-full bg-white dark:bg-zinc-950 flex items-center justify-center transition-colors duration-300",
+                    "h-6 absolute left-5 md:left-5 w-6 rounded-full bg-white dark:bg-zinc-950 flex items-center justify-center transition-colors duration-300",
                     isPassed ? "shadow-[0_0_15px_rgba(163,230,53,0.3)]" : ""
                 )}>
                     <motion.div
@@ -122,7 +122,7 @@ const TimelineItem = ({
                         {isPassed && (
                             <motion.div
                                 initial={{ scale: 0 }}
-                                animate={{ scale: [1, 1.5, 1] }}
+                                animate={{ scale: [1, 1.5, 1.8] }}
                                 transition={{ duration: 1, repeat: Infinity, repeatType: "reverse" }}
                                 className="absolute inset-0 rounded-full bg-lime-500/30"
                             />
@@ -132,11 +132,11 @@ const TimelineItem = ({
 
                 {/* Title inside the dot on mobile */}
                 <div className="md:hidden flex flex-col pl-20">
-                    <h3 className="text-2xl font-bold text-zinc-900 dark:text-zinc-100 transition-colors">
+                    <h3 className="text-xl font-bold text-zinc-900 dark:text-zinc-100 transition-colors">
                         {item.title}
                     </h3>
                     {item.subtitle && (
-                        <p className="text-lime-600 dark:text-lime-500 font-mono text-sm tracking-wider mt-1 transition-colors">
+                        <p className="text-lime-600 dark:text-lime-500 text-sm tracking-wider mt-1 transition-colors">
                             {item.subtitle}
                         </p>
                     )}
@@ -144,11 +144,11 @@ const TimelineItem = ({
 
                 {/* Title beside the dot on desktop */}
                 <div className="hidden md:flex flex-col ml-20 w-full">
-                    <h3 className="text-2xl lg:text-4xl font-bold text-zinc-900 dark:text-zinc-100 transition-colors">
+                    <h3 className="text-xl lg:text-3xl font-bold text-zinc-900 dark:text-zinc-100 transition-colors">
                         {item.title}
                     </h3>
                     {item.subtitle && (
-                        <p className="text-lime-600 dark:text-lime-500 font-mono text-sm lg:text-base tracking-wider mt-2 transition-colors">
+                        <p className="text-lime-600 dark:text-lime-500 text-sm lg:text-base tracking-wider mt-2 transition-colors">
                             {item.subtitle}
                         </p>
                     )}
