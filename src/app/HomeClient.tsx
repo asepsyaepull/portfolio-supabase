@@ -26,6 +26,10 @@ const CtaSection = dynamic(
   () => import("@/components/organism/cta/ctaSection").then((mod) => mod.CtaSection),
   { loading: () => <SectionSkeleton /> }
 );
+const PricingSection = dynamic(
+  () => import("@/components/organism/pricing/pricingSection").then((mod) => mod.PricingSection),
+  { loading: () => <SectionSkeleton /> }
+);
 
 export default function HomeClient() {
   return (
@@ -35,6 +39,7 @@ export default function HomeClient() {
       <About />
       <FeaturedProjects />
       <WorkflowSection />
+      <PricingSection />
       <CtaSection />
     </div>
   );
