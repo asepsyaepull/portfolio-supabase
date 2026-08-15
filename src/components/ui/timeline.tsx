@@ -105,10 +105,12 @@ const TimelineItem = ({
     }, [progress, threshold]);
 
     return (
-        <div className="flex justify-start pt-10 md:pt-40 md:gap-10 relative">
-            <div className="sticky flex flex-col md:flex-row z-30 items-center top-40 self-start max-w-xs lg:max-w-sm md:w-full">
+        <div className="flex flex-col md:flex-row justify-start pt-8 md:pt-36 md:gap-10 relative">
+            {/* Left Header Section (Desktop Sticky / Mobile In-flow) */}
+            <div className="md:sticky md:top-36 self-start max-w-full md:max-w-xs lg:max-w-sm md:w-full flex flex-col items-start z-30">
+                {/* Timeline Dot */}
                 <div className={cn(
-                    "h-6 absolute left-5 md:left-5 w-6 rounded-full bg-white dark:bg-zinc-950 flex items-center justify-center transition-colors duration-300",
+                    "h-6 absolute left-5 w-6 rounded-full bg-white dark:bg-zinc-950 flex items-center justify-center transition-colors duration-300 top-1 md:top-0",
                     isPassed ? "shadow-[0_0_15px_rgba(163,230,53,0.3)]" : ""
                 )}>
                     <motion.div
@@ -130,19 +132,19 @@ const TimelineItem = ({
                     </motion.div>
                 </div>
 
-                {/* Title inside the dot on mobile */}
-                <div className="md:hidden flex flex-col pl-20">
-                    <h3 className="text-xl font-bold text-zinc-900 dark:text-zinc-100 transition-colors">
+                {/* Mobile Title & Subtitle */}
+                <div className="md:hidden flex flex-col pl-14 pr-4">
+                    <h3 className="text-lg font-bold text-zinc-900 dark:text-zinc-100 transition-colors leading-tight">
                         {item.title}
                     </h3>
                     {item.subtitle && (
-                        <p className="text-lime-600 dark:text-lime-500 text-sm tracking-wider mt-1 transition-colors">
+                        <p className="text-lime-600 dark:text-lime-500 text-xs font-medium tracking-wide mt-1 transition-colors">
                             {item.subtitle}
                         </p>
                     )}
                 </div>
 
-                {/* Title beside the dot on desktop */}
+                {/* Desktop Title & Subtitle */}
                 <div className="hidden md:flex flex-col ml-20 w-full">
                     <h3 className="text-xl lg:text-3xl font-bold text-zinc-900 dark:text-zinc-100 transition-colors">
                         {item.title}
@@ -155,8 +157,9 @@ const TimelineItem = ({
                 </div>
             </div>
 
-            <div className="relative pl-20 pr-4 md:pl-4 w-full mt-8 md:mt-0">
-                <div className="text-zinc-600 dark:text-zinc-400 text-sm md:text-base leading-relaxed transition-colors prose prose-zinc dark:prose-invert">
+            {/* Right Content Section */}
+            <div className="relative pl-14 pr-4 md:pl-4 w-full mt-3 md:mt-0">
+                <div className="text-zinc-600 dark:text-zinc-400 text-sm md:text-base leading-relaxed transition-colors prose prose-zinc dark:prose-invert max-w-none">
                     {item.content}
                 </div>
             </div>
