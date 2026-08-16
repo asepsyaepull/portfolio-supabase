@@ -5,11 +5,11 @@ import { cn } from "@/lib/utils";
 /**
  * CSS-only replacement for the old Boxes component.
  *
- * The old implementation rendered 150×100 = 15,000 divs + 3,750 SVGs into the DOM,
+ * The old implementation rendered 150×100 cells (~15,150 divs total) + 3,750 SVGs into the DOM,
  * which bloated the server-rendered HTML to ~2.3 MB and wrecked TTFB.
  *
  * This version reproduces the same skewed grid + plus-mark visual using pure CSS
- * background gradients — ZERO DOM nodes inside, same look, ~0 rendering cost.
+ * background gradients (2 overlay layers; no per-cell DOM nodes), same look, minimal render cost.
  */
 export const BoxesCore = ({ className, ...rest }: React.HTMLAttributes<HTMLDivElement>) => {
   return (
