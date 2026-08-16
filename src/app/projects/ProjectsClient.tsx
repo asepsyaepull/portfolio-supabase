@@ -46,7 +46,7 @@ export default function ProjectsClient({ projects }: { projects: Project[] }) {
               transition={{ delay: idx * 0.1 }}
             >
               <Link href={`/projects/${project.slug}`} className="group cursor-pointer block">
-                <div className="relative h-[450px] w-full overflow-hidden rounded-[40px] bg-white dark:bg-zinc-900 border border-black/5 dark:border-white/5 transition-all duration-500 group-hover:border-lime-500/50">
+                <div className="relative h-[360px] sm:h-[420px] md:h-[450px] w-full overflow-hidden rounded-[28px] sm:rounded-[40px] bg-white dark:bg-zinc-900 border border-black/5 dark:border-white/5 transition-all duration-500 group-hover:border-lime-500/50">
                   <Image
                     src={project.image || "/og-image.jpg"}
                     alt={project.name || "Project image"}
@@ -56,10 +56,10 @@ export default function ProjectsClient({ projects }: { projects: Project[] }) {
                     className="object-cover object-top transition-transform duration-700 ease-out group-hover:scale-105"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent transition-colors duration-300" />
-                  <div className="absolute bottom-10 left-10 right-10">
-                    <span className="text-lime-500 text-xs font-bold tracking-[0.2em] uppercase mb-3 block">{project.category}</span>
-                    <h3 className="text-white text-3xl font-bold mb-4">{project.name}</h3>
-                    <div className="flex gap-2">
+                  <div className="absolute bottom-6 left-6 right-6 sm:bottom-10 sm:left-10 sm:right-10">
+                    <span className="text-lime-500 text-xs font-bold tracking-[0.2em] uppercase mb-2 sm:mb-3 block">{project.category}</span>
+                    <h3 className="text-white text-2xl sm:text-3xl font-bold mb-3 sm:mb-4">{project.name}</h3>
+                    <div className="flex flex-wrap gap-2">
                       {project.tech_stack?.slice(0, 3).map((tech: string) => (
                           <span key={tech} className="text-[10px] px-3 py-1 rounded-full bg-white/10 text-zinc-300 border border-white/20 uppercase font-bold tracking-tighter">
                               {tech}

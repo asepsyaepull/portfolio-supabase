@@ -115,7 +115,7 @@ const Hero = () => {
                         </div>
 
                         {/* Social Proof Stats from Resume */}
-                        <div className="flex gap-6 sm:gap-12 border-t border-zinc-200 dark:border-white/5 pt-6 sm:pt-10 transition-colors">
+                        <div className="flex flex-wrap gap-6 sm:gap-12 border-t border-zinc-200 dark:border-white/5 pt-6 sm:pt-10 transition-colors">
                             <div className="flex flex-col gap-1">
                                 <span className="text-2xl sm:text-3xl font-black text-zinc-900 dark:text-white leading-none transition-colors">7+</span>
                                 <span className="text-[9px] sm:text-[10px] font-bold text-zinc-500 dark:text-zinc-600 uppercase tracking-widest transition-colors">Years UI/UX</span>
