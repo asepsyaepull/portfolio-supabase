@@ -11,7 +11,7 @@ import { cn } from "@/lib/utils";
  * This version reproduces the same skewed grid + plus-mark visual using pure CSS
  * background gradients — ZERO DOM nodes inside, same look, ~0 rendering cost.
  */
-export const BoxesCore = ({ className, ...rest }: { className?: string }) => {
+export const BoxesCore = ({ className, ...rest }: React.HTMLAttributes<HTMLDivElement>) => {
   return (
     <div
       style={{
