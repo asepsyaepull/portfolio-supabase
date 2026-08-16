@@ -18,6 +18,10 @@ const FeaturedProjects = dynamic(
   () => import("@/components/organism/projects/featuredProjects").then((mod) => mod.FeaturedProjects),
   { loading: () => <SectionSkeleton /> }
 );
+const WhatsupSection = dynamic(
+  () => import("@/components/organism/whatsup/whatsupSection").then((mod) => mod.WhatsupSection),
+  { loading: () => <SectionSkeleton /> }
+);
 const WorkflowSection = dynamic(
   () => import("@/components/organism/workflow/workflowSection").then((mod) => mod.WorkflowSection),
   { loading: () => <SectionSkeleton /> }
@@ -37,6 +41,7 @@ export default function HomeClient() {
       <Hero />
       <SkillsSection />
       <About />
+      <WhatsupSection />
       <FeaturedProjects />
       <WorkflowSection />
       <PricingSection />
