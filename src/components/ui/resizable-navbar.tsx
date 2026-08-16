@@ -10,6 +10,7 @@ import {
 
 import React, { useRef, useState } from "react";
 import Link from "next/link";
+import { MenuToggleIcon } from "@/components/ui/menu-toggle-icon";
 
 
 interface NavbarProps {
@@ -200,7 +201,7 @@ export const MobileNavMenu = ({
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
           className={cn(
-            "absolute inset-x-0 top-16 z-50 flex w-full flex-col items-start justify-start gap-4 rounded-lg bg-white dark:bg-neutral-950 text-zinc-900 dark:text-white px-4 py-8 shadow-2xl border border-zinc-200 dark:border-white/10 transition-colors",
+            "absolute inset-x-0 top-16 z-50 flex w-full max-h-[70vh] overflow-y-auto flex-col items-start justify-start gap-4 rounded-lg bg-white dark:bg-neutral-950 text-zinc-900 dark:text-white px-4 py-8 shadow-2xl border border-zinc-200 dark:border-white/10 transition-colors",
             className,
           )}
         >
@@ -214,14 +215,24 @@ export const MobileNavMenu = ({
 export const MobileNavToggle = ({
   isOpen,
   onClick,
+  className,
 }: {
   isOpen: boolean;
   onClick: () => void;
+  className?: string;
 }) => {
-  return isOpen ? (
-    <IconX className="text-zinc-900 dark:text-white cursor-pointer" onClick={onClick} />
-  ) : (
-      <IconMenu2 className="text-zinc-900 dark:text-white cursor-pointer" onClick={onClick} />
+  return (
+    <button
+      type="button"
+      onClick={onClick}
+      aria-label={isOpen ? "Close menu" : "Open menu"}
+      className={cn(
+        "p-1.5 rounded-lg text-zinc-900 dark:text-white hover:bg-zinc-100 dark:hover:bg-zinc-800/60 transition-colors cursor-pointer flex items-center justify-center",
+        className
+      )}
+    >
+      <MenuToggleIcon open={isOpen} className="w-6 h-6" duration={500} />
+    </button>
   );
 };
 

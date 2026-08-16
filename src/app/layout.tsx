@@ -8,13 +8,13 @@ import AppShell from "@/components/layouts/AppShell";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://asepsyaepul.com"),
+  metadataBase: new URL("https://asepsyaepul-portfolio.vercel.app"),
   title: "Asep Syaepul | Software Developer",
   description: "A portfolio showcasing my skills and projects as a software developer and engineer.",
   openGraph: {
     title: "Asep Syaepul | Software Developer",
     description: "A portfolio showcasing my skills and projects as a software developer and engineer.",
-    url: "https://asepsyaepul.com",
+    url: "https://asepsyaepul-portfolio.vercel.app",
     siteName: "Asep Syaepul Portfolio",
     images: [
       {

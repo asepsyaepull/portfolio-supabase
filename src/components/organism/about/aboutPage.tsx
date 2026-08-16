@@ -40,7 +40,7 @@ export default function AboutPage() {
                 {/* Skills Matrix */}
                 <div className="mb-32">
                     <h2 className="text-2xl md:text-4xl font-bold text-zinc-900 dark:text-white mb-12 flex items-center gap-4 transition-colors">
-                        Technical Arsenal <div className="h-px flex-1 bg-zinc-200 dark:bg-zinc-800 transition-colors" />
+                        Technical Skills <div className="h-px flex-1 bg-zinc-200 dark:bg-zinc-800 transition-colors" />
                     </h2>
                     <div className="grid md:grid-cols-2 gap-8">
                         {/* Design Column */}
@@ -85,22 +85,22 @@ export default function AboutPage() {
                         Foundations <div className="h-px flex-1 bg-zinc-200 dark:bg-zinc-800 transition-colors" />
                     </h2>
                     <div className="grid md:grid-cols-3 gap-8">
-                        <EducationCard 
-                            school="Binus University" 
-                            degree="Bachelor of Information Systems" 
-                            year="2018 - 2020" 
+                        <EducationCard
+                            school="Binus University"
+                            degree="Bachelor of Information Systems"
+                            year="2018 - 2020"
                             gpa="GPA: 3.20"
                         />
-                        <EducationCard 
-                            school="Bogor Agricultural University" 
-                            degree="Associate's Degree of Informatics" 
-                            year="2014 - 2017" 
+                        <EducationCard
+                            school="Bogor Agricultural University"
+                            degree="Associate's Degree of Informatics"
+                            year="2014 - 2017"
                             gpa="GPA: 2.81"
                         />
-                        <EducationCard 
-                            school="Dibimbing.id" 
-                            degree="Front-End Web Development" 
-                            year="2024 - 2025" 
+                        <EducationCard
+                            school="Dibimbing.id"
+                            degree="Front-End Web Development"
+                            year="2024 - 2025"
                             gpa="Final Score: 96.93"
                         />
                     </div>
@@ -117,7 +117,7 @@ const SkillItem = ({ label, percent }: { label: string, percent: number }) => (
             <span className="text-sm text-zinc-400 dark:text-zinc-500 transition-colors">{percent}%</span>
         </div>
         <div className="h-1 w-full bg-zinc-800 rounded-full overflow-hidden">
-            <motion.div 
+            <motion.div
                 initial={{ width: 0 }}
                 whileInView={{ width: `${percent}%` }}
                 transition={{ duration: 1, ease: "easeOut" }}
