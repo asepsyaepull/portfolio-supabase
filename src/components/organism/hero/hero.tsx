@@ -1,155 +1,211 @@
 "use client";
+
 import { HoverBorderGradient } from "@/components/ui/hover-border-gradient";
 import { SmoothTypingText } from "@/components/ui/smooth-typing-text";
 import { motion } from "framer-motion";
-import { IconChevronRight } from "@tabler/icons-react";
+import { IconArrowUpRight, IconChevronRight, IconMapPin } from "@tabler/icons-react";
+import Image from "next/image";
 import Link from "next/link";
 import { memo, useEffect, useRef, useState } from "react";
 import { FigmaHoverInspector } from "./figma-inspector";
-import { StylizedProfile } from "./stylized-profile";
+
+const TYPEWRITER_WORDS = [
+  "pixel-perfect",
+  "scalable",
+  "user-centered",
+  "high-performance",
+  "accessible",
+];
 
 const Hero = () => {
-    const [isMounted, setIsMounted] = useState(false);
-    const containerRef = useRef<HTMLDivElement>(null);
+  const [isMounted, setIsMounted] = useState(false);
+  const containerRef = useRef<HTMLDivElement>(null);
 
-    useEffect(() => {
-        setIsMounted(true);
-    }, []);
+  useEffect(() => {
+    setIsMounted(true);
+  }, []);
 
-    const containerVariants = {
-        hidden: { opacity: 0 },
-        visible: {
-            opacity: 1,
-            transition: {
-                staggerChildren: 0.1,
-            },
-        },
-    };
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.12,
+        delayChildren: 0.1,
+      },
+    },
+  };
 
-    const itemVariants = {
-        hidden: { opacity: 0, y: 20 },
-        visible: {
-            opacity: 1,
-            y: 0,
-            transition: {
-                duration: 0.6,
-                ease: [0.22, 1, 0.36, 1],
-            },
-        },
-    };
+  const itemVariants = {
+    hidden: { opacity: 0, y: 28 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: {
+        duration: 0.7,
+        ease: [0.22, 1, 0.36, 1],
+      },
+    },
+  };
 
-    if (!isMounted) return <div className="min-h-screen bg-gray-950" />;
+  if (!isMounted) return <div className="min-h-screen bg-gray-950" />;
 
-    return (
+  return (
+    <div
+      ref={containerRef}
+      className="relative min-h-[100dvh] flex flex-col items-center justify-center overflow-hidden selection:bg-lime-500/30"
+    >
+      {/* ── Background Layer ── */}
+      <div className="absolute inset-0 z-0">
+        {/* Base dark color */}
+        <div className="absolute inset-0 bg-gray-950" />
+
+        {/* Background image */}
+        <Image
+          src="/assets/images/hero-bg.jpg"
+          alt=""
+          fill
+          priority
+          sizes="100vw"
+          className="object-cover opacity-60 pointer-events-none"
+          aria-hidden="true"
+        />
+
+        {/* Radial gradient overlay for depth */}
         <div
-            ref={containerRef}
-            className="min-h-[100dvh] bg-zinc-50 dark:bg-gray-950 relative flex items-center justify-center overflow-hidden selection:bg-lime-500/30 transition-colors duration-300"
+          className="absolute inset-0 pointer-events-none"
+          style={{
+            background:
+              "radial-gradient(ellipse 70% 50% at 50% 30%, rgba(132,204,22,0.06) 0%, transparent 70%)",
+          }}
+        />
+
+        {/* Bottom fade to next section */}
+        <div className="absolute bottom-0 left-0 right-0 h-40 bg-gradient-to-t from-gray-950 to-transparent pointer-events-none" />
+      </div>
+
+      {/* Figma-style Inspector Overlay */}
+      <FigmaHoverInspector containerRef={containerRef} />
+
+      {/* ── Centered Content ── */}
+      <motion.div
+        initial="hidden"
+        animate="visible"
+        variants={containerVariants}
+        className="relative z-20 flex flex-col items-center text-center w-full max-w-[978px] mx-auto px-6 sm:px-8 md:px-12"
+      >
+        {/* Trust / Status Badge */}
+        <motion.div variants={itemVariants} className="mb-8 sm:mb-10">
+          <div className="inline-flex items-center gap-3 px-4 py-2 rounded-full bg-white/[0.04] border border-white/[0.08] backdrop-blur-sm">
+            <span className="relative flex h-2 w-2">
+              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-lime-400 opacity-75" />
+              <span className="relative inline-flex rounded-full h-2 w-2 bg-lime-500" />
+            </span>
+            <span className="text-[11px] sm:text-xs font-bold text-zinc-300 uppercase tracking-[0.2em]">
+              Available for Work
+            </span>
+            <span className="w-px h-3 bg-white/10" />
+            <span className="inline-flex items-center gap-1 text-[11px] sm:text-xs text-zinc-500 font-medium">
+              <IconMapPin className="w-3 h-3" />
+              Jakarta, ID
+            </span>
+          </div>
+        </motion.div>
+
+        {/* Massive Centered Heading */}
+        <motion.h1
+          variants={itemVariants}
+          className="text-5xl sm:text-7xl md:text-[5.5rem] lg:text-[6.5rem] font-black tracking-tighter text-white leading-[0.92] uppercase"
+          style={{ fontFamily: "'Inter Tight', 'Inter', system-ui, sans-serif" }}
         >
-            {/* Background */}
-            <div className="absolute inset-0 z-0">
-                <div className="absolute inset-0 bg-zinc-50 dark:bg-gray-950 transition-colors duration-300" />
-                <div className="absolute top-1/4 left-1/4 w-[600px] h-[600px] bg-lime-500/5 rounded-full blur-[140px] pointer-events-none" />
-            </div>
+          <span className="block">Design</span>
+          <span className="block">
+            <span className="text-lime-500 italic font-mono font-light">&</span>{" "}
+            Engineering
+            <span className="text-lime-500">.</span>
+          </span>
+        </motion.h1>
 
-            {/* Figma-style Inspector Overlay */}
-            <FigmaHoverInspector containerRef={containerRef} />
+        {/* Subtitle with Typewriter */}
+        <motion.div variants={itemVariants} className="mt-6 sm:mt-8 max-w-xl mx-auto">
+          <p className="text-base sm:text-lg md:text-xl text-zinc-400 leading-relaxed">
+            I craft{" "}
+            <SmoothTypingText
+              words={TYPEWRITER_WORDS}
+              className="inline-flex"
+              textClassName="text-lime-400 font-semibold h-7 sm:h-8 md:h-9"
+              typingSpeed={70}
+              deletingSpeed={35}
+              duration={2200}
+            />{" "}
+            <br className="hidden sm:block" />
+            digital experiences for businesses worldwide.
+          </p>
+        </motion.div>
 
-            <div className="container mx-auto px-4 md:px-24 relative z-20 w-full grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-12 items-center">
-                {/* Left Column - Text Content */}
-                <motion.div
-                    initial="hidden"
-                    animate="visible"
-                    variants={containerVariants}
-                    className="flex flex-col items-start text-left w-full pt-16 md:pt-0 pb-8 lg:pb-0 lg:col-span-7"
-                >
-                    {/* Status & Location Badge */}
-                    <motion.div variants={itemVariants} className="mb-4 sm:mb-6 flex flex-wrap gap-3">
-                        <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-lime-500/10 border border-lime-500/30 text-lime-700 dark:text-lime-400 text-[10px] font-bold tracking-widest uppercase transition-colors">
-                            <span className="relative flex h-2 w-2">
-                                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-lime-500 dark:bg-lime-400 opacity-75"></span>
-                                <span className="relative inline-flex rounded-full h-2 w-2 bg-lime-500"></span>
-                            </span>
-                            Available for work
-                        </div>
-                    </motion.div>
-
-                    {/* Loud Typography Headline */}
-                    <motion.h1
-                        variants={itemVariants}
-                        className="text-4xl sm:text-6xl md:text-[5.2rem] font-black tracking-tighter text-zinc-900 dark:text-white mb-3 sm:mb-4 leading-[0.95] uppercase transition-colors"
-                    >
-                        Design <br />
-                        <span className="text-lime-600 dark:text-lime-500 italic font-sans normal-case">&</span> Engineering.
-                    </motion.h1>
-
-                    <motion.div variants={itemVariants} className="mt-4 sm:mt-6 mb-6 sm:mb-8 flex flex-col gap-5">
-                        <p className="text-base sm:text-lg md:text-xl text-zinc-700 dark:text-zinc-300 max-w-xl leading-relaxed transition-colors">
-                            Hi, I'm <span className="text-zinc-900 dark:text-white font-bold underline decoration-lime-500/50 decoration-2 underline-offset-4">Asep</span>. A <span className="text-zinc-900 dark:text-zinc-100 font-medium">Design Technologist & Frontend Engineer</span> blending pixel-perfect aesthetics with robust technical architecture. Over 7 years of crafting digital products.
-                        </p>
-                    </motion.div>
-
-                    {/* Actions */}
-                    <motion.div variants={itemVariants} className="mt-4 sm:mt-6 mb-6 sm:mb-8">
-                        <Link href="/projects">
-                            <HoverBorderGradient
-                                containerClassName="rounded-full shadow-lg shadow-lime-500/20"
-                                as="div"
-                                className="bg-lime-500 text-black flex items-center space-x-2 px-6 sm:px-8 py-3.5 sm:py-4 font-bold text-xs sm:text-sm transition-all hover:scale-[1.05] active:scale-[0.98]"
-                            >
-                                <span>View Work</span>
-                                <IconChevronRight className="ml-1 h-4 w-4 sm:h-5 sm:w-5" />
-                            </HoverBorderGradient>
-                        </Link>
-                    </motion.div>
-                </motion.div>
-
-                {/* Right Column - Visual Concept */}
-                <motion.div
-                    initial={{ opacity: 0, scale: 0.9 }}
-                    animate={{ opacity: 1, scale: 1 }}
-                    transition={{ delay: 0.4, duration: 1, ease: "easeOut" }}
-                    className="hidden lg:flex w-full justify-end items-center lg:col-span-5"
-                >
-                    <StylizedProfile />
-                </motion.div>
-            </div>
-
-
-            {/* Scroll Indicator */}
-            <motion.button
-                aria-label="Scroll to next section"
-                initial={{ opacity: 0, y: 10 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 1.6, duration: 0.8, ease: "easeOut" }}
-                className="absolute bottom-3 md:bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center justify-center gap-1.5 md:gap-2.5 cursor-pointer group z-20 opacity-60 hover:opacity-100 transition-opacity duration-300"
-                onClick={() => {
-                    const nextSection = document.getElementById("skills-section");
-                    if (nextSection) {
-                        nextSection.scrollIntoView({ behavior: "smooth" });
-                    }
-                }}
+        {/* Dual CTA Buttons */}
+        <motion.div
+          variants={itemVariants}
+          className="mt-10 sm:mt-12 flex flex-col sm:flex-row items-center gap-4"
+        >
+          {/* Primary CTA */}
+          <Link href="/projects">
+            <HoverBorderGradient
+              containerClassName="rounded-full shadow-lg shadow-lime-500/20"
+              as="div"
+              className="bg-lime-500 text-black flex items-center space-x-2 px-7 sm:px-9 py-3.5 sm:py-4 font-bold text-sm transition-all hover:scale-[1.03] active:scale-[0.97]"
             >
-                <div className="w-5 h-9 md:w-6 md:h-10 rounded-full border border-zinc-700 dark:border-zinc-800 group-hover:border-lime-500/50 flex justify-center p-1 md:p-1.5 bg-white/50 dark:bg-zinc-950/50 backdrop-blur-sm transition-colors duration-300 relative overflow-hidden">
-                    <motion.div
-                        animate={{
-                            y: [0, 12],
-                            opacity: [1, 0],
-                        }}
-                        transition={{
-                            duration: 2,
-                            repeat: Infinity,
-                            ease: "linear",
-                        }}
-                        className="w-1.5 h-1.5 rounded-full bg-lime-500 shadow-[0_0_6px_#84cc16]"
-                    />
-                </div>
+              <span>View Work</span>
+              <IconChevronRight className="ml-1 h-4 w-4 sm:h-5 sm:w-5" />
+            </HoverBorderGradient>
+          </Link>
 
-                <span className="text-[8px] md:text-[9px] uppercase tracking-[0.3em] pl-[0.3em] text-zinc-500 group-hover:text-lime-400 font-bold transition-colors duration-300 select-none text-center">
-                    Scroll
-                </span>
-            </motion.button>
+          {/* Secondary CTA */}
+          <Link
+            href="/contact"
+            className="group inline-flex items-center gap-2.5 px-7 sm:px-9 py-3.5 sm:py-4 rounded-full border border-white/15 hover:border-lime-500/50 bg-white/[0.03] hover:bg-lime-500/[0.06] text-white font-bold text-sm transition-all duration-300 active:scale-[0.97]"
+          >
+            <span>Get in Touch</span>
+            <IconArrowUpRight className="w-4 h-4 text-zinc-500 group-hover:text-lime-400 transition-colors duration-300" />
+          </Link>
+        </motion.div>
+      </motion.div>
+
+      {/* ── Scroll Indicator ── */}
+      <motion.button
+        aria-label="Scroll to next section"
+        initial={{ opacity: 0, y: 10 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ delay: 1.6, duration: 0.8, ease: "easeOut" }}
+        className="absolute bottom-4 md:bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center justify-center gap-2 cursor-pointer group z-20 opacity-50 hover:opacity-100 transition-opacity duration-300"
+        onClick={() => {
+          const nextSection = document.getElementById("skills-section");
+          if (nextSection) {
+            nextSection.scrollIntoView({ behavior: "smooth" });
+          }
+        }}
+      >
+        <div className="w-5 h-9 md:w-6 md:h-10 rounded-full border border-zinc-700 group-hover:border-lime-500/50 flex justify-center p-1 md:p-1.5 bg-zinc-950/50 backdrop-blur-sm transition-colors duration-300 relative overflow-hidden">
+          <motion.div
+            animate={{
+              y: [0, 12],
+              opacity: [1, 0],
+            }}
+            transition={{
+              duration: 2,
+              repeat: Infinity,
+              ease: "linear",
+            }}
+            className="w-1.5 h-1.5 rounded-full bg-lime-500 shadow-[0_0_6px_#84cc16]"
+          />
         </div>
-    );
+
+        <span className="text-[8px] md:text-[9px] uppercase tracking-[0.3em] pl-[0.3em] text-zinc-600 group-hover:text-lime-400 font-bold transition-colors duration-300 select-none text-center">
+          Scroll
+        </span>
+      </motion.button>
+    </div>
+  );
 };
 
 export default memo(Hero);

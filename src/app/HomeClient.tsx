@@ -8,15 +8,15 @@ const SectionSkeleton = () => (
   <div className="min-h-[60vh] animate-pulse bg-zinc-100 dark:bg-zinc-900 rounded-lg m-4" />
 );
 
-const SkillsSection = dynamic(
-  () => import("@/components/organism/skills/skillsSection").then((mod) => mod.SkillsSection),
-  { loading: () => <SectionSkeleton /> }
-);
 const About = dynamic(() => import("@/components/organism/about/aboutHome"), {
   loading: () => <SectionSkeleton />,
 });
 const FeaturedProjects = dynamic(
   () => import("@/components/organism/projects/featuredProjects").then((mod) => mod.FeaturedProjects),
+  { loading: () => <SectionSkeleton /> }
+);
+const WhatsupSection = dynamic(
+  () => import("@/components/organism/whatsup/whatsupSection").then((mod) => mod.WhatsupSection),
   { loading: () => <SectionSkeleton /> }
 );
 const WorkflowSection = dynamic(
@@ -38,7 +38,7 @@ export default function HomeClient({
   return (
     <div>
       <Hero />
-      <SkillsSection skills={skills} />
+      <WhatsupSection />
       <FeaturedProjects projects={featuredProjects} />
       <About />
       <WorkflowSection />
