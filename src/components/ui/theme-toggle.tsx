@@ -1,7 +1,7 @@
 "use client";
 
 import * as React from "react";
-import { Moon, Sun } from "lucide-react";
+import { IconMoon, IconSun } from "@tabler/icons-react";
 import { useTheme } from "next-themes";
 import { motion } from "framer-motion";
 
@@ -35,7 +35,7 @@ export function ThemeToggle() {
         transition={{ duration: 0.2 }}
         className="absolute"
       >
-        <Moon className="w-5 h-5" />
+        <IconMoon className="w-5 h-5" />
       </motion.div>
       <motion.div
         initial={false}
@@ -47,7 +47,7 @@ export function ThemeToggle() {
         transition={{ duration: 0.2 }}
         className="absolute"
       >
-        <Sun className="w-5 h-5" />
+        <IconSun className="w-5 h-5" />
       </motion.div>
     </button>
   );

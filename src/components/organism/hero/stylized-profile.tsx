@@ -4,7 +4,7 @@ import React from "react";
 import { motion } from "framer-motion";
 import Image from "next/image";
 import { cn } from "@/lib/utils";
-import { SiReact, SiFigma } from "react-icons/si";
+import { IconBrandFigma, IconBrandReact } from "@tabler/icons-react";
 import { IconGitFork } from "@tabler/icons-react";
 
 export const StylizedProfile = () => {
@@ -47,7 +47,7 @@ export const StylizedProfile = () => {
           className="relative w-full h-full rounded-[2rem] overflow-hidden bg-zinc-100 dark:bg-zinc-900 border border-zinc-200 dark:border-white/10 group transition-colors"
         >
           <Image
-            src="/assets/images/profile.png"
+            src="/assets/images/profile.webp"
             alt="Asep Syaepul Rohman"
             fill
             priority
@@ -70,14 +70,14 @@ export const StylizedProfile = () => {
 
         {/* Orbiting UI Badges */}
         <OrbitingBadge
-          icon={<SiFigma className="w-4 h-4 text-[#F24E1E]" />}
+          icon={<IconBrandFigma className="w-4 h-4 text-[#F24E1E]" />}
           label="UI/UX"
           angle={45}
           radius={180}
           delay={0}
         />
         <OrbitingBadge
-          icon={<SiReact className="w-4 h-4 text-[#61DAFB]" />}
+          icon={<IconBrandReact className="w-4 h-4 text-[#61DAFB]" />}
           label="React"
           angle={180}
           radius={220}

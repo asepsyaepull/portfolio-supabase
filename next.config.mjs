@@ -1,8 +1,12 @@
+import { fileURLToPath } from "node:url";
+
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   reactStrictMode: true,
   allowedDevOrigins: ['192.168.8.171'],
+  poweredByHeader: false,
   images: {
+    formats: ['image/avif', 'image/webp'],
     remotePatterns: [
       {
         protocol: 'https',
@@ -21,6 +25,9 @@ const nextConfig = {
         hostname: 'esyfusgjdsjuudkkmcot.supabase.co',
       }
     ],
+  },
+  turbopack: {
+    root: fileURLToPath(new URL('.', import.meta.url)),
   },
 };
 

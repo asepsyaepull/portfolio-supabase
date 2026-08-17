@@ -1,4 +1,4 @@
-import { createClient } from "@/lib/supabase/server";
+import { getStaticClient } from "@/lib/supabase/server";
 import ProjectsClient from "./ProjectsClient";
 import { Metadata } from "next";
 
@@ -10,7 +10,7 @@ export const metadata: Metadata = {
 };
 
 export default async function ProjectsPage() {
-  const supabase = await createClient();
+  const supabase = getStaticClient();
   const { data: projects, error } = await supabase
     .from("projects")
     .select("id, name, slug, category, description, image, tech_stack")

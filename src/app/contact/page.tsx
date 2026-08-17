@@ -1,7 +1,7 @@
 "use client";
 import React from "react";
 import { motion } from "framer-motion";
-import { Mail, Github, Linkedin, Dribbble, Send, MapPin } from "lucide-react";
+import { IconMail, IconBrandGithub, IconBrandLinkedin, IconBrandDribbble, IconSend, IconMapPin } from "@tabler/icons-react";
 import { Spotlight } from "@/components/ui/spotlight";
 import { Input, TextArea } from "@/components/ui/input";
 import { HoverBorderGradient } from "@/components/ui/hover-border-gradient";
@@ -34,10 +34,10 @@ export default function ContactPage() {
         className="-top-40 left-0 md:left-60 md:-top-20"
         fill="rgba(163, 230, 53, 0.2)"
       />
-      
+
       <div className="container mx-auto px-4 md:px-24 relative z-10">
         <div className="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
-          
+
           {/* Left Column: Context & Info */}
           <motion.div
             initial={{ opacity: 0, x: -30 }}
@@ -50,31 +50,22 @@ export default function ContactPage() {
                 <span className="text-zinc-500">Something Great.</span>
             </h1>
             <p className="text-zinc-600 dark:text-zinc-400 text-base md:text-xl leading-relaxed mb-8 md:mb-12 max-w-md transition-colors">
-                Have a project in mind or a complex business problem to solve? 
+                Have a project in mind or a complex business problem to solve?
                 I'm currently available for freelance work and full-time opportunities.
             </p>
 
             <div className="space-y-8">
-                <ContactInfoItem 
-                    icon={<Mail className="text-lime-500" />} 
-                    label="Email" 
-                    value="mail.asepsyaepul@gmail.com" 
+                <ContactInfoItem
+                    icon={<IconMail className="text-lime-500" />}
+                    label="Email"
+                    value="mail.asepsyaepul@gmail.com"
                     href="mailto:mail.asepsyaepul@gmail.com"
                 />
-                <ContactInfoItem 
-                    icon={<MapPin className="text-lime-500" />} 
-                    label="Location" 
-                    value="Cilandak, Jakarta Selatan" 
+                <ContactInfoItem
+                    icon={<IconMapPin className="text-lime-500" />}
+                    label="Location"
+                    value="Cilandak, Jakarta Selatan"
                 />
-            </div>
-
-            <div className="mt-16 pt-8 border-t border-black/5 dark:border-white/5 transition-colors">
-                <h4 className="text-zinc-500 text-sm font-bold uppercase tracking-widest mb-6">Social Connections</h4>
-                <div className="flex gap-6">
-                    <SocialIcon icon={<Linkedin />} href="https://linkedin.com/in/asepsyaepul" label="LinkedIn" />
-                    <SocialIcon icon={<Github />} href="https://github.com/asepsyaepull" label="GitHub" />
-                    <SocialIcon icon={<Dribbble />} href="#" label="Dribbble" />
-                </div>
             </div>
           </motion.div>
 
@@ -86,7 +77,7 @@ export default function ContactPage() {
             className="bg-white/50 dark:bg-zinc-900/40 backdrop-blur-md p-8 md:p-12 rounded-[40px] border border-black/5 dark:border-white/5 relative overflow-hidden transition-colors duration-300"
           >
             <div className="absolute top-0 right-0 h-40 w-40 bg-lime-500/5 blur-[80px] -z-10" />
-            
+
             <form id="contact-form" action={handleSubmit} className="space-y-6 relative z-10">
               <div className="grid md:grid-cols-2 gap-6">
                 <LabelInputContainer>
@@ -117,7 +108,7 @@ export default function ContactPage() {
                     className="font-bold w-full py-4 flex items-center justify-center gap-3 bg-white dark:bg-zinc-950 text-lime-600 dark:text-lime-500 group-hover:text-lime-700 dark:group-hover:text-lime-400 transition-colors"
                   >
                     <span>{isPending ? "SENDING..." : "SEND MESSAGE"}</span>
-                    <Send size={18} />
+                    <IconSend size={18} />
                   </HoverBorderGradient>
               </div>
             </form>
@@ -146,9 +137,9 @@ const ContactInfoItem = ({ icon, label, value, href }: { icon: React.ReactNode, 
 );
 
 const SocialIcon = ({ icon, href, label }: { icon: React.ReactNode, href: string, label: string }) => (
-    <a 
-        href={href} 
-        target="_blank" 
+    <a
+        href={href}
+        target="_blank"
         rel="noopener noreferrer"
         aria-label={label}
         className="h-12 w-12 rounded-full bg-white dark:bg-zinc-900 border border-black/5 dark:border-white/5 flex items-center justify-center text-zinc-600 dark:text-zinc-400 hover:text-lime-600 hover:border-lime-500/50 dark:hover:text-lime-500 dark:hover:border-lime-500/50 transition-all duration-300"

@@ -1,19 +1,15 @@
 "use client";
 import React from "react";
-import { Boxes } from "@/components/ui/background-boxes";
 import { cn } from "@/lib/utils";
 import { motion } from "framer-motion";
 import { HoverBorderGradient } from "@/components/ui/hover-border-gradient";
-import { ArrowRight } from "lucide-react";
+import { IconArrowRight } from "@tabler/icons-react";
 import Link from "next/link";
 
 export function CtaSection() {
   return (
-    <div className="h-96 relative w-full overflow-hidden bg-zinc-50 dark:bg-gray-950 flex flex-col items-center justify-center transition-colors duration-300">
-      <div className="absolute inset-0 w-full h-full bg-zinc-50 dark:bg-gray-950 z-20 [mask-image:radial-gradient(transparent,white)] pointer-events-none transition-colors duration-300" />
-
-      <Boxes />
-      <div className="relative z-30 px-4">
+    <div className="py-32 relative w-full overflow-hidden bg-zinc-50 dark:bg-gray-950 flex flex-col items-center justify-center transition-colors duration-300">
+      <div className="relative z-10 px-4">
         <motion.h1
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -44,8 +40,8 @@ export function CtaSection() {
                     as="div"
                     className="bg-white dark:bg-gray-950 text-lime-600 dark:text-lime-500 flex items-center space-x-2 px-8 py-4 font-bold transition-colors"
                 >
-                    <span>LET'S GET STARTED</span>
-                    <ArrowRight className="ml-2 h-5 w-5" />
+                    <span>LET'S TALK</span>
+                    <IconArrowRight className="ml-2 h-5 w-5" />
                 </HoverBorderGradient>
             </Link>
         </motion.div>

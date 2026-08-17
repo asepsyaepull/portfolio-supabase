@@ -1,7 +1,7 @@
 "use client";
 
+import { IconActivity, IconBattery, IconCpu, IconLock, IconServer, IconShieldCheck, IconTrendingUp, IconWifi, IconWorld } from "@tabler/icons-react";
 import { motion } from "framer-motion";
-import { Activity, Battery, Cpu, Globe, Lock, Server, Signal, Wifi } from "lucide-react";
 import { useState } from "react";
 
 export default function AboutHome() {
@@ -30,7 +30,7 @@ export default function AboutHome() {
                         className="text-4xl md:text-5xl font-black tracking-tight mb-4 uppercase"
                     >
                         Cross-platform design <br />
-                        <span className="text-lime-600 dark:text-lime-500 italic font-serif normal-case transition-colors">&</span> implementation
+                        <span className="text-lime-600 dark:text-lime-500 italic font-sans normal-case transition-colors">&</span> implementation
                     </motion.h2>
                     <motion.p
                         initial={{ opacity: 0, y: 20 }}
@@ -188,7 +188,7 @@ export default function AboutHome() {
                 </div>
 
                 {/* Device Showcase Row */}
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-10 items-center justify-items-center w-full max-w-5xl mx-auto overflow-hidden py-4 md:py-10">
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-10 items-center justify-items-center w-full max-w-5xl mx-auto py-4 md:py-10">
 
                     {/* 1. iPhone Skeleton */}
                     <motion.div
@@ -196,116 +196,117 @@ export default function AboutHome() {
                         whileInView={{ opacity: 1, y: 0 }}
                         viewport={{ once: true }}
                         transition={{ duration: 0.6 }}
-                        className="flex flex-col items-center min-w-[120px] w-full max-w-[200px]"
+                        className="flex flex-col items-center min-w-[140px] w-full max-w-[220px]"
                     >
                         {/* Mobile container with side buttons */}
                         <div
                             onMouseEnter={() => setIphoneHover(true)}
                             onMouseLeave={() => setIphoneHover(false)}
-                            className="relative group cursor-pointer"
+                            className="relative group cursor-pointer transition-transform duration-300 hover:-translate-y-1.5"
                         >
                             {/* Volume Buttons (Left) */}
-                            <div className="absolute left-[-4px] top-12 w-[4px] h-8 bg-zinc-300 dark:bg-zinc-800 rounded-l transition-colors" />
-                            <div className="absolute left-[-4px] top-[80px] w-[4px] h-8 bg-zinc-300 dark:bg-zinc-800 rounded-l transition-colors" />
+                            <div className="absolute left-[-3px] top-12 w-[3px] h-8 bg-zinc-300 dark:bg-zinc-700 rounded-l transition-colors" />
+                            <div className="absolute left-[-3px] top-[80px] w-[3px] h-8 bg-zinc-300 dark:bg-zinc-700 rounded-l transition-colors" />
                             {/* Power Button (Right) */}
-                            <div className="absolute right-[-4px] top-[60px] w-[4px] h-10 bg-zinc-300 dark:bg-zinc-800 rounded-r transition-colors" />
+                            <div className="absolute right-[-3px] top-[60px] w-[3px] h-10 bg-zinc-300 dark:bg-zinc-700 rounded-r transition-colors" />
 
                             {/* Device body */}
-                            <div className="w-[120px] h-[240px] border-[4px] border-zinc-200 dark:border-zinc-800 rounded-[24px] bg-white dark:bg-zinc-950 p-2 relative flex flex-col justify-between overflow-hidden shadow-2xl shadow-black/10 dark:shadow-black/80 ring-1 ring-zinc-200 dark:ring-zinc-700/30 transition-colors">
+                            <div className="w-[140px] h-[260px] border-[3.5px] border-zinc-300 dark:border-zinc-700 rounded-[28px] bg-zinc-950 p-2.5 relative flex flex-col justify-between overflow-hidden shadow-2xl shadow-black/15 dark:shadow-black/80 ring-1 ring-zinc-200 dark:ring-zinc-700/40 transition-colors">
                                 {/* Screen background glow */}
-                                <div className="absolute inset-0 bg-gradient-to-tr from-lime-500/5 via-transparent to-blue-500/5 pointer-events-none" />
+                                <div className="absolute inset-0 bg-gradient-to-tr from-lime-500/10 via-zinc-950 to-blue-500/10 pointer-events-none" />
 
                                 {/* Interactive Dynamic Island */}
-                                <div className="absolute top-2.5 left-0 right-0 z-30 flex justify-center">
+                                <div className="absolute top-2 left-0 right-0 z-30 flex justify-center">
                                     <motion.div
                                         onHoverStart={() => setIphoneIslandHover(true)}
                                         onHoverEnd={() => setIphoneIslandHover(false)}
                                         animate={{
-                                            width: iphoneIslandHover && iphoneHover ? 94 : 46,
-                                            height: iphoneIslandHover && iphoneHover ? 16 : 10,
+                                            width: iphoneIslandHover || iphoneHover ? 96 : 48,
+                                            height: iphoneIslandHover || iphoneHover ? 16 : 10,
                                             borderRadius: 99
                                         }}
                                         transition={{ type: "spring", stiffness: 300, damping: 20 }}
-                                        className="bg-zinc-900 dark:bg-black border border-zinc-700 dark:border-zinc-800 flex items-center justify-center gap-1 cursor-pointer overflow-hidden px-1.5 shadow-[0_0_8px_rgba(0,0,0,0.2)] dark:shadow-[0_0_8px_rgba(0,0,0,0.9)]"
+                                        className="bg-black border border-zinc-800 flex items-center justify-center gap-1.5 cursor-pointer overflow-hidden px-2 shadow-[0_0_10px_rgba(0,0,0,0.9)]"
                                     >
-                                        {iphoneIslandHover && iphoneHover ? (
+                                        {iphoneIslandHover || iphoneHover ? (
                                             <motion.div
                                                 initial={{ opacity: 0, scale: 0.8 }}
                                                 animate={{ opacity: 1, scale: 1 }}
-                                                className="flex items-center gap-1 text-[6px] text-lime-400 font-black tracking-wider uppercase"
+                                                className="flex items-center gap-1.5 text-[6px] text-lime-400 font-bold tracking-wider uppercase"
                                             >
-                                                <span className="w-1 h-1 rounded-full bg-lime-400 animate-pulse" />
-                                                Synced
+                                                <span className="w-1.5 h-1.5 rounded-full bg-lime-400 animate-pulse" />
+                                                Live Sync
                                             </motion.div>
                                         ) : (
-                                            <div className="w-1.5 h-1.5 rounded-full bg-zinc-600 dark:bg-zinc-800" />
+                                            <div className="flex items-center gap-1">
+                                                <div className="w-1.5 h-1.5 rounded-full bg-zinc-800" />
+                                                <div className="w-1 h-1 rounded-full bg-blue-500/60" />
+                                            </div>
                                         )}
                                     </motion.div>
                                 </div>
 
-                                {/* iPhone Screen Content (Fades in on hover) */}
-                                <motion.div
-                                    animate={{ opacity: iphoneHover ? 1 : 0 }}
-                                    transition={{ duration: 0.35 }}
-                                    className="w-full h-full flex flex-col justify-between pt-1 relative z-10"
-                                >
+                                {/* iPhone Screen Content */}
+                                <div className="w-full h-full flex flex-col justify-between pt-2 relative z-10">
                                     {/* iPhone Status Bar */}
-                                    <div className="flex justify-between items-center px-1 text-[7px] text-zinc-400 dark:text-zinc-500 font-bold z-20">
+                                    <div className="flex justify-between items-center px-1 text-[7px] text-zinc-400 font-bold z-20">
                                         <span>9:41</span>
                                         <div className="w-12" /> {/* Spacer for dynamic island */}
                                         <div className="flex items-center gap-1">
-                                            <Wifi size={7} />
-                                            <Battery size={9} />
+                                            <IconWifi size={8} className="text-zinc-400" />
+                                            <IconBattery size={10} className="text-zinc-400" />
                                         </div>
                                     </div>
 
                                     {/* Screen Content Dashboard */}
-                                    <div className="flex-1 flex flex-col gap-2 mt-3">
-                                        <div className="h-16 rounded-xl border border-zinc-100 dark:border-zinc-900 bg-zinc-50 dark:bg-zinc-900/40 p-1.5 flex flex-col gap-1 justify-center relative overflow-hidden group">
-                                            <div className="absolute top-1.5 right-1.5 w-1 h-1 rounded-full bg-lime-500 animate-pulse" />
-                                            <span className="text-[6px] text-zinc-400 dark:text-zinc-500 uppercase tracking-widest font-black">TRACtoGO App</span>
-                                            <span className="text-[8px] font-bold text-zinc-800 dark:text-white leading-none">UX Audited</span>
-                                            <div className="w-full bg-zinc-200 dark:bg-zinc-950 h-1 rounded-full overflow-hidden mt-1">
+                                    <div className="flex-1 flex flex-col gap-2 mt-2">
+                                        <div className="rounded-xl border border-zinc-800/80 bg-zinc-900/90 p-2 flex flex-col gap-1 relative overflow-hidden">
+                                            <div className="flex items-center justify-between">
+                                                <span className="text-[6px] text-zinc-400 uppercase tracking-widest font-black">TRACtoGO App</span>
+                                                <span className="w-1.5 h-1.5 rounded-full bg-lime-400 animate-pulse" />
+                                            </div>
+                                            <span className="text-[9px] font-bold text-white leading-tight">UX Redesign</span>
+                                            <div className="w-full bg-zinc-800 h-1.5 rounded-full overflow-hidden mt-1">
                                                 <motion.div
-                                                    animate={{ width: ["0%", "100%"] }}
-                                                    transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
-                                                    className="h-full bg-lime-500"
+                                                    animate={{ width: ["15%", "100%"] }}
+                                                    transition={{ duration: 2.5, repeat: Infinity, ease: "easeInOut" }}
+                                                    className="h-full bg-gradient-to-r from-lime-500 to-emerald-400"
                                                 />
                                             </div>
                                         </div>
 
-                                        <div className="flex gap-1.5">
-                                            <div className="flex-1 h-10 rounded-xl border border-zinc-100 dark:border-zinc-900 bg-zinc-50 dark:bg-zinc-900/40 p-1.5 flex flex-col justify-between">
-                                                <span className="text-[5px] text-zinc-400 dark:text-zinc-500 uppercase tracking-widest font-black">Memory</span>
-                                                <span className="text-[8px] font-bold text-zinc-600 dark:text-zinc-300">12.4 MB</span>
+                                        <div className="grid grid-cols-2 gap-1.5">
+                                            <div className="rounded-xl border border-zinc-800/80 bg-zinc-900/70 p-1.5 flex flex-col justify-between">
+                                                <span className="text-[5px] text-zinc-400 uppercase tracking-widest font-black">Flows</span>
+                                                <span className="text-[8px] font-bold text-zinc-200">100% Valid</span>
                                             </div>
-                                            <div className="flex-1 h-10 rounded-xl border border-zinc-100 dark:border-zinc-900 bg-zinc-50 dark:bg-zinc-900/40 p-1.5 flex flex-col justify-between">
-                                                <span className="text-[5px] text-zinc-400 dark:text-zinc-500 uppercase tracking-widest font-black">Latency</span>
-                                                <span className="text-[8px] font-bold text-lime-600 dark:text-lime-400">14ms</span>
+                                            <div className="rounded-xl border border-zinc-800/80 bg-zinc-900/70 p-1.5 flex flex-col justify-between">
+                                                <span className="text-[5px] text-zinc-400 uppercase tracking-widest font-black">Speed</span>
+                                                <span className="text-[8px] font-bold text-lime-400">14ms</span>
                                             </div>
                                         </div>
 
                                         {/* Flow chart layout */}
-                                        <div className="flex-1 rounded-xl border border-zinc-100 dark:border-zinc-900 bg-zinc-50 dark:bg-zinc-900/30 p-1.5 flex items-center justify-center gap-1.5">
-                                            <div className="w-5 h-5 rounded-full bg-white dark:bg-zinc-950 border border-zinc-200 dark:border-zinc-800 flex items-center justify-center">
-                                                <Server size={8} className="text-zinc-400 dark:text-zinc-600" />
+                                        <div className="rounded-xl border border-zinc-800/80 bg-zinc-900/50 p-2 flex items-center justify-between gap-1.5">
+                                            <div className="w-6 h-6 rounded-lg bg-zinc-800 flex items-center justify-center">
+                                                <IconServer size={10} className="text-zinc-400" />
                                             </div>
-                                            <div className="flex-1 h-[2px] bg-dashed border-t border-zinc-200 dark:border-zinc-800 relative">
+                                            <div className="flex-1 h-[2px] bg-zinc-800 relative overflow-hidden">
                                                 <motion.div
-                                                    animate={{ left: ["0%", "100%"] }}
-                                                    transition={{ duration: 1.5, repeat: Infinity, ease: "linear" }}
-                                                    className="absolute top-[-1px] w-1 h-1 rounded-full bg-lime-500"
+                                                    animate={{ left: ["-20%", "100%"] }}
+                                                    transition={{ duration: 1.6, repeat: Infinity, ease: "linear" }}
+                                                    className="absolute top-0 w-4 h-full bg-lime-400 rounded-full"
                                                 />
                                             </div>
-                                            <div className="w-5 h-5 rounded-full bg-white dark:bg-zinc-950 border border-lime-500/20 flex items-center justify-center">
-                                                <Cpu size={8} className="text-lime-600 dark:text-lime-500" />
+                                            <div className="w-6 h-6 rounded-lg bg-lime-500/10 border border-lime-500/30 flex items-center justify-center">
+                                                <IconCpu size={10} className="text-lime-400" />
                                             </div>
                                         </div>
                                     </div>
 
                                     {/* iPhone Home Indicator bar */}
-                                    <div className="w-12 h-0.5 bg-zinc-300 dark:bg-zinc-800 rounded-full mx-auto mt-1" />
-                                </motion.div>
+                                    <div className="w-12 h-1 bg-zinc-700 rounded-full mx-auto mt-1" />
+                                </div>
                             </div>
                         </div>
                         {/* iPhone Label */}
@@ -317,89 +318,107 @@ export default function AboutHome() {
                         </p>
                     </motion.div>
 
-                    {/* 2. MacBook Skeleton */}
+                    {/* 2. MacBook Pro Laptop Skeleton */}
                     <motion.div
                         initial={{ opacity: 0, y: 40 }}
                         whileInView={{ opacity: 1, y: 0 }}
                         viewport={{ once: true }}
                         transition={{ duration: 0.6, delay: 0.1 }}
-                        className="flex flex-col items-center min-w-[200px] w-full max-w-[260px]"
+                        className="flex flex-col items-center w-full max-w-[340px]"
                     >
-                        {/* Laptop 3D perspective hover container */}
+                        {/* Laptop container with hover effect */}
                         <div
                             onMouseEnter={() => setMacLidHover(true)}
                             onMouseLeave={() => setMacLidHover(false)}
-                            className="relative flex flex-col items-center cursor-pointer group"
-                            style={{ perspective: "1000px" }}
+                            className="relative w-full flex flex-col items-center cursor-pointer group transition-transform duration-300 hover:-translate-y-1.5"
                         >
-                            {/* MacBook Lid Screen */}
-                            <motion.div
-                                animate={{
-                                    rotateX: macLidHover ? 0 : -32,
-                                    y: macLidHover ? 0 : 5
-                                }}
-                                transition={{ type: "spring", stiffness: 180, damping: 18 }}
-                                className="w-full max-w-[320px] h-[200px] border-4 border-zinc-200 dark:border-zinc-800 rounded-t-xl bg-white dark:bg-zinc-950 p-1.5 relative shadow-xl overflow-hidden transition-colors"
-                                style={{ transformOrigin: "bottom center" }}
-                            >
-                                {/* Screen background glow */}
-                                <div className="absolute inset-0 bg-gradient-to-b from-blue-500/5 via-transparent to-transparent pointer-events-none" />
+                            {/* MacBook Screen / Lid Frame */}
+                            <div className="w-full h-[200px] rounded-t-[12px] bg-zinc-300 dark:bg-zinc-800 p-[5px] border border-zinc-400/40 dark:border-zinc-700/60 shadow-2xl relative transition-all duration-300">
+                                {/* Inner Display Bezel */}
+                                <div className="w-full h-full rounded-t-[8px] bg-zinc-950 p-[2px] relative overflow-hidden flex flex-col justify-between">
+                                    {/* Subtle screen reflection / sheen gradient */}
+                                    <div className="absolute inset-0 bg-gradient-to-tr from-white/[0.03] via-transparent to-blue-500/[0.04] pointer-events-none z-20" />
 
-                                {/* Camera notch detail */}
-                                <div className="w-10 h-3 bg-zinc-200 dark:bg-zinc-900 rounded-b-md mx-auto absolute top-0 left-1/2 -translate-x-1/2 z-20 flex items-center justify-center transition-colors">
-                                    <div className="w-1 h-1 rounded-full bg-zinc-400 dark:bg-zinc-950" />
+                                    {/* Apple Camera Notch */}
+                                    <div className="w-14 h-[9px] bg-black rounded-b-md mx-auto absolute top-0 left-1/2 -translate-x-1/2 z-30 flex items-center justify-center gap-1.5 shadow-sm">
+                                        <div className="w-1.5 h-1.5 rounded-full bg-zinc-900 border border-zinc-700/60 flex items-center justify-center">
+                                            <div className="w-0.5 h-0.5 rounded-full bg-blue-400/80" />
+                                        </div>
+                                        <div className="w-0.5 h-0.5 rounded-full bg-emerald-400 animate-pulse" />
+                                    </div>
+
+                                    {/* macOS Title Bar */}
+                                    <div className="flex justify-between items-center px-2 py-1 border-b border-zinc-800/80 bg-zinc-900/60 text-[7px] text-zinc-400 font-mono relative z-20">
+                                        {/* Traffic lights */}
+                                        <div className="flex items-center gap-1">
+                                            <span className="w-1.5 h-1.5 rounded-full bg-rose-500/90" />
+                                            <span className="w-1.5 h-1.5 rounded-full bg-amber-500/90" />
+                                            <span className="w-1.5 h-1.5 rounded-full bg-emerald-500/90" />
+                                        </div>
+                                        <span className="text-[7.5px] font-sans font-bold text-zinc-200">Symbolix.ai — Enterprise ERP</span>
+                                        <div className="flex items-center gap-1 text-[6.5px] text-lime-400 font-bold">
+                                            <span className="w-1 h-1 rounded-full bg-lime-400 animate-pulse" />
+                                            ACTIVE
+                                        </div>
+                                    </div>
+
+                                    {/* Screen Body Content */}
+                                    <div className="flex-1 p-2 flex flex-col justify-between gap-1.5 bg-zinc-950/90 relative z-10">
+                                        {/* Top Stats Cards */}
+                                        <div className="grid grid-cols-3 gap-1.5">
+                                            <div className="bg-zinc-900/80 border border-zinc-800/80 rounded-lg p-1.5 flex flex-col justify-between">
+                                                <span className="text-[5.5px] text-zinc-400 uppercase tracking-wider font-bold">Latency</span>
+                                                <span className="text-[9px] font-black text-lime-400">8.2 ms</span>
+                                            </div>
+                                            <div className="bg-zinc-900/80 border border-zinc-800/80 rounded-lg p-1.5 flex flex-col justify-between">
+                                                <span className="text-[5.5px] text-zinc-400 uppercase tracking-wider font-bold">Uptime</span>
+                                                <span className="text-[9px] font-black text-white">99.98%</span>
+                                            </div>
+                                            <div className="bg-zinc-900/80 border border-zinc-800/80 rounded-lg p-1.5 flex flex-col justify-between">
+                                                <span className="text-[5.5px] text-zinc-400 uppercase tracking-wider font-bold">Role</span>
+                                                <span className="text-[9px] font-black text-blue-400">UI Lead</span>
+                                            </div>
+                                        </div>
+
+                                        {/* Dynamic Bar Chart Visual */}
+                                        <div className="flex-1 bg-zinc-900/50 border border-zinc-800/60 rounded-lg p-2 flex flex-col justify-between">
+                                            <div className="flex justify-between items-center text-[6px] text-zinc-400 uppercase tracking-widest font-bold">
+                                                <span>Realtime Throughput</span>
+                                                <span className="text-lime-400 font-mono">+32.4%</span>
+                                            </div>
+                                            <div className="flex items-end gap-1.5 h-10 pt-1">
+                                                {[35, 60, 45, 80, 65, 95, 75, 90, 100, 85].map((val, i) => (
+                                                    <div key={i} className="flex-1 bg-zinc-800/80 rounded-t-sm h-full flex items-end">
+                                                        <motion.div
+                                                            animate={{ height: macLidHover ? [`${val * 0.7}%`, `${val}%`, `${val * 0.85}%`] : `${val}%` }}
+                                                            transition={{ duration: 1.5 + (i * 0.1), repeat: Infinity, ease: "easeInOut" }}
+                                                            className={`w-full rounded-t-sm ${i >= 6 ? "bg-lime-400" : "bg-zinc-600"}`}
+                                                            style={{ height: `${val}%` }}
+                                                        />
+                                                    </div>
+                                                ))}
+                                            </div>
+                                        </div>
+
+                                        {/* Bottom Terminal Bar */}
+                                        <div className="rounded-md bg-black/80 border border-zinc-800/80 px-2 py-1 font-mono text-[6px] text-zinc-400 flex items-center justify-between">
+                                            <span className="text-zinc-500">$ pnpm run build:system</span>
+                                            <span className="text-lime-400 font-bold">✓ 48 modules synced (0 errors)</span>
+                                        </div>
+                                    </div>
                                 </div>
+                            </div>
 
-                                {/* MacBook Screen Content Mockup */}
-                                <motion.div
-                                    animate={{ opacity: macLidHover ? 1 : 0 }}
-                                    transition={{ duration: 0.35 }}
-                                    className="w-full h-full rounded-md border border-zinc-100 dark:border-zinc-900 bg-zinc-50 dark:bg-zinc-950 flex flex-col p-2.5 justify-between relative transition-colors"
-                                >
-                                    {/* Top bar */}
-                                    <div className="flex justify-between items-center text-[7px] text-zinc-400 dark:text-zinc-500 font-bold border-b border-zinc-200 dark:border-zinc-900/80 pb-1.5 transition-colors">
-                                        <span>Symbolix.ai (ERP & POS)</span>
-                                        <span className="text-lime-600 dark:text-lime-500">COMPONENTS SYNCED</span>
-                                    </div>
+                            {/* MacBook Hinge */}
+                            <div className="w-[88%] h-[3.5px] bg-zinc-400 dark:bg-zinc-900 mx-auto rounded-b-[2px] transition-colors" />
 
-                                    {/* Middle Layout */}
-                                    <div className="flex-1 flex gap-3 items-center mt-2.5">
-                                        <div className="flex-1 h-full flex flex-col gap-1.5">
-                                            <div className="h-6 rounded bg-white dark:bg-zinc-900/60 border border-zinc-200 dark:border-zinc-900 p-1 flex items-center justify-between transition-colors">
-                                                <span className="text-[6px] text-zinc-400 dark:text-zinc-500 uppercase tracking-wider font-bold">Latency API</span>
-                                                <span className="text-[8px] font-black text-lime-600 dark:text-lime-400">8.2ms</span>
-                                            </div>
-                                            <div className="flex-1 rounded bg-white dark:bg-zinc-900/40 border border-zinc-200 dark:border-zinc-900 p-1.5 flex flex-col justify-between transition-colors">
-                                                <span className="text-[5px] text-zinc-400 dark:text-zinc-500 uppercase tracking-widest font-black">CPU LOAD</span>
-                                                <div className="flex items-end gap-0.5 h-6 mt-1">
-                                                    <motion.div animate={{ height: ["40%", "80%", "40%"] }} transition={{ duration: 1.5, repeat: Infinity }} className="w-1 bg-lime-500/80 rounded-t-sm" />
-                                                    <motion.div animate={{ height: ["60%", "40%", "90%", "60%"] }} transition={{ duration: 1.8, repeat: Infinity }} className="w-1 bg-lime-500/85 rounded-t-sm" />
-                                                    <motion.div animate={{ height: ["30%", "70%", "30%"] }} transition={{ duration: 1.2, repeat: Infinity }} className="w-1 bg-lime-500/70 rounded-t-sm" />
-                                                    <motion.div animate={{ height: ["50%", "90%", "50%"] }} transition={{ duration: 1.4, repeat: Infinity }} className="w-1 bg-lime-500/90 rounded-t-sm" />
-                                                    <motion.div animate={{ height: ["80%", "30%", "80%"] }} transition={{ duration: 1.6, repeat: Infinity }} className="w-1 bg-lime-500/80 rounded-t-sm" />
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <div className="w-20 h-full rounded border border-zinc-200 dark:border-zinc-900 bg-white dark:bg-zinc-900/40 p-2 flex flex-col justify-between items-center text-center transition-colors">
-                                            <Cpu size={14} className="text-blue-500 animate-pulse" />
-                                            <span className="text-[5px] text-zinc-400 dark:text-zinc-500 uppercase font-black tracking-widest mt-1">Role</span>
-                                            <span className="text-[8px] font-bold text-zinc-800 dark:text-white">UI/UX Dev</span>
-                                        </div>
-                                    </div>
-
-                                    {/* Terminal block at bottom */}
-                                    <div className="h-8 rounded bg-zinc-100 dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-900/80 p-1 font-mono text-[5px] text-zinc-500 flex flex-col justify-between overflow-hidden leading-tight transition-colors">
-                                        <span>$ npm run build:design-system</span>
-                                        <span className="text-lime-600 dark:text-lime-500/90">&gt; compiling tokens... success (3.2s)</span>
-                                    </div>
-                                </motion.div>
-                            </motion.div>
-
-                            {/* MacBook Base Keyboard */}
-                            <div className="w-full max-w-[370px] h-[10px] bg-zinc-300 dark:bg-zinc-800 rounded-b-xl relative z-10 shadow-md transition-colors">
-                                {/* Trackpad notch */}
-                                <div className="w-[56px] h-[4px] bg-zinc-200 dark:bg-zinc-900 mx-auto rounded-b-sm border-t border-zinc-300 dark:border-zinc-700/50 transition-colors" />
+                            {/* MacBook Base Keyboard Deck */}
+                            <div className="w-full h-[15px] bg-gradient-to-b from-zinc-200 via-zinc-300 to-zinc-400 dark:from-zinc-700 dark:via-zinc-800 dark:to-zinc-900 rounded-b-xl border-t border-white/50 dark:border-zinc-600/40 relative shadow-xl flex items-center justify-center transition-colors">
+                                {/* Thumb opening notch / indent */}
+                                <div className="w-14 h-[3px] bg-zinc-300 dark:bg-zinc-950/80 rounded-b-sm absolute top-0" />
+                                {/* Bottom non-slip feet */}
+                                <div className="w-2.5 h-[1.5px] bg-zinc-400 dark:bg-zinc-950 absolute bottom-0 left-6 rounded-full" />
+                                <div className="w-2.5 h-[1.5px] bg-zinc-400 dark:bg-zinc-950 absolute bottom-0 right-6 rounded-full" />
                             </div>
                         </div>
                         {/* MacBook Label */}
@@ -417,82 +436,80 @@ export default function AboutHome() {
                         whileInView={{ opacity: 1, y: 0 }}
                         viewport={{ once: true }}
                         transition={{ duration: 0.6, delay: 0.2 }}
-                        className="flex flex-col items-center min-w-[200px] w-full max-w-[260px]"
+                        className="flex flex-col items-center min-w-[180px] w-full max-w-[260px]"
                     >
                         {/* iPad container in Landscape Mode */}
                         <div
                             onMouseEnter={() => setIpadHover(true)}
                             onMouseLeave={() => setIpadHover(false)}
-                            className="relative group cursor-pointer w-full max-w-[260px] flex justify-center"
+                            className="relative group cursor-pointer w-full flex justify-center transition-transform duration-300 hover:-translate-y-1.5"
                         >
                             {/* Top/Lock Button (iPad Side) */}
-                            <div className="absolute right-12 top-[-3px] w-8 h-[3px] bg-zinc-300 dark:bg-zinc-800 rounded-t transition-colors" />
+                            <div className="absolute right-12 top-[-3px] w-8 h-[3px] bg-zinc-300 dark:bg-zinc-700 rounded-t transition-colors" />
                             {/* Volume Buttons (iPad Right) */}
-                            <div className="absolute right-[-3px] top-8 w-[3px] h-6 bg-zinc-300 dark:bg-zinc-800 rounded-r transition-colors" />
-                            <div className="absolute right-[-3px] top-[60px] w-[3px] h-6 bg-zinc-300 dark:bg-zinc-800 rounded-r transition-colors" />
+                            <div className="absolute right-[-3px] top-8 w-[3px] h-6 bg-zinc-300 dark:bg-zinc-700 rounded-r transition-colors" />
+                            <div className="absolute right-[-3px] top-[60px] w-[3px] h-6 bg-zinc-300 dark:bg-zinc-700 rounded-r transition-colors" />
 
                             {/* Device body */}
-                            <div className="w-full h-[180px] border-[4.5px] border-zinc-200 dark:border-zinc-800 rounded-[20px] bg-white dark:bg-zinc-950 p-2 relative flex flex-col justify-between overflow-hidden shadow-2xl shadow-black/10 dark:shadow-black/80 ring-1 ring-zinc-200 dark:ring-zinc-700/30 transition-colors">
+                            <div className="w-full h-[190px] border-[4px] border-zinc-300 dark:border-zinc-700 rounded-[22px] bg-zinc-950 p-2.5 relative flex flex-col justify-between overflow-hidden shadow-2xl shadow-black/15 dark:shadow-black/80 ring-1 ring-zinc-200 dark:ring-zinc-700/40 transition-colors">
                                 {/* Screen background glow */}
-                                <div className="absolute inset-0 bg-gradient-to-tl from-blue-500/5 via-transparent to-lime-500/5 pointer-events-none" />
+                                <div className="absolute inset-0 bg-gradient-to-tl from-blue-500/10 via-zinc-950 to-lime-500/10 pointer-events-none" />
 
-                                {/* Camera dot notch at top left bezel */}
-                                <div className="absolute top-1/2 left-[3px] -translate-y-1/2 w-1 h-1 rounded-full bg-zinc-300 dark:bg-zinc-900 z-20 transition-colors" />
+                                {/* Camera dot notch at top bezel */}
+                                <div className="absolute top-[3px] left-1/2 -translate-x-1/2 w-1.5 h-1.5 rounded-full bg-zinc-800 z-20 flex items-center justify-center">
+                                    <div className="w-0.5 h-0.5 rounded-full bg-zinc-600" />
+                                </div>
 
                                 {/* Screen content mockup */}
-                                <motion.div
-                                    animate={{ opacity: ipadHover ? 1 : 0 }}
-                                    transition={{ duration: 0.35 }}
-                                    className="w-full h-full rounded-[12px] border border-zinc-100 dark:border-zinc-900 bg-zinc-50 dark:bg-zinc-950 p-2 flex flex-col justify-between relative transition-colors"
-                                >
+                                <div className="w-full h-full rounded-[14px] border border-zinc-800/80 bg-zinc-900/90 p-2 flex flex-col justify-between relative z-10">
                                     {/* Header */}
-                                    <div className="flex justify-between items-center text-[7px] text-zinc-400 dark:text-zinc-500 font-bold border-b border-zinc-200 dark:border-zinc-900 pb-1 z-10 transition-colors">
-                                        <span className="flex items-center gap-1 text-zinc-800 dark:text-zinc-500">
-                                            <Signal size={6} className="text-lime-500" /> OMS Crewdible
+                                    <div className="flex justify-between items-center text-[7px] text-zinc-400 font-bold border-b border-zinc-800 pb-1 z-10">
+                                        <span className="flex items-center gap-1 text-white">
+                                            <IconWifi size={7} className="text-lime-400" /> OMS Crewdible
                                         </span>
                                         {/* Interactive Notch */}
                                         <motion.div
                                             onHoverStart={() => setIpadIslandHover(true)}
                                             onHoverEnd={() => setIpadIslandHover(false)}
                                             animate={{
-                                                width: ipadIslandHover ? 60 : 36,
-                                                height: ipadIslandHover ? 12 : 8
+                                                width: ipadIslandHover || ipadHover ? 64 : 36,
+                                                height: ipadIslandHover || ipadHover ? 12 : 8
                                             }}
-                                            className="bg-zinc-900 dark:bg-black border border-zinc-700 dark:border-zinc-800/80 rounded-full flex items-center justify-center gap-0.5 cursor-pointer"
+                                            className="bg-black border border-zinc-700 rounded-full flex items-center justify-center gap-1 cursor-pointer px-1"
                                         >
-                                            {ipadIslandHover ? (
+                                            {ipadIslandHover || ipadHover ? (
                                                 <span className="text-[5.5px] text-blue-400 font-black tracking-wide uppercase">Connected</span>
                                             ) : (
-                                                <div className="w-1 h-1 rounded-full bg-zinc-700 dark:bg-zinc-800" />
+                                                <div className="w-1 h-1 rounded-full bg-zinc-700" />
                                             )}
                                         </motion.div>
                                     </div>
 
                                     {/* Body Layout */}
                                     <div className="flex-1 flex gap-2 mt-2 items-center">
-                                        <div className="w-16 h-full rounded bg-white dark:bg-zinc-900/40 border border-zinc-200 dark:border-zinc-900 p-1 flex flex-col justify-between transition-colors">
-                                            <span className="text-[5px] text-zinc-400 dark:text-zinc-500 uppercase tracking-widest font-black">Memory</span>
+                                        <div className="w-18 h-full rounded-lg bg-zinc-950/80 border border-zinc-800 p-1.5 flex flex-col justify-between">
+                                            <span className="text-[5.5px] text-zinc-400 uppercase tracking-widest font-black">Performance</span>
                                             <div className="h-6 flex items-center justify-center">
-                                                <Activity size={12} className="text-lime-500 animate-pulse" />
+                                                <IconActivity size={14} className="text-lime-400 animate-pulse" />
                                             </div>
-                                            <span className="text-[8px] font-bold text-zinc-800 dark:text-white text-center">98.4%</span>
+                                            <span className="text-[8.5px] font-bold text-white text-center">98.4%</span>
                                         </div>
 
-                                        <div className="flex-1 h-full flex flex-col gap-1">
-                                            <div className="h-8 rounded bg-white dark:bg-zinc-900/50 border border-zinc-200 dark:border-zinc-900 p-1 flex flex-col justify-between transition-colors">
-                                                <span className="text-[5px] text-zinc-400 dark:text-zinc-500 uppercase tracking-widest font-black font-mono">OMS Performance</span>
+                                        <div className="flex-1 h-full flex flex-col gap-1.5">
+                                            <div className="h-10 rounded-lg bg-zinc-950/80 border border-zinc-800 p-1.5 flex flex-col justify-between">
+                                                <span className="text-[5px] text-zinc-400 uppercase tracking-widest font-black">Order Fulfillment</span>
                                                 <div className="flex justify-between items-center">
-                                                    <span className="text-[8px] font-bold text-zinc-800 dark:text-white">+24% Convert</span>
-                                                    <span className="text-[6px] text-lime-600 dark:text-lime-400 uppercase tracking-wider font-bold">Ok</span>
+                                                    <span className="text-[8.5px] font-bold text-white">+24% Convert</span>
+                                                    <span className="text-[6px] text-lime-400 font-bold uppercase">Optimal</span>
                                                 </div>
                                             </div>
-                                            <div className="flex-1 rounded bg-white dark:bg-zinc-900/30 border border-zinc-200 dark:border-zinc-900 p-1 flex items-center justify-between transition-colors">
-                                                <span className="text-[5px] text-zinc-400 dark:text-zinc-500 uppercase tracking-widest font-black">Sync Time</span>
-                                                <span className="text-[8px] font-bold text-zinc-600 dark:text-zinc-400">1.2s ago</span>
+                                            <div className="flex-1 rounded-lg bg-zinc-950/80 border border-zinc-800 p-1.5 flex items-center justify-between">
+                                                <span className="text-[5.5px] text-zinc-400 uppercase tracking-widest font-black">Sync Time</span>
+                                                <span className="text-[8px] font-bold text-lime-400">1.2s ago</span>
                                             </div>
                                         </div>
                                     </div>
-                                </motion.div>
+                                </div>
                             </div>
                         </div>
                         {/* iPad Label */}
@@ -506,165 +523,150 @@ export default function AboutHome() {
 
                 </div>
 
-                {/* Feature Cards Below */}
+                {/* Feature Highlights Grid */}
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-5xl mx-auto mt-16">
 
-                    {/* Card 1: Enterprise-grade Security */}
+                    {/* Card 1: Design Systems & Tokens */}
                     <motion.div
                         initial={{ opacity: 0, y: 20 }}
                         whileInView={{ opacity: 1, y: 0 }}
                         viewport={{ once: true }}
                         transition={{ duration: 0.5 }}
-                        className="rounded-2xl border border-zinc-200 dark:border-zinc-900/60 bg-white/50 dark:bg-zinc-900/20 backdrop-blur-sm p-6 hover:border-zinc-300 dark:hover:border-zinc-800 transition-all duration-300 hover:scale-[1.02] flex flex-col justify-between h-[280px]"
+                        className="rounded-2xl border border-zinc-200 dark:border-white/[0.08] bg-zinc-50/80 dark:bg-zinc-900/40 p-6 flex flex-col justify-between h-[280px] shadow-sm hover:border-zinc-300 dark:hover:border-white/20 transition-all duration-300 hover:scale-[1.02]"
                     >
-                        {/* Security Locks and Beams illustration */}
-                        <div className="h-28 border border-zinc-100 dark:border-zinc-950 bg-zinc-50 dark:bg-zinc-950/60 rounded-xl flex items-center justify-center relative overflow-hidden group transition-colors">
-                            {/* Left node (avatar mock) */}
-                            <div className="w-8 h-8 rounded-full border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-900/80 flex items-center justify-center relative z-10 transition-colors">
-                                <div className="w-5 h-5 rounded-full bg-lime-500/20 border border-lime-500/30" />
+                        {/* Visual Animation */}
+                        <div className="h-28 border border-zinc-200/80 dark:border-zinc-800 bg-white dark:bg-zinc-950/70 rounded-xl flex items-center justify-center relative overflow-hidden group">
+                            {/* Left node */}
+                            <div className="w-8 h-8 rounded-full border border-zinc-200 dark:border-zinc-800 bg-zinc-100 dark:bg-zinc-900 flex items-center justify-center relative z-10">
+                                <div className="w-4 h-4 rounded-full bg-lime-500/20 border border-lime-500/40 flex items-center justify-center">
+                                    <span className="w-1.5 h-1.5 rounded-full bg-lime-500" />
+                                </div>
                             </div>
 
                             {/* Connecting animated dashed path */}
-                            <div className="w-16 h-[1px] border-t border-dashed border-zinc-300 dark:border-zinc-800 relative mx-2 transition-colors">
+                            <div className="w-16 h-[1px] border-t border-dashed border-zinc-300 dark:border-zinc-700 relative mx-2">
                                 <motion.div
                                     animate={{ left: ["0%", "100%"] }}
                                     transition={{ duration: 2, repeat: Infinity, ease: "linear" }}
-                                    className="absolute top-[-1px] w-2 h-[2px] bg-gradient-to-r from-transparent via-lime-500 to-transparent"
+                                    className="absolute top-[-1px] w-3 h-[2px] bg-gradient-to-r from-transparent via-lime-500 to-transparent"
                                 />
                             </div>
 
-                            {/* Center Lock */}
-                            <div className="w-12 h-12 rounded-xl border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-900 flex items-center justify-center relative z-10 group-hover:border-lime-500/40 transition-colors duration-300 shadow-xl shadow-black/5 dark:shadow-black/40">
-                                <Lock size={20} className="text-lime-500 group-hover:scale-110 transition-transform duration-300" />
+                            {/* Center Lock / Security */}
+                            <div className="w-11 h-11 rounded-xl border border-zinc-200 dark:border-zinc-700 bg-zinc-50 dark:bg-zinc-900 flex items-center justify-center relative z-10 shadow-md">
+                                <IconLock size={18} className="text-lime-500" />
                             </div>
 
                             {/* Connecting animated dashed path */}
-                            <div className="w-16 h-[1px] border-t border-dashed border-zinc-300 dark:border-zinc-800 relative mx-2 transition-colors">
+                            <div className="w-16 h-[1px] border-t border-dashed border-zinc-300 dark:border-zinc-700 relative mx-2">
                                 <motion.div
                                     animate={{ left: ["100%", "0%"] }}
                                     transition={{ duration: 2, repeat: Infinity, ease: "linear" }}
-                                    className="absolute top-[-1px] w-2 h-[2px] bg-gradient-to-r from-transparent via-lime-500 to-transparent"
+                                    className="absolute top-[-1px] w-3 h-[2px] bg-gradient-to-r from-transparent via-lime-500 to-transparent"
                                 />
                             </div>
 
                             {/* Right node */}
-                            <div className="w-8 h-8 rounded-full border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-900/80 flex items-center justify-center relative z-10 transition-colors">
-                                <div className="w-5 h-5 rounded-full bg-blue-500/20 border border-blue-500/30" />
+                            <div className="w-8 h-8 rounded-full border border-zinc-200 dark:border-zinc-800 bg-zinc-100 dark:bg-zinc-900 flex items-center justify-center relative z-10">
+                                <div className="w-4 h-4 rounded-full bg-blue-500/20 border border-blue-500/40 flex items-center justify-center">
+                                    <span className="w-1.5 h-1.5 rounded-full bg-blue-500" />
+                                </div>
                             </div>
                         </div>
 
                         <div>
-                            <h3 className="text-base font-bold text-zinc-900 dark:text-white mb-2 uppercase tracking-wider transition-colors">
-                                High-Fidelity & Prototyping
+                            <h3 className="text-base font-bold text-zinc-900 dark:text-white mb-1.5 uppercase tracking-wider">
+                                Design Systems & Tokens
                             </h3>
-                            <p className="text-xs text-zinc-500 dark:text-zinc-400 leading-relaxed transition-colors">
-                                Designing responsive flows in Figma, auditing design consistency,
-                                and maintaining shared UI design systems.
+                            <p className="text-xs text-zinc-500 dark:text-zinc-400 leading-relaxed">
+                                Translating Figma variables into typed React design tokens for 100% visual consistency across platforms.
                             </p>
                         </div>
                     </motion.div>
 
-                    {/* Card 2: Edge Computing Ready */}
+                    {/* Card 2: Enterprise & Mission-Critical Web */}
                     <motion.div
                         initial={{ opacity: 0, y: 20 }}
                         whileInView={{ opacity: 1, y: 0 }}
                         viewport={{ once: true }}
                         transition={{ duration: 0.5, delay: 0.1 }}
-                        className="rounded-2xl border border-zinc-200 dark:border-zinc-900/60 bg-white/50 dark:bg-zinc-900/20 backdrop-blur-sm p-6 hover:border-zinc-300 dark:hover:border-zinc-800 transition-all duration-300 hover:scale-[1.02] flex flex-col justify-between h-[280px]"
+                        className="rounded-2xl border border-zinc-200 dark:border-white/[0.08] bg-zinc-50/80 dark:bg-zinc-900/40 p-6 flex flex-col justify-between h-[280px] shadow-sm hover:border-zinc-300 dark:hover:border-white/20 transition-all duration-300 hover:scale-[1.02]"
                     >
-                        {/* World Map SVG with Location Pins */}
-                        <div className="h-28 border border-zinc-100 dark:border-zinc-950 bg-zinc-50 dark:bg-zinc-950/60 rounded-xl flex items-center justify-center relative overflow-hidden group transition-colors">
-                            {/* Dotted grid simulating world coordinates */}
-                            <svg className="absolute inset-0 w-full h-full p-2 opacity-35" viewBox="0 0 200 100" fill="none">
-                                {/* Horizontal dotted coordinates */}
-                                <path d="M 0 20 L 200 20 M 0 40 L 200 40 M 0 60 L 200 60 M 0 80 L 200 80" stroke="rgba(82, 82, 91, 0.3)" strokeWidth="0.5" strokeDasharray="2 3" />
-                                {/* Vertical dotted coordinates */}
-                                <path d="M 40 0 L 40 100 M 80 0 L 80 100 M 120 0 L 120 100 M 160 0 L 160 100" stroke="rgba(82, 82, 91, 0.3)" strokeWidth="0.5" strokeDasharray="2 3" />
-
-                                {/* Highlighted map grid nodes (simulating continents) */}
-                                <circle cx="45" cy="35" r="1" fill="#84cc16" />
-                                <circle cx="55" cy="45" r="1" fill="#84cc16" />
-                                <circle cx="95" cy="25" r="1" fill="#84cc16" />
-                                <circle cx="120" cy="55" r="1" fill="#84cc16" />
-                                <circle cx="145" cy="35" r="1" fill="#84cc16" />
-                                <circle cx="155" cy="65" r="1" fill="#84cc16" />
+                        {/* Dotted Grid map visual */}
+                        <div className="h-28 border border-zinc-200/80 dark:border-zinc-800 bg-white dark:bg-zinc-950/70 rounded-xl flex items-center justify-center relative overflow-hidden group">
+                            <svg className="absolute inset-0 w-full h-full p-2 opacity-30" viewBox="0 0 200 100" fill="none">
+                                <path d="M 0 20 L 200 20 M 0 40 L 200 40 M 0 60 L 200 60 M 0 80 L 200 80" stroke="currentColor" strokeWidth="0.5" strokeDasharray="2 3" />
+                                <path d="M 40 0 L 40 100 M 80 0 L 80 100 M 120 0 L 120 100 M 160 0 L 160 100" stroke="currentColor" strokeWidth="0.5" strokeDasharray="2 3" />
+                                <circle cx="45" cy="35" r="1.5" fill="#84cc16" />
+                                <circle cx="95" cy="25" r="1.5" fill="#84cc16" />
+                                <circle cx="145" cy="55" r="1.5" fill="#3b82f6" />
                             </svg>
 
-                            {/* Pulsing Pin 1 */}
-                            <div className="absolute top-6 left-12 flex flex-col items-center">
-                                <span className="relative flex h-2 w-2">
-                                    <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-blue-400 opacity-75"></span>
-                                    <span className="relative inline-flex rounded-full h-2 w-2 bg-blue-500"></span>
-                                </span>
-                            </div>
-
-                            {/* Pulsing Pin 2 */}
-                            <div className="absolute bottom-10 right-20 flex flex-col items-center">
+                            <div className="absolute top-5 left-10 flex flex-col items-center">
                                 <span className="relative flex h-2 w-2">
                                     <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-lime-400 opacity-75"></span>
                                     <span className="relative inline-flex rounded-full h-2 w-2 bg-lime-500"></span>
                                 </span>
                             </div>
 
-                            {/* Central avatar connection showcase */}
-                            <div className="w-6 h-6 rounded-full border border-blue-500/50 bg-white dark:bg-zinc-900 flex items-center justify-center z-10 shadow-lg shadow-black/10 dark:shadow-black/40 animate-bounce transition-colors">
-                                <Globe size={10} className="text-blue-500 dark:text-blue-400" />
+                            <div className="absolute bottom-6 right-12 flex flex-col items-center">
+                                <span className="relative flex h-2 w-2">
+                                    <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-blue-400 opacity-75"></span>
+                                    <span className="relative inline-flex rounded-full h-2 w-2 bg-blue-500"></span>
+                                </span>
+                            </div>
+
+                            <div className="w-8 h-8 rounded-full border border-blue-500/40 bg-blue-500/10 flex items-center justify-center z-10 shadow-lg">
+                                <IconWorld size={14} className="text-blue-500 dark:text-blue-400" />
                             </div>
                         </div>
 
                         <div>
-                            <h3 className="text-base font-bold text-zinc-900 dark:text-white mb-2 uppercase tracking-wider transition-colors">
-                                ERP, POS & Government Systems
+                            <h3 className="text-base font-bold text-zinc-900 dark:text-white mb-1.5 uppercase tracking-wider">
+                                Enterprise & ERP Systems
                             </h3>
-                            <p className="text-xs text-zinc-500 dark:text-zinc-400 leading-relaxed transition-colors">
-                                Expert in implementing complex web interfaces for Korlantas Polri,
-                                PT Liftech, and PT Dinamika Simbolis Indonesia.
+                            <p className="text-xs text-zinc-500 dark:text-zinc-400 leading-relaxed">
+                                Specialized in complex data architectures for Korlantas Polri, PT Liftech, and Symbolix.ai.
                             </p>
                         </div>
                     </motion.div>
 
-                    {/* Card 3: SOC2 and HIPAA Compliant */}
+                    {/* Card 3: Measured Impact */}
                     <motion.div
                         initial={{ opacity: 0, y: 20 }}
                         whileInView={{ opacity: 1, y: 0 }}
                         viewport={{ once: true }}
                         transition={{ duration: 0.5, delay: 0.2 }}
-                        className="rounded-2xl border border-zinc-200 dark:border-zinc-900/60 bg-white/50 dark:bg-zinc-900/20 backdrop-blur-sm p-6 hover:border-zinc-300 dark:hover:border-zinc-800 transition-all duration-300 hover:scale-[1.02] flex flex-col justify-between h-[280px]"
+                        className="rounded-2xl border border-zinc-200 dark:border-white/[0.08] bg-zinc-50/80 dark:bg-zinc-900/40 p-6 flex flex-col justify-between h-[280px] shadow-sm hover:border-zinc-300 dark:hover:border-white/20 transition-all duration-300 hover:scale-[1.02]"
                     >
-                        {/* Handcrafted compliance logos illustration */}
-                        <div className="h-28 border border-zinc-100 dark:border-zinc-950 bg-zinc-50 dark:bg-zinc-950/60 rounded-xl flex items-center justify-center gap-4 relative overflow-hidden group transition-colors">
-                            {/* Adoption Growth Badge */}
-                            <div className="w-14 h-14 rounded-full border border-lime-500/20 bg-gradient-to-tr from-lime-100 dark:from-lime-950/80 to-white dark:to-lime-900/20 flex flex-col items-center justify-center shadow-lg hover:scale-105 transition-transform duration-300 relative">
-                                <span className="text-[9px] font-black text-lime-700 dark:text-white leading-none">+25%</span>
-                                <span className="text-[5px] text-lime-600 dark:text-lime-400 font-bold uppercase tracking-wider mt-1 text-center px-1">Adoption</span>
+                        {/* Impact stats pill showcase */}
+                        <div className="h-28 border border-zinc-200/80 dark:border-zinc-800 bg-white dark:bg-zinc-950/70 rounded-xl flex items-center justify-center gap-3 relative overflow-hidden group">
+                            <div className="w-13 h-13 rounded-xl border border-lime-500/30 bg-lime-500/10 flex flex-col items-center justify-center p-1.5 shadow-sm">
+                                <span className="text-[10px] font-black text-lime-600 dark:text-lime-400">+25%</span>
+                                <span className="text-[6px] font-bold text-zinc-500 uppercase tracking-wider">Adoption</span>
                             </div>
-
-                            {/* Satisfaction Badge */}
-                            <div className="w-14 h-14 rounded-full border border-blue-500/20 bg-gradient-to-tr from-blue-100 dark:from-blue-950/80 to-white dark:to-blue-900/20 flex flex-col items-center justify-center shadow-lg hover:scale-105 transition-transform duration-300 relative">
-                                <span className="text-[9px] font-black text-blue-700 dark:text-white leading-none">+28%</span>
-                                <span className="text-[5px] text-blue-600 dark:text-blue-400 font-bold uppercase tracking-wider mt-1 text-center px-1">Satisfaction</span>
+                            <div className="w-13 h-13 rounded-xl border border-blue-500/30 bg-blue-500/10 flex flex-col items-center justify-center p-1.5 shadow-sm">
+                                <span className="text-[10px] font-black text-blue-600 dark:text-blue-400">+28%</span>
+                                <span className="text-[6px] font-bold text-zinc-500 uppercase tracking-wider">CSAT</span>
                             </div>
-
-                            {/* Time Saved Badge */}
-                            <div className="w-14 h-14 rounded-full border border-orange-500/20 bg-gradient-to-tr from-orange-100 dark:from-orange-950/80 to-white dark:to-orange-900/20 flex flex-col items-center justify-center shadow-lg hover:scale-105 transition-transform duration-300 relative">
-                                <span className="text-[9px] font-black text-orange-700 dark:text-white leading-none">-30%</span>
-                                <span className="text-[5px] text-orange-600 dark:text-orange-400 font-bold uppercase tracking-wider mt-1 text-center px-1">Dev Time</span>
+                            <div className="w-13 h-13 rounded-xl border border-amber-500/30 bg-amber-500/10 flex flex-col items-center justify-center p-1.5 shadow-sm">
+                                <span className="text-[10px] font-black text-amber-600 dark:text-amber-400">-30%</span>
+                                <span className="text-[6px] font-bold text-zinc-500 uppercase tracking-wider">Cycles</span>
                             </div>
                         </div>
 
                         <div>
-                            <h3 className="text-base font-bold text-zinc-900 dark:text-white mb-2 uppercase tracking-wider transition-colors">
-                                Proven User Impact
+                            <h3 className="text-base font-bold text-zinc-900 dark:text-white mb-1.5 uppercase tracking-wider">
+                                Production Impact
                             </h3>
-                            <p className="text-xs text-zinc-500 dark:text-zinc-400 leading-relaxed transition-colors">
-                                Accomplished 25% user adoption growth, 28% increase in satisfaction,
-                                and a 30% reduction in design-to-development cycles.
+                            <p className="text-xs text-zinc-500 dark:text-zinc-400 leading-relaxed">
+                                Accelerating feature delivery by 30% with zero regression, high accessibility, and 98+ Core Web Vitals.
                             </p>
                         </div>
                     </motion.div>
 
                 </div>
-            </div >
-        </div >
+            </div>
+        </div>
     );
 }

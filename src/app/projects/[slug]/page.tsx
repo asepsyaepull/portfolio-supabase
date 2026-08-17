@@ -1,5 +1,4 @@
-import { createClient } from "@/lib/supabase/server";
-import { createClient as createSupabaseJsClient } from "@supabase/supabase-js";
+import { getStaticClient } from "@/lib/supabase/server";
 import { notFound } from "next/navigation";
 import Image from "next/image";
 import Link from "next/link";
@@ -11,13 +10,8 @@ import rehypeRaw from "rehype-raw";
 
 import { Metadata, ResolvingMetadata } from "next";
 
-// Define an admin client without cookies for static generation (build time)
-const getStaticClient = () => {
-  return createSupabaseJsClient(
-    process.env.NEXT_PUBLIC_SUPABASE_URL as string,
-    process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY as string
-  );
-};
+// Halaman di-cache (ISR): regenerate saat build + setiap 1 jam + on-demand saat slug baru
+export const revalidate = 3600;
 
 // Generate Static Params for build time optimization (optional but good)
 export async function generateStaticParams() {
@@ -34,7 +28,7 @@ export async function generateMetadata(
 ): Promise<Metadata> {
   const { slug } = await params;
 
-  const supabase = await createClient();
+  const supabase = getStaticClient();
   const { data: project } = await supabase
     .from("projects")
     .select("name, description, image")
@@ -74,7 +68,7 @@ export async function generateMetadata(
 export default async function ProjectDetailPage({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
 
-  const supabase = await createClient();
+  const supabase = getStaticClient();
   const { data: project, error } = await supabase
     .from("projects")
     .select("*")

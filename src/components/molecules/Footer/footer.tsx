@@ -37,7 +37,7 @@ export default function Footer() {
                         © {new Date().getFullYear()} Asep Syaepul. All rights reserved.
                     </div>
                     <div className="flex text-sm space-x-6 mt-4 md:mt-0 font-medium text-zinc-500 dark:text-zinc-400">
-                        <Link href="/contact" className="hover:text-lime-600 dark:hover:text-lime-500 transition-colors">Let's Collaborate</Link>
+                        <Link href="/contact" className="hover:text-lime-600 dark:hover:text-lime-500 transition-colors">Let's Talk</Link>
                     </div>
                 </div>
             </div>

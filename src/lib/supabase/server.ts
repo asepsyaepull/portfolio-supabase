@@ -1,4 +1,5 @@
 import { createServerClient, type CookieOptions } from '@supabase/ssr'
+import { createClient as createSupabaseJsClient } from '@supabase/supabase-js'
 import { cookies } from 'next/headers'
 
 const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL
@@ -7,6 +8,21 @@ const supabaseKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY
 if (!supabaseUrl || !supabaseKey) {
   throw new Error(
     'Missing NEXT_PUBLIC_SUPABASE_URL or NEXT_PUBLIC_SUPABASE_ANON_KEY env vars'
+  )
+}
+
+/**
+ * Client tanpa cookies untuk data PUBLIK yang bisa di-cache (ISR/SSG).
+ * Aman dipakai di Server Component — TIDAK membuat route jadi dinamis.
+ * JANGAN dipakai untuk fitur yang butuh session/auth.
+ */
+export function getStaticClient() {
+  return createSupabaseJsClient(
+    supabaseUrl as string,
+    supabaseKey as string,
+    {
+      auth: { persistSession: false },
+    }
   )
 }
 

@@ -1,9 +1,9 @@
 import React from "react";
 import { Timeline } from "@/components/ui/timeline";
-import { createClient } from "@/lib/supabase/server";
+import { getStaticClient } from "@/lib/supabase/server";
 
 export async function WorkExperience() {
-    const supabase = await createClient();
+    const supabase = getStaticClient();
     const { data: experiences, error } = await supabase
         .from("experiences")
         .select("*")

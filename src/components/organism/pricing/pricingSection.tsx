@@ -1,17 +1,17 @@
 "use client";
 import { motion, AnimatePresence } from "framer-motion";
 import {
-  ArrowRight,
-  Check,
-  ChevronDown,
-  Layers,
-  Minus,
-  MousePointer2,
-  Plus,
-  SlidersHorizontal,
-  Sparkles,
-  Zap,
-} from "lucide-react";
+  IconArrowRight,
+  IconCheck,
+  IconChevronDown,
+  IconStack,
+  IconMinus,
+  IconMouse,
+  IconPlus,
+  IconAdjustments,
+  IconSparkles,
+  IconBolt,
+} from "@tabler/icons-react";
 import Link from "next/link";
 import { useMemo, useState } from "react";
 import { cn } from "@/lib/utils";
@@ -27,16 +27,6 @@ const FigmaDots = () => (
     <span className="w-3 h-3 rounded-full bg-[#FEBC2E]" />
     <span className="w-3 h-3 rounded-full bg-[#28C840]" />
   </div>
-);
-
-const DesignLiveBadge = () => (
-  <span className="inline-flex items-center gap-1.5 rounded-md border border-lime-500/30 bg-lime-500/10 px-2 py-0.5 text-[9px] font-black uppercase tracking-widest text-lime-600 dark:text-lime-400">
-    <span className="relative flex h-1.5 w-1.5">
-      <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-lime-400 opacity-75" />
-      <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-lime-500" />
-    </span>
-    Designed Live
-  </span>
 );
 
 /* ------------------------------------------------------------------ */
@@ -116,7 +106,7 @@ export function PricingSection() {
   }, [projectType, pageScope, withDev, withCms, extraRevs, urgent]);
 
   const layers = [
-    { icon: <Layers className="w-3 h-3" />, name: "pricing.fig", active: true, depth: 0 },
+    { icon: <IconStack className="w-3 h-3" />, name: "pricing.fig", active: true, depth: 0 },
     { icon: null, name: "Project Type", active: false, depth: 1 },
     { icon: null, name: "Page Scope", active: false, depth: 1 },
     { icon: null, name: "Add-ons", active: false, depth: 1 },
@@ -135,11 +125,8 @@ export function PricingSection() {
           transition={{ duration: 0.5 }}
           className="text-center mb-16"
         >
-          <span className="text-lime-600 dark:text-lime-500 font-bold tracking-widest text-sm uppercase transition-colors">
-            / Pricing
-          </span>
-          <h2 className="text-3xl md:text-5xl font-black text-zinc-900 dark:text-white mt-4 mb-4 tracking-tight transition-colors">
-            Build your <span className="text-lime-600 dark:text-lime-500 italic font-serif">own</span> quote.
+          <h2 className="text-3xl md:text-5xl font-black text-zinc-900 dark:text-white mb-4 tracking-tight transition-colors">
+            Build your <span className="text-lime-600 dark:text-lime-500 italic">own</span> quote.
           </h2>
           <p className="text-zinc-600 dark:text-gray-400 max-w-2xl mx-auto transition-colors">
             No menu of fixed packages — configure the scope below and watch the price
@@ -163,9 +150,8 @@ export function PricingSection() {
                 <span className="text-lime-500">▦</span> pricing.fig
               </span>
             </div>
-            <DesignLiveBadge />
             <div className="hidden md:flex items-center gap-2 text-[11px] text-zinc-400 dark:text-zinc-500">
-              <SlidersHorizontal className="w-3.5 h-3.5" />
+              <IconAdjustments className="w-3.5 h-3.5" />
               <span>100%</span>
             </div>
           </div>
@@ -177,7 +163,7 @@ export function PricingSection() {
                 <span className="text-[10px] font-black uppercase tracking-widest text-zinc-400 dark:text-zinc-500">
                   Layers
                 </span>
-                <ChevronDown className="w-3 h-3 text-zinc-400" />
+                <IconChevronDown className="w-3 h-3 text-zinc-400" />
               </div>
               <div className="flex flex-col gap-0.5">
                 {layers.map((l, i) => (
@@ -204,7 +190,7 @@ export function PricingSection() {
                 {/* Project type selector */}
                 <div className="mb-8">
                   <p className="text-[10px] font-black uppercase tracking-widest text-zinc-400 dark:text-zinc-500 mb-2.5 flex items-center gap-1.5">
-                    <MousePointer2 className="w-3 h-3" /> 01 · Project type
+                    <IconMouse className="w-3 h-3" /> 01 · Project type
                   </p>
                   <div className="grid grid-cols-3 gap-2">
                     {PROJECT_TYPES.map((t) => (
@@ -284,7 +270,7 @@ export function PricingSection() {
                           aria-label="Decrease revisions"
                           className="w-7 h-7 rounded-full border border-zinc-200 dark:border-white/[0.1] flex items-center justify-center text-zinc-500 dark:text-zinc-400 hover:border-lime-500/50 hover:text-lime-500 transition-colors"
                         >
-                          <Minus className="w-3.5 h-3.5" />
+                          <IconMinus className="w-3.5 h-3.5" />
                         </button>
                         <span className="w-4 text-center text-sm font-black text-zinc-900 dark:text-white transition-colors">
                           {extraRevs}
@@ -294,14 +280,14 @@ export function PricingSection() {
                           aria-label="Increase revisions"
                           className="w-7 h-7 rounded-full border border-zinc-200 dark:border-white/[0.1] flex items-center justify-center text-zinc-500 dark:text-zinc-400 hover:border-lime-500/50 hover:text-lime-500 transition-colors"
                         >
-                          <Plus className="w-3.5 h-3.5" />
+                          <IconPlus className="w-3.5 h-3.5" />
                         </button>
                       </div>
                     </div>
                     <div className="flex items-center justify-between gap-4">
                       <div>
                         <p className="text-sm font-bold text-zinc-800 dark:text-zinc-100 transition-colors">
-                          Urgent delivery <Zap className="inline w-3.5 h-3.5 text-amber-500 -mt-0.5" />
+                          Urgent delivery <IconBolt className="inline w-3.5 h-3.5 text-amber-500 -mt-0.5" />
                         </p>
                         <p className="text-[11px] text-zinc-400 dark:text-zinc-500">+20%, priority slot</p>
                       </div>
@@ -343,9 +329,9 @@ export function PricingSection() {
                       as="div"
                       className="w-full flex items-center justify-center gap-2 bg-lime-500 text-black px-6 py-3.5 text-sm font-bold transition-all"
                     >
-                      <Sparkles className="w-4 h-4" />
-                      <span>Start this project — {fmtPrice(price)}jt</span>
-                      <ArrowRight className="w-4 h-4" />
+                      <IconSparkles className="w-4 h-4" />
+                      <span>Let's Talk — {fmtPrice(price)}jt</span>
+                      <IconArrowRight className="w-4 h-4" />
                     </HoverBorderGradient>
                   </Link>
                   <p className="mt-3 text-[10px] text-zinc-400 dark:text-zinc-500">
@@ -359,7 +345,7 @@ export function PricingSection() {
           {/* Fake Figma status bar */}
           <div className="flex items-center justify-between px-4 py-1.5 border-t border-zinc-200 dark:border-white/[0.06] bg-zinc-50 dark:bg-zinc-900/60 text-[10px] text-zinc-400 dark:text-zinc-500 transition-colors">
             <span className="flex items-center gap-1.5">
-              <Layers className="w-3 h-3" /> Frame 1 · 1280 × auto
+              <IconStack className="w-3 h-3" /> Frame 1 · 1280 × auto
             </span>
             <span className="hidden sm:block">Made in Figma, built in Next.js</span>
           </div>

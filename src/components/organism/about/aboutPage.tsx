@@ -2,7 +2,7 @@
 import React from 'react'
 import { motion } from 'framer-motion';
 import { ProfileCardPointer } from '@/components/molecules/Card/profileCardPointer';
-import { SiFigma, SiFramer, SiMiro, SiReact, SiNextdotjs, SiTypescript, SiTailwindcss, SiJavascript, SiHtml5, SiCss3 } from "react-icons/si";
+import { IconBrandFigma, IconBrandFramer, IconBrandReact, IconBrandNextjs, IconBrandTypescript, IconBrandTailwind, IconBrandJavascript, IconBrandHtml5, IconBrandCss3 } from "@tabler/icons-react";
 
 export default function AboutPage() {
     return (
@@ -53,9 +53,8 @@ export default function AboutPage() {
                                 <SkillItem label="Design Systems" percent={95} />
                             </div>
                             <div className="flex gap-4 mt-8 pt-8 border-t border-black/5 dark:border-white/5 transition-colors">
-                                <SiFigma className="text-2xl text-zinc-400 hover:text-zinc-900 dark:text-zinc-500 dark:hover:text-white transition-colors" />
-                                <SiFramer className="text-2xl text-zinc-400 hover:text-zinc-900 dark:text-zinc-500 dark:hover:text-white transition-colors" />
-                                <SiMiro className="text-2xl text-zinc-400 hover:text-zinc-900 dark:text-zinc-500 dark:hover:text-white transition-colors" />
+                                <IconBrandFigma className="text-2xl text-zinc-400 hover:text-zinc-900 dark:text-zinc-500 dark:hover:text-white transition-colors" />
+                                <IconBrandFramer className="text-2xl text-zinc-400 hover:text-zinc-900 dark:text-zinc-500 dark:hover:text-white transition-colors" />
                             </div>
                         </div>
 
@@ -69,11 +68,11 @@ export default function AboutPage() {
                                 <SkillItem label="Performance Optimization" percent={80} />
                             </div>
                             <div className="flex gap-4 mt-8 pt-8 border-t border-black/5 dark:border-white/5 transition-colors">
-                                <SiReact className="text-2xl text-zinc-400 hover:text-zinc-900 dark:text-zinc-500 dark:hover:text-white transition-colors" />
-                                <SiNextdotjs className="text-2xl text-zinc-400 hover:text-zinc-900 dark:text-zinc-500 dark:hover:text-white transition-colors" />
-                                <SiTypescript className="text-2xl text-zinc-400 hover:text-zinc-900 dark:text-zinc-500 dark:hover:text-white transition-colors" />
-                                <SiTailwindcss className="text-2xl text-zinc-400 hover:text-zinc-900 dark:text-zinc-500 dark:hover:text-white transition-colors" />
-                                <SiJavascript className="text-2xl text-zinc-400 hover:text-zinc-900 dark:text-zinc-500 dark:hover:text-white transition-colors" />
+                                <IconBrandReact className="text-2xl text-zinc-400 hover:text-zinc-900 dark:text-zinc-500 dark:hover:text-white transition-colors" />
+                                <IconBrandNextjs className="text-2xl text-zinc-400 hover:text-zinc-900 dark:text-zinc-500 dark:hover:text-white transition-colors" />
+                                <IconBrandTypescript className="text-2xl text-zinc-400 hover:text-zinc-900 dark:text-zinc-500 dark:hover:text-white transition-colors" />
+                                <IconBrandTailwind className="text-2xl text-zinc-400 hover:text-zinc-900 dark:text-zinc-500 dark:hover:text-white transition-colors" />
+                                <IconBrandJavascript className="text-2xl text-zinc-400 hover:text-zinc-900 dark:text-zinc-500 dark:hover:text-white transition-colors" />
                             </div>
                         </div>
                     </div>

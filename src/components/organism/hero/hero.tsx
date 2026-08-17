@@ -2,7 +2,7 @@
 import { HoverBorderGradient } from "@/components/ui/hover-border-gradient";
 import { SmoothTypingText } from "@/components/ui/smooth-typing-text";
 import { motion } from "framer-motion";
-import { ChevronRight } from "lucide-react";
+import { IconChevronRight } from "@tabler/icons-react";
 import Link from "next/link";
 import { memo, useEffect, useRef, useState } from "react";
 import { FigmaHoverInspector } from "./figma-inspector";
@@ -45,13 +45,10 @@ const Hero = () => {
             ref={containerRef}
             className="min-h-[100dvh] bg-zinc-50 dark:bg-gray-950 relative flex items-center justify-center overflow-hidden selection:bg-lime-500/30 transition-colors duration-300"
         >
-            {/* Design System Grid Background */}
+            {/* Background */}
             <div className="absolute inset-0 z-0">
-                <div className="absolute inset-0 bg-[radial-gradient(#d4d4d8_1px,transparent_1px)] dark:bg-[radial-gradient(#27272a_1px,transparent_1px)] [background-size:32px_32px] [mask-image:radial-gradient(ellipse_50%_50%_at_50%_50%,#000_70%,transparent_100%)] opacity-50 dark:opacity-30 transition-colors duration-300" />
-
-                {/* Subtle Radial Glows */}
-                <div className="absolute top-1/4 left-1/4 w-[600px] h-[600px] bg-lime-500/10 rounded-full blur-[140px] pointer-events-none" />
-                <div className="absolute bottom-1/4 right-1/4 w-[500px] h-[500px] bg-blue-500/5 rounded-full blur-[140px] pointer-events-none" />
+                <div className="absolute inset-0 bg-zinc-50 dark:bg-gray-950 transition-colors duration-300" />
+                <div className="absolute top-1/4 left-1/4 w-[600px] h-[600px] bg-lime-500/5 rounded-full blur-[140px] pointer-events-none" />
             </div>
 
             {/* Figma-style Inspector Overlay */}
@@ -82,7 +79,7 @@ const Hero = () => {
                         className="text-4xl sm:text-6xl md:text-[5.2rem] font-black tracking-tighter text-zinc-900 dark:text-white mb-3 sm:mb-4 leading-[0.95] uppercase transition-colors"
                     >
                         Design <br />
-                        <span className="text-lime-600 dark:text-lime-500 italic font-serif normal-case">&</span> Engineering.
+                        <span className="text-lime-600 dark:text-lime-500 italic font-sans normal-case">&</span> Engineering.
                     </motion.h1>
 
                     <motion.div variants={itemVariants} className="mt-4 sm:mt-6 mb-6 sm:mb-8 flex flex-col gap-5">
@@ -91,44 +88,18 @@ const Hero = () => {
                         </p>
                     </motion.div>
 
-                    {/* Actions & Social Proof */}
-                    <motion.div variants={itemVariants} className="flex flex-col gap-6 sm:gap-10 w-full">
-                        <div className="flex flex-wrap items-center justify-start gap-3 sm:gap-4">
-                            <Link href="/projects">
-                                <HoverBorderGradient
-                                    containerClassName="rounded-full shadow-lg shadow-lime-500/20"
-                                    as="div"
-                                    className="bg-lime-500 text-black flex items-center space-x-2 px-6 sm:px-8 py-3.5 sm:py-4 font-bold text-xs sm:text-sm transition-all hover:scale-[1.05] active:scale-[0.98]"
-                                >
-                                    <span>View My Work</span>
-                                    <ChevronRight className="ml-1 h-4 w-4 sm:h-5 sm:w-5" />
-                                </HoverBorderGradient>
-                            </Link>
-
-                            <Link
-                                href="/contact"
-                                className="text-zinc-700 dark:text-zinc-200 font-bold text-xs sm:text-sm flex items-center gap-2.5 px-6 sm:px-8 py-3.5 sm:py-4 rounded-full border border-zinc-200 dark:border-white/10 bg-white dark:bg-white/5 hover:bg-zinc-50 dark:hover:bg-white/10 transition-all active:scale-[0.98] shadow-sm"
+                    {/* Actions */}
+                    <motion.div variants={itemVariants} className="mt-4 sm:mt-6 mb-6 sm:mb-8">
+                        <Link href="/projects">
+                            <HoverBorderGradient
+                                containerClassName="rounded-full shadow-lg shadow-lime-500/20"
+                                as="div"
+                                className="bg-lime-500 text-black flex items-center space-x-2 px-6 sm:px-8 py-3.5 sm:py-4 font-bold text-xs sm:text-sm transition-all hover:scale-[1.05] active:scale-[0.98]"
                             >
-                                <span>Get in touch</span>
-                                <div className="w-2 h-2 rounded-full bg-lime-500 animate-pulse" />
-                            </Link>
-                        </div>
-
-                        {/* Social Proof Stats from Resume */}
-                        <div className="flex flex-wrap gap-6 sm:gap-12 border-t border-zinc-200 dark:border-white/5 pt-6 sm:pt-10 transition-colors">
-                            <div className="flex flex-col gap-1">
-                                <span className="text-2xl sm:text-3xl font-black text-zinc-900 dark:text-white leading-none transition-colors">7+</span>
-                                <span className="text-[9px] sm:text-[10px] font-bold text-zinc-500 dark:text-zinc-600 uppercase tracking-widest transition-colors">Years UI/UX</span>
-                            </div>
-                            <div className="flex flex-col gap-1">
-                                <span className="text-2xl sm:text-3xl font-black text-zinc-900 dark:text-white leading-none transition-colors">25%</span>
-                                <span className="text-[9px] sm:text-[10px] font-bold text-zinc-500 dark:text-zinc-600 uppercase tracking-widest transition-colors">Adoption Growth</span>
-                            </div>
-                            <div className="flex flex-col gap-1">
-                                <span className="text-2xl sm:text-3xl font-black text-zinc-900 dark:text-white leading-none transition-colors">28%</span>
-                                <span className="text-[9px] sm:text-[10px] font-bold text-zinc-500 dark:text-zinc-600 uppercase tracking-widest transition-colors">User Satisfaction</span>
-                            </div>
-                        </div>
+                                <span>View Work</span>
+                                <IconChevronRight className="ml-1 h-4 w-4 sm:h-5 sm:w-5" />
+                            </HoverBorderGradient>
+                        </Link>
                     </motion.div>
                 </motion.div>
 

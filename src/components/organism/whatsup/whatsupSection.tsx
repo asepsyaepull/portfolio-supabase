@@ -1,6 +1,6 @@
 "use client";
 import { motion } from "framer-motion";
-import { ArrowUpRight, Star } from "lucide-react";
+import { IconArrowUpRight, IconStar } from "@tabler/icons-react";
 
 /* ------------------------------------------------------------------ */
 /* Sub-components                                                       */
@@ -60,7 +60,7 @@ export function WhatsupSection() {
               <BlockLabel>STATEMENT.TXT</BlockLabel>
               <h3 className="mt-3 text-3xl md:text-4xl font-bold leading-tight text-zinc-900 dark:text-white transition-colors">
                 I make people stop and ask,{" "}
-                <span className="italic font-serif text-lime-600 dark:text-lime-500 normal-case">
+                <span className="italic text-lime-600 dark:text-lime-500 normal-case">
                   who built that?
                 </span>
               </h3>
@@ -94,8 +94,7 @@ export function WhatsupSection() {
               transition={{ duration: 0.5 }}
               className="rounded-2xl border border-zinc-200 dark:border-white/[0.06] bg-zinc-50 dark:bg-zinc-900/40 p-6 transition-colors"
             >
-              <BlockLabel>Metrics</BlockLabel>
-              <div className="mt-5 grid grid-cols-3 gap-4">
+              <div className="grid grid-cols-3 gap-4">
                 {metrics.map((m) => (
                   <div key={m.label}>
                     <div className="text-3xl md:text-4xl font-black text-zinc-900 dark:text-white tabular-nums transition-colors">
@@ -117,8 +116,7 @@ export function WhatsupSection() {
               transition={{ duration: 0.5, delay: 0.1 }}
               className="rounded-2xl border border-zinc-200 dark:border-white/[0.06] bg-zinc-50 dark:bg-zinc-900/40 p-6 transition-colors"
             >
-              <BlockLabel>Capabilities</BlockLabel>
-              <div className="mt-4 flex flex-wrap gap-2">
+              <div className="flex flex-wrap gap-2">
                 {capabilities.map((c) => (
                   <Pill key={c}>{c}</Pill>
                 ))}
@@ -135,14 +133,6 @@ export function WhatsupSection() {
                 className="rounded-2xl border border-zinc-200 dark:border-white/[0.06] bg-zinc-50 dark:bg-zinc-900/40 p-6 transition-colors"
               >
                 <div className="flex items-center justify-between">
-                  <BlockLabel>craft</BlockLabel>
-                  <span className="inline-flex items-center gap-1.5 rounded-md border border-lime-500/30 bg-lime-500/10 px-2 py-0.5 text-[9px] font-black uppercase tracking-widest text-lime-600 dark:text-lime-400">
-                    <span className="relative flex h-1.5 w-1.5">
-                      <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-lime-400 opacity-75" />
-                      <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-lime-500" />
-                    </span>
-                    Designed Live
-                  </span>
                 </div>
                 <div className="mt-4 rounded-xl border border-zinc-200 dark:border-white/[0.08] bg-white dark:bg-[#1E1E1E] overflow-hidden transition-colors">
                   <div className="flex items-center gap-1.5 px-3 py-2 border-b border-zinc-200 dark:border-white/[0.06]">
@@ -176,8 +166,7 @@ export function WhatsupSection() {
                 transition={{ duration: 0.5, delay: 0.3 }}
                 className="rounded-2xl border border-zinc-200 dark:border-white/[0.06] bg-zinc-50 dark:bg-zinc-900/40 p-6 transition-colors"
               >
-                <BlockLabel>▶ Currently building in</BlockLabel>
-                <div className="mt-4 flex flex-col gap-2">
+                <div className="flex flex-col gap-2">
                   {tools.map((t) => (
                     <div
                       key={t}
@@ -200,10 +189,9 @@ export function WhatsupSection() {
               className="rounded-2xl border border-zinc-200 dark:border-white/[0.06] bg-zinc-50 dark:bg-zinc-900/40 p-6 transition-colors"
             >
               <div className="flex items-center justify-between">
-                <BlockLabel>Review_01</BlockLabel>
                 <span className="flex items-center gap-0.5 text-lime-500">
                   {[...Array(5)].map((_, i) => (
-                    <Star key={i} className="w-3.5 h-3.5 fill-current" />
+                    <IconStar key={i} className="w-3.5 h-3.5 fill-current" />
                   ))}
                 </span>
               </div>
@@ -213,9 +201,9 @@ export function WhatsupSection() {
               </p>
               <div className="mt-4 flex items-center justify-between">
                 <span className="text-[11px] font-bold uppercase tracking-widest text-zinc-500 dark:text-zinc-400 transition-colors">
-                  — [Nama] · [Jabatan]
+                  — Tech Lead · Enterprise Client
                 </span>
-                <ArrowUpRight className="w-4 h-4 text-zinc-400 dark:text-zinc-600" />
+                <IconArrowUpRight className="w-4 h-4 text-zinc-400 dark:text-zinc-600" />
               </div>
             </motion.div>
           </div>

@@ -1,11 +1,15 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
+import localFont from "next/font/local";
 import "@/styles/globals.css";
 import { ThemeProvider } from "@/components/theme-provider";
 import { Toaster } from "sonner";
 import AppShell from "@/components/layouts/AppShell";
 
-const inter = Inter({ subsets: ["latin"] });
+const geist = localFont({
+  src: [{ path: "./fonts/GeistVF.woff", style: "normal" }],
+  variable: "--font-geist",
+  display: "swap",
+});
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://asepsyaepul-portfolio.vercel.app"),
@@ -42,7 +46,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <body className={`${inter.className} antialiased bg-zinc-50 dark:bg-zinc-950 text-zinc-900 dark:text-zinc-50`}>
+      <body className={`${geist.variable} font-sans antialiased bg-zinc-50 dark:bg-zinc-950 text-zinc-900 dark:text-zinc-50`}>
         <ThemeProvider
           attribute="class"
           defaultTheme="system"
