@@ -390,7 +390,7 @@ function VisualShowcaseContent({
         <div className="w-full space-y-4">
           <div className="grid grid-cols-2 gap-3">
             <div className="p-3.5 rounded-lg bg-white dark:bg-zinc-800/80 border border-zinc-200 dark:border-zinc-700/60 shadow-sm">
-              <div className="flex items-center justify-between mb-1">
+              <div className="flex flex-col gap-1 sm:flex-row sm:items-center sm:justify-between">
                 <span className="text-[11px] font-bold text-zinc-500 uppercase">UX Heuristics</span>
                 <span className="text-xs font-bold text-emerald-600 dark:text-emerald-400">96% PASSED</span>
               </div>
@@ -400,7 +400,7 @@ function VisualShowcaseContent({
             </div>
 
             <div className="p-3.5 rounded-lg bg-white dark:bg-zinc-800/80 border border-zinc-200 dark:border-zinc-700/60 shadow-sm">
-              <div className="flex items-center justify-between mb-1">
+              <div className="flex flex-col gap-1 sm:flex-row sm:items-center sm:justify-between">
                 <span className="text-[11px] font-bold text-zinc-500 uppercase">Target TTFB</span>
                 <span className="text-xs font-bold text-lime-600 dark:text-lime-400">&lt; 80ms</span>
               </div>
@@ -431,7 +431,7 @@ function VisualShowcaseContent({
             </div>
           </div>
 
-          <div className="flex items-center justify-between p-3 rounded-lg bg-lime-500/10 border border-lime-500/20 text-xs">
+          <div className="flex flex-col gap-1 sm:flex-row sm:items-center sm:justify-between p-3 rounded-lg bg-lime-500/10 border border-lime-500/20 text-xs">
             <span className="font-semibold text-lime-700 dark:text-lime-300">Phase Outcome:</span>
             <span className="font-mono text-zinc-700 dark:text-zinc-300">System Blueprint Approved</span>
           </div>
@@ -450,32 +450,32 @@ function VisualShowcaseContent({
 
             {/* Visual Node Graph */}
             <div className="space-y-2">
-              <div className="p-2.5 rounded-lg bg-zinc-100 dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-700 flex items-center justify-between">
+              <div className="p-2.5 rounded-lg bg-zinc-100 dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-700 flex flex-col gap-1 sm:flex-row sm:items-center sm:justify-between">
                 <div className="flex items-center gap-2">
-                  <IconDeviceLaptop className="w-4 h-4 text-blue-500" />
+                  <IconDeviceLaptop className="w-4 h-4 text-blue-500 shrink-0" />
                   <span className="text-xs font-semibold">Landing View / Route (/)</span>
                 </div>
-                <span className="text-[10px] font-mono text-emerald-500 bg-emerald-500/10 px-2 py-0.5 rounded">SSR Hydrated</span>
+                <span className="text-[10px] font-mono text-emerald-500 bg-emerald-500/10 px-2 py-0.5 rounded w-fit">SSR Hydrated</span>
               </div>
 
               <div className="pl-6 border-l-2 border-dashed border-zinc-300 dark:border-zinc-700 space-y-2">
-                <div className="p-2 rounded-lg bg-zinc-50 dark:bg-zinc-900/80 border border-zinc-200 dark:border-zinc-800 flex items-center justify-between text-xs">
-                  <span className="text-zinc-600 dark:text-zinc-400">├── Hero & Live Metrics Engine</span>
-                  <span className="font-mono text-[10px] text-zinc-400">&lt;HeroCore /&gt;</span>
+                <div className="p-2 rounded-lg bg-zinc-50 dark:bg-zinc-900/80 border border-zinc-200 dark:border-zinc-800 flex flex-col gap-0.5 sm:flex-row sm:items-center sm:justify-between text-xs">
+                  <span className="text-zinc-600 dark:text-zinc-400">├── Hero &amp; Live Metrics Engine</span>
+                  <span className="font-mono text-[10px] text-zinc-400 whitespace-nowrap">&lt;HeroCore /&gt;</span>
                 </div>
-                <div className="p-2 rounded-lg bg-zinc-50 dark:bg-zinc-900/80 border border-zinc-200 dark:border-zinc-800 flex items-center justify-between text-xs">
-                  <span className="text-zinc-600 dark:text-zinc-400">├── Portfolio Showcase & Filters</span>
-                  <span className="font-mono text-[10px] text-zinc-400">&lt;ProjectGrid /&gt;</span>
+                <div className="p-2 rounded-lg bg-zinc-50 dark:bg-zinc-900/80 border border-zinc-200 dark:border-zinc-800 flex flex-col gap-0.5 sm:flex-row sm:items-center sm:justify-between text-xs">
+                  <span className="text-zinc-600 dark:text-zinc-400">├── Portfolio Showcase &amp; Filters</span>
+                  <span className="font-mono text-[10px] text-zinc-400 whitespace-nowrap">&lt;ProjectGrid /&gt;</span>
                 </div>
-                <div className="p-2 rounded-lg bg-zinc-50 dark:bg-zinc-900/80 border border-zinc-200 dark:border-zinc-800 flex items-center justify-between text-xs">
+                <div className="p-2 rounded-lg bg-zinc-50 dark:bg-zinc-900/80 border border-zinc-200 dark:border-zinc-800 flex flex-col gap-0.5 sm:flex-row sm:items-center sm:justify-between text-xs">
                   <span className="text-zinc-600 dark:text-zinc-400">└── Interactive Workflow System</span>
-                  <span className="font-mono text-[10px] text-lime-500">&lt;WorkflowView /&gt;</span>
+                  <span className="font-mono text-[10px] text-lime-500 whitespace-nowrap">&lt;WorkflowView /&gt;</span>
                 </div>
               </div>
             </div>
           </div>
 
-          <div className="grid grid-cols-3 gap-2 text-center text-xs">
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-2 text-center text-xs">
             <div className="p-2 rounded-lg bg-zinc-100 dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700">
               <span className="block font-bold text-zinc-800 dark:text-zinc-200">3 Breakpoints</span>
               <span className="text-[10px] text-zinc-400">Mobile, Tab, Desk</span>
@@ -497,9 +497,9 @@ function VisualShowcaseContent({
       return (
         <div className="w-full space-y-4">
           <div className="p-4 rounded-lg bg-white dark:bg-zinc-800/80 border border-zinc-200 dark:border-zinc-700/60 font-mono text-xs">
-            <div className="flex items-center justify-between pb-2 mb-3 border-b border-zinc-100 dark:border-zinc-700 text-zinc-500">
+            <div className="flex flex-col gap-1 sm:flex-row sm:items-center sm:justify-between pb-2 mb-3 border-b border-zinc-100 dark:border-zinc-700 text-zinc-500">
               <span>design-tokens.config.ts</span>
-              <span className="text-lime-500 font-bold">SYNCHRONIZED</span>
+              <span className="text-lime-500 font-bold w-fit">SYNCHRONIZED</span>
             </div>
 
             <div className="space-y-1.5 leading-relaxed text-zinc-700 dark:text-zinc-300">
@@ -529,7 +529,7 @@ function VisualShowcaseContent({
             </div>
           </div>
 
-          <div className="grid grid-cols-4 gap-2">
+          <div className="grid grid-cols-2 sm:grid-cols-4 gap-2">
             {[
               { label: "Buttons", count: "12 Variants" },
               { label: "Typography", count: "8 Scales" },
@@ -537,7 +537,7 @@ function VisualShowcaseContent({
               { label: "Cards", count: "6 Layouts" },
             ].map((atom, i) => (
               <div key={i} className="p-2 rounded-lg bg-zinc-100 dark:bg-zinc-800 text-center border border-zinc-200 dark:border-zinc-700">
-                <span className="text-[11px] font-bold block text-zinc-800 dark:text-zinc-200">{atom.label}</span>
+                <span className="text-[11px] font-bold block text-zinc-800 dark:text-zinc-200 break-words">{atom.label}</span>
                 <span className="text-[9px] text-zinc-400">{atom.count}</span>
               </div>
             ))}
@@ -550,12 +550,12 @@ function VisualShowcaseContent({
       return (
         <div className="w-full space-y-4">
           <div className="p-4 rounded-lg bg-[#18181b] border border-zinc-800 text-zinc-200 font-mono text-xs shadow-inner">
-            <div className="flex items-center justify-between pb-2 mb-3 border-b border-zinc-800 text-[11px] text-zinc-400">
+            <div className="flex flex-col gap-1 sm:flex-row sm:items-center sm:justify-between pb-2 mb-3 border-b border-zinc-800 text-[11px] text-zinc-400">
               <span className="flex items-center gap-2">
-                <IconTerminal className="w-3.5 h-3.5 text-lime-400" />
+                <IconTerminal className="w-3.5 h-3.5 text-lime-400 shrink-0" />
                 src/components/Experience.tsx
               </span>
-              <span className="text-emerald-400">Strict TS ✓</span>
+              <span className="text-emerald-400 w-fit">Strict TS ✓</span>
             </div>
 
             <div className="space-y-1 text-[11px] leading-relaxed overflow-x-auto text-zinc-300">
@@ -582,7 +582,7 @@ function VisualShowcaseContent({
             </div>
           </div>
 
-          <div className="flex items-center justify-center gap-3 p-3 rounded-lg bg-white dark:bg-zinc-800/80 border border-zinc-200 dark:border-zinc-700 text-xs">
+          <div className="flex flex-wrap items-center justify-center gap-3 p-3 rounded-lg bg-white dark:bg-zinc-800/80 border border-zinc-200 dark:border-zinc-700 text-xs">
             <div className="flex items-center gap-1.5 font-semibold text-zinc-700 dark:text-zinc-300">
               <IconBrandNextjs className="w-4 h-4" /> Next.js 15
             </div>
@@ -603,13 +603,13 @@ function VisualShowcaseContent({
       return (
         <div className="w-full space-y-4">
           <div className="p-4 rounded-lg bg-white dark:bg-zinc-800/80 border border-zinc-200 dark:border-zinc-700/60">
-            <div className="flex items-center justify-between mb-3 text-xs">
-              <span className="font-bold text-zinc-800 dark:text-zinc-200">Spring Physics & Curve Engine</span>
-              <span className="font-mono text-lime-500 text-[10px]">60 FPS SMOOTH</span>
+            <div className="flex flex-col gap-1 sm:flex-row sm:items-center sm:justify-between mb-3 text-xs">
+              <span className="font-bold text-zinc-800 dark:text-zinc-200">Spring Physics &amp; Curve Engine</span>
+              <span className="font-mono text-lime-500 text-[10px] w-fit">60 FPS SMOOTH</span>
             </div>
 
             {/* Interactive Physics Visual Card */}
-            <div className="p-4 rounded-lg bg-zinc-100 dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-700 flex items-center justify-around gap-2">
+            <div className="p-4 rounded-lg bg-zinc-100 dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-700 flex flex-wrap items-center justify-around gap-2">
               <motion.div
                 animate={{
                   y: [-8, 8, -8],
@@ -633,7 +633,7 @@ function VisualShowcaseContent({
             </div>
           </div>
 
-          <div className="grid grid-cols-3 gap-2 text-center text-xs">
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-2 text-center text-xs">
             <div className="p-2.5 rounded-lg bg-zinc-100 dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700">
               <span className="font-bold text-zinc-800 dark:text-zinc-200 block">Scroll Linked</span>
               <span className="text-[10px] text-zinc-400">Zero jank reveals</span>
@@ -656,12 +656,12 @@ function VisualShowcaseContent({
         <div className="w-full space-y-4">
           {/* Lighthouse Score 100 Badges */}
           <div className="p-4 rounded-lg bg-white dark:bg-zinc-800/80 border border-zinc-200 dark:border-zinc-700/60">
-            <div className="flex items-center justify-between mb-3 text-xs">
+            <div className="flex flex-col gap-1 sm:flex-row sm:items-center sm:justify-between mb-3 text-xs">
               <span className="font-bold text-zinc-800 dark:text-zinc-200">Google Lighthouse Audit</span>
-              <span className="font-mono text-emerald-500 font-bold text-[10px]">VERIFIED 100/100</span>
+              <span className="font-mono text-emerald-500 font-bold text-[10px] w-fit">VERIFIED 100/100</span>
             </div>
 
-            <div className="grid grid-cols-4 gap-2">
+            <div className="grid grid-cols-2 sm:grid-cols-4 gap-2">
               {[
                 { label: "Performance", score: 100 },
                 { label: "Accessibility", score: 100 },
@@ -672,7 +672,7 @@ function VisualShowcaseContent({
                   <div className="w-10 h-10 rounded-full border-2 border-emerald-500 bg-emerald-500/10 flex items-center justify-center font-mono font-bold text-xs text-emerald-600 dark:text-emerald-400">
                     {m.score}
                   </div>
-                  <span className="text-[9px] font-semibold text-zinc-600 dark:text-zinc-400 text-center leading-tight">
+                  <span className="text-[9px] font-semibold text-zinc-600 dark:text-zinc-400 text-center leading-tight break-words">
                     {m.label}
                   </span>
                 </div>
@@ -680,13 +680,13 @@ function VisualShowcaseContent({
             </div>
           </div>
 
-          <div className="p-3.5 rounded-lg bg-emerald-500/10 border border-emerald-500/20 flex items-center justify-between text-xs">
+          <div className="p-3.5 rounded-lg bg-emerald-500/10 border border-emerald-500/20 flex flex-col gap-1 sm:flex-row sm:items-center sm:justify-between text-xs">
             <div className="flex items-center gap-2">
               <span className="w-1 h-1 rounded-full bg-emerald-500 animate-ping" />
               <span className="font-bold text-emerald-700 dark:text-emerald-400">Deploy Status:</span>
               <span className="text-zinc-700 dark:text-zinc-300">Live on Global Edge Network</span>
             </div>
-            <IconRocket className="w-4 h-4 text-emerald-500" />
+            <IconRocket className="w-4 h-4 text-emerald-500 shrink-0" />
           </div>
         </div>
       );
