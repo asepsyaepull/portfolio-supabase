@@ -118,10 +118,10 @@ const Hero = () => {
           className="text-5xl sm:text-7xl md:text-[5.5rem] lg:text-[6.5rem] font-black tracking-tighter text-white leading-[0.92] uppercase"
           style={{ fontFamily: "'Inter Tight', 'Inter', system-ui, sans-serif" }}
         >
-          <span className="block">Design</span>
+          <span className="block">UI / UX Design</span>
           <span className="block">
             <span className="text-lime-500 italic font-mono font-light">&</span>{" "}
-            Engineering
+            Developer
             <span className="text-lime-500">.</span>
           </span>
         </motion.h1>
@@ -172,38 +172,42 @@ const Hero = () => {
       </motion.div>
 
       {/* ── Scroll Indicator ── */}
-      <motion.button
-        aria-label="Scroll to next section"
-        initial={{ opacity: 0, y: 10 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ delay: 1.6, duration: 0.8, ease: "easeOut" }}
-        className="absolute bottom-4 md:bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center justify-center gap-2 cursor-pointer group z-20 opacity-50 hover:opacity-100 transition-opacity duration-300"
-        onClick={() => {
-          const nextSection = document.getElementById("skills-section");
-          if (nextSection) {
-            nextSection.scrollIntoView({ behavior: "smooth" });
-          }
-        }}
-      >
-        <div className="w-5 h-9 md:w-6 md:h-10 rounded-full border border-zinc-700 group-hover:border-lime-500/50 flex justify-center p-1 md:p-1.5 bg-zinc-950/50 backdrop-blur-sm transition-colors duration-300 relative overflow-hidden">
-          <motion.div
-            animate={{
-              y: [0, 12],
-              opacity: [1, 0],
-            }}
-            transition={{
-              duration: 2,
-              repeat: Infinity,
-              ease: "linear",
-            }}
-            className="w-1.5 h-1.5 rounded-full bg-lime-500 shadow-[0_0_6px_#84cc16]"
-          />
-        </div>
+      <div className="absolute bottom-4 md:bottom-8 left-0 right-0 mx-auto w-fit flex justify-center z-20 pointer-events-auto">
+        <motion.button
+          aria-label="Scroll to next section"
+          initial={{ opacity: 0, y: 10 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 1.6, duration: 0.8, ease: "easeOut" }}
+          className="flex flex-col items-center justify-center gap-2 cursor-pointer group opacity-50 hover:opacity-100 transition-opacity duration-300"
+          onClick={() => {
+            const nextSection =
+              document.getElementById("whatsup") ||
+              document.getElementById("projects");
+            if (nextSection) {
+              nextSection.scrollIntoView({ behavior: "smooth" });
+            }
+          }}
+        >
+          <div className="w-5 h-9 md:w-6 md:h-10 rounded-full border border-zinc-700 group-hover:border-lime-500/50 flex justify-center p-1 md:p-1.5 bg-zinc-950/50 backdrop-blur-sm transition-colors duration-300 relative overflow-hidden">
+            <motion.div
+              animate={{
+                y: [0, 12],
+                opacity: [1, 0],
+              }}
+              transition={{
+                duration: 2,
+                repeat: Infinity,
+                ease: "linear",
+              }}
+              className="w-1.5 h-1.5 rounded-full bg-lime-500 shadow-[0_0_6px_#84cc16]"
+            />
+          </div>
 
-        <span className="text-[8px] md:text-[9px] uppercase tracking-[0.3em] pl-[0.3em] text-zinc-600 group-hover:text-lime-400 font-bold transition-colors duration-300 select-none text-center">
-          Scroll
-        </span>
-      </motion.button>
+          <span className="text-[8px] md:text-[9px] uppercase tracking-[0.3em] pl-[0.3em] text-zinc-600 group-hover:text-lime-400 font-bold transition-colors duration-300 select-none text-center">
+            Scroll
+          </span>
+        </motion.button>
+      </div>
     </div>
   );
 };
