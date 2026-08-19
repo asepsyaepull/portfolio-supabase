@@ -17,7 +17,7 @@ export const revalidate = 3600;
 export async function generateStaticParams() {
   const supabase = getStaticClient();
   const { data: projects } = await supabase.from("projects").select("slug");
-  return (projects || []).map((project) => ({
+  return (projects || []).map((project: any) => ({
     slug: project.slug,
   }));
 }

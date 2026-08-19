@@ -1,6 +1,6 @@
 "use server";
 
-import { createClient } from "@/lib/supabase/server";
+import { from } from "@/lib/pg-client";
 
 export async function submitContactForm(formData: FormData) {
   const name = formData.get("name") as string;
@@ -12,15 +12,7 @@ export async function submitContactForm(formData: FormData) {
     return { error: "Semua kolom wajib diisi!" };
   }
 
-  const supabase = await createClient();
-  const { error } = await supabase.from("contacts").insert([
-    {
-      name,
-      email,
-      subject,
-      message,
-    },
-  ]);
+  const { error } = await from("contacts").insert([{ name, email, subject, message }]);
 
   if (error) {
     console.error("Error inserting contact:", error);

@@ -82,7 +82,7 @@ export default function SortableProjectsList({ initialProjects }: { initialProje
       <div className="flex flex-col divide-y divide-zinc-200 dark:divide-zinc-800">
         <DndContext sensors={sensors} collisionDetection={closestCenter} onDragEnd={handleDragEnd}>
           <SortableContext items={projects.map(p => p.id)} strategy={verticalListSortingStrategy}>
-            {projects.map((project) => (
+            {projects.map((project: any) => (
               <SortableProjectRow key={project.id} project={project} />
             ))}
           </SortableContext>

@@ -2,7 +2,6 @@
 
 import { useState, useEffect, useMemo } from "react";
 import { createClient } from "@/lib/supabase/client";
-import { toast } from "sonner";
 import { IconDeviceFloppy } from "@tabler/icons-react";
 
 export default function AdminSettingsPage() {
@@ -42,7 +41,7 @@ export default function AdminSettingsPage() {
         <div className="text-sm text-zinc-500 dark:text-zinc-400 space-y-2">
           <p>
             <span className="font-semibold text-zinc-700 dark:text-zinc-300">Database:</span>{" "}
-            Supabase
+            PostgreSQL 16 (self-hosted)
           </p>
           <p>
             <span className="font-semibold text-zinc-700 dark:text-zinc-300">Framework:</span>{" "}
@@ -50,7 +49,7 @@ export default function AdminSettingsPage() {
           </p>
           <p>
             <span className="font-semibold text-zinc-700 dark:text-zinc-300">Storage:</span>{" "}
-            Supabase Storage (portfolio-assets bucket)
+            Local filesystem (/public/uploads)
           </p>
         </div>
       </div>

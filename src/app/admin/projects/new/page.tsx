@@ -1,7 +1,7 @@
 "use client";
 
 import { useRouter } from "next/navigation";
-import { createClient } from "@/lib/supabase/client";
+import { insertProject } from "@/app/admin/crud-actions";
 import { toast } from "sonner";
 import { IconArrowLeft } from "@tabler/icons-react";
 import Link from "next/link";
@@ -9,15 +9,13 @@ import ProjectForm, { type ProjectFormData } from "@/components/admin/ProjectFor
 
 export default function NewProjectPage() {
   const router = useRouter();
-  const supabase = createClient();
-
   const handleSubmit = async (data: ProjectFormData) => {
     const techStackArray = data.tech_stack
       .split(",")
       .map((t) => t.trim())
       .filter((t) => t.length > 0);
 
-    const { error } = await supabase.from("projects").insert([
+    const { error } = await insertProject(
       {
         name: data.name,
         slug: data.slug,
@@ -36,8 +34,8 @@ export default function NewProjectPage() {
         solution: data.solution || null,
         icon_name: data.icon_name || null,
         order_index: data.order_index,
-      },
-    ]);
+      }
+    );
 
     if (error) throw new Error(error.message);
 

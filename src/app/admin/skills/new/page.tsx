@@ -1,7 +1,7 @@
 "use client";
 
 import { useRouter } from "next/navigation";
-import { createClient } from "@/lib/supabase/client";
+import { insertSkill } from "@/app/admin/crud-actions";
 import { toast } from "sonner";
 import { IconArrowLeft } from "@tabler/icons-react";
 import Link from "next/link";
@@ -9,17 +9,15 @@ import SkillForm, { type SkillFormData } from "@/components/admin/SkillForm";
 
 export default function NewSkillPage() {
   const router = useRouter();
-  const supabase = createClient();
-
   const handleSubmit = async (data: SkillFormData) => {
-    const { error } = await supabase.from("skills").insert([
+    const { error } = await insertSkill(
       {
         name: data.name,
         icon_name: data.icon_name,
         color_class: data.color_class,
         order_index: data.order_index,
-      },
-    ]);
+      }
+    );
 
     if (error) throw new Error(error.message);
 

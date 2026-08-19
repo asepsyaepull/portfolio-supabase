@@ -2,7 +2,7 @@
 
 import { useState, useEffect, use, useMemo } from "react";
 import { useRouter } from "next/navigation";
-import { createClient } from "@/lib/supabase/client";
+import { getSkillById, updateSkill } from "@/app/admin/crud-actions";
 import { toast } from "sonner";
 import { IconArrowLeft } from "@tabler/icons-react";
 import Link from "next/link";
@@ -12,18 +12,12 @@ export default function EditSkillPage({ params }: { params: Promise<{ id: string
   const unwrappedParams = use(params);
   const skillId = unwrappedParams.id;
   const router = useRouter();
-  const supabase = useMemo(() => createClient(), []);
-
   const [fetching, setFetching] = useState(true);
   const [initialData, setInitialData] = useState<SkillFormData>(emptySkillData);
 
   useEffect(() => {
     const fetchSkill = async () => {
-      const { data, error } = await supabase
-        .from("skills")
-        .select("*")
-        .eq("id", skillId)
-        .single();
+      const { data, error } = await getSkillById(skillId);
 
       if (error) {
         toast.error("Gagal memuat skill.");
@@ -40,18 +34,15 @@ export default function EditSkillPage({ params }: { params: Promise<{ id: string
     };
 
     fetchSkill();
-  }, [skillId, router, supabase]);
+  }, [skillId, router]);
 
   const handleSubmit = async (formData: SkillFormData) => {
-    const { error } = await supabase
-      .from("skills")
-      .update({
-        name: formData.name,
-        icon_name: formData.icon_name,
-        color_class: formData.color_class,
-        order_index: formData.order_index,
-      })
-      .eq("id", skillId);
+    const { error } = await updateSkill(skillId, {
+      name: formData.name,
+      icon_name: formData.icon_name,
+      color_class: formData.color_class,
+      order_index: formData.order_index,
+    });
 
     if (error) throw new Error(error.message);
 
