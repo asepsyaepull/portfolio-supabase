@@ -80,7 +80,7 @@ export default async function AdminDashboardPage() {
           </Link>
         </div>
         <div className="divide-y divide-zinc-200 dark:divide-zinc-800">
-          {recentProjects?.map((project) => (
+          {recentProjects?.map((project: any) => (
             <Link
               key={project.id}
               href={`/admin/projects/${project.id}`}

@@ -4,18 +4,16 @@ import { useState } from "react";
 import { IconTrash, IconAlertTriangle, IconX } from "@tabler/icons-react";
 import { toast } from "sonner";
 import { useRouter } from "next/navigation";
-import { createClient } from "@/lib/supabase/client";
+import { deleteContact } from "@/app/admin/crud-actions";
 
 export default function DeleteContactButton({ id, name }: { id: string; name: string }) {
   const [isOpen, setIsOpen] = useState(false);
   const [isDeleting, setIsDeleting] = useState(false);
   const router = useRouter();
-  const supabase = createClient();
-
   const handleDelete = async () => {
     setIsDeleting(true);
     try {
-      const { error } = await supabase.from("contacts").delete().eq("id", id);
+      const { error } = await deleteContact(id);
       if (error) throw error;
 
       toast.success("Pesan berhasil dihapus");

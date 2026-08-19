@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useEffect, use, useMemo } from "react";
-import { createClient } from "@/lib/supabase/client";
+import { getProjectById, updateProject } from "@/app/admin/crud-actions";
 import { useRouter } from "next/navigation";
 import { toast } from "sonner";
 import { IconArrowLeft } from "@tabler/icons-react";
@@ -19,17 +19,12 @@ export default function EditProjectPage({
   const unwrappedParams = use(params);
   const projectId = unwrappedParams.id;
   const router = useRouter();
-  const supabase = useMemo(() => createClient(), []);
   const [fetching, setFetching] = useState(true);
   const [initialData, setInitialData] = useState<ProjectFormData>(emptyFormData);
 
   useEffect(() => {
     const fetchProject = async () => {
-      const { data, error } = await supabase
-        .from("projects")
-        .select("*")
-        .eq("id", projectId)
-        .single();
+      const { data, error } = await getProjectById(projectId);
 
       if (error) {
         toast.error("Gagal memuat proyek.");
@@ -68,28 +63,25 @@ export default function EditProjectPage({
       .map((t) => t.trim())
       .filter((t) => t.length > 0);
 
-    const { error } = await supabase
-      .from("projects")
-      .update({
-        name: formData.name,
-        slug: formData.slug,
-        category: formData.category,
-        description: formData.description,
-        image: formData.image,
-        tech_stack: techStackArray,
-        is_featured: formData.is_featured,
-        role: formData.role,
-        timeline: formData.timeline,
-        tags: formData.tags,
-        tools: formData.tools,
-        long_description: formData.long_description,
-        link: formData.link || null,
-        problem: formData.problem || null,
-        solution: formData.solution || null,
-        icon_name: formData.icon_name || null,
-        order_index: formData.order_index,
-      })
-      .eq("id", projectId);
+    const { error } = await updateProject(projectId, {
+      name: formData.name,
+      slug: formData.slug,
+      category: formData.category,
+      description: formData.description,
+      image: formData.image,
+      tech_stack: techStackArray,
+      is_featured: formData.is_featured,
+      role: formData.role,
+      timeline: formData.timeline,
+      tags: formData.tags,
+      tools: formData.tools,
+      long_description: formData.long_description,
+      link: formData.link || null,
+      problem: formData.problem || null,
+      solution: formData.solution || null,
+      icon_name: formData.icon_name || null,
+      order_index: formData.order_index,
+    });
 
     if (error) throw new Error(error.message);
 

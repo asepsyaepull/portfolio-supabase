@@ -679,20 +679,18 @@ function ImageUploadField({
     if (!file.type.startsWith("image/")) return;
     setUploading(true);
     try {
-      const { createClient } = await import("@/lib/supabase/client");
-      const supabase = createClient();
       const fileExt = file.name.split(".").pop();
       const fileName = `${Math.random().toString(36).substring(2, 15)}_${Date.now()}.${fileExt}`;
       const filePath = `covers/${fileName}`;
 
-      const { error } = await supabase.storage
-        .from("portfolio-assets")
-        .upload(filePath, file);
-      if (error) throw error;
+      const fd = new FormData();
+      fd.append("file", file);
+      fd.append("path", filePath);
 
-      const { data } = supabase.storage
-        .from("portfolio-assets")
-        .getPublicUrl(filePath);
+      const res = await fetch("/api/storage", { method: "POST", body: fd });
+      const data = await res.json();
+      if (!res.ok) throw new Error(data.error);
+
       onChange(data.publicUrl);
     } catch (err: any) {
       alert(`Upload gagal: ${err.message}`);

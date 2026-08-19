@@ -1,7 +1,7 @@
 "use client";
 
 import { IconTrash, IconAlertTriangle, IconX } from "@tabler/icons-react";
-import { createClient } from "@/lib/supabase/client";
+import { deleteSkill } from "@/app/admin/crud-actions";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { toast } from "sonner";
@@ -10,11 +10,9 @@ export default function DeleteSkillButton({ id, name }: { id: string | number; n
   const [isOpen, setIsOpen] = useState(false);
   const [isDeleting, setIsDeleting] = useState(false);
   const router = useRouter();
-  const supabase = createClient();
-
   const handleDelete = async () => {
     setIsDeleting(true);
-    const { error } = await supabase.from("skills").delete().eq("id", id);
+    const { error } = await deleteSkill(id);
 
     if (error) {
       toast.error(error.message);
