@@ -115,7 +115,7 @@ const Hero = () => {
         {/* Massive Centered Heading */}
         <motion.h1
           variants={itemVariants}
-          className="text-5xl sm:text-7xl md:text-[5.5rem] lg:text-[6.5rem] font-black tracking-tighter text-white leading-[0.92] uppercase"
+          className="text-4xl sm:text-6xl md:text-[5rem] lg:text-[5.75rem] font-black tracking-tight text-white leading-[0.95] uppercase"
           style={{ fontFamily: "'Inter Tight', 'Inter', system-ui, sans-serif" }}
         >
           <span className="block">UI / UX Design</span>

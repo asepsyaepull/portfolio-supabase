@@ -1,18 +1,18 @@
 "use client";
 
-import React from "react";
-import { motion } from "framer-motion";
 import {
-  IconLayoutGrid,
+  IconArrowUpRight,
+  IconBrandReact,
   IconCode,
   IconComponents,
-  IconSparkles,
-  IconBrandReact,
-  IconGauge,
-  IconArrowUpRight,
-  IconQuote,
   IconDeviceDesktop,
+  IconGauge,
+  IconLayoutGrid,
+  IconQuote,
+  IconSparkles,
 } from "@tabler/icons-react";
+import { motion } from "framer-motion";
+import React from "react";
 
 export function WhatsupSection() {
   return (
@@ -20,32 +20,33 @@ export function WhatsupSection() {
       id="whatsup"
       className="py-24 md:py-32 bg-zinc-50 dark:bg-[#08080a] text-zinc-900 dark:text-white relative overflow-hidden transition-colors duration-300 border-t border-zinc-200/80 dark:border-zinc-900"
     >
-      {/* Background Subtle Dot Matrix */}
+      {/* Background Subtle Dot Matrix with Ambient Glow */}
       <div className="absolute inset-0 z-0 pointer-events-none opacity-40 dark:opacity-20">
         <div className="absolute inset-0 bg-[radial-gradient(#a1a1aa_1px,transparent_1px)] dark:bg-[radial-gradient(#3f3f46_1px,transparent_1px)] [background-size:20px_20px]" />
       </div>
+      <div className="pointer-events-none absolute -top-20 left-10 w-96 h-96 bg-lime-500/10 dark:bg-lime-500/5 rounded-full blur-3xl" />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         {/* Section Header */}
-        <div className="flex flex-col items-start mb-12 md:mb-16">
-          <div className="flex items-center gap-2 mb-3">
-            <span className="w-2 h-2 rounded-full bg-lime-500 animate-pulse" />
-            <span className="font-mono text-xs font-bold uppercase tracking-widest text-lime-600 dark:text-lime-400">
-              What&apos;s up
-            </span>
-          </div>
-
-          <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-black tracking-tight text-zinc-900 dark:text-white uppercase leading-[0.95]">
-            Engineering products that make people stop and{" "}
-            <span className="text-lime-600 dark:text-lime-400 italic font-serif lowercase">
-              stare.
+        <motion.div
+          initial={{ opacity: 0, y: 16 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.5 }}
+          className="flex flex-col items-start mb-8 sm:mb-10"
+        >
+          {/* Badge Tag */}
+          <h2 className="text-3xl sm:text-4xl md:text-4xl font-bold tracking-tight text-zinc-900 dark:text-white">
+            Crafted with{" "}
+            <span className="text-lime-600 dark:text-lime-400 italic font-medium">
+              precision & intent.
             </span>
           </h2>
-          <p className="mt-4 text-sm sm:text-base md:text-lg text-zinc-600 dark:text-zinc-400 max-w-2xl">
-            A high-craft blend of design systems, frontend architecture, and
-            obsessive attention to visual details.
+
+          <p className="mt-2 text-sm sm:text-base text-zinc-600 dark:text-zinc-400 max-w-lg leading-relaxed">
+            Bridging user experience, scalable design systems, and frontend code.
           </p>
-        </div>
+        </motion.div>
 
         {/* Bento Grid (12-column layout inspired by OhhMyDesign) */}
         <div className="grid grid-cols-1 md:grid-cols-6 lg:grid-cols-12 gap-4 sm:gap-5 lg:gap-6">
@@ -73,37 +74,30 @@ export function WhatsupSection() {
             {/* Ambient Background Glow */}
             <div className="pointer-events-none absolute -right-12 -top-12 w-64 h-64 bg-lime-500/10 dark:bg-lime-500/5 rounded-full blur-3xl" />
 
-            <div className="space-y-6 pt-4 sm:pt-2 relative z-10">
+            <div className="space-y-5 pt-4 sm:pt-2 relative z-10">
               {/* Quote Icon */}
               <div className="w-10 h-10 rounded-xl bg-lime-500/10 text-lime-600 dark:text-lime-400 flex items-center justify-center">
                 <IconQuote className="w-5 h-5" />
               </div>
 
               {/* Big Statement Headline */}
-              <h3 className="text-2xl sm:text-3xl md:text-4xl lg:text-[2.6rem] font-bold tracking-tight text-zinc-900 dark:text-white leading-[1.12]">
-                I build digital products that make people stop and ask,{" "}
-                <span className="text-lime-600 dark:text-lime-400 italic font-serif">
-                  who built that?
+              <h3 className="text-xl sm:text-2xl md:text-3xl font-bold tracking-tight text-zinc-900 dark:text-white leading-snug">
+                Bridging creative vision with{" "}
+                <span className="text-lime-600 dark:text-lime-400 italic font-medium">
+                  production-grade engineering.
                 </span>
               </h3>
 
               {/* Sub-statement */}
-              <p className="text-sm sm:text-base md:text-lg text-zinc-600 dark:text-zinc-400 leading-relaxed max-w-2xl font-normal">
-                That reaction is the whole job. Over <strong>7+ years</strong>{" "}
-                bridging UX architecture, design system precision, and
-                high-performance frontend code for companies that refuse to look
-                generic. No templates, ever.
+              <p className="text-sm sm:text-base text-zinc-600 dark:text-zinc-400 leading-relaxed max-w-2xl font-normal">
+                With <strong>7+ years</strong> of experience, I build intuitive UI architectures, design tokens, and robust frontend systems that transform complex ideas into seamless products.
               </p>
             </div>
 
             {/* Footer Sign-off */}
             <div className="pt-8 sm:pt-10 flex flex-wrap items-center justify-between gap-3 border-t border-zinc-200/80 dark:border-zinc-800/80 mt-8 relative z-10">
               <span className="font-mono text-xs font-bold text-zinc-700 dark:text-zinc-300">
-                Asep Syaepul · Since 2018
-              </span>
-              <span className="inline-flex items-center gap-2 font-mono text-[11px] font-bold text-lime-700 dark:text-lime-400 bg-lime-500/10 px-3 py-1 rounded-full border border-lime-500/30">
-                <span className="w-1.5 h-1.5 rounded-full bg-lime-500 animate-ping" />
-                available for projects
+                Asep Syaepul · Since 2019
               </span>
             </div>
           </motion.div>
@@ -130,7 +124,7 @@ export function WhatsupSection() {
             <div className="divide-y divide-zinc-800/80 my-2">
               <div className="flex items-baseline justify-between py-3 sm:py-4">
                 <span className="font-mono text-3xl sm:text-4xl font-black text-white tracking-tight">
-                  07<span className="text-lime-400">+</span>
+                  7<span className="text-lime-400">+</span>
                 </span>
                 <span className="font-mono text-xs uppercase tracking-wider text-zinc-400 text-right">
                   Years of Experience
@@ -151,13 +145,9 @@ export function WhatsupSection() {
                   100<span className="text-xs text-zinc-400 font-sans">%</span>
                 </span>
                 <span className="font-mono text-xs uppercase tracking-wider text-zinc-400 text-right">
-                  Pixel Precision & Craft
+                  Design-to-Code Fidelity
                 </span>
               </div>
-            </div>
-
-            <div className="pt-2 text-right font-mono text-[10px] text-zinc-500">
-              VERIFIED PORTFOLIO METRICS
             </div>
           </motion.div>
 
@@ -211,7 +201,6 @@ export function WhatsupSection() {
 
             <div className="pt-2 flex items-center justify-between font-mono text-[11px] text-zinc-500 dark:text-zinc-400">
               <span>Full-Stack UI Specialist</span>
-              <span className="text-lime-600 dark:text-lime-400 font-bold">● Active</span>
             </div>
           </motion.div>
 
@@ -370,7 +359,6 @@ export function WhatsupSection() {
               <span className="font-mono text-[10px] font-bold text-zinc-500 uppercase tracking-widest">
                 PHILOSOPHY
               </span>
-              <div className="text-lime-500 text-xs tracking-widest">★★★★★</div>
             </div>
 
             {/* Quote Body */}
@@ -390,7 +378,7 @@ export function WhatsupSection() {
                   Asep Syaepul
                 </span>
                 <span className="font-mono text-[10px] text-zinc-500">
-                  Design Technologist
+                  UI/UX Design & Developer
                 </span>
               </div>
             </div>

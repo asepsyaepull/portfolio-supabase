@@ -32,9 +32,9 @@ const workflowSteps: WorkflowStep[] = [
     id: "discovery",
     step: "01",
     title: "Discovery & UX Audit",
-    tag: "Research & Strategic Blueprint",
+    tag: "Strategy & Audit",
     description:
-      "Deep dive into user pain points, business goals, and existing systems. I map requirements into clear user stories, performance budgets, and technical feasibility blueprints before committing to code.",
+      "Deep dive into user pain points, business goals, and existing systems. I map requirements into clear user stories, performance budgets, and technical blueprints before committing to code.",
     deliverables: ["Technical Audit", "User Journey Maps", "Architecture Blueprint", "Performance Target"],
     icon: <IconSearch className="w-5 h-5" />,
   },
@@ -42,9 +42,9 @@ const workflowSteps: WorkflowStep[] = [
     id: "architecture",
     step: "02",
     title: "Information Architecture",
-    tag: "Wireframes & System Hierarchy",
+    tag: "Wireframes & IA",
     description:
-      "Structuring intuitive page layouts, navigation hierarchies, and low-fidelity prototypes. Every interactive touchpoint is validated to ensure frictionless navigation and optimal user conversion.",
+      "Structuring intuitive page layouts, navigation hierarchies, and low-fidelity prototypes. Every interactive touchpoint is validated to ensure frictionless navigation and optimal conversion.",
     deliverables: ["Low-Fi Wireframes", "Component Tree Specs", "State Machine Diagrams", "UX Flow Validation"],
     icon: <IconRoute className="w-5 h-5" />,
   },
@@ -52,9 +52,9 @@ const workflowSteps: WorkflowStep[] = [
     id: "design-systems",
     step: "03",
     title: "Design Systems & Tokens",
-    tag: "Figma Variables & Atomic UI Kit",
+    tag: "Tokens & UI Kit",
     description:
-      "Translating visual identity into scalable design tokens (colors, typography scales, spacing, shadows, and dark mode palettes). Building atomic UI primitives for consistency across every platform.",
+      "Translating visual identity into scalable design tokens (colors, typography scales, spacing, shadows, and dark mode palettes). Building atomic UI primitives for cross-platform consistency.",
     deliverables: ["Design Token Library", "Atomic Component Kit", "WCAG AA Contrast", "Figma to Code Map"],
     icon: <IconPalette className="w-5 h-5" />,
   },
@@ -62,7 +62,7 @@ const workflowSteps: WorkflowStep[] = [
     id: "engineering",
     step: "04",
     title: "Frontend Engineering",
-    tag: "React, Next.js & TypeScript Craft",
+    tag: "Next.js & TypeScript",
     description:
       "Writing clean, modular, and strictly-typed frontend architecture. Implementing responsive layouts, resilient data-fetching with SSR/ISR, and production-grade state management.",
     deliverables: ["Next.js App Router", "TypeScript Strict", "Tailwind Design System", "Optimized Data Fetching"],
@@ -71,18 +71,18 @@ const workflowSteps: WorkflowStep[] = [
   {
     id: "motion",
     step: "05",
-    title: "Motion & Micro-Interactions",
-    tag: "Framer Motion & Fluid UX",
+    title: "Motion & Interactions",
+    tag: "Motion Physics",
     description:
-      "Elevating digital interfaces from functional to memorable. Implementing 60fps spring animations, scroll-driven reveals, intuitive gestures, and seamless page transitions.",
+      "Elevating digital interfaces from functional to memorable. Implementing 60fps spring animations, scroll-driven reveals, intuitive gestures, and seamless transitions.",
     deliverables: ["Spring Physics", "Scroll-linked Animations", "Interactive Feedback", "Gesture Controls"],
     icon: <IconSparkles className="w-5 h-5" />,
   },
   {
     id: "optimization",
     step: "06",
-    title: "Testing, CWV & Deployment",
-    tag: "Lighthouse 100 & Production Release",
+    title: "Testing, CWV & Release",
+    tag: "Audit & Launch",
     description:
       "Rigorous cross-browser testing, accessibility (a11y) audits, Core Web Vitals optimization, and automated CI/CD deployment to edge networks for sub-second page loads.",
     deliverables: ["100/100 Lighthouse", "Zero CLS / Fast LCP", "Automated CI/CD", "Edge CDN Deployment"],
@@ -112,17 +112,19 @@ export function WorkflowSection() {
       <div className="absolute bottom-1/4 -right-40 w-96 h-96 bg-emerald-500/10 dark:bg-emerald-500/5 rounded-full blur-3xl pointer-events-none" />
 
       <div className="container mx-auto px-4 sm:px-6 lg:px-12 relative z-10">
-        {/* Section Header (Zeeframes Style) */}
-        <div className="max-w-3xl mx-auto text-center mb-16 md:mb-24">
+        {/* Section Header */}
+        <div className="max-w-3xl mx-auto text-center mb-14 md:mb-20">
           <motion.h2
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6, delay: 0.1 }}
-            className="text-3xl sm:text-4xl lg:text-5xl font-black tracking-tight text-zinc-900 dark:text-white uppercase mb-6"
+            className="text-3xl sm:text-4xl md:text-4xl font-bold tracking-tight text-zinc-900 dark:text-white mb-3"
           >
-            From Concept To <br className="hidden sm:inline" />
-            <span className="text-lime-600 dark:text-lime-400 italic font-serif normal-case">Production Ready</span> Reality
+            From Concept to{" "}
+            <span className="text-lime-600 dark:text-lime-400 italic font-medium">
+              Production.
+            </span>
           </motion.h2>
 
           <motion.p
@@ -130,9 +132,9 @@ export function WorkflowSection() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6, delay: 0.2 }}
-            className="text-base sm:text-lg text-zinc-600 dark:text-zinc-400 leading-relaxed max-w-2xl mx-auto"
+            className="text-sm sm:text-base text-zinc-600 dark:text-zinc-400 leading-relaxed max-w-xl mx-auto"
           >
-            A disciplined, precision-driven engineering process designed to turn complex digital challenges into clean, accessible, and ultra-performant web interfaces.
+            A disciplined 6-phase engineering workflow from discovery and design tokens to high-performance edge deployment.
           </motion.p>
         </div>
 
@@ -301,7 +303,7 @@ function StepListItem({
       {/* Header Row: Title & Tag */}
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-1 mb-2">
         <h3
-          className={`text-xl sm:text-2xl font-bold tracking-tight transition-colors flex items-center gap-2.5 ${
+          className={`text-lg sm:text-xl font-bold tracking-tight transition-colors flex items-center gap-2.5 ${
             isActive
               ? "text-zinc-900 dark:text-white"
               : "text-zinc-600 dark:text-zinc-400 group-hover:text-zinc-900 dark:group-hover:text-zinc-200"

@@ -21,26 +21,25 @@ export default function AboutHome() {
 
             <div className="container mx-auto px-4 md:px-24 relative z-10">
                 {/* Title Header */}
-                <div className="text-center mb-16">
+                <div className="text-center mb-14 md:mb-16">
                     <motion.h2
                         initial={{ opacity: 0, y: 20 }}
                         whileInView={{ opacity: 1, y: 0 }}
                         viewport={{ once: true }}
                         transition={{ duration: 0.6 }}
-                        className="text-4xl md:text-5xl font-black tracking-tight mb-4 uppercase"
+                        className="text-3xl sm:text-4xl md:text-4xl font-bold tracking-tight mb-3 text-zinc-900 dark:text-white"
                     >
-                        Cross-platform design <br />
-                        <span className="text-lime-600 dark:text-lime-500 italic font-sans normal-case transition-colors">&</span> implementation
+                        Multi-Device{" "}
+                        <span className="text-lime-600 dark:text-lime-400 italic font-medium">Architecture.</span>
                     </motion.h2>
                     <motion.p
                         initial={{ opacity: 0, y: 20 }}
                         whileInView={{ opacity: 1, y: 0 }}
                         viewport={{ once: true }}
                         transition={{ duration: 0.6, delay: 0.15 }}
-                        className="text-zinc-600 dark:text-zinc-400 max-w-2xl mx-auto text-base md:text-lg transition-colors"
+                        className="text-zinc-600 dark:text-zinc-400 max-w-xl mx-auto text-sm sm:text-base leading-relaxed transition-colors"
                     >
-                        Bridging the gap between high-fidelity designs and production-ready interfaces
-                        for mobile, tablet, and desktop environments.
+                        Bridging high-fidelity design with production-grade engineering across mobile, tablet, and desktop.
                     </motion.p>
                 </div>
 
