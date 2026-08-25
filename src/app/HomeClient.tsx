@@ -26,7 +26,7 @@ const ServicesSection = dynamic(() => import("@/components/organism/services/ser
 const WhySection = dynamic(() => import("@/components/organism/why/whySection"), {
   loading: () => <SectionSkeleton />,
 });
-const ReviewsSection = dynamic(() => import("@/components/organism/reviews/reviewsSection"), {
+const HowIBuildSection = dynamic(() => import("@/components/organism/howibuild/howIBuildSection"), {
   loading: () => <SectionSkeleton />,
 });
 const CtaSection = dynamic(
@@ -68,8 +68,8 @@ export default function HomeClient({
         <ServicesSection />
       </div>
       <WhySection />
-      <div id="reviews">
-        <ReviewsSection />
+      <div id="how-i-build">
+        <HowIBuildSection />
       </div>
       <div id="contact">
         <CtaSection />
