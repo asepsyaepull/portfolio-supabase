@@ -118,13 +118,13 @@ class QueryBuilder {
     try {
       switch (this.op) {
         case "select":
-          return this.doSelect();
+          return await this.doSelect();
         case "insert":
-          return this.doInsert();
+          return await this.doInsert();
         case "update":
-          return this.doUpdate();
+          return await this.doUpdate();
         case "delete":
-          return this.doDelete();
+          return await this.doDelete();
         default:
           return { data: null, error: new Error("Unknown op") };
       }
