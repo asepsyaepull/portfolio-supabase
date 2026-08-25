@@ -8,19 +8,23 @@ const SectionSkeleton = () => (
   <div className="min-h-[60vh] animate-pulse bg-zinc-100 dark:bg-zinc-900 rounded-lg m-4" />
 );
 
-const About = dynamic(() => import("@/components/organism/about/aboutHome"), {
-  loading: () => <SectionSkeleton />,
-});
 const FeaturedProjects = dynamic(
   () => import("@/components/organism/projects/featuredProjects").then((mod) => mod.FeaturedProjects),
   { loading: () => <SectionSkeleton /> }
 );
-const WhatsupSection = dynamic(
-  () => import("@/components/organism/whatsup/whatsupSection").then((mod) => mod.WhatsupSection),
-  { loading: () => <SectionSkeleton /> }
-);
+const About = dynamic(() => import("@/components/organism/about/aboutHome"), {
+  loading: () => <SectionSkeleton />,
+});
 const WorkflowSection = dynamic(
   () => import("@/components/organism/workflow/workflowSection").then((mod) => mod.WorkflowSection),
+  { loading: () => <SectionSkeleton /> }
+);
+const PricingSection = dynamic(
+  () => import("@/components/organism/pricing/pricingSection").then((mod) => mod.PricingSection),
+  { loading: () => <SectionSkeleton /> }
+);
+const WhatsupSection = dynamic(
+  () => import("@/components/organism/whatsup/whatsupSection").then((mod) => mod.WhatsupSection),
   { loading: () => <SectionSkeleton /> }
 );
 const CtaSection = dynamic(
@@ -38,10 +42,18 @@ export default function HomeClient({
   return (
     <div>
       <Hero />
-      <WhatsupSection />
-      <FeaturedProjects projects={featuredProjects} />
-      <About />
+      {/* Sections take no id prop — anchor ids live on these wrappers */}
+      <div id="work">
+        <FeaturedProjects projects={featuredProjects} />
+      </div>
+      <div id="about">
+        <About />
+      </div>
       <WorkflowSection />
+      <div id="pricing">
+        <PricingSection />
+      </div>
+      <WhatsupSection />
       <CtaSection />
     </div>
   );

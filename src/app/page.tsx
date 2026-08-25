@@ -6,8 +6,9 @@ import { Project, Skill } from "@/types/database";
 export const revalidate = 3600; // Revalidate setiap 1 jam (ISR)
 
 export const metadata: Metadata = {
-  title: "Asep Syaepul | Frontend Developer",
-  description: "Portfolio of Asep Syaepul, a Frontend Developer specialized in React, Next.js, and Modern Web UI.",
+  title: "Asep Syaepul | UI/UX Designer & Frontend Developer",
+  description:
+    "Portfolio of Asep Syaepul — UI/UX designer & frontend developer with 7+ years crafting interactive digital products. Design systems, React/Next.js, motion.",
 };
 
 const fallbackSkills: Skill[] = [

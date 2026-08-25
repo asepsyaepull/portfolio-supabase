@@ -2,7 +2,6 @@
 import { motion, AnimatePresence } from "framer-motion";
 import {
   IconArrowRight,
-  IconCheck,
   IconChevronDown,
   IconStack,
   IconMinus,
@@ -15,7 +14,7 @@ import {
 import Link from "next/link";
 import { useMemo, useState } from "react";
 import { cn } from "@/lib/utils";
-import { HoverBorderGradient } from "@/components/ui/hover-border-gradient";
+import AccentSwitcher from "@/components/accent/AccentSwitcher";
 
 /* ------------------------------------------------------------------ */
 /* Fake Figma chrome                                                    */
@@ -68,7 +67,7 @@ function Switch({ on, onClick, label }: { on: boolean; onClick: () => void; labe
       aria-label={label}
       className={cn(
         "relative h-6 w-11 shrink-0 rounded-full transition-colors duration-300",
-        on ? "bg-lime-500" : "bg-zinc-200 dark:bg-zinc-800"
+        on ? "bg-[var(--accent)]" : "bg-white/20"
       )}
     >
       <motion.span
@@ -115,7 +114,7 @@ export function PricingSection() {
   ];
 
   return (
-    <section className="py-24 bg-zinc-50 dark:bg-gray-950 transition-colors duration-300">
+    <section id="pricing" className="relative z-[1] py-24">
       <div className="container mx-auto px-4 md:px-24">
         {/* Header */}
         <motion.div
@@ -123,47 +122,69 @@ export function PricingSection() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.5 }}
-          className="text-center mb-16"
+          className="mb-14 flex flex-wrap items-end justify-between gap-x-10 gap-y-6"
         >
-          <h2 className="text-3xl md:text-5xl font-black text-zinc-900 dark:text-white mb-4 tracking-tight transition-colors">
-            Build your <span className="text-lime-600 dark:text-lime-500 italic">own</span> quote.
-          </h2>
-          <p className="text-zinc-600 dark:text-gray-400 max-w-2xl mx-auto transition-colors">
-            No menu of fixed packages — configure the scope below and watch the price
-            adjust in real time. What you see is what you pay.
-          </p>
+          <div>
+            <p className="figma-frame-label mb-2.5 flex items-center gap-2 font-display text-[13px] font-semibold text-[var(--accent)]">
+              <IconStack className="h-3.5 w-3.5" />
+              Component — PricingConfigurator
+            </p>
+            <h2 className="font-display text-[clamp(30px,4.5vw,46px)] font-bold tracking-tight text-[#16150F]">
+              Hitung estimasi proyekmu.
+            </h2>
+            <p className="mt-3 max-w-xl text-[15.5px] leading-relaxed text-[#6E6A5E]">
+              Configurator interaktif ala Figma: pilih tipe proyek, scope halaman,
+              dan add-on — estimasi muncul real-time. Transparan sebelum chat pertama.
+            </p>
+          </div>
+          <div className="rounded-xl border border-dashed border-[#D9D4C7] bg-white/70 p-4">
+            <AccentSwitcher />
+            <p className="mt-2 max-w-[230px] text-xs leading-snug text-[#6E6A5E]">
+              pilih aksen favoritmu — seluruh situs ikut berganti ✦
+            </p>
+          </div>
         </motion.div>
 
-        {/* Figma Canvas */}
+        {/* Ink panel */}
         <motion.div
           initial={{ opacity: 0, y: 40 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
-          className="max-w-5xl mx-auto rounded-2xl border border-zinc-200 dark:border-white/[0.08] shadow-2xl shadow-zinc-900/5 dark:shadow-black/40 overflow-hidden bg-white dark:bg-[#1E1E1E] transition-colors"
+          className="relative mx-auto max-w-5xl overflow-hidden rounded-[20px] border-[1.5px] border-[#16150F] bg-[#16150F] text-[#F4F1EA] shadow-[8px_8px_0_rgba(var(--accent-rgb),0.35)]"
         >
+          {/* accent glow */}
+          <div
+            aria-hidden="true"
+            className="pointer-events-none absolute -right-32 -top-40 h-[420px] w-[420px] rounded-full"
+            style={{
+              background:
+                "radial-gradient(circle, rgba(var(--accent-rgb), 0.35), transparent 70%)",
+            }}
+          />
+
           {/* Fake Figma toolbar */}
-          <div className="flex items-center justify-between gap-4 px-4 py-2.5 border-b border-zinc-200 dark:border-white/[0.06] bg-zinc-50 dark:bg-zinc-900/60 transition-colors">
+          <div className="relative flex items-center justify-between gap-4 border-b border-white/10 bg-black/20 px-4 py-2.5">
             <div className="flex items-center gap-3 min-w-0">
               <FigmaDots />
-              <span className="hidden sm:flex items-center gap-1.5 text-[11px] font-medium text-zinc-500 dark:text-zinc-400">
-                <span className="text-lime-500">▦</span> pricing.fig
+              <span className="hidden items-center gap-1.5 text-[11px] font-medium text-[#9D9DA8] sm:flex">
+                <span className="text-[var(--accent)]">▦</span> pricing.fig
               </span>
             </div>
-            <div className="hidden md:flex items-center gap-2 text-[11px] text-zinc-400 dark:text-zinc-500">
-              <IconAdjustments className="w-3.5 h-3.5" />
+            <div className="hidden items-center gap-2 text-[11px] text-[#9D9DA8] md:flex">
+              <IconAdjustments className="h-3.5 w-3.5" />
               <span>100%</span>
             </div>
           </div>
 
-          <div className="flex">
+          <div className="relative flex">
             {/* Fake layers panel */}
-            <div className="hidden lg:block w-52 shrink-0 border-r border-zinc-200 dark:border-white/[0.06] p-3 bg-zinc-50/50 dark:bg-zinc-950/40 transition-colors">
+            <div className="hidden w-52 shrink-0 border-r border-white/10 bg-black/20 p-3 lg:block">
               <div className="flex items-center justify-between px-1 pb-2">
-                <span className="text-[10px] font-black uppercase tracking-widest text-zinc-400 dark:text-zinc-500">
+                <span className="font-display text-[10px] font-bold uppercase tracking-widest text-[#9D9DA8]">
                   Layers
                 </span>
-                <IconChevronDown className="w-3 h-3 text-zinc-400" />
+                <IconChevronDown className="h-3 w-3 text-[#9D9DA8]" />
               </div>
               <div className="flex flex-col gap-0.5">
                 {layers.map((l, i) => (
@@ -172,12 +193,12 @@ export function PricingSection() {
                     className={cn(
                       "flex items-center gap-1.5 rounded px-1.5 py-1 text-[11px] transition-colors",
                       l.active
-                        ? "bg-lime-500/15 text-lime-700 dark:text-lime-400 font-semibold"
-                        : "text-zinc-500 dark:text-zinc-400 hover:bg-zinc-100 dark:hover:bg-white/[0.04]"
+                        ? "bg-[rgba(var(--accent-rgb),0.18)] font-semibold text-white"
+                        : "text-[#9D9DA8] hover:bg-white/5"
                     )}
                     style={{ paddingLeft: `${8 + l.depth * 12}px` }}
                   >
-                    {l.icon ?? <span className="w-3 h-3 flex items-center justify-center text-zinc-400">▸</span>}
+                    {l.icon ?? <span className="flex h-3 w-3 items-center justify-center text-[#9D9DA8]">▸</span>}
                     {l.name}
                   </div>
                 ))}
@@ -186,11 +207,11 @@ export function PricingSection() {
 
             {/* Interactive pricing frame */}
             <div className="flex-1 p-5 md:p-10">
-              <div className="max-w-md mx-auto">
+              <div className="mx-auto max-w-md">
                 {/* Project type selector */}
                 <div className="mb-8">
-                  <p className="text-[10px] font-black uppercase tracking-widest text-zinc-400 dark:text-zinc-500 mb-2.5 flex items-center gap-1.5">
-                    <IconMouse className="w-3 h-3" /> 01 · Project type
+                  <p className="mb-2.5 flex items-center gap-1.5 font-display text-[10px] font-bold uppercase tracking-widest text-[#9D9DA8]">
+                    <IconMouse className="h-3 w-3" /> 01 · Project type
                   </p>
                   <div className="grid grid-cols-3 gap-2">
                     {PROJECT_TYPES.map((t) => (
@@ -200,8 +221,8 @@ export function PricingSection() {
                         className={cn(
                           "rounded-xl border px-2 py-2.5 text-xs font-bold transition-all duration-300",
                           projectType === t
-                            ? "border-lime-500 bg-lime-500/10 text-lime-700 dark:text-lime-400 shadow-lg shadow-lime-500/10"
-                            : "border-zinc-200 dark:border-white/[0.08] text-zinc-600 dark:text-zinc-400 hover:border-lime-500/40 hover:text-zinc-900 dark:hover:text-white"
+                            ? "border-[var(--accent)] bg-[rgba(var(--accent-rgb),0.15)] text-white shadow-lg shadow-black/20"
+                            : "border-white/15 text-[#B9B5A9] hover:border-[rgba(var(--accent-rgb),0.5)] hover:text-white"
                         )}
                       >
                         {t}
@@ -212,7 +233,7 @@ export function PricingSection() {
 
                 {/* Page scope */}
                 <div className="mb-8">
-                  <p className="text-[10px] font-black uppercase tracking-widest text-zinc-400 dark:text-zinc-500 mb-2.5">
+                  <p className="mb-2.5 font-display text-[10px] font-bold uppercase tracking-widest text-[#9D9DA8]">
                     02 · Scope
                   </p>
                   <div className="flex flex-wrap gap-2">
@@ -223,8 +244,8 @@ export function PricingSection() {
                         className={cn(
                           "rounded-full border px-4 py-2 text-xs font-bold transition-all duration-300",
                           pageScope === s
-                            ? "border-lime-500 bg-lime-500/10 text-lime-700 dark:text-lime-400"
-                            : "border-zinc-200 dark:border-white/[0.08] text-zinc-600 dark:text-zinc-400 hover:border-lime-500/40"
+                            ? "border-[var(--accent)] bg-[rgba(var(--accent-rgb),0.15)] text-white"
+                            : "border-white/15 text-[#B9B5A9] hover:border-[rgba(var(--accent-rgb),0.5)] hover:text-white"
                         )}
                       >
                         {s}
@@ -235,74 +256,70 @@ export function PricingSection() {
 
                 {/* Add-ons */}
                 <div className="mb-8">
-                  <p className="text-[10px] font-black uppercase tracking-widest text-zinc-400 dark:text-zinc-500 mb-2.5">
+                  <p className="mb-2.5 font-display text-[10px] font-bold uppercase tracking-widest text-[#9D9DA8]">
                     03 · Add-ons
                   </p>
                   <div className="flex flex-col gap-3">
                     <div className="flex items-center justify-between gap-4">
                       <div>
-                        <p className="text-sm font-bold text-zinc-800 dark:text-zinc-100 transition-colors">
-                          Development <span className="font-normal text-zinc-400">(Next.js/React)</span>
+                        <p className="text-sm font-bold text-white">
+                          Development <span className="font-normal text-[#9D9DA8]">(Next.js/React)</span>
                         </p>
-                        <p className="text-[11px] text-zinc-400 dark:text-zinc-500">+50% of design price</p>
+                        <p className="text-[11px] text-[#9D9DA8]">+50% of design price</p>
                       </div>
                       <Switch on={withDev} onClick={() => setWithDev(!withDev)} label="Toggle development" />
                     </div>
                     <div className="flex items-center justify-between gap-4">
                       <div>
-                        <p className="text-sm font-bold text-zinc-800 dark:text-zinc-100 transition-colors">
-                          CMS & SEO setup
-                        </p>
-                        <p className="text-[11px] text-zinc-400 dark:text-zinc-500">+Rp 1.5jt</p>
+                        <p className="text-sm font-bold text-white">CMS &amp; SEO setup</p>
+                        <p className="text-[11px] text-[#9D9DA8]">+Rp 1.5jt</p>
                       </div>
                       <Switch on={withCms} onClick={() => setWithCms(!withCms)} label="Toggle CMS & SEO" />
                     </div>
                     <div className="flex items-center justify-between gap-4">
                       <div>
-                        <p className="text-sm font-bold text-zinc-800 dark:text-zinc-100 transition-colors">
-                          Extra revision round
-                        </p>
-                        <p className="text-[11px] text-zinc-400 dark:text-zinc-500">+Rp 500rb / round</p>
+                        <p className="text-sm font-bold text-white">Extra revision round</p>
+                        <p className="text-[11px] text-[#9D9DA8]">+Rp 500rb / round</p>
                       </div>
                       <div className="flex items-center gap-3">
                         <button
                           onClick={() => setExtraRevs(Math.max(0, extraRevs - 1))}
                           aria-label="Decrease revisions"
-                          className="w-7 h-7 rounded-full border border-zinc-200 dark:border-white/[0.1] flex items-center justify-center text-zinc-500 dark:text-zinc-400 hover:border-lime-500/50 hover:text-lime-500 transition-colors"
+                          className="flex h-7 w-7 items-center justify-center rounded-full border border-white/15 text-[#B9B5A9] transition-colors hover:border-[var(--accent)] hover:text-white"
                         >
-                          <IconMinus className="w-3.5 h-3.5" />
+                          <IconMinus className="h-3.5 w-3.5" />
                         </button>
-                        <span className="w-4 text-center text-sm font-black text-zinc-900 dark:text-white transition-colors">
+                        <span className="w-4 text-center font-display text-sm font-bold text-white">
                           {extraRevs}
                         </span>
                         <button
                           onClick={() => setExtraRevs(Math.min(5, extraRevs + 1))}
                           aria-label="Increase revisions"
-                          className="w-7 h-7 rounded-full border border-zinc-200 dark:border-white/[0.1] flex items-center justify-center text-zinc-500 dark:text-zinc-400 hover:border-lime-500/50 hover:text-lime-500 transition-colors"
+                          className="flex h-7 w-7 items-center justify-center rounded-full border border-white/15 text-[#B9B5A9] transition-colors hover:border-[var(--accent)] hover:text-white"
                         >
-                          <IconPlus className="w-3.5 h-3.5" />
+                          <IconPlus className="h-3.5 w-3.5" />
                         </button>
                       </div>
                     </div>
                     <div className="flex items-center justify-between gap-4">
                       <div>
-                        <p className="text-sm font-bold text-zinc-800 dark:text-zinc-100 transition-colors">
-                          Urgent delivery <IconBolt className="inline w-3.5 h-3.5 text-amber-500 -mt-0.5" />
+                        <p className="text-sm font-bold text-white">
+                          Urgent delivery <IconBolt className="-mt-0.5 inline h-3.5 w-3.5 text-[#F59E0B]" />
                         </p>
-                        <p className="text-[11px] text-zinc-400 dark:text-zinc-500">+20%, priority slot</p>
+                        <p className="text-[11px] text-[#9D9DA8]">+20%, priority slot</p>
                       </div>
                       <Switch on={urgent} onClick={() => setUrgent(!urgent)} label="Toggle urgent delivery" />
                     </div>
                   </div>
                 </div>
 
-                {/* Price display */}
-                <div className="rounded-2xl border border-zinc-200 dark:border-white/[0.08] bg-zinc-50 dark:bg-zinc-950/60 p-6 text-center transition-colors">
-                  <p className="text-[10px] font-black uppercase tracking-widest text-zinc-400 dark:text-zinc-500 mb-1">
+                {/* Price widget — white card on ink panel */}
+                <div className="rounded-[14px] border-[1.5px] border-[#16150F] bg-white p-6 text-center text-[#16150F] shadow-[6px_6px_0_rgba(var(--accent-rgb),0.45)]">
+                  <p className="mb-1 font-display text-[10px] font-bold uppercase tracking-widest text-[#6E6A5E]">
                     Estimated total
                   </p>
                   <div className="flex items-baseline justify-center gap-2 overflow-hidden">
-                    <span className="text-xl font-bold text-lime-600 dark:text-lime-500">Rp</span>
+                    <span className="font-display text-xl font-bold text-[var(--accent)]">Rp</span>
                     <AnimatePresence mode="popLayout">
                       <motion.span
                         key={price}
@@ -310,31 +327,28 @@ export function PricingSection() {
                         animate={{ y: 0, opacity: 1 }}
                         exit={{ y: -24, opacity: 0 }}
                         transition={{ type: "spring", stiffness: 300, damping: 25 }}
-                        className="text-5xl font-black text-zinc-900 dark:text-white tabular-nums transition-colors"
+                        className="font-display text-5xl font-bold tabular-nums text-[var(--accent)]"
                       >
                         {fmtPrice(price)}
                       </motion.span>
                     </AnimatePresence>
-                    <span className="text-sm font-medium text-zinc-400 dark:text-zinc-500">jt</span>
+                    <span className="text-sm font-medium text-[#6E6A5E]">jt</span>
                   </div>
-                  <p className="mt-2 text-[11px] text-zinc-400 dark:text-zinc-500">
+                  <p className="mt-2 text-[11px] text-[#6E6A5E]">
                     {projectType} · {pageScope}
                     {withDev ? " · with development" : " · design only"}
                     {urgent ? " · urgent" : ""}
                   </p>
 
-                  <Link href={`/contact?project=${encodeURIComponent(projectType)}&price=${fmtPrice(price)}jt`} className="mt-5 block w-full">
-                    <HoverBorderGradient
-                      containerClassName="rounded-full w-full"
-                      as="div"
-                      className="w-full flex items-center justify-center gap-2 bg-lime-500 text-black px-6 py-3.5 text-sm font-bold transition-all"
-                    >
-                      <IconSparkles className="w-4 h-4" />
-                      <span>Let's Talk — {fmtPrice(price)}jt</span>
-                      <IconArrowRight className="w-4 h-4" />
-                    </HoverBorderGradient>
+                  <Link
+                    href={`/contact?project=${encodeURIComponent(projectType)}&price=${fmtPrice(price)}jt`}
+                    className="mt-5 flex w-full items-center justify-center gap-2 rounded-xl border-[1.5px] border-[#16150F] bg-[var(--accent)] px-6 py-3.5 text-sm font-bold text-white shadow-[3px_3px_0_#16150F] transition-all hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-[1px_1px_0_#16150F]"
+                  >
+                    <IconSparkles className="h-4 w-4" />
+                    <span>Let&apos;s Talk — {fmtPrice(price)}jt</span>
+                    <IconArrowRight className="h-4 w-4" />
                   </Link>
-                  <p className="mt-3 text-[10px] text-zinc-400 dark:text-zinc-500">
+                  <p className="mt-3 text-[10px] text-[#6E6A5E]">
                     Fixed price · milestone payment available · negotiable
                   </p>
                 </div>
@@ -343,9 +357,9 @@ export function PricingSection() {
           </div>
 
           {/* Fake Figma status bar */}
-          <div className="flex items-center justify-between px-4 py-1.5 border-t border-zinc-200 dark:border-white/[0.06] bg-zinc-50 dark:bg-zinc-900/60 text-[10px] text-zinc-400 dark:text-zinc-500 transition-colors">
+          <div className="relative flex items-center justify-between border-t border-white/10 bg-black/20 px-4 py-1.5 text-[10px] text-[#9D9DA8]">
             <span className="flex items-center gap-1.5">
-              <IconStack className="w-3 h-3" /> Frame 1 · 1280 × auto
+              <IconStack className="h-3 w-3" /> Frame 1 · 1280 × auto
             </span>
             <span className="hidden sm:block">Made in Figma, built in Next.js</span>
           </div>
@@ -357,27 +371,24 @@ export function PricingSection() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.5, delay: 0.2 }}
-          className="mt-14 max-w-3xl mx-auto text-center"
+          className="mx-auto mt-14 max-w-3xl"
         >
-          <div className="inline-flex flex-col items-center gap-3 p-6 md:p-8 rounded-3xl border border-dashed border-zinc-300 dark:border-white/10 bg-white/40 dark:bg-zinc-900/40 transition-colors w-full">
-            <p className="text-sm font-black uppercase tracking-widest text-zinc-700 dark:text-zinc-200 transition-colors">
+          <div className="inline-flex w-full flex-col items-center gap-3 rounded-[20px] border-[1.5px] border-dashed border-[#D9D4C7] bg-white/60 p-6 text-center md:p-8">
+            <p className="font-display text-sm font-bold uppercase tracking-widest text-[#16150F]">
               Prefer hourly support?
             </p>
             <div className="flex items-baseline gap-2">
-              <span className="text-3xl font-black text-zinc-900 dark:text-white transition-colors">Rp 200rb</span>
-              <span className="text-sm text-zinc-500 dark:text-zinc-400 transition-colors">/ hour</span>
+              <span className="font-display text-3xl font-bold text-[var(--accent)]">Rp 200rb</span>
+              <span className="text-sm text-[#6E6A5E]">/ hour</span>
             </div>
-            <p className="text-xs text-zinc-500 dark:text-zinc-400 transition-colors">
+            <p className="text-xs text-[#6E6A5E]">
               UX audits, design reviews, or small tasks — minimum 10 hours.
             </p>
-            <Link href="/contact">
-              <HoverBorderGradient
-                containerClassName="rounded-full"
-                as="div"
-                className="bg-white dark:bg-zinc-950 text-zinc-900 dark:text-white px-6 py-3 text-sm font-bold transition-colors"
-              >
-                <span>Ask about hourly work</span>
-              </HoverBorderGradient>
+            <Link
+              href="/contact"
+              className="inline-flex items-center gap-2 rounded-xl border-[1.5px] border-[#16150F] bg-transparent px-6 py-3 text-sm font-bold text-[#16150F] transition-colors hover:bg-[var(--accent-soft)]"
+            >
+              <span>Ask about hourly work</span>
             </Link>
           </div>
         </motion.div>

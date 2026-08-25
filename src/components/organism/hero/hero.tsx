@@ -1,214 +1,122 @@
 "use client";
 
-import { HoverBorderGradient } from "@/components/ui/hover-border-gradient";
-import { SmoothTypingText } from "@/components/ui/smooth-typing-text";
 import { motion } from "framer-motion";
-import { IconArrowUpRight, IconChevronRight, IconMapPin } from "@tabler/icons-react";
-import Image from "next/image";
-import Link from "next/link";
-import { memo, useEffect, useRef, useState } from "react";
-import { FigmaHoverInspector } from "./figma-inspector";
+import { memo } from "react";
 
-const TYPEWRITER_WORDS = [
-  "pixel-perfect",
-  "scalable",
-  "user-centered",
-  "high-performance",
-  "accessible",
-];
+const FigmaIcon = () => (
+  <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+    <path
+      d="M8 3a3 3 0 100 6h3V3H8zm0 6a3 3 0 000 6h3V9H8zm0 6a3 3 0 103 3v-3H8zm6-12v6h3a3 3 0 100-6h-3z"
+      opacity=".95"
+    />
+  </svg>
+);
 
 const Hero = () => {
-  const [isMounted, setIsMounted] = useState(false);
-  const containerRef = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    setIsMounted(true);
-  }, []);
-
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.12,
-        delayChildren: 0.1,
-      },
-    },
-  };
-
-  const itemVariants = {
-    hidden: { opacity: 0, y: 28 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: {
-        duration: 0.7,
-        ease: [0.22, 1, 0.36, 1],
-      },
-    },
-  };
-
-  if (!isMounted) return <div className="min-h-screen bg-gray-950" />;
-
   return (
-    <div
-      ref={containerRef}
-      className="relative min-h-[100dvh] flex flex-col items-center justify-center overflow-hidden selection:bg-lime-500/30"
-    >
-      {/* ── Background Layer ── */}
-      <div className="absolute inset-0 z-0">
-        {/* Base dark color */}
-        <div className="absolute inset-0 bg-gray-950" />
+    <section className="relative z-[1] mx-auto w-full max-w-[1160px] px-6 pb-10 pt-16 md:pt-20">
+      {/* Frame label */}
+      <p className="figma-frame-label mb-2.5 flex items-center gap-2 font-display text-[13px] font-semibold text-[var(--accent)]">
+        <FigmaIcon />
+        Frame 01 — Hero
+      </p>
 
-        {/* Background image */}
-        <Image
-          src="/assets/images/hero-bg.jpg"
-          alt=""
-          fill
-          priority
-          sizes="100vw"
-          className="object-cover opacity-60 pointer-events-none"
-          aria-hidden="true"
-        />
+      {/* Hero frame */}
+      <div className="relative overflow-hidden rounded-[14px] border-[1.5px] border-[#D9D4C7] bg-white outline outline-[1.5px] outline-offset-5 outline-[var(--accent)]">
+        {/* Selection chip */}
+        <motion.span
+          animate={{ y: [0, -8, 0] }}
+          transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
+          className="absolute right-6 top-6 z-10 rounded-md bg-[var(--accent)] px-2.5 py-1 font-display text-xs font-semibold text-white md:right-7 md:top-7"
+        >
+          ⌘ selected · 1440 × 900
+        </motion.span>
 
-        {/* Radial gradient overlay for depth */}
-        <div
-          className="absolute inset-0 pointer-events-none"
-          style={{
-            background:
-              "radial-gradient(ellipse 70% 50% at 50% 30%, rgba(132,204,22,0.06) 0%, transparent 70%)",
-          }}
-        />
-
-        {/* Bottom fade to next section */}
-        <div className="absolute bottom-0 left-0 right-0 h-40 bg-gradient-to-t from-gray-950 to-transparent pointer-events-none" />
-      </div>
-
-      {/* Figma-style Inspector Overlay */}
-      <FigmaHoverInspector containerRef={containerRef} />
-
-      {/* ── Centered Content ── */}
-      <motion.div
-        initial="hidden"
-        animate="visible"
-        variants={containerVariants}
-        className="relative z-20 flex flex-col items-center text-center w-full max-w-[978px] mx-auto px-6 sm:px-8 md:px-12"
-      >
-        {/* Trust / Status Badge */}
-        <motion.div variants={itemVariants} className="mb-8 sm:mb-10">
-          <div className="inline-flex items-center gap-3 px-4 py-2 rounded-full bg-white/[0.04] border border-white/[0.08] backdrop-blur-sm">
+        <div className="p-8 sm:p-12 lg:p-16">
+          {/* Availability badge */}
+          <div className="mb-7 inline-flex items-center gap-2 rounded-full border border-[#86EFAC] bg-[#DCFCE7] px-3.5 py-1.5 text-[13px] font-semibold text-[#166534]">
             <span className="relative flex h-2 w-2">
-              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-lime-400 opacity-75" />
-              <span className="relative inline-flex rounded-full h-2 w-2 bg-lime-500" />
+              <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-[#22C55E] opacity-75" />
+              <span className="relative inline-flex h-2 w-2 rounded-full bg-[#22C55E]" />
             </span>
-            <span className="text-[11px] sm:text-xs font-bold text-zinc-300 uppercase tracking-[0.2em]">
-              Available for Work
-            </span>
-            <span className="w-px h-3 bg-white/10" />
-            <span className="inline-flex items-center gap-1 text-[11px] sm:text-xs text-zinc-500 font-medium">
-              <IconMapPin className="w-3 h-3" />
-              Jakarta, ID
-            </span>
+            Available for fulltime &amp; freelance
           </div>
-        </motion.div>
 
-        {/* Massive Centered Heading */}
-        <motion.h1
-          variants={itemVariants}
-          className="text-5xl sm:text-7xl md:text-[5.5rem] lg:text-[6.5rem] font-black tracking-tighter text-white leading-[0.92] uppercase"
-          style={{ fontFamily: "'Inter Tight', 'Inter', system-ui, sans-serif" }}
-        >
-          <span className="block">UI / UX Design</span>
-          <span className="block">
-            <span className="text-lime-500 italic font-mono font-light">&</span>{" "}
-            Developer
-            <span className="text-lime-500">.</span>
-          </span>
-        </motion.h1>
-
-        {/* Subtitle with Typewriter */}
-        <motion.div variants={itemVariants} className="mt-6 sm:mt-8 max-w-xl mx-auto">
-          <p className="text-base sm:text-lg md:text-xl text-zinc-400 leading-relaxed">
-            I craft{" "}
-            <SmoothTypingText
-              words={TYPEWRITER_WORDS}
-              className="inline-flex"
-              textClassName="text-lime-400 font-semibold h-7 sm:h-8 md:h-9"
-              typingSpeed={70}
-              deletingSpeed={35}
-              duration={2200}
-            />{" "}
-            <br className="hidden sm:block" />
-            digital experiences for businesses worldwide.
-          </p>
-        </motion.div>
-
-        {/* Dual CTA Buttons */}
-        <motion.div
-          variants={itemVariants}
-          className="mt-10 sm:mt-12 flex flex-col sm:flex-row items-center gap-4"
-        >
-          {/* Primary CTA */}
-          <Link href="/projects">
-            <HoverBorderGradient
-              containerClassName="rounded-full shadow-lg shadow-lime-500/20"
-              as="div"
-              className="bg-lime-500 text-black flex items-center space-x-2 px-7 sm:px-9 py-3.5 sm:py-4 font-bold text-sm transition-all hover:scale-[1.03] active:scale-[0.97]"
+          {/* Display heading */}
+          <h1 className="font-display font-bold uppercase leading-[1.02] tracking-tight text-[clamp(44px,7.5vw,88px)] text-[#16150F]">
+            UI/UX Designer
+            <br />
+            <span
+              className="text-transparent"
+              style={{ WebkitTextStroke: "2px #16150F" }}
             >
-              <span>View Work</span>
-              <IconChevronRight className="ml-1 h-4 w-4 sm:h-5 sm:w-5" />
-            </HoverBorderGradient>
-          </Link>
+              yang ngoding.
+            </span>
+            <br />
+            Desain{" "}
+            <span className="relative whitespace-nowrap text-[var(--accent)]">
+              interaktif
+              <svg
+                className="absolute -bottom-1 left-0 h-[10px] w-full md:-bottom-1.5 md:h-[13px]"
+                viewBox="0 0 200 14"
+                preserveAspectRatio="none"
+                aria-hidden="true"
+              >
+                <path
+                  d="M2 10 Q 50 2 100 8 T 198 6"
+                  fill="none"
+                  stroke="#F59E0B"
+                  strokeWidth="5"
+                  strokeLinecap="round"
+                />
+              </svg>
+            </span>{" "}
+            nya.
+          </h1>
 
-          {/* Secondary CTA */}
-          <Link
-            href="/contact"
-            className="group inline-flex items-center gap-2.5 px-7 sm:px-9 py-3.5 sm:py-4 rounded-full border border-white/15 hover:border-lime-500/50 bg-white/[0.03] hover:bg-lime-500/[0.06] text-white font-bold text-sm transition-all duration-300 active:scale-[0.97]"
-          >
-            <span>Get in Touch</span>
-            <IconArrowUpRight className="w-4 h-4 text-zinc-500 group-hover:text-lime-400 transition-colors duration-300" />
-          </Link>
-        </motion.div>
-      </motion.div>
+          {/* Sub copy */}
+          <p className="mt-6 max-w-[560px] text-[15px] leading-relaxed text-[#6E6A5E] md:text-[17px]">
+            7+ tahun merancang &amp; membangun produk digital — dari ERP
+            enterprise sampai mobile app redesign. Desain yang saya buat bukan
+            cuma mockup: hidup di production, terukur, dan enak dipakai.
+          </p>
 
-      {/* ── Scroll Indicator ── */}
-      <div className="absolute bottom-4 md:bottom-8 left-0 right-0 mx-auto w-fit flex justify-center z-20 pointer-events-auto">
-        <motion.button
-          aria-label="Scroll to next section"
-          initial={{ opacity: 0, y: 10 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 1.6, duration: 0.8, ease: "easeOut" }}
-          className="flex flex-col items-center justify-center gap-2 cursor-pointer group opacity-50 hover:opacity-100 transition-opacity duration-300"
-          onClick={() => {
-            const nextSection =
-              document.getElementById("whatsup") ||
-              document.getElementById("projects");
-            if (nextSection) {
-              nextSection.scrollIntoView({ behavior: "smooth" });
-            }
-          }}
-        >
-          <div className="w-5 h-9 md:w-6 md:h-10 rounded-full border border-zinc-700 group-hover:border-lime-500/50 flex justify-center p-1 md:p-1.5 bg-zinc-950/50 backdrop-blur-sm transition-colors duration-300 relative overflow-hidden">
-            <motion.div
-              animate={{
-                y: [0, 12],
-                opacity: [1, 0],
-              }}
-              transition={{
-                duration: 2,
-                repeat: Infinity,
-                ease: "linear",
-              }}
-              className="w-1.5 h-1.5 rounded-full bg-lime-500 shadow-[0_0_6px_#84cc16]"
-            />
+          {/* CTAs */}
+          <div className="mt-9 flex flex-wrap gap-3.5">
+            <a
+              href="#work"
+              className="inline-flex items-center gap-2.5 rounded-xl border-[1.5px] border-[#16150F] bg-[#16150F] px-6 py-3.5 text-[15px] font-semibold text-white shadow-[4px_4px_0_var(--accent)] transition-all duration-150 hover:translate-x-[3px] hover:translate-y-[3px] hover:shadow-[1px_1px_0_var(--accent)]"
+            >
+              Lihat Karya
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" aria-hidden="true">
+                <path d="M12 5v14M5 12l7 7 7-7" />
+              </svg>
+            </a>
+            <a
+              href="#pricing"
+              className="inline-flex items-center gap-2.5 rounded-xl border-[1.5px] border-[#16150F] bg-transparent px-6 py-3.5 text-[15px] font-semibold text-[#16150F] transition-colors duration-150 hover:bg-[var(--accent-soft)]"
+            >
+              Hitung Estimasi Proyek
+            </a>
           </div>
+        </div>
 
-          <span className="text-[8px] md:text-[9px] uppercase tracking-[0.3em] pl-[0.3em] text-zinc-600 group-hover:text-lime-400 font-bold transition-colors duration-300 select-none text-center">
-            Scroll
+        {/* Collaborator cursor */}
+        <motion.div
+          aria-hidden="true"
+          animate={{ x: [0, -30, 0], y: [0, -14, 0] }}
+          transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
+          className="absolute bottom-10 right-14 hidden items-start gap-0.5 drop-shadow-[2px_3px_4px_rgba(0,0,0,0.25)] md:flex"
+        >
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="#F59E0B" stroke="#16150F" strokeWidth="1.5">
+            <path d="M5 3l14 7-6 2-2 6z" />
+          </svg>
+          <span className="mt-3.5 rounded-[4px_10px_10px_10px] bg-[#F59E0B] px-2.5 py-0.5 font-display text-xs font-bold text-[#16150F]">
+            Asep
           </span>
-        </motion.button>
+        </motion.div>
       </div>
-    </div>
+    </section>
   );
 };
 

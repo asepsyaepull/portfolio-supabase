@@ -1,7 +1,9 @@
 import type { Metadata } from "next";
 import localFont from "next/font/local";
+import { Space_Grotesk } from "next/font/google";
 import "@/styles/globals.css";
 import { ThemeProvider } from "@/components/theme-provider";
+import { AccentProvider } from "@/components/accent/AccentContext";
 import { Toaster } from "sonner";
 import AppShell from "@/components/layouts/AppShell";
 
@@ -11,14 +13,23 @@ const geist = localFont({
   display: "swap",
 });
 
+const spaceGrotesk = Space_Grotesk({
+  subsets: ["latin"],
+  weight: ["500", "600", "700"],
+  variable: "--font-display",
+  display: "swap",
+});
+
 export const metadata: Metadata = {
-  metadataBase: new URL("https://asepsyaepul-portfolio.vercel.app"),
-  title: "Asep Syaepul | Software Developer",
-  description: "A portfolio showcasing my skills and projects as a software developer and engineer.",
+  metadataBase: new URL("https://asyaepul.id"),
+  title: "Asep Syaepul | UI/UX Designer & Frontend Developer",
+  description:
+    "Portfolio of Asep Syaepul — UI/UX designer & frontend developer with 7+ years crafting interactive digital products. Design systems, React/Next.js, motion.",
   openGraph: {
-    title: "Asep Syaepul | Software Developer",
-    description: "A portfolio showcasing my skills and projects as a software developer and engineer.",
-    url: "https://asepsyaepul-portfolio.vercel.app",
+    title: "Asep Syaepul | UI/UX Designer & Frontend Developer",
+    description:
+      "Portfolio of Asep Syaepul — UI/UX designer & frontend developer with 7+ years crafting interactive digital products. Design systems, React/Next.js, motion.",
+    url: "https://asyaepul.id",
     siteName: "Asep Syaepul Portfolio",
     images: [
       {
@@ -33,8 +44,9 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Asep Syaepul | Software Developer",
-    description: "A portfolio showcasing my skills and projects as a software developer and engineer.",
+    title: "Asep Syaepul | UI/UX Designer & Frontend Developer",
+    description:
+      "Portfolio of Asep Syaepul — UI/UX designer & frontend developer with 7+ years crafting interactive digital products. Design systems, React/Next.js, motion.",
     images: ["/og-image.jpg"],
   },
 };
@@ -46,15 +58,17 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <body className={`${geist.variable} font-sans antialiased bg-zinc-50 dark:bg-zinc-950 text-zinc-900 dark:text-zinc-50`}>
+      <body className={`${geist.variable} ${spaceGrotesk.variable} font-sans antialiased bg-zinc-50 dark:bg-zinc-950 text-zinc-900 dark:text-zinc-50`}>
         <ThemeProvider
           attribute="class"
           defaultTheme="system"
           enableSystem
           disableTransitionOnChange
         >
-          <AppShell>{children}</AppShell>
-          <Toaster position="bottom-right" richColors />
+          <AccentProvider>
+            <AppShell>{children}</AppShell>
+            <Toaster position="bottom-right" richColors />
+          </AccentProvider>
         </ThemeProvider>
       </body>
     </html>

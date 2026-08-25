@@ -2,6 +2,106 @@
 @tailwind components;
 @tailwind utilities;
 
+/* ==================================================================
+   Figma Canvas × Playground — design foundation (redesign-v2)
+   Lives above the legacy shadcn tokens; unlayered rules win the
+   cascade, admin pages keep working off the @layer base vars below.
+   ================================================================== */
+
+:root {
+  /* Canvas palette */
+  --canvas: #f4f1ea;
+  --surface: #ffffff;
+  --ink: #16150f;
+  --muted: #6e6a5e;
+  --frame-border: #d9d4c7;
+
+  /* Live accent system — consumed via var(), never hardcoded.
+     AccentProvider (JS) overwrites these at runtime. */
+  --accent: #4b41f0;
+  --accent-soft: #e3e1fc;
+  --accent-rgb: 75, 65, 240;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--canvas);
+  color: var(--ink);
+}
+
+/* Figma canvas grid dots backdrop */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(22, 21, 15, 0.045) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(22, 21, 15, 0.045) 1px, transparent 1px);
+  background-size: 28px 28px;
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* ---------- Utilities ---------- */
+
+.font-display {
+  font-family: var(--font-display), sans-serif;
+}
+
+.heading-display {
+  font-family: var(--font-display), sans-serif;
+  letter-spacing: -0.02em;
+}
+
+/* Small Figma-style frame label */
+.figma-frame-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--font-display), sans-serif;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--accent);
+}
+
+/* Figma frame: white surface + selection outline in accent */
+.frame-outline {
+  border: 1.5px solid var(--frame-border);
+  outline: 1.5px solid var(--accent);
+  outline-offset: 5px;
+}
+
+/* Sticker pop shadow */
+.shadow-pop {
+  box-shadow: 4px 4px 0 rgba(22, 21, 15, 0.85);
+}
+
+.tag-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 12px;
+  font-weight: 500;
+  padding: 3px 10px;
+  border-radius: 999px;
+  border: 1px solid var(--frame-border);
+  background: var(--surface);
+  color: var(--ink);
+}
+
+.tag-pill--hl {
+  background: var(--accent-soft);
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+/* ==================================================================
+   Legacy base — kept for shadcn/admin pages. Do not remove.
+   ================================================================== */
+
 :root {
   --background: #ffffff;
   --foreground: #171717;
@@ -14,18 +114,11 @@
   }
 }
 
-body {
-  color: var(--foreground);
-  background: var(--background);
-}
-
 @layer utilities {
   .text-balance {
     text-wrap: balance;
   }
 }
-
-
 
 @layer base {
   :root {
@@ -82,8 +175,6 @@ body {
     --chart-5: 340 75% 55%;
   }
 }
-
-
 
 @layer base {
   * {
