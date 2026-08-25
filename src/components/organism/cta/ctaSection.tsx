@@ -1,30 +1,64 @@
 "use client";
+import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
-import { IconArrowRight } from "@tabler/icons-react";
+
+const MAILTO = "mailto:mail.asepsyaepul@gmail.com";
+const timeFmt = new Intl.DateTimeFormat("en-GB", {
+  timeZone: "Asia/Jakarta",
+  hour: "2-digit",
+  minute: "2-digit",
+  second: "2-digit",
+  hour12: false,
+});
 
 export function CtaSection() {
+  const [now, setNow] = useState<string | null>(null);
+
+  useEffect(() => {
+    const tick = () => setNow(timeFmt.format(new Date()));
+    tick();
+    const id = setInterval(tick, 1000);
+    return () => clearInterval(id);
+  }, []);
+
   return (
-    <section className="py-28 md:py-40 bg-[#F4F1EA] text-[#16150F] relative overflow-hidden">
-      {/* canvas dot grid */}
+    <section
+      id="contact"
+      className="relative flex min-h-[70vh] items-center justify-center overflow-hidden"
+      style={{ background: "linear-gradient(180deg, #F9C97C 0%, #F0531C 100%)" }}
+    >
+      {/* sun */}
       <div
         aria-hidden
-        className="absolute inset-0 pointer-events-none"
+        className="absolute left-1/2 top-[18%] h-56 w-56 -translate-x-1/2 rounded-full md:h-72 md:w-72"
         style={{
-          backgroundImage: "radial-gradient(rgba(22,21,15,.09) 1px, transparent 1px)",
-          backgroundSize: "26px 26px",
+          background: "radial-gradient(circle, rgba(255,241,181,.95) 0%, rgba(255,196,92,.55) 55%, transparent 72%)",
+          filter: "blur(2px)",
         }}
+      />
+      {/* clouds */}
+      <div
+        aria-hidden
+        className="absolute left-[8%] top-[22%] h-16 w-40 rounded-full bg-white/50 blur-xl md:h-20 md:w-56"
+      />
+      <div
+        aria-hidden
+        className="absolute right-[6%] top-[38%] h-14 w-32 rounded-full bg-white/40 blur-xl md:h-16 md:w-44"
+      />
+      <div
+        aria-hidden
+        className="absolute bottom-[12%] left-[18%] h-12 w-28 rounded-full bg-white/30 blur-lg md:w-36"
       />
 
       <div className="relative z-10 mx-auto max-w-4xl px-4 text-center sm:px-6">
         <motion.p
-          initial={{ opacity: 0, y: 16 }}
+          initial={{ opacity: 0, y: 12 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.45 }}
-          className="font-mono text-xs font-bold uppercase tracking-[0.18em]"
-          style={{ color: "var(--accent)" }}
+          className="font-mono text-xs font-bold uppercase italic tracking-[0.22em] text-white/85"
         >
-          ✦ Frame Final — Contact
+          golden hour in jakarta
         </motion.p>
 
         <motion.h2
@@ -32,37 +66,39 @@ export function CtaSection() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.55, delay: 0.08 }}
-          className="mt-6 font-display text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold leading-[1.04] tracking-tight"
+          className="mt-5 font-display text-[clamp(54px,10vw,140px)] font-bold uppercase leading-[0.95] tracking-tight text-[#14202B]"
         >
-          Punya ide?
-          <br />
-          <span style={{ color: "var(--accent)" }}>Gas kita wujudkan.</span>
+          Still building.
         </motion.h2>
 
         <motion.p
-          initial={{ opacity: 0, y: 20 }}
+          initial={{ opacity: 0, y: 16 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.55, delay: 0.16 }}
-          className="mx-auto mt-6 max-w-lg text-base sm:text-lg leading-relaxed text-[#6E6A5E]"
+          transition={{ duration: 0.5, delay: 0.16 }}
+          className="mx-auto mt-7 max-w-md text-base leading-relaxed text-[#14202B]/80 sm:text-lg"
         >
-          Terbuka untuk posisi fulltime UI/UX / Frontend maupun proyek freelance. Balasan &lt; 24 jam.
+          Sekarang jam {now ?? "--:--:--"} di studio. Ide terbaik selalu datang sekitar jam ini.
         </motion.p>
 
         <motion.div
-          initial={{ opacity: 0, scale: 0.95 }}
-          whileInView={{ opacity: 1, scale: 1 }}
+          initial={{ opacity: 0, y: 14 }}
+          whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.45, delay: 0.24 }}
-          className="mt-12 flex justify-center"
+          className="mt-10 flex flex-col items-center justify-center gap-4 sm:flex-row sm:gap-6"
         >
           <a
-            href="mailto:mail.asepsyaepul@gmail.com"
-            className="group inline-flex items-center gap-2.5 rounded-xl bg-[#16150F] px-8 py-4 text-[15px] font-semibold text-white transition-transform duration-150 ease-out hover:-translate-y-[2px]"
-            style={{ boxShadow: "4px 4px 0 var(--accent)" }}
+            href={MAILTO}
+            className="inline-flex items-center gap-2.5 rounded-full bg-white px-8 py-3.5 font-mono text-[13px] font-bold uppercase tracking-wide text-[#14202B] shadow-[0_20px_50px_-32px_rgba(20,19,16,.45)] transition-transform duration-150 ease-out hover:-translate-y-[2px]"
           >
-            Let&apos;s Talk
-            <IconArrowRight className="h-5 w-5 transition-transform duration-200 group-hover:translate-x-1" />
+            Talk with me
+          </a>
+          <a
+            href={MAILTO}
+            className="font-mono text-[13px] font-bold text-white underline decoration-white/60 underline-offset-4 transition-colors hover:decoration-white"
+          >
+            or book a call
           </a>
         </motion.div>
       </div>

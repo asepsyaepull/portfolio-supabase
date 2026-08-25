@@ -3,24 +3,29 @@
 @tailwind utilities;
 
 /* ==================================================================
-   Figma Canvas × Playground — design foundation (redesign-v2)
-   Lives above the legacy shadcn tokens; unlayered rules win the
-   cascade, admin pages keep working off the @layer base vars below.
+   OhhMyDesign clone foundation (ohmy-clone)
+   Tokens verbatim dari /tmp/ohmy/ref.css. Unlayered rules win the
+   cascade; shadcn vars at the bottom stay for admin pages.
    ================================================================== */
 
 :root {
-  /* Canvas palette */
-  --canvas: #f4f1ea;
-  --surface: #ffffff;
-  --ink: #16150f;
-  --muted: #6e6a5e;
-  --frame-border: #d9d4c7;
+  --canvas: #AFD8F0;
+  --frame: #ffffff;
+  --ink: #14202B;
+  --ink-soft: #4A6173;
+  --ink-faint: #8AA6B8;
+  --brand: #F0531C;
+  --brand-deep: #D2410E;
+  --tool: #0D99FF;
+  --grid: #EFEEE9;
+  --line: rgba(20, 32, 43, 0.07);
+  --line-2: rgba(20, 32, 43, 0.13);
+  --shadow-card: 0 20px 50px -32px rgba(20, 19, 16, 0.32);
 
-  /* Live accent system — consumed via var(), never hardcoded.
-     AccentProvider (JS) overwrites these at runtime. */
-  --accent: #4b41f0;
-  --accent-soft: #e3e1fc;
-  --accent-rgb: 75, 65, 240;
+  /* ponytail: legacy aliases kept so organism files from other agents
+     (--muted/--accent) still compile; drop when those are rethemed */
+  --muted: var(--ink-soft);
+  --surface: var(--frame);
 }
 
 html {
@@ -32,70 +37,121 @@ body {
   color: var(--ink);
 }
 
-/* Figma canvas grid dots backdrop */
-body::before {
-  content: "";
-  position: fixed;
-  inset: 0;
-  background-image:
-    linear-gradient(rgba(22, 21, 15, 0.045) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(22, 21, 15, 0.045) 1px, transparent 1px);
-  background-size: 28px 28px;
-  pointer-events: none;
-  z-index: 0;
-}
-
-/* ---------- Utilities ---------- */
+/* ---------- Utilities ala ohhmy ---------- */
 
 .font-display {
-  font-family: var(--font-display), sans-serif;
+  font-family: var(--font-display), serif;
+}
+
+.font-body {
+  font-family: var(--font-body), sans-serif;
+}
+
+.font-mono {
+  font-family: var(--font-mono), monospace;
 }
 
 .heading-display {
-  font-family: var(--font-display), sans-serif;
+  font-family: var(--font-display), serif;
   letter-spacing: -0.02em;
 }
 
-/* Small Figma-style frame label */
-.figma-frame-label {
+/* Figma-style frame label — Space Mono 11px uppercase */
+.omd-frame-label {
   display: inline-flex;
   align-items: center;
   gap: 8px;
-  font-family: var(--font-display), sans-serif;
-  font-size: 13px;
-  font-weight: 600;
-  color: var(--accent);
-}
-
-/* Figma frame: white surface + selection outline in accent */
-.frame-outline {
-  border: 1.5px solid var(--frame-border);
-  outline: 1.5px solid var(--accent);
-  outline-offset: 5px;
-}
-
-/* Sticker pop shadow */
-.shadow-pop {
-  box-shadow: 4px 4px 0 rgba(22, 21, 15, 0.85);
-}
-
-.tag-pill {
-  display: inline-flex;
-  align-items: center;
-  gap: 4px;
-  font-size: 12px;
-  font-weight: 500;
-  padding: 3px 10px;
-  border-radius: 999px;
-  border: 1px solid var(--frame-border);
-  background: var(--surface);
+  font-family: var(--font-mono), monospace;
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.09em;
   color: var(--ink);
 }
 
-.tag-pill--hl {
-  background: var(--accent-soft);
-  border-color: var(--accent);
-  color: var(--accent);
+/* Dashed Figma selection outline */
+.omd-sel {
+  position: relative;
+}
+.omd-sel::after {
+  content: "";
+  position: absolute;
+  inset: -7px -12px;
+  border: 1.5px dashed var(--tool);
+  border-radius: 7px;
+  pointer-events: none;
+}
+
+/* Buttons — Space Mono bold 13px, pad 13/20, radius 12 */
+.omd-btn-primary,
+.omd-btn-ghost {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--font-mono), monospace;
+  font-weight: 700;
+  font-size: 13px;
+  padding: 13px 20px;
+  border-radius: 12px;
+  transition: transform 0.15s ease, background 0.15s ease, color 0.15s ease;
+}
+.omd-btn-primary {
+  background: var(--brand);
+  color: #fff;
+}
+.omd-btn-primary:hover {
+  background: var(--brand-deep);
+}
+.omd-btn-primary:active {
+  transform: scale(0.97);
+}
+.omd-btn-ghost {
+  background: var(--frame);
+  color: var(--ink);
+  border: 1px solid var(--line-2);
+}
+.omd-btn-ghost:hover {
+  background: var(--grid);
+}
+
+/* Card frame — white, radius 24, signature shadow */
+.omd-card {
+  background: var(--frame);
+  border: 1px solid var(--line);
+  border-radius: 24px;
+  box-shadow: var(--shadow-card);
+}
+
+/* Ticker marquee */
+@keyframes marquee {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+.marquee-animation {
+  animation: marquee var(--animation-duration, 25s) linear infinite;
+}
+
+/* Dropfun confetti */
+@keyframes omd-drop {
+  0% {
+    transform: translate(0, 0) rotate(0deg);
+    opacity: 1;
+  }
+  70% {
+    opacity: 1;
+  }
+  100% {
+    transform: translate(var(--drift, 40px), 150px) rotate(540deg);
+    opacity: 0;
+  }
+}
+
+.omd-confetto {
+  animation: omd-drop 2s ease-in forwards;
 }
 
 /* ==================================================================
@@ -183,17 +239,4 @@ body::before {
   body {
     @apply bg-background text-foreground;
   }
-}
-
-@keyframes marquee {
-  0% {
-    transform: translateX(0);
-  }
-  100% {
-    transform: translateX(-50%);
-  }
-}
-
-.marquee-animation {
-  animation: marquee var(--animation-duration, 25s) linear infinite;
 }

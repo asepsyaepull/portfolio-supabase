@@ -1,35 +1,12 @@
 "use client";
 import { motion, AnimatePresence } from "framer-motion";
-import {
-  IconArrowRight,
-  IconChevronDown,
-  IconStack,
-  IconMinus,
-  IconMouse,
-  IconPlus,
-  IconAdjustments,
-  IconSparkles,
-  IconBolt,
-} from "@tabler/icons-react";
+import { IconMinus, IconPlus, IconBolt } from "@tabler/icons-react";
 import Link from "next/link";
 import { useMemo, useState } from "react";
 import { cn } from "@/lib/utils";
-import AccentSwitcher from "@/components/accent/AccentSwitcher";
 
 /* ------------------------------------------------------------------ */
-/* Fake Figma chrome                                                    */
-/* ------------------------------------------------------------------ */
-
-const FigmaDots = () => (
-  <div className="flex items-center gap-1.5">
-    <span className="w-3 h-3 rounded-full bg-[#FF5F57]" />
-    <span className="w-3 h-3 rounded-full bg-[#FEBC2E]" />
-    <span className="w-3 h-3 rounded-full bg-[#28C840]" />
-  </div>
-);
-
-/* ------------------------------------------------------------------ */
-/* Types & config                                                       */
+/* Types & config (logic unchanged)                                     */
 /* ------------------------------------------------------------------ */
 
 type ProjectType = "Landing Page" | "Full Website" | "App UI/UX";
@@ -55,10 +32,23 @@ const fmtPrice = (n: number) => {
   return Number.isInteger(rounded) ? `${rounded}` : `${rounded.toFixed(1)}`;
 };
 
-/* ------------------------------------------------------------------ */
-/* Switch                                                               */
-/* ------------------------------------------------------------------ */
+const CARD = "rounded-[24px] border border-[#14202b12] bg-white shadow-[0_20px_50px_-32px_rgba(20,19,16,0.32)]";
+const SERIF = "[font-family:var(--font-display),'Fraunces',serif]";
+const MONO = "[font-family:var(--font-mono),ui-monospace,monospace]";
 
+/* Figma frame label per control group */
+function FrameLabel({ name }: { name: string }) {
+  return (
+    <p className={cn(MONO, "mb-3 flex items-center gap-1.5 text-[11px] font-bold uppercase tracking-[0.14em] text-[#8AA6B8]")}>
+      <svg width="11" height="11" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+        <path d="M8 3a3 3 0 100 6h3V3H8zm0 6a3 3 0 000 6h3V9H8zm0 6a3 3 0 103 3v-3H8zm6-12v6h3a3 3 0 100-6h-3z" />
+      </svg>
+      {name}
+    </p>
+  );
+}
+
+/* Ohhmy-style lever switch */
 function Switch({ on, onClick, label }: { on: boolean; onClick: () => void; label: string }) {
   return (
     <button
@@ -66,18 +56,43 @@ function Switch({ on, onClick, label }: { on: boolean; onClick: () => void; labe
       aria-pressed={on}
       aria-label={label}
       className={cn(
-        "relative h-6 w-11 shrink-0 rounded-full transition-colors duration-300",
-        on ? "bg-[var(--accent)]" : "bg-white/20"
+        "relative h-6 w-11 shrink-0 rounded-full border transition-colors duration-300",
+        on ? "border-[#F0531C] bg-[#F0531C]" : "border-[#14202b22] bg-[#F1F6FA]"
       )}
     >
       <motion.span
         layout
         transition={{ type: "spring", stiffness: 500, damping: 30 }}
         className={cn(
-          "absolute top-0.5 left-0.5 h-5 w-5 rounded-full bg-white shadow-md",
+          "absolute top-[3px] left-[3px] h-4 w-4 rounded-full bg-white shadow-md",
           on && "translate-x-5"
         )}
       />
+    </button>
+  );
+}
+
+/* Option pill — line-2 border, active = brand border + brand/8% bg */
+function Pill({
+  active,
+  onClick,
+  children,
+}: {
+  active: boolean;
+  onClick: () => void;
+  children: React.ReactNode;
+}) {
+  return (
+    <button
+      onClick={onClick}
+      className={cn(
+        "rounded-full border px-4 py-2.5 text-[13px] font-semibold transition-all duration-200",
+        active
+          ? "border-[#F0531C] bg-[#F0531C]/[0.08] font-bold text-[#14202B]"
+          : "border-[#14202b22] bg-white text-[#4A6173] hover:border-[#14202B] hover:text-[#14202B]"
+      )}
+    >
+      {children}
     </button>
   );
 }
@@ -104,264 +119,166 @@ export function PricingSection() {
     return Math.round((base + pages + dev + cms + revs + rush) * 10) / 10;
   }, [projectType, pageScope, withDev, withCms, extraRevs, urgent]);
 
-  const layers = [
-    { icon: <IconStack className="w-3 h-3" />, name: "pricing.fig", active: true, depth: 0 },
-    { icon: null, name: "Project Type", active: false, depth: 1 },
-    { icon: null, name: "Page Scope", active: false, depth: 1 },
-    { icon: null, name: "Add-ons", active: false, depth: 1 },
-    { icon: null, name: "Price Display", active: false, depth: 1 },
-    { icon: null, name: "CTA Button", active: false, depth: 1 },
-  ];
-
   return (
-    <section id="pricing" className="relative z-[1] py-24">
-      <div className="container mx-auto px-4 md:px-24">
+    <section id="pricing" className="relative z-[1] py-20 md:py-28">
+      <div className="mx-auto max-w-[1280px] px-6">
         {/* Header */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.5 }}
-          className="mb-14 flex flex-wrap items-end justify-between gap-x-10 gap-y-6"
+          className="mb-12 text-center"
         >
-          <div>
-            <p className="figma-frame-label mb-2.5 flex items-center gap-2 font-display text-[13px] font-semibold text-[var(--accent)]">
-              <IconStack className="h-3.5 w-3.5" />
-              Component — PricingConfigurator
-            </p>
-            <h2 className="font-display text-[clamp(30px,4.5vw,46px)] font-bold tracking-tight text-[#16150F]">
-              Hitung estimasi proyekmu.
-            </h2>
-            <p className="mt-3 max-w-xl text-[15.5px] leading-relaxed text-[#6E6A5E]">
-              Configurator interaktif ala Figma: pilih tipe proyek, scope halaman,
-              dan add-on — estimasi muncul real-time. Transparan sebelum chat pertama.
-            </p>
-          </div>
-          <div className="rounded-xl border border-dashed border-[#D9D4C7] bg-white/70 p-4">
-            <AccentSwitcher />
-            <p className="mt-2 max-w-[230px] text-xs leading-snug text-[#6E6A5E]">
-              pilih aksen favoritmu — seluruh situs ikut berganti ✦
-            </p>
-          </div>
+          <p className={cn(MONO, "mb-3 text-[11px] font-bold uppercase tracking-[0.16em] text-[#F0531C]")}>
+            pricing.fig
+          </p>
+          <h2 className={cn(SERIF, "text-[clamp(38px,6vw,72px)] font-semibold uppercase leading-[0.98] text-[#14202B]")}>
+            Pick your plan.
+          </h2>
+          <p className="mx-auto mt-4 max-w-[48ch] text-[16px] text-[#4A6173]">
+            hitung sendiri. transparan sebelum ngobrol.
+          </p>
         </motion.div>
 
-        {/* Ink panel */}
+        {/* Big white panel */}
         <motion.div
           initial={{ opacity: 0, y: 40 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
+          viewport={{ once: true, margin: "-80px" }}
           transition={{ duration: 0.6 }}
-          className="relative mx-auto max-w-5xl overflow-hidden rounded-[20px] border-[1.5px] border-[#16150F] bg-[#16150F] text-[#F4F1EA] shadow-[8px_8px_0_rgba(var(--accent-rgb),0.35)]"
+          className={cn(CARD, "relative mx-auto max-w-3xl p-6 md:p-10")}
         >
-          {/* accent glow */}
-          <div
-            aria-hidden="true"
-            className="pointer-events-none absolute -right-32 -top-40 h-[420px] w-[420px] rounded-full"
-            style={{
-              background:
-                "radial-gradient(circle, rgba(var(--accent-rgb), 0.35), transparent 70%)",
-            }}
-          />
-
-          {/* Fake Figma toolbar */}
-          <div className="relative flex items-center justify-between gap-4 border-b border-white/10 bg-black/20 px-4 py-2.5">
-            <div className="flex items-center gap-3 min-w-0">
-              <FigmaDots />
-              <span className="hidden items-center gap-1.5 text-[11px] font-medium text-[#9D9DA8] sm:flex">
-                <span className="text-[var(--accent)]">▦</span> pricing.fig
-              </span>
-            </div>
-            <div className="hidden items-center gap-2 text-[11px] text-[#9D9DA8] md:flex">
-              <IconAdjustments className="h-3.5 w-3.5" />
-              <span>100%</span>
-            </div>
-          </div>
-
-          <div className="relative flex">
-            {/* Fake layers panel */}
-            <div className="hidden w-52 shrink-0 border-r border-white/10 bg-black/20 p-3 lg:block">
-              <div className="flex items-center justify-between px-1 pb-2">
-                <span className="font-display text-[10px] font-bold uppercase tracking-widest text-[#9D9DA8]">
-                  Layers
-                </span>
-                <IconChevronDown className="h-3 w-3 text-[#9D9DA8]" />
-              </div>
-              <div className="flex flex-col gap-0.5">
-                {layers.map((l, i) => (
-                  <div
-                    key={i}
-                    className={cn(
-                      "flex items-center gap-1.5 rounded px-1.5 py-1 text-[11px] transition-colors",
-                      l.active
-                        ? "bg-[rgba(var(--accent-rgb),0.18)] font-semibold text-white"
-                        : "text-[#9D9DA8] hover:bg-white/5"
-                    )}
-                    style={{ paddingLeft: `${8 + l.depth * 12}px` }}
-                  >
-                    {l.icon ?? <span className="flex h-3 w-3 items-center justify-center text-[#9D9DA8]">▸</span>}
-                    {l.name}
-                  </div>
-                ))}
-              </div>
-            </div>
-
-            {/* Interactive pricing frame */}
-            <div className="flex-1 p-5 md:p-10">
-              <div className="mx-auto max-w-md">
-                {/* Project type selector */}
-                <div className="mb-8">
-                  <p className="mb-2.5 flex items-center gap-1.5 font-display text-[10px] font-bold uppercase tracking-widest text-[#9D9DA8]">
-                    <IconMouse className="h-3 w-3" /> 01 · Project type
-                  </p>
-                  <div className="grid grid-cols-3 gap-2">
-                    {PROJECT_TYPES.map((t) => (
-                      <button
-                        key={t}
-                        onClick={() => setProjectType(t)}
-                        className={cn(
-                          "rounded-xl border px-2 py-2.5 text-xs font-bold transition-all duration-300",
-                          projectType === t
-                            ? "border-[var(--accent)] bg-[rgba(var(--accent-rgb),0.15)] text-white shadow-lg shadow-black/20"
-                            : "border-white/15 text-[#B9B5A9] hover:border-[rgba(var(--accent-rgb),0.5)] hover:text-white"
-                        )}
-                      >
-                        {t}
-                      </button>
-                    ))}
-                  </div>
-                </div>
-
-                {/* Page scope */}
-                <div className="mb-8">
-                  <p className="mb-2.5 font-display text-[10px] font-bold uppercase tracking-widest text-[#9D9DA8]">
-                    02 · Scope
-                  </p>
-                  <div className="flex flex-wrap gap-2">
-                    {PAGE_SCOPES.map((s) => (
-                      <button
-                        key={s}
-                        onClick={() => setPageScope(s)}
-                        className={cn(
-                          "rounded-full border px-4 py-2 text-xs font-bold transition-all duration-300",
-                          pageScope === s
-                            ? "border-[var(--accent)] bg-[rgba(var(--accent-rgb),0.15)] text-white"
-                            : "border-white/15 text-[#B9B5A9] hover:border-[rgba(var(--accent-rgb),0.5)] hover:text-white"
-                        )}
-                      >
-                        {s}
-                      </button>
-                    ))}
-                  </div>
-                </div>
-
-                {/* Add-ons */}
-                <div className="mb-8">
-                  <p className="mb-2.5 font-display text-[10px] font-bold uppercase tracking-widest text-[#9D9DA8]">
-                    03 · Add-ons
-                  </p>
-                  <div className="flex flex-col gap-3">
-                    <div className="flex items-center justify-between gap-4">
-                      <div>
-                        <p className="text-sm font-bold text-white">
-                          Development <span className="font-normal text-[#9D9DA8]">(Next.js/React)</span>
-                        </p>
-                        <p className="text-[11px] text-[#9D9DA8]">+50% of design price</p>
-                      </div>
-                      <Switch on={withDev} onClick={() => setWithDev(!withDev)} label="Toggle development" />
-                    </div>
-                    <div className="flex items-center justify-between gap-4">
-                      <div>
-                        <p className="text-sm font-bold text-white">CMS &amp; SEO setup</p>
-                        <p className="text-[11px] text-[#9D9DA8]">+Rp 1.5jt</p>
-                      </div>
-                      <Switch on={withCms} onClick={() => setWithCms(!withCms)} label="Toggle CMS & SEO" />
-                    </div>
-                    <div className="flex items-center justify-between gap-4">
-                      <div>
-                        <p className="text-sm font-bold text-white">Extra revision round</p>
-                        <p className="text-[11px] text-[#9D9DA8]">+Rp 500rb / round</p>
-                      </div>
-                      <div className="flex items-center gap-3">
-                        <button
-                          onClick={() => setExtraRevs(Math.max(0, extraRevs - 1))}
-                          aria-label="Decrease revisions"
-                          className="flex h-7 w-7 items-center justify-center rounded-full border border-white/15 text-[#B9B5A9] transition-colors hover:border-[var(--accent)] hover:text-white"
-                        >
-                          <IconMinus className="h-3.5 w-3.5" />
-                        </button>
-                        <span className="w-4 text-center font-display text-sm font-bold text-white">
-                          {extraRevs}
-                        </span>
-                        <button
-                          onClick={() => setExtraRevs(Math.min(5, extraRevs + 1))}
-                          aria-label="Increase revisions"
-                          className="flex h-7 w-7 items-center justify-center rounded-full border border-white/15 text-[#B9B5A9] transition-colors hover:border-[var(--accent)] hover:text-white"
-                        >
-                          <IconPlus className="h-3.5 w-3.5" />
-                        </button>
-                      </div>
-                    </div>
-                    <div className="flex items-center justify-between gap-4">
-                      <div>
-                        <p className="text-sm font-bold text-white">
-                          Urgent delivery <IconBolt className="-mt-0.5 inline h-3.5 w-3.5 text-[#F59E0B]" />
-                        </p>
-                        <p className="text-[11px] text-[#9D9DA8]">+20%, priority slot</p>
-                      </div>
-                      <Switch on={urgent} onClick={() => setUrgent(!urgent)} label="Toggle urgent delivery" />
-                    </div>
-                  </div>
-                </div>
-
-                {/* Price widget — white card on ink panel */}
-                <div className="rounded-[14px] border-[1.5px] border-[#16150F] bg-white p-6 text-center text-[#16150F] shadow-[6px_6px_0_rgba(var(--accent-rgb),0.45)]">
-                  <p className="mb-1 font-display text-[10px] font-bold uppercase tracking-widest text-[#6E6A5E]">
-                    Estimated total
-                  </p>
-                  <div className="flex items-baseline justify-center gap-2 overflow-hidden">
-                    <span className="font-display text-xl font-bold text-[var(--accent)]">Rp</span>
-                    <AnimatePresence mode="popLayout">
-                      <motion.span
-                        key={price}
-                        initial={{ y: 24, opacity: 0 }}
-                        animate={{ y: 0, opacity: 1 }}
-                        exit={{ y: -24, opacity: 0 }}
-                        transition={{ type: "spring", stiffness: 300, damping: 25 }}
-                        className="font-display text-5xl font-bold tabular-nums text-[var(--accent)]"
-                      >
-                        {fmtPrice(price)}
-                      </motion.span>
-                    </AnimatePresence>
-                    <span className="text-sm font-medium text-[#6E6A5E]">jt</span>
-                  </div>
-                  <p className="mt-2 text-[11px] text-[#6E6A5E]">
-                    {projectType} · {pageScope}
-                    {withDev ? " · with development" : " · design only"}
-                    {urgent ? " · urgent" : ""}
-                  </p>
-
-                  <Link
-                    href={`/contact?project=${encodeURIComponent(projectType)}&price=${fmtPrice(price)}jt`}
-                    className="mt-5 flex w-full items-center justify-center gap-2 rounded-xl border-[1.5px] border-[#16150F] bg-[var(--accent)] px-6 py-3.5 text-sm font-bold text-white shadow-[3px_3px_0_#16150F] transition-all hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-[1px_1px_0_#16150F]"
-                  >
-                    <IconSparkles className="h-4 w-4" />
-                    <span>Let&apos;s Talk — {fmtPrice(price)}jt</span>
-                    <IconArrowRight className="h-4 w-4" />
-                  </Link>
-                  <p className="mt-3 text-[10px] text-[#6E6A5E]">
-                    Fixed price · milestone payment available · negotiable
-                  </p>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          {/* Fake Figma status bar */}
-          <div className="relative flex items-center justify-between border-t border-white/10 bg-black/20 px-4 py-1.5 text-[10px] text-[#9D9DA8]">
-            <span className="flex items-center gap-1.5">
-              <IconStack className="h-3 w-3" /> Frame 1 · 1280 × auto
+          {/* panel frame label */}
+          <div className="absolute -top-9 left-0 flex items-center gap-2 px-1">
+            <span className={cn(MONO, "text-[11px] font-bold uppercase tracking-[0.14em] text-[#8AA6B8]")}>
+              ▤ pricing.fig
             </span>
-            <span className="hidden sm:block">Made in Figma, built in Next.js</span>
+          </div>
+
+          {/* project-type.frame */}
+          <div className="mb-8">
+            <FrameLabel name="project-type.frame" />
+            <div className="flex flex-wrap gap-2">
+              {PROJECT_TYPES.map((t) => (
+                <Pill key={t} active={projectType === t} onClick={() => setProjectType(t)}>
+                  {t}
+                </Pill>
+              ))}
+            </div>
+          </div>
+
+          {/* scope.frame */}
+          <div className="mb-8">
+            <FrameLabel name="scope.frame" />
+            <div className="flex flex-wrap gap-2">
+              {PAGE_SCOPES.map((s) => (
+                <Pill key={s} active={pageScope === s} onClick={() => setPageScope(s)}>
+                  {s}
+                </Pill>
+              ))}
+            </div>
+          </div>
+
+          {/* add-ons.frame */}
+          <div className="mb-9">
+            <FrameLabel name="add-ons.frame" />
+            <div className="flex flex-col divide-y divide-[#14202b12]">
+              {/* Development */}
+              <div className="flex items-center justify-between gap-4 py-3.5 first:pt-0">
+                <div>
+                  <p className="text-[14.5px] font-bold text-[#14202B]">
+                    Development <span className="font-normal text-[#4A6173]">(Next.js/React)</span>
+                  </p>
+                  <p className={cn(MONO, "mt-0.5 text-[11px] text-[#8AA6B8]")}>+50% of design price</p>
+                </div>
+                <Switch on={withDev} onClick={() => setWithDev(!withDev)} label="Toggle development" />
+              </div>
+
+              {/* CMS */}
+              <div className="flex items-center justify-between gap-4 py-3.5">
+                <div>
+                  <p className="text-[14.5px] font-bold text-[#14202B]">CMS &amp; SEO setup</p>
+                  <p className={cn(MONO, "mt-0.5 text-[11px] text-[#8AA6B8]")}>+Rp 1.5jt</p>
+                </div>
+                <Switch on={withCms} onClick={() => setWithCms(!withCms)} label="Toggle CMS & SEO" />
+              </div>
+
+              {/* Extra revisions */}
+              <div className="flex items-center justify-between gap-4 py-3.5">
+                <div>
+                  <p className="text-[14.5px] font-bold text-[#14202B]">Extra revision round</p>
+                  <p className={cn(MONO, "mt-0.5 text-[11px] text-[#8AA6B8]")}>+Rp 500rb / round</p>
+                </div>
+                <div className="flex items-center gap-3">
+                  <button
+                    onClick={() => setExtraRevs(Math.max(0, extraRevs - 1))}
+                    aria-label="Decrease revisions"
+                    className="flex h-7 w-7 items-center justify-center rounded-full border border-[#14202b22] text-[#4A6173] transition-colors hover:border-[#F0531C] hover:text-[#F0531C]"
+                  >
+                    <IconMinus className="h-3.5 w-3.5" />
+                  </button>
+                  <span className={cn(SERIF, "w-4 text-center text-lg font-semibold text-[#14202B]")}>{extraRevs}</span>
+                  <button
+                    onClick={() => setExtraRevs(Math.min(5, extraRevs + 1))}
+                    aria-label="Increase revisions"
+                    className="flex h-7 w-7 items-center justify-center rounded-full border border-[#14202b22] text-[#4A6173] transition-colors hover:border-[#F0531C] hover:text-[#F0531C]"
+                  >
+                    <IconPlus className="h-3.5 w-3.5" />
+                  </button>
+                </div>
+              </div>
+
+              {/* Urgent */}
+              <div className="flex items-center justify-between gap-4 pt-3.5 last:pb-0">
+                <div>
+                  <p className="text-[14.5px] font-bold text-[#14202B]">
+                    Urgent delivery <IconBolt className="-mt-0.5 inline h-3.5 w-3.5 text-[#F0531C]" />
+                  </p>
+                  <p className={cn(MONO, "mt-0.5 text-[11px] text-[#8AA6B8]")}>+20%, priority slot</p>
+                </div>
+                <Switch on={urgent} onClick={() => setUrgent(!urgent)} label="Toggle urgent delivery" />
+              </div>
+            </div>
+          </div>
+
+          {/* Price display — big serif */}
+          <div className="border-t border-dashed border-[#14202b22] pt-7 text-center">
+            <p className={cn(MONO, "text-[11px] font-bold uppercase tracking-[0.16em] text-[#8AA6B8]")}>
+              Estimated total
+            </p>
+            <div className="mt-2 flex flex-wrap items-baseline justify-center gap-x-2 overflow-hidden text-[#14202B]">
+              <span className={cn(SERIF, "text-3xl font-semibold")}>Rp</span>
+              <AnimatePresence mode="popLayout">
+                <motion.span
+                  key={price}
+                  initial={{ y: 24, opacity: 0 }}
+                  animate={{ y: 0, opacity: 1 }}
+                  exit={{ y: -24, opacity: 0 }}
+                  transition={{ type: "spring", stiffness: 300, damping: 25 }}
+                  className={cn(SERIF, "text-[clamp(52px,8vw,84px)] font-semibold leading-none tabular-nums")}
+                >
+                  {fmtPrice(price)}
+                </motion.span>
+              </AnimatePresence>
+              <span className={cn(SERIF, "text-3xl font-semibold")}>jt</span>
+              <span className={cn(MONO, "ml-1 text-[12px] font-bold lowercase text-[#8AA6B8]")}>/start-from</span>
+            </div>
+            <p className={cn(MONO, "mt-3 text-[11px] text-[#8AA6B8]")}>
+              {projectType} · {pageScope}
+              {withDev ? " · with development" : " · design only"}
+              {urgent ? " · urgent" : ""}
+            </p>
+
+            <Link
+              href={`/contact?project=${encodeURIComponent(projectType)}&price=${fmtPrice(price)}jt`}
+              className="mt-6 flex w-full items-center justify-center gap-2 rounded-xl bg-[#F0531C] px-6 py-[13px] text-white shadow-[0_12px_26px_-12px_#F0531C] transition-colors duration-200 hover:bg-[#D2410E]"
+            >
+              <span className={cn(MONO, "text-[13px] font-bold")}>
+                Start today → {fmtPrice(price)}jt
+              </span>
+            </Link>
+            <p className={cn(MONO, "mt-3 text-[11px] text-[#8AA6B8]")}>No contracts. Pause anytime.</p>
           </div>
         </motion.div>
 
@@ -370,25 +287,26 @@ export function PricingSection() {
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.5, delay: 0.2 }}
-          className="mx-auto mt-14 max-w-3xl"
+          transition={{ duration: 0.5, delay: 0.15 }}
+          className="mx-auto mt-12 max-w-3xl"
         >
-          <div className="inline-flex w-full flex-col items-center gap-3 rounded-[20px] border-[1.5px] border-dashed border-[#D9D4C7] bg-white/60 p-6 text-center md:p-8">
-            <p className="font-display text-sm font-bold uppercase tracking-widest text-[#16150F]">
+          <div className="flex flex-col items-center gap-3 rounded-[24px] border border-dashed border-[#14202b22] bg-white/60 p-7 text-center">
+            <p className={cn(MONO, "text-[11px] font-bold uppercase tracking-[0.16em] text-[#14202B]")}>
               Prefer hourly support?
             </p>
             <div className="flex items-baseline gap-2">
-              <span className="font-display text-3xl font-bold text-[var(--accent)]">Rp 200rb</span>
-              <span className="text-sm text-[#6E6A5E]">/ hour</span>
+              <span className={cn(SERIF, "text-3xl font-semibold text-[#14202B]")}>Rp 200rb</span>
+              <span className={cn(MONO, "text-[12px] text-[#8AA6B8]")}>/ hour</span>
             </div>
-            <p className="text-xs text-[#6E6A5E]">
-              UX audits, design reviews, or small tasks — minimum 10 hours.
-            </p>
+            <p className="text-sm text-[#4A6173]">UX audits, design reviews, or small tasks — minimum 10 hours.</p>
             <Link
               href="/contact"
-              className="inline-flex items-center gap-2 rounded-xl border-[1.5px] border-[#16150F] bg-transparent px-6 py-3 text-sm font-bold text-[#16150F] transition-colors hover:bg-[var(--accent-soft)]"
+              className={cn(
+                MONO,
+                "mt-1 inline-flex items-center gap-2 rounded-xl border border-[#14202b22] bg-white px-5 py-2.5 text-[13px] font-bold text-[#14202B] transition-colors hover:border-[#F0531C] hover:text-[#F0531C]"
+              )}
             >
-              <span>Ask about hourly work</span>
+              Ask about hourly work
             </Link>
           </div>
         </motion.div>
