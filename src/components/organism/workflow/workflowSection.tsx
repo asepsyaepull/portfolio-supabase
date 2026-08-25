@@ -1,190 +1,215 @@
 "use client";
 
-import { IconCheck, IconSearch, IconRoute, IconPalette, IconCode, IconSparkles, IconRocket } from "@tabler/icons-react";
 import { motion } from "framer-motion";
 
-interface WorkflowStep {
-  id: string;
-  step: string;
-  title: string;
-  tag: string;
-  description: string;
-  deliverables: string[];
-  icon: React.ReactNode;
-}
+const CARD = "rounded-[24px] border border-[#14202b12] bg-white shadow-[0_20px_50px_-32px_rgba(20,19,16,0.32)]";
+const SERIF = "[font-family:var(--font-display),'Fraunces',serif]";
+const MONO = "[font-family:var(--font-mono),ui-monospace,monospace]";
 
-const workflowSteps: WorkflowStep[] = [
+type Msg = {
+  from: "you" | "asep";
+  text: string;
+  time: string;
+  attach?: string;
+  reaction?: string;
+};
+
+type Step = {
+  label: string;
+  msgs: Msg[];
+};
+
+const STEPS: Step[] = [
   {
-    id: "discovery",
-    step: "01",
-    title: "Discovery & UX Audit",
-    tag: "Research & Strategic Blueprint",
-    description:
-      "Deep dive into user pain points, business goals, and existing systems. I map requirements into clear user stories, performance budgets, and technical feasibility blueprints before committing to code.",
-    deliverables: ["Technical Audit", "User Journey Maps", "Architecture Blueprint", "Performance Target"],
-    icon: <IconSearch className="w-5 h-5" />,
+    label: "01 · SUBSCRIBE",
+    msgs: [
+      { from: "you", text: "gas daftar dulu, satu slot bulan ini kan?", time: "09.02" },
+      { from: "asep", text: "you're in 👋 visi nya gimana?", time: "09.04" },
+    ],
   },
   {
-    id: "architecture",
-    step: "02",
-    title: "Information Architecture",
-    tag: "Wireframes & System Hierarchy",
-    description:
-      "Structuring intuitive page layouts, navigation hierarchies, and low-fidelity prototypes. Every interactive touchpoint is validated to ensure frictionless navigation and optimal user conversion.",
-    deliverables: ["Low-Fi Wireframes", "Component Tree Specs", "State Machine Diagrams", "UX Flow Validation"],
-    icon: <IconRoute className="w-5 h-5" />,
+    label: "02 · SEND IT OVER",
+    msgs: [
+      { from: "you", text: "nih brief + referensi, tinggal dibaca", time: "09.15", attach: "project-brief.fig" },
+      { from: "asep", text: "kebaca semua. sabar, aku racik dulu 🔥", time: "09.20" },
+    ],
   },
   {
-    id: "design-systems",
-    step: "03",
-    title: "Design Systems & Tokens",
-    tag: "Figma Variables & Atomic UI Kit",
-    description:
-      "Translating visual identity into scalable design tokens (colors, typography scales, spacing, shadows, and dark mode palettes). Building atomic UI primitives for consistency across every platform.",
-    deliverables: ["Design Token Library", "Atomic Component Kit", "WCAG AA Contrast", "Figma to Code Map"],
-    icon: <IconPalette className="w-5 h-5" />,
+    label: "03 · REFINE",
+    msgs: [
+      { from: "asep", text: "v1 udah. cek ya", time: "14.30", attach: "homepage-v1.png", reaction: "🔥 2" },
+      { from: "you", text: "cepet amat 😳 tombolnya kecilin dikit", time: "15.02", reaction: "👍 1" },
+      { from: "asep", text: "beres. revisi unlimited kok, santai", time: "15.05" },
+    ],
   },
   {
-    id: "engineering",
-    step: "04",
-    title: "Frontend Engineering",
-    tag: "React, Next.js & TypeScript Craft",
-    description:
-      "Writing clean, modular, and strictly-typed frontend architecture. Implementing responsive layouts, resilient data-fetching with SSR/ISR, and production-grade state management.",
-    deliverables: ["Next.js App Router", "TypeScript Strict", "Tailwind Design System", "Optimized Data Fetching"],
-    icon: <IconCode className="w-5 h-5" />,
-  },
-  {
-    id: "motion",
-    step: "05",
-    title: "Motion & Micro-Interactions",
-    tag: "Framer Motion & Fluid UX",
-    description:
-      "Elevating digital interfaces from functional to memorable. Implementing 60fps spring animations, scroll-driven reveals, intuitive gestures, and seamless page transitions.",
-    deliverables: ["Spring Physics", "Scroll-linked Animations", "Interactive Feedback", "Gesture Controls"],
-    icon: <IconSparkles className="w-5 h-5" />,
-  },
-  {
-    id: "optimization",
-    step: "06",
-    title: "Testing, CWV & Deployment",
-    tag: "Lighthouse 100 & Production Release",
-    description:
-      "Rigorous cross-browser testing, accessibility (a11y) audits, Core Web Vitals optimization, and automated CI/CD deployment to edge networks for sub-second page loads.",
-    deliverables: ["100/100 Lighthouse", "Zero CLS / Fast LCP", "Automated CI/CD", "Edge CDN Deployment"],
-    icon: <IconRocket className="w-5 h-5" />,
+    label: "04 · SHIP IT",
+    msgs: [
+      { from: "asep", text: "live udah 🚀 lighthouse 98", time: "10.41" },
+      { from: "you", text: "gila sih. langganan terus 🔥", time: "10.44" },
+    ],
   },
 ];
 
-export function WorkflowSection() {
+/* Flat message list for stagger indexing */
+const ALL_MSGS = STEPS.flatMap((s) => s.msgs);
+
+function Avatar({ from }: { from: "you" | "asep" }) {
   return (
-    <section
-      id="workflow"
-      className="py-24 md:py-32 bg-[#F4F1EA] text-[#16150F] relative overflow-x-clip"
+    <span
+      className={`mt-0.5 flex h-8 w-8 shrink-0 items-center justify-center rounded-full ${MONO} text-[12px] font-bold ${
+        from === "asep" ? "bg-[#F0531C] text-white" : "bg-[#14202B] text-white"
+      }`}
     >
-      {/* Figma canvas dot-grid backdrop */}
-      <div
-        aria-hidden
-        className="absolute inset-0 pointer-events-none"
-        style={{
-          backgroundImage:
-            "radial-gradient(rgba(22,21,15,.10) 1px, transparent 1px)",
-          backgroundSize: "24px 24px",
-        }}
-      />
+      {from === "asep" ? "O" : "Y"}
+    </span>
+  );
+}
 
-      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        {/* Section header */}
-        <div className="max-w-3xl mb-14 md:mb-20">
-          <p className="font-mono text-xs font-bold tracking-[0.18em] uppercase text-[var(--accent)] mb-4">
-            ✦ Process — 06 Phases
-          </p>
-          <motion.h2
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.55 }}
-            className="font-display text-3xl sm:text-4xl lg:text-5xl xl:text-6xl font-bold uppercase tracking-tight leading-[1.04]"
-          >
-            From Concept To{" "}
-            <em className="italic normal-case text-[var(--accent)]">
-              Production&nbsp;Ready
-            </em>{" "}
-            Reality
-          </motion.h2>
-          <motion.p
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.55, delay: 0.12 }}
-            className="mt-5 text-base sm:text-lg leading-relaxed text-[#6E6A5E] max-w-2xl"
-          >
-            A disciplined, precision-driven engineering process designed to turn complex digital challenges into clean, accessible, and ultra-performant web interfaces.
-          </motion.p>
-        </div>
-
-        {/* Phase frames grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {workflowSteps.map((item, index) => (
-            <motion.article
-              key={item.id}
-              initial={{ opacity: 0, y: 24 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: "-60px" }}
-              transition={{ duration: 0.45, delay: (index % 3) * 0.08 }}
-              className="group relative flex flex-col bg-white rounded-[14px] border-[1.5px] border-[#D9D4C7] p-6 sm:p-7 transition-all duration-200 ease-out hover:-translate-y-[3px]"
-              style={{ boxShadow: "4px 4px 0 rgba(22,21,15,.10)" }}
+function Bubble({ msg }: { msg: Msg }) {
+  const mine = msg.from === "you";
+  return (
+    <div className={`flex gap-2.5 ${mine ? "flex-row-reverse" : ""}`}>
+      <Avatar from={msg.from} />
+      <div className={`max-w-[78%] ${mine ? "items-end text-right" : ""} flex flex-col`}>
+        <div
+          className={`inline-block rounded-2xl px-4 py-2.5 text-left text-[14.5px] leading-snug ${
+            mine
+              ? "rounded-tr-sm bg-[#14202B] text-white"
+              : "rounded-tl-sm border border-[#14202b12] bg-[#F1F6FA] text-[#14202B]"
+          }`}
+        >
+          {msg.text}
+          {msg.attach && (
+            <span
+              className={`mt-2 flex w-fit items-center gap-2 rounded-lg border px-2.5 py-1.5 ${MONO} text-[11px] font-bold ${
+                mine ? "border-white/20 bg-white/10 text-white/90" : "border-[#14202b22] bg-white text-[#4A6173]"
+              }`}
             >
-              {/* selection outline on hover */}
-              <span
-                aria-hidden
-                className="pointer-events-none absolute inset-0 rounded-[14px] opacity-0 group-hover:opacity-100 transition-opacity duration-200"
-                style={{
-                  outline: "1.5px solid var(--accent)",
-                  outlineOffset: "4px",
-                  boxShadow: "6px 6px 0 var(--accent-soft)",
-                  borderColor: "var(--accent)",
-                }}
-              />
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                <path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z" />
+                <path d="M14 2v6h6" />
+              </svg>
+              {msg.attach}
+            </span>
+          )}
+        </div>
+        <div className={`mt-1 flex items-center gap-2 ${mine ? "flex-row-reverse" : ""}`}>
+          <span className={`${MONO} text-[10.5px] text-[#8AA6B8]`}>{msg.time}</span>
+          {msg.reaction && (
+            <span className="rounded-full border border-[#14202b12] bg-white px-1.5 py-px text-[11px]">
+              {msg.reaction}
+            </span>
+          )}
+        </div>
+      </div>
+    </div>
+  );
+}
 
-              {/* Phase label */}
-              <div className="flex items-center justify-between mb-5">
-                <span className="font-mono text-xs font-bold tracking-[0.16em]" style={{ color: "var(--accent)" }}>
-                  PHASE_{item.step}
-                </span>
-                <span className="flex h-9 w-9 items-center justify-center rounded-lg border border-[#D9D4C7] bg-[#FAF9F5] text-[#16150F] transition-colors duration-200 group-hover:border-[var(--accent)] group-hover:text-[var(--accent)]">
-                  {item.icon}
-                </span>
-              </div>
+export function WorkflowSection() {
+  let msgIndex = -1;
 
-              <h3 className="font-display text-xl sm:text-2xl font-bold tracking-tight leading-snug">
-                {item.title}
-              </h3>
-              <span className="mt-3 w-fit rounded-full border border-[#D9D4C7] bg-[#F4F1EA] px-3 py-1 text-[11.5px] font-semibold text-[#6E6A5E]">
-                {item.tag}
+  return (
+    <section id="process" className="relative z-[1] overflow-x-clip py-20 md:py-28">
+      <div className="mx-auto max-w-[1280px] px-6">
+        {/* Head */}
+        <motion.div
+          initial={{ opacity: 0, y: 24 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.55 }}
+          className="mb-12 text-center"
+        >
+          <p className={`${MONO} mb-3 text-[11px] font-bold uppercase tracking-[0.16em] text-[#F0531C]`}>
+            how-it-works.frame
+          </p>
+          <h2 className={`${SERIF} mx-auto max-w-[16ch] text-[clamp(38px,6vw,72px)] font-semibold uppercase leading-[0.98] text-[#14202B]`}>
+            No forms. No hoops. Just this.
+          </h2>
+          <p className="mx-auto mt-5 max-w-[52ch] text-[16px] text-[#4A6173]">
+            Satu thread, zero chaos. Begini jalannya.
+          </p>
+        </motion.div>
+
+        {/* Chat window */}
+        <motion.div
+          initial={{ opacity: 0, y: 40 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-80px" }}
+          transition={{ duration: 0.6 }}
+          className={`${CARD} mx-auto max-w-3xl overflow-hidden`}
+        >
+          {/* Chat header */}
+          <div className="flex items-center justify-between gap-4 border-b border-[#14202b12] px-5 py-3.5 md:px-7">
+            <div className="flex items-center gap-3">
+              <span className="flex -space-x-2">
+                <span className="flex h-7 w-7 items-center justify-center rounded-full border-2 border-white bg-[#F0531C] text-[11px] font-bold text-white">
+                  O
+                </span>
+                <span className="flex h-7 w-7 items-center justify-center rounded-full border-2 border-white bg-[#14202B] text-[11px] font-bold text-white">
+                  Y
+                </span>
               </span>
+              <span className={`${MONO} text-[13px] font-bold text-[#14202B]`}>&lt;project-channel&gt;</span>
+            </div>
+            <span className="flex items-center gap-2 [font-family:var(--font-mono),ui-monospace,monospace] text-[11px] font-bold text-[#4A6173]">
+              <span className="h-2 w-2 rounded-full bg-[#27c06b] shadow-[0_0_0_3px_rgba(39,192,107,0.18)]" />
+              3 online
+            </span>
+          </div>
 
-              <p className="mt-4 text-sm sm:text-[15px] leading-relaxed text-[#6E6A5E]">
-                {item.description}
-              </p>
-
-              {/* Deliverables */}
-              <div className="mt-auto pt-6">
-                <div className="flex flex-wrap gap-2 border-t border-dashed border-[#D9D4C7] pt-4">
-                  {item.deliverables.map((del) => (
-                    <span
-                      key={del}
-                      className="inline-flex items-center gap-1 rounded-full border border-[#D9D4C7] bg-white px-2.5 py-1 text-[11px] font-medium text-[#16150F]"
-                    >
-                      <IconCheck className="h-3 w-3" style={{ color: "var(--accent)" }} />
-                      {del}
-                    </span>
-                  ))}
+          {/* Messages — staggered on inview */}
+          <motion.div
+            initial="hidden"
+            whileInView="show"
+            viewport={{ once: true, margin: "-60px" }}
+            variants={{ show: { transition: { staggerChildren: 0.32 } } }}
+            className="flex flex-col gap-4 bg-[#FAFCFE] px-5 py-7 md:px-7"
+          >
+            {STEPS.map((step) => (
+              <div key={step.label}>
+                {/* step divider */}
+                <div className="my-5 flex items-center gap-3 first:mt-0">
+                  <span className="h-px flex-1 bg-[#14202b12]" />
+                  <span className={`${MONO} text-[11px] font-bold uppercase tracking-[0.16em] text-[#F0531C]`}>
+                    {step.label}
+                  </span>
+                  <span className="h-px flex-1 bg-[#14202b12]" />
+                </div>
+                <div className="flex flex-col gap-4">
+                  {step.msgs.map((msg) => {
+                    msgIndex += 1;
+                    return (
+                      <motion.div
+                        key={`${step.label}-${msg.time}-${msgIndex}`}
+                        variants={{
+                          hidden: { opacity: 0, y: 16, scale: 0.98 },
+                          show: { opacity: 1, y: 0, scale: 1 },
+                        }}
+                        transition={{ duration: 0.35, ease: "easeOut" }}
+                      >
+                        <Bubble msg={msg} />
+                      </motion.div>
+                    );
+                  })}
                 </div>
               </div>
-            </motion.article>
-          ))}
-        </div>
+            ))}
+            </motion.div>
+
+          {/* Fake input */}
+          <div className="flex items-center gap-3 border-t border-[#14202b12] px-5 py-3.5 md:px-7">
+            <div className={`${MONO} flex-1 rounded-full border border-[#14202b22] px-4 py-2.5 text-[12px] text-[#8AA6B8]`}>
+              message &lt;project-channel&gt;
+            </div>
+            <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-[#F0531C] text-white">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
+                <path d="M22 2L11 13M22 2l-7 20-4-9-9-4z" />
+              </svg>
+            </span>
+          </div>
+        </motion.div>
       </div>
     </section>
   );

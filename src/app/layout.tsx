@@ -1,22 +1,29 @@
 import type { Metadata } from "next";
-import localFont from "next/font/local";
-import { Space_Grotesk } from "next/font/google";
+import { Fraunces, Hanken_Grotesk, Space_Mono } from "next/font/google";
 import "@/styles/globals.css";
 import { ThemeProvider } from "@/components/theme-provider";
-import { AccentProvider } from "@/components/accent/AccentContext";
 import { Toaster } from "sonner";
 import AppShell from "@/components/layouts/AppShell";
 
-const geist = localFont({
-  src: [{ path: "./fonts/GeistVF.woff", style: "normal" }],
-  variable: "--font-geist",
+const fraunces = Fraunces({
+  subsets: ["latin"],
+  weight: "variable",
+  axes: ["opsz"],
+  variable: "--font-display",
   display: "swap",
 });
 
-const spaceGrotesk = Space_Grotesk({
+const hanken = Hanken_Grotesk({
   subsets: ["latin"],
-  weight: ["500", "600", "700"],
-  variable: "--font-display",
+  weight: ["400", "500", "600", "700"],
+  variable: "--font-body",
+  display: "swap",
+});
+
+const spaceMono = Space_Mono({
+  subsets: ["latin"],
+  weight: ["400", "700"],
+  variable: "--font-mono",
   display: "swap",
 });
 
@@ -58,17 +65,17 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <body className={`${geist.variable} ${spaceGrotesk.variable} font-sans antialiased bg-zinc-50 dark:bg-zinc-950 text-zinc-900 dark:text-zinc-50`}>
+      <body
+        className={`${fraunces.variable} ${hanken.variable} ${spaceMono.variable} font-body antialiased bg-[var(--canvas)] text-[var(--ink)]`}
+      >
         <ThemeProvider
           attribute="class"
           defaultTheme="system"
           enableSystem
           disableTransitionOnChange
         >
-          <AccentProvider>
-            <AppShell>{children}</AppShell>
-            <Toaster position="bottom-right" richColors />
-          </AccentProvider>
+          <AppShell>{children}</AppShell>
+          <Toaster position="bottom-right" richColors />
         </ThemeProvider>
       </body>
     </html>

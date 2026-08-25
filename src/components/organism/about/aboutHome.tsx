@@ -26,7 +26,7 @@ export default function AboutHome({ skills }: { skills?: Skill[] }) {
       <div className="mx-auto grid w-full max-w-[1160px] items-start gap-12 px-6 lg:grid-cols-[1.2fr_0.8fr]">
         {/* Copy */}
         <div>
-          <p className="figma-frame-label mb-2.5 flex items-center gap-2 font-display text-[13px] font-semibold text-[var(--accent)]">
+          <p className="omd-frame-label mb-2.5 flex items-center gap-2 font-display text-[13px] font-semibold text-[var(--brand)]">
             <FigmaIcon />
             Page 03 — Tentang
           </p>
@@ -84,7 +84,7 @@ export default function AboutHome({ skills }: { skills?: Skill[] }) {
               transition={{ duration: 0.45 }}
               className="rounded-[14px] border-[1.5px] border-[#16150F] bg-white p-5 shadow-[4px_4px_0_rgba(22,21,15,0.1)]"
             >
-              <b className="mb-1 block font-display text-[26px] font-bold leading-tight tracking-tight text-[var(--accent)] lg:text-[30px]">
+              <b className="mb-1 block font-display text-[26px] font-bold leading-tight tracking-tight text-[var(--brand)] lg:text-[30px]">
                 {stat.big}
               </b>
               <span className="text-[13px] font-medium text-[#6E6A5E]">
