@@ -1,53 +1,73 @@
 "use client";
-import React from "react";
-import { cn } from "@/lib/utils";
 import { motion } from "framer-motion";
-import { HoverBorderGradient } from "@/components/ui/hover-border-gradient";
 import { IconArrowRight } from "@tabler/icons-react";
-import Link from "next/link";
 
 export function CtaSection() {
   return (
-    <div className="py-28 md:py-36 relative w-full overflow-hidden bg-zinc-50 dark:bg-gray-950 flex flex-col items-center justify-center transition-colors duration-300 border-t border-zinc-200/80 dark:border-zinc-900">
-      <div className="relative z-10 px-4 text-center">
+    <section className="py-28 md:py-40 bg-[#F4F1EA] text-[#16150F] relative overflow-hidden">
+      {/* canvas dot grid */}
+      <div
+        aria-hidden
+        className="absolute inset-0 pointer-events-none"
+        style={{
+          backgroundImage: "radial-gradient(rgba(22,21,15,.09) 1px, transparent 1px)",
+          backgroundSize: "26px 26px",
+        }}
+      />
+
+      <div className="relative z-10 mx-auto max-w-4xl px-4 text-center sm:px-6">
+        <motion.p
+          initial={{ opacity: 0, y: 16 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.45 }}
+          className="font-mono text-xs font-bold uppercase tracking-[0.18em]"
+          style={{ color: "var(--accent)" }}
+        >
+          ✦ Frame Final — Contact
+        </motion.p>
+
         <motion.h2
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.5 }}
-          className={cn("text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight text-zinc-900 dark:text-white transition-colors")}
+          transition={{ duration: 0.55, delay: 0.08 }}
+          className="mt-6 font-display text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold leading-[1.04] tracking-tight"
         >
-          Ready to <span className="text-lime-600 dark:text-lime-400 italic font-medium transition-colors">collaborate?</span>
+          Punya ide?
+          <br />
+          <span style={{ color: "var(--accent)" }}>Gas kita wujudkan.</span>
         </motion.h2>
+
         <motion.p
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.5, delay: 0.1 }}
-          className="mt-4 text-sm sm:text-base text-zinc-600 dark:text-zinc-400 max-w-md mx-auto transition-colors leading-relaxed"
+          transition={{ duration: 0.55, delay: 0.16 }}
+          className="mx-auto mt-6 max-w-lg text-base sm:text-lg leading-relaxed text-[#6E6A5E]"
         >
-          Whether starting from scratch or scaling an existing platform, let&apos;s build something exceptional together.
+          Terbuka untuk posisi fulltime UI/UX / Frontend maupun proyek freelance. Balasan &lt; 24 jam.
         </motion.p>
 
         <motion.div
           initial={{ opacity: 0, scale: 0.95 }}
           whileInView={{ opacity: 1, scale: 1 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.5, delay: 0.2 }}
-          className="flex justify-center mt-8 sm:mt-10"
+          transition={{ duration: 0.45, delay: 0.24 }}
+          className="mt-12 flex justify-center"
         >
-          <Link href="/contact">
-            <HoverBorderGradient
-              containerClassName="rounded-full shadow-lg shadow-lime-500/20"
-              as="div"
-              className="bg-lime-500 text-black flex items-center space-x-2 px-8 py-3.5 sm:py-4 font-bold text-sm transition-all hover:scale-[1.03] active:scale-[0.97]"
-            >
-              <span>Get in Touch</span>
-              <IconArrowRight className="ml-1 h-4 w-4 sm:h-5 sm:w-5" />
-            </HoverBorderGradient>
-          </Link>
+          <a
+            href="mailto:mail.asepsyaepul@gmail.com"
+            className="group inline-flex items-center gap-2.5 rounded-xl bg-[#16150F] px-8 py-4 text-[15px] font-semibold text-white transition-transform duration-150 ease-out hover:-translate-y-[2px]"
+            style={{ boxShadow: "4px 4px 0 var(--accent)" }}
+          >
+            Let&apos;s Talk
+            <IconArrowRight className="h-5 w-5 transition-transform duration-200 group-hover:translate-x-1" />
+          </a>
         </motion.div>
       </div>
-    </div>
+    </section>
   );
 }
+
+export default CtaSection;
