@@ -4,6 +4,7 @@ import { useState } from "react";
 import Link from "next/link";
 import { IconMail, IconMenu2, IconX } from "@tabler/icons-react";
 import { cn } from "@/lib/utils";
+import ScrollRuler from "@/components/atoms/scroll-ruler/scrollRuler";
 
 const navItems = [
     { name: "Home", link: "/" },
@@ -22,6 +23,7 @@ export function NavbarMenu() {
 
     return (
         <div className="sticky top-0 z-50 px-4 pt-4">
+            <ScrollRuler />
             <nav
                 aria-label="Main navigation"
                 className="mx-auto flex max-w-5xl items-center justify-between gap-3 rounded-full border border-[var(--line)] bg-white/80 py-2 pl-5 pr-2 shadow-[var(--shadow-card)] backdrop-blur-md"
@@ -52,7 +54,7 @@ export function NavbarMenu() {
                     {/* Email pill CTA */}
                     <a
                         href={`mailto:${EMAIL}`}
-                        className="omd-btn-primary hidden !py-2.5 md:inline-flex"
+                        className="omd-btn-primary hidden max-w-[240px] truncate !py-2.5 md:inline-flex"
                     >
                         <IconMail className="h-4 w-4" aria-hidden />
                         {EMAIL}

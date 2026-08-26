@@ -82,9 +82,19 @@ body {
 }
 
 /* Buttons — Space Mono bold 13px, pad 13/20, radius 12 */
+@media (min-width: 768px) {
+  .omd-btn-primary:not(.hidden),
+  .omd-btn-ghost {
+    display: inline-flex;
+  }
+}
+@media (max-width: 767px) {
+  .omd-btn-ghost {
+    display: inline-flex;
+  }
+}
 .omd-btn-primary,
 .omd-btn-ghost {
-  display: inline-flex;
   align-items: center;
   gap: 8px;
   font-family: var(--font-mono), monospace;
