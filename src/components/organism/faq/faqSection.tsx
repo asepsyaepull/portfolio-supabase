@@ -11,7 +11,7 @@ const faqs = [
             <>
                 Dua-duanya bisa. <strong>Project-based</strong> untuk scope jelas (landing page, redesign),{" "}
                 <strong>retainer bulanan</strong> kalau butuh design/dev terus-menerus tanpa mikir ulang kontrak.
-                Ngobrol dulu, kita pilih format yang paling masuk akal.
+                Diskusi dulu, kita pilih format yang paling sesuai.
             </>
         ),
     },

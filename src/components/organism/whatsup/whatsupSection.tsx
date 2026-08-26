@@ -102,8 +102,8 @@ export function WhatsupSection() {
           >
             <p className={`${LABEL} text-[#8AA6B8]`}>STATEMENT.TXT</p>
             <blockquote className={`${SERIF} mt-8 text-[clamp(26px,2.8vw,40px)] font-medium leading-[1.15]`}>
-              &ldquo;Gue bikin desain yang bikin orang berhenti scroll — terus nanya,{" "}
-              <span className="text-[#F0531C]">ini siapa yang bikin?</span>&rdquo;
+              &ldquo;Saya merancang desain yang membuat orang berhenti scroll lalu bertanya,{" "}
+              <span className="text-[#F0531C]">siapa yang membuat ini?</span>&rdquo;
             </blockquote>
             <p className={`${LABEL} mt-10 text-white/85`}>ASEP, SINCE 2018</p>
             <span className="mt-5 inline-flex items-center gap-2 rounded-full border border-[#27c06b]/50 bg-[#27c06b]/15 px-3.5 py-1.5 [font-family:var(--font-mono),ui-monospace,monospace] text-[11px] font-bold lowercase tracking-wide text-[#5fe39a]">

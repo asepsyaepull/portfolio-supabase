@@ -38,18 +38,18 @@ export default function AboutHome({ skills }: { skills?: Skill[] }) {
 
           <div className="mt-6 space-y-4 text-[15.5px] leading-relaxed text-[#6E6A5E] md:text-base">
             <p>
-              Gue <strong className="text-[#16150F]">Asep Syaepul</strong>,
-              UI/UX designer sekaligus frontend developer, 7+ tahun.
-              Spesialisasi gue:{" "}
+              Saya <strong className="text-[#16150F]">Asep Syaepul</strong>,
+              UI/UX designer sekaligus frontend developer dengan 7+ tahun pengalaman.
+              Spesialisasi saya:{" "}
               <strong className="text-[#16150F]">
                 design systems, frontend architecture (React/Next.js/TypeScript),
                 dan micro-interactions
               </strong>{" "}
-              yang bikin produk kerasa hidup.
+              yang membuat produk terasa hidup.
             </p>
             <p>
-              Pernah ngurusin ERP enterprise, POS retail, sampai aplikasi pemerintah —
-              jadi gue paham desain itu bukan cuma soal cantik, tapi soal{" "}
+              Berlatar ERP enterprise, POS retail, hingga aplikasi pemerintah —
+              saya paham bahwa desain bukan hanya soal estetika, tapi soal{" "}
               <strong className="text-[#16150F]">
                 bisa di-build tepat waktu, scalable, dan enak dipakai
               </strong>

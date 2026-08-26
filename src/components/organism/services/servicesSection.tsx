@@ -7,7 +7,7 @@ const services = [
         title: "UI/UX",
         titleLast: "Design",
         tool: "Figma.",
-        work: "Dari wireframe kasar sampai pixel-final. Flow-nya masuk akal, interface-nya enak dipandang, handoff-nya nggak bikin developer bingung.",
+        work: "Dari wireframe hingga pixel-final. Flow yang masuk akal, interface yang nyaman dilihat, handoff yang jelas untuk developer.",
         deliverables: ["Wireframe", "User flow", "Hi-fi mockup", "Prototype", "Design system"],
     },
     {
@@ -15,7 +15,7 @@ const services = [
         title: "Web",
         titleLast: "Development",
         tool: "Next.js & React.",
-        work: "Desain lo gue hidupin jadi produk beneran: cepat, responsif, SEO-ready. TypeScript ketat, Tailwind rapi, CMS kalau perlu.",
+        work: "Desain saya wujudkan menjadi produk nyata: cepat, responsif, SEO-ready. TypeScript ketat, Tailwind rapi, CMS bila diperlukan.",
         deliverables: ["Next.js / React", "TypeScript", "Tailwind CSS", "CMS setup", "Deploy & domain"],
     },
     {
@@ -23,7 +23,7 @@ const services = [
         title: "Brand",
         titleLast: "Identity",
         tool: "",
-        work: "Logo doang nggak cukup. Lo dapet moodboard, sistem visual yang utuh, dan guideline singkat biar brand-nya konsisten di mana pun muncul.",
+        work: "Logo saja tidak cukup. Anda mendapat moodboard, sistem visual utuh, dan guideline ringkas agar brand konsisten di semua media.",
         deliverables: ["Moodboard", "Logo suite", "Color & type system", "Brand guideline"],
     },
 ];
@@ -36,7 +36,7 @@ export default function ServicesSection() {
                 What we make
             </h2>
             <p className="mt-3 text-center font-mono text-sm uppercase tracking-widest text-[var(--ink-soft)]">
-                Tiga hal yang paling sering dipesan.
+                Tiga layanan yang paling sering diminta.
             </p>
 
             <div className="mx-auto mt-12 flex max-w-6xl snap-x snap-mandatory gap-6 overflow-x-auto pb-4 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden md:grid md:grid-cols-3 md:overflow-visible">

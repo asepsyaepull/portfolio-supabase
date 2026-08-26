@@ -78,7 +78,7 @@ export function CtaSection() {
           transition={{ duration: 0.5, delay: 0.16 }}
           className="mx-auto mt-7 max-w-md text-base leading-relaxed text-[#14202B]/80 sm:text-lg"
         >
-          Jam {now ?? "--:--:--"} di studio gue. Ada ide? Cerita sekarang, besok udah masuk antrian.
+          Jam {now ?? "--:--:--"} di studio. Punya ide? Ceritakan sekarang, besok masuk antrian.
         </motion.p>
 
         <motion.div
