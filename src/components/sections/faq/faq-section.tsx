@@ -118,7 +118,7 @@ export function FaqSection() {
                 <div
                   className="transition-all duration-300 ease-in-out"
                   style={{
-                    maxHeight: isOpen ? "220px" : "0px",
+                    maxHeight: isOpen ? "400px" : "0px",
                     opacity: isOpen ? 1 : 0,
                   }}
                 >

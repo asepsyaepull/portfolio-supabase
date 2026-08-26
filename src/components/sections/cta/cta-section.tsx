@@ -3,6 +3,7 @@
 import React from "react";
 import { motion } from "framer-motion";
 import { useClock } from "@/hooks/use-clock";
+import { FigmaTag, FrameLabel } from "@/components/ui/figma-tag";
 
 const MAILTO = "mailto:mail.asepsyaepul@gmail.com";
 
@@ -10,89 +11,97 @@ export function CtaSection() {
   const now = useClock();
 
   return (
-    <section
-      id="contact"
-      className="relative flex min-h-[70vh] items-center justify-center overflow-hidden"
-      style={{ background: "linear-gradient(180deg, #F9C97C 0%, #F0531C 100%)" }}
-    >
-      {/* Sun glow */}
-      <div
-        aria-hidden
-        className="absolute left-1/2 top-[18%] h-56 w-56 -translate-x-1/2 rounded-full md:h-72 md:w-72"
-        style={{
-          background:
-            "radial-gradient(circle, rgba(255,241,181,.95) 0%, rgba(255,196,92,.55) 55%, transparent 72%)",
-          filter: "blur(2px)",
-        }}
-      />
-      {/* Clouds */}
-      <div
-        aria-hidden
-        className="absolute left-[8%] top-[22%] h-16 w-40 rounded-full bg-white/50 blur-xl md:h-20 md:w-56"
-      />
-      <div
-        aria-hidden
-        className="absolute right-[6%] top-[38%] h-14 w-32 rounded-full bg-white/40 blur-xl md:h-16 md:w-44"
-      />
-      <div
-        aria-hidden
-        className="absolute bottom-[12%] left-[18%] h-12 w-28 rounded-full bg-white/30 blur-lg md:w-36"
-      />
+    <section id="contact" className="relative z-[1] px-4 py-20 sm:px-6 md:py-28">
+      <div className="mx-auto max-w-[1280px]">
+        {/* Frame Label */}
+        <div className="mb-4 flex items-center justify-between px-2">
+          <FrameLabel name="CONTACT.FRAME" className="!text-brand" />
+          <span className="font-mono text-[11px] font-bold text-ink-faint">
+            1280 × 520
+          </span>
+        </div>
 
-      <div className="relative z-10 mx-auto max-w-4xl px-4 text-center sm:px-6">
-        <motion.p
-          initial={{ opacity: 0, y: 12 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.45 }}
-          className="font-mono text-xs font-bold uppercase italic tracking-[0.22em] text-white/85"
-        >
-          golden hour in jakarta
-        </motion.p>
+        {/* Figma Artboard Card Wrapper */}
+        <div className="omd-sel relative my-6">
+          <span className="omd-h tl" aria-hidden />
+          <span className="omd-h tr" aria-hidden />
+          <span className="omd-h bl" aria-hidden />
+          <span className="omd-h br" aria-hidden />
 
-        <motion.h2
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.55, delay: 0.08 }}
-          className="heading-display mt-5 text-[clamp(54px,10vw,140px)] font-bold uppercase leading-[0.95] tracking-tight text-ink"
-        >
-          Still building.
-        </motion.h2>
+          <FigmaTag variant="blue" className="-top-3 left-6 z-20">
+            contact.fig
+          </FigmaTag>
 
-        <motion.p
-          initial={{ opacity: 0, y: 16 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.5, delay: 0.16 }}
-          className="mx-auto mt-7 max-w-md text-base leading-relaxed text-ink/80 sm:text-lg"
-        >
-          Jam {now} di studio. Punya project — atau posisi yang cocok? Ceritakan sekarang, besok masuk antrian.
-        </motion.p>
+          {/* Inner card with overflow-hidden for gradients/grid */}
+          <div className="relative overflow-hidden rounded-[28px] border border-line bg-gradient-to-b from-[#14202B] to-[#1C2E3D] p-8 text-white shadow-card md:p-16">
+            {/* Subtle grid accent */}
+            <div
+              aria-hidden
+              className="pointer-events-none absolute inset-0 opacity-[0.06]"
+              style={{
+                backgroundImage:
+                  "linear-gradient(to right, #ffffff 1px, transparent 1px), linear-gradient(to bottom, #ffffff 1px, transparent 1px)",
+                backgroundSize: "32px 32px",
+              }}
+            />
 
-        <motion.div
-          initial={{ opacity: 0, y: 14 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.45, delay: 0.24 }}
-          className="mt-10 flex flex-col items-center justify-center gap-4 sm:flex-row sm:gap-6"
-        >
-          <a
-            href={MAILTO}
-            className="inline-flex items-center gap-2.5 rounded-full bg-white px-8 py-3.5 font-mono text-[13px] font-bold uppercase tracking-wide text-ink shadow-[0_20px_50px_-32px_rgba(20,19,16,.45)] transition-transform duration-150 ease-out hover:-translate-y-[2px]"
-          >
-            Talk with me
-          </a>
-          <a
-            href={MAILTO}
-            className="font-mono text-[13px] font-bold text-white underline decoration-white/60 underline-offset-4 transition-colors hover:decoration-white"
-          >
-            or book a call
-          </a>
-        </motion.div>
+          <div className="relative z-10 mx-auto max-w-3xl text-center">
+            <motion.p
+              initial={{ opacity: 0, y: 12 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.45 }}
+              className="font-mono text-xs font-bold uppercase italic tracking-[0.22em] text-brand"
+            >
+              golden hour in jakarta
+            </motion.p>
+
+            <motion.h2
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.55, delay: 0.08 }}
+              className="heading-display mt-5 text-[clamp(44px,8vw,96px)] font-bold uppercase leading-[0.95] tracking-tight text-white"
+            >
+              Still building<span className="text-brand">.</span>
+            </motion.h2>
+
+            <motion.p
+              initial={{ opacity: 0, y: 16 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5, delay: 0.16 }}
+              className="mx-auto mt-6 max-w-lg text-base leading-relaxed text-zinc-300 sm:text-lg"
+            >
+              Jam {now} di studio. Punya project — atau posisi yang cocok? Ceritakan sekarang, besok masuk antrian.
+            </motion.p>
+
+            <motion.div
+              initial={{ opacity: 0, y: 14 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.45, delay: 0.24 }}
+              className="mt-9 flex flex-col items-center justify-center gap-4 sm:flex-row sm:gap-6"
+            >
+              <a
+                href={MAILTO}
+                className="omd-btn-primary !px-8 !py-3.5 text-sm shadow-[0_12px_26px_-8px_#F0531C]"
+              >
+                Talk with me
+              </a>
+              <a
+                href={MAILTO}
+                className="font-mono text-[13px] font-bold text-white/90 underline decoration-white/40 underline-offset-4 transition-colors hover:text-white hover:decoration-white"
+              >
+                or book a call
+              </a>
+            </motion.div>
+          </div>
+        </div>
       </div>
-    </section>
-  );
+    </div>
+  </section>
+);
 }
 
 export default CtaSection;

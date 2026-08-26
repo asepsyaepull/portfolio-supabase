@@ -213,7 +213,7 @@ export function ArcRevealHero({
               preserveAspectRatio="none"
               aria-hidden
             >
-              <motion.path d={arcPath} style={{ fill: "var(--canvas, #AFD8F0)" }} />
+              <motion.path d={arcPath} style={{ fill: "var(--canvas, #E6E8EC)" }} />
             </svg>
           </motion.div>
         )}

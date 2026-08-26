@@ -3,7 +3,7 @@
 import React, { useCallback, useRef, useState } from "react";
 import { FrameLabel } from "@/components/ui/figma-tag";
 
-const COLORS = ["#F0531C", "#0D99FF", "#D2410E", "#14202B", "#AFD8F0", "#ffffff"];
+const COLORS = ["#F0531C", "#0D99FF", "#D2410E", "#14202B", "#27C06B", "#ffffff"];
 
 type Confetto = {
   id: number;

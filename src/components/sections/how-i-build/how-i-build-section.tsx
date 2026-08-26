@@ -94,7 +94,7 @@ export function HowIBuildSection() {
   }, []);
 
   return (
-    <section className="overflow-hidden bg-canvas py-20 md:py-28">
+    <section className="overflow-hidden py-20 md:py-28">
       <div className="mx-auto max-w-6xl px-5" ref={headRef}>
         <div className="flex flex-wrap items-end justify-between gap-4">
           <SectionHeader
@@ -141,7 +141,7 @@ export function HowIBuildSection() {
           animate={inView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.55, ease: "easeOut" }}
           ref={trackRef}
-          className="mt-12 flex snap-x snap-mandatory gap-5 overflow-x-auto pb-4 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
+          className="mt-8 flex snap-x snap-mandatory gap-5 overflow-x-auto px-2 py-6 -mx-2 -my-4 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
         >
           {PHASES.map((ph, i) => {
             const Icon = ICONS[i];

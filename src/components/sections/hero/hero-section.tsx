@@ -2,7 +2,7 @@
 
 import { FigmaTag } from "@/components/ui/figma-tag";
 import { motion, useMotionValue, useSpring } from "framer-motion";
-import React, { memo } from "react";
+import { memo } from "react";
 
 const TICKER_ITEMS = [
   "UI/UX",
@@ -13,10 +13,6 @@ const TICKER_ITEMS = [
   "SUPABASE",
   "MOTION",
 ];
-
-const Cloud = ({ style }: { style: React.CSSProperties }) => (
-  <div aria-hidden className="omd-cloud" style={style} />
-);
 
 export const HeroSection = () => {
   const mx = useMotionValue(-300);
@@ -30,45 +26,8 @@ export const HeroSection = () => {
         mx.set(e.clientX);
         my.set(e.clientY);
       }}
-      className="relative z-[1] overflow-hidden bg-canvas"
+      className="relative z-[1] overflow-hidden bg-transparent"
     >
-      {/* Drifting clouds */}
-      <div
-        aria-hidden
-        className="pointer-events-none absolute inset-0 overflow-hidden"
-      >
-        <Cloud
-          style={{
-            top: "10%",
-            left: "-4%",
-            width: 420,
-            height: 150,
-            opacity: 0.95,
-          }}
-        />
-        <Cloud
-          style={{
-            top: "34%",
-            right: "-6%",
-            width: 520,
-            height: 190,
-            opacity: 0.8,
-            animationDuration: "74s",
-            animationDelay: "-22s",
-          }}
-        />
-        <Cloud
-          style={{
-            bottom: "18%",
-            left: "12%",
-            width: 360,
-            height: 130,
-            opacity: 0.65,
-            animationDuration: "88s",
-            animationDelay: "-48s",
-          }}
-        />
-      </div>
 
       <div className="relative mx-auto flex min-h-[90vh] max-w-[1280px] flex-col items-center justify-center px-6 pb-14 pt-20 text-center">
         {/* Status pill */}
@@ -80,6 +39,9 @@ export const HeroSection = () => {
         </div>
 
         {/* Headline wrapped in dashed Figma selection */}
+        <span className="mb-4 inline-block font-mono text-md font-semibold uppercase tracking-[0.16em] text-ink/60">
+          Hi! I'm Asep Syaepul
+        </span>
         <div className="omd-sel relative px-5 py-4">
           <span className="omd-h tl" aria-hidden />
           <span className="omd-h tr" aria-hidden />
@@ -102,10 +64,8 @@ export const HeroSection = () => {
         </div>
 
         {/* Sub copy */}
-        <p className="mt-8 font-mono text-[11px] font-bold uppercase tracking-[0.16em] text-ink/70">
-          Asep Syaepul — UI/UX Designer × Frontend Developer
-        </p>
-        <p className="mt-4 max-w-3xl text-md leading-relaxed text-ink-soft md:text-lg">
+
+        <p className="mt-12 max-w-3xl text-md leading-relaxed text-ink-soft md:text-lg">
           7+ tahun merancang dan membangun produk digital: ERP enterprise, POS retail, sampai mobile app. Bukan sekadar mockup — desain saya berjalan di production, terukur, dan dipakai pengguna nyata.
         </p>
 

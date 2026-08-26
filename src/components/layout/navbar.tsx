@@ -24,7 +24,7 @@ export function Navbar() {
   return (
     <header className="sticky top-0 z-50">
       <ScrollRuler />
-      <div className="sticky top-0 z-50 px-4 pt-4">
+      <div className="relative px-4 pt-3">
         <nav
           aria-label="Main navigation"
           className="mx-auto flex max-w-5xl items-center justify-between gap-3 rounded-full border border-line bg-white/80 px-5 py-2 shadow-card backdrop-blur-md"

@@ -13,9 +13,11 @@
      ------------------------------------------------------------------------ */
 
   /* Surface & Backgrounds */
-  --canvas: #AFD8F0;          /* Soft Sky Blue page background */
+  --canvas: #E6E8EC;          /* Authentic Figma Light Canvas Neutral */
   --frame: #FFFFFF;           /* Pure White card/panel surface */
   --grid: #EFEEE9;            /* Warm Neutral surface/divider/subtle tile */
+  --canvas-dot: rgba(20, 32, 43, 0.11); /* Figma Canvas dot grid marker */
+  --canvas-line: rgba(20, 32, 43, 0.05); /* Figma Canvas grid line */
 
   /* Text & Ink */
   --ink: #14202B;             /* Deep Obsidian Navy (Primary Headings, Dark Card) */
@@ -58,6 +60,23 @@
   /* Legacy aliases for backward compatibility */
   --muted: var(--ink-soft);
   --surface: var(--frame);
+}
+
+.dark {
+  /* Dark Mode Figma Canvas Tokens */
+  --canvas: #18181B;          /* Figma Dark Canvas #18181B / #1E1E1E */
+  --frame: #242427;           /* Dark Card Frame */
+  --grid: #2A2A2E;            /* Dark Neutral tile */
+  --canvas-dot: rgba(255, 255, 255, 0.12);
+  --canvas-line: rgba(255, 255, 255, 0.05);
+
+  --ink: #F4F4F5;             /* Light Text */
+  --ink-soft: #A1A1AA;        /* Sub-copy */
+  --ink-faint: #71717A;       /* Muted / Labels */
+
+  --line: rgba(255, 255, 255, 0.08);
+  --line-2: rgba(255, 255, 255, 0.14);
+  --line-dashed: rgba(255, 255, 255, 0.22);
 }
 
 /* --------------------------------------------------------------------------
@@ -243,19 +262,11 @@
   animation: omd-marquee 26s linear infinite;
 }
 
-/* Drifting clouds in hero background */
-@keyframes omd-drift {
-  from { transform: translateX(-46px); }
-  to { transform: translateX(46px); }
-}
-
-.omd-cloud {
-  position: absolute;
-  border-radius: var(--radius-pill);
-  background: radial-gradient(closest-side, #ffffff 58%, rgba(255, 255, 255, 0));
-  filter: blur(14px);
-  animation: omd-drift 60s ease-in-out infinite alternate;
-  will-change: transform;
+/* Figma Canvas Dot Grid Texture */
+.figma-canvas-grid {
+  background-color: var(--canvas);
+  background-image: radial-gradient(var(--canvas-dot, rgba(20, 32, 43, 0.11)) 1.2px, transparent 1.2px);
+  background-size: 24px 24px;
 }
 
 /* Confetti falling drop */
@@ -269,7 +280,6 @@
   }
   100% {
     transform: translate(var(--drift, 40px), 150px) rotate(540deg);
-    opacity: 0;
   }
 }
 
@@ -279,7 +289,6 @@
 
 /* Accessibility: Reduced motion query */
 @media (prefers-reduced-motion: reduce) {
-  .omd-cloud,
   .omd-track,
   .omd-confetto {
     animation: none !important;

@@ -113,7 +113,7 @@ export function ScrollRuler() {
   return (
     <div
       aria-hidden
-      className="pointer-events-none sticky top-0 z-[60] flex h-4 items-center overflow-hidden bg-white/90 md:h-8"
+      className="pointer-events-none relative z-10 flex h-4 items-center overflow-hidden bg-white/90 md:h-8"
     >
       {/* Left: Brand tag */}
       <div className="flex shrink-0 items-center gap-1.5 pl-3 md:gap-2 md:pl-4">
