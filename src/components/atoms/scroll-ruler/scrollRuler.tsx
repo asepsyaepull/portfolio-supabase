@@ -24,13 +24,24 @@ export default function ScrollRuler() {
     };
   }, []);
 
-  // 13 ticks: 100,200,...1300
-  const TICKS = Array.from({ length: 13 }, (_, i) => (i + 1) * 100);
+  // 13 ticks desktop; 6 ticks mobile (200..1200 step 200) biar muat di 390px
+  const [isMobile, setIsMobile] = useState(false);
+  useEffect(() => {
+    const mq = window.matchMedia("(max-width: 767px)");
+    const update = () => setIsMobile(mq.matches);
+    update();
+    mq.addEventListener("change", update);
+    return () => mq.removeEventListener("change", update);
+  }, []);
+  const TICKS = isMobile
+    ? Array.from({ length: 6 }, (_, i) => (i + 1) * 200)
+    : Array.from({ length: 13 }, (_, i) => (i + 1) * 100);
+  const denom = TICKS[TICKS.length - 1];
 
   return (
     <div
       aria-hidden
-      className="pointer-events-none absolute inset-x-0 top-0 hidden h-8 items-end justify-between border-b border-[#14202b12] bg-[#f4f4f0]/80 px-6 pb-1 backdrop-blur-sm md:flex"
+      className="pointer-events-none absolute inset-x-0 top-0 flex h-7 items-end justify-between border-b border-[#14202b12] bg-[#f4f4f0]/80 px-4 pb-1 backdrop-blur-sm md:h-8 md:px-6"
     >
       {/* progress fill */}
       <div
@@ -44,7 +55,7 @@ export default function ScrollRuler() {
             {t}
           </span>
           <span
-            className={`mt-0.5 w-px ${progress >= (t - 100) / 1200 ? "bg-[var(--brand)]" : "bg-[#14202b33]"}`}
+            className={`mt-0.5 w-px ${progress >= (t - TICKS[0] + 100) / denom ? "bg-[var(--brand)]" : "bg-[#14202b33]"}`}
             style={{ height: t % 500 === 0 ? 10 : 5 }}
           />
         </div>
