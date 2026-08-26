@@ -3,10 +3,10 @@ import { IconCheck, IconX } from "@tabler/icons-react";
 
 const mostStudios = [
     "Pitched senior, dikerjain junior.",
-    "Booked mingguan — lambat deliver.",
+    "Booking mingguan, deliver bulan depan.",
     "Retainer mahal + tagihan kejutan.",
     "Banyak meeting sebelum pixel pertama.",
-    "Aman… tapi instantly forgettable.",
+    "Rapi semua… tapi gampang dilupain.",
 ];
 
 const asep = [
@@ -14,7 +14,7 @@ const asep = [
     "First draft hari, bukan kuartal.",
     "Fixed scope, fixed price.",
     "Less meetings, more shipping.",
-    "Custom & hard to forget.",
+    "Custom, susah dilupain.",
 ];
 
 export default function WhySection() {

@@ -25,9 +25,9 @@ const PHASES: Phase[] = [
   {
     n: "01",
     phase: "DISCOVER",
-    title: "Nggas & Riset",
+    title: "Ngobrol & Riset",
     duration: "HARI 1–2",
-    body: "Ngobrol santai dulu: goals, user, konteks bisnis. Gue riset kompetitor + pattern yang udah terbukti. Nol asumsi.",
+    body: "Ngobrol santai soal goals, user, dan konteks bisnis. Gue riset kompetitor dan pattern yang udah terbukti. Nol asumsi.",
     deliver: ["kickoff call", "competitor teardown", "success metrics"],
     progress: 15,
   },

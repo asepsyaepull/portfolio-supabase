@@ -11,7 +11,7 @@ const faqs = [
             <>
                 Dua-duanya bisa. <strong>Project-based</strong> untuk scope jelas (landing page, redesign),{" "}
                 <strong>retainer bulanan</strong> kalau butuh design/dev terus-menerus tanpa mikir ulang kontrak.
-                Chat dulu, kami pilih format yang paling masuk akal.
+                Ngobrol dulu, kita pilih format yang paling masuk akal.
             </>
         ),
     },
@@ -42,7 +42,7 @@ const faqs = [
             <>
                 Bisa dua-duanya. <strong>Design-only</strong> (Figma sampai handoff) atau{" "}
                 <strong>design + development</strong> pakai Next.js/React — desain dan kode dari satu orang, jadi
-                nggak ada drama “kok di Figma beda sama di browser”.
+                nggak ada drama "kok di Figma beda sama di browser?"
             </>
         ),
     },
