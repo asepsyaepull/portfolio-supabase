@@ -41,7 +41,7 @@ export default function ScrollRuler() {
   return (
     <div
       aria-hidden
-      className="pointer-events-none absolute inset-x-0 top-0 flex h-7 items-end justify-between border-b border-[#14202b12] bg-[#f4f4f0]/80 px-4 pb-1 backdrop-blur-sm md:h-8 md:px-6"
+      className="pointer-events-none sticky top-0 z-[60] flex h-7 items-end justify-between border-b border-[#14202b12] bg-[#f4f4f0]/80 px-4 pb-1 backdrop-blur-sm md:h-8 md:px-6"
     >
       {/* progress fill */}
       <div
