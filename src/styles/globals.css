@@ -16,21 +16,6 @@ body {
   color: var(--ink);
 }
 
-/* ==================================================================
-   Legacy base — kept for shadcn/admin pages. Do not remove.
-   ================================================================== */
-
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
-}
 
 @layer utilities {
   .text-balance {

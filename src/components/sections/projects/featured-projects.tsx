@@ -330,16 +330,6 @@ export function FeaturedProjects({ projects }: FeaturedProjectsProps) {
                       >
                         <IconArrowUpRight size={18} className="md:w-5 md:h-5" />
                       </Link>
-
-                      {/* Floating `< DRAG >` Flexible Badge on Active Card */}
-                      {isActive && (
-                        <FlexibleDragBadge
-                          isDragging={isDragging}
-                          onNavigate={() => {
-                            setActive((prev) => (prev + 1) % total);
-                          }}
-                        />
-                      )}
                     </div>
 
                     {/* Bottom Metadata Bar */}

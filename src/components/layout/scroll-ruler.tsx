@@ -37,23 +37,23 @@ export function ScrollRuler() {
     ctx.clearRect(0, 0, w, h);
 
     const startVal = isMobile ? 200 : 100;
-    const endVal = 1300;
-    const majorStep = 100;
-    const minorPerMajor = 10;
+    const endVal = isMobile ? 1200 : 1300;
+    const majorStep = isMobile ? 200 : 100;
+    const minorPerMajor = isMobile ? 5 : 10;
     const totalRange = endVal - startVal;
 
     const padL = 4;
     const padR = 4;
     const usableW = w - padL - padR;
 
-    const majorH = isMobile ? 12 : 14;
-    const midH = isMobile ? 8 : 10;
-    const minorH = isMobile ? 5 : 6;
+    const majorH = isMobile ? 10 : 14;
+    const midH = isMobile ? 6 : 10;
+    const minorH = isMobile ? 3.5 : 6;
     const baseline = h;
 
     const tickDefault = "rgba(20, 32, 43, 0.25)";
     const tickActive = "rgba(20, 32, 43, 0.55)";
-    const numDefault = "rgba(20, 32, 43, 0.35)";
+    const numDefault = "rgba(20, 32, 43, 0.4)";
     const progressColor = "#F0531C";
 
     const totalMinorTicks = (totalRange / majorStep) * minorPerMajor;
@@ -80,10 +80,10 @@ export function ScrollRuler() {
 
       if (isMajor) {
         const label = Math.round(val).toString();
-        ctx.font = `bold ${isMobile ? 8 : 9}px "Space Mono", monospace`;
+        ctx.font = `bold ${isMobile ? 8.5 : 9}px "Space Mono", monospace`;
         ctx.textAlign = "center";
         ctx.fillStyle = filled ? progressColor : numDefault;
-        ctx.fillText(label, x, baseline - tickH - 3);
+        ctx.fillText(label, x, baseline - tickH - 2.5);
       }
     }
 
@@ -113,7 +113,7 @@ export function ScrollRuler() {
   return (
     <div
       aria-hidden
-      className="pointer-events-none relative z-10 flex h-4 items-center overflow-hidden bg-white/90 md:h-8"
+      className="pointer-events-none relative z-10 flex h-7 items-center overflow-hidden border-b border-line/60 bg-white/90 backdrop-blur-sm md:h-8"
     >
       {/* Left: Brand tag */}
       <div className="flex shrink-0 items-center gap-1.5 pl-3 md:gap-2 md:pl-4">

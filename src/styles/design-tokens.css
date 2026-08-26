@@ -62,22 +62,6 @@
   --surface: var(--frame);
 }
 
-.dark {
-  /* Dark Mode Figma Canvas Tokens */
-  --canvas: #18181B;          /* Figma Dark Canvas #18181B / #1E1E1E */
-  --frame: #242427;           /* Dark Card Frame */
-  --grid: #2A2A2E;            /* Dark Neutral tile */
-  --canvas-dot: rgba(255, 255, 255, 0.12);
-  --canvas-line: rgba(255, 255, 255, 0.05);
-
-  --ink: #F4F4F5;             /* Light Text */
-  --ink-soft: #A1A1AA;        /* Sub-copy */
-  --ink-faint: #71717A;       /* Muted / Labels */
-
-  --line: rgba(255, 255, 255, 0.08);
-  --line-2: rgba(255, 255, 255, 0.14);
-  --line-dashed: rgba(255, 255, 255, 0.22);
-}
 
 /* --------------------------------------------------------------------------
    4. TYPOGRAPHY SYSTEM

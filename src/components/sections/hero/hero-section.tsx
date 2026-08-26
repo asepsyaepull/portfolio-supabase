@@ -39,7 +39,7 @@ export const HeroSection = () => {
         </div>
 
         {/* Headline wrapped in dashed Figma selection */}
-        <span className="mb-4 inline-block font-mono text-md font-semibold uppercase tracking-[0.16em] text-ink/60">
+        <span className="mb-12 inline-block font-mono text-sm md:text-md font-semibold uppercase tracking-[0.16em] text-ink/60">
           Hi! I'm Asep Syaepul
         </span>
         <div className="omd-sel relative px-5 py-4">
