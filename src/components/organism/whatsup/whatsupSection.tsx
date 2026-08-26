@@ -102,8 +102,8 @@ export function WhatsupSection() {
           >
             <p className={`${LABEL} text-[#8AA6B8]`}>STATEMENT.TXT</p>
             <blockquote className={`${SERIF} mt-8 text-[clamp(26px,2.8vw,40px)] font-medium leading-[1.15]`}>
-              &ldquo;Saya bikin orang berhenti scroll dan bertanya,{" "}
-              <span className="text-[#F0531C]">siapa yang bikin ini?</span>&rdquo;
+              &ldquo;Gue bikin desain yang bikin orang berhenti scroll — terus nanya,{" "}
+              <span className="text-[#F0531C]">ini siapa yang bikin?</span>&rdquo;
             </blockquote>
             <p className={`${LABEL} mt-10 text-white/85`}>ASEP, SINCE 2018</p>
             <span className="mt-5 inline-flex items-center gap-2 rounded-full border border-[#27c06b]/50 bg-[#27c06b]/15 px-3.5 py-1.5 [font-family:var(--font-mono),ui-monospace,monospace] text-[11px] font-bold lowercase tracking-wide text-[#5fe39a]">
@@ -150,7 +150,7 @@ export function WhatsupSection() {
           >
             <p className="text-sm tracking-[0.2em] text-[#F0531C]">★★★★★</p>
             <p className="mt-4 text-[15px] leading-relaxed text-[#14202B]">
-              &ldquo;Desainnya rapi, komunikasinya cepat. Hasil akhirnya melebihi ekspektasi tim.&rdquo;
+              &ldquo;Desainnya rapi, komunikasinya cepat. Jarang nemu desainer yang paham kode selevel ini.&rdquo;
             </p>
             <p className={`${LABEL} mt-5 text-[#8AA6B8]`}>— DIMAS, PRODUCT MANAGER</p>
           </motion.div>

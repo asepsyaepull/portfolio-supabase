@@ -23,30 +23,30 @@ const STEPS: Step[] = [
   {
     label: "01 · SUBSCRIBE",
     msgs: [
-      { from: "you", text: "gas daftar dulu, satu slot bulan ini kan?", time: "09.02" },
-      { from: "asep", text: "you're in 👋 visi nya gimana?", time: "09.04" },
+      { from: "you", text: "gas. masih ada slot bulan ini kan?", time: "09.02" },
+      { from: "asep", text: "ada, aman 👋 cerita visi nya dulu yuk", time: "09.04" },
     ],
   },
   {
     label: "02 · SEND IT OVER",
     msgs: [
-      { from: "you", text: "nih brief + referensi, tinggal dibaca", time: "09.15", attach: "project-brief.fig" },
-      { from: "asep", text: "kebaca semua. sabar, aku racik dulu 🔥", time: "09.20" },
+      { from: "you", text: "nih brief plus referensi, santai aja dibacanya", time: "09.15", attach: "project-brief.fig" },
+      { from: "asep", text: "udah gue baca semua. oke, gue racik dulu 🔥", time: "09.20" },
     ],
   },
   {
     label: "03 · REFINE",
     msgs: [
-      { from: "asep", text: "v1 udah. cek ya", time: "14.30", attach: "homepage-v1.png", reaction: "🔥 2" },
-      { from: "you", text: "cepet amat 😳 tombolnya kecilin dikit", time: "15.02", reaction: "👍 1" },
-      { from: "asep", text: "beres. revisi unlimited kok, santai", time: "15.05" },
+      { from: "asep", text: "v1 jadi. cek ya", time: "14.30", attach: "homepage-v1.png", reaction: "🔥 2" },
+      { from: "you", text: "cepet amat 😳 tombol primary nya kecilin dikit", time: "15.02", reaction: "👍 1" },
+      { from: "asep", text: "beres. revisi masuk paket, santai", time: "15.05" },
     ],
   },
   {
     label: "04 · SHIP IT",
     msgs: [
-      { from: "asep", text: "live udah 🚀 lighthouse 98", time: "10.41" },
-      { from: "you", text: "gila sih. langganan terus 🔥", time: "10.44" },
+      { from: "asep", text: "udah live 🚀 lighthouse 98 btw", time: "10.41" },
+      { from: "you", text: "gila. project selanjutnya sini lagi ya 🔥", time: "10.44" },
     ],
   },
 ];

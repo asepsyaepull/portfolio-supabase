@@ -77,8 +77,7 @@ const Hero = () => {
 
         {/* Sub copy */}
         <p className="mt-14 max-w-[46ch] text-[16px] leading-relaxed text-[#4A6173] md:text-lg">
-          7+ tahun merancang &amp; membangun produk digital — dari ERP enterprise sampai
-          mobile app redesign. Desain yang hidup di production, terukur, dan enak dipakai.
+          7+ tahun ngerancang dan ngebangun produk digital — dari ERP enterprise, POS retail, sampai mobile app. Yang gue bikin bukan cuma mockup: jalan di production, diukur, dipake beneran.
         </p>
 
         {/* CTAs */}
@@ -100,14 +99,14 @@ const Hero = () => {
 
       {/* Corner notes */}
       <p className="absolute bottom-24 left-8 hidden [font-family:var(--font-mono),ui-monospace,monospace] text-[10.5px] font-bold uppercase tracking-[0.14em] text-[#14202B]/60 md:block">
-        Working worldwide
+        Remote, worldwide
         <br />
-        No office, on purpose
+        Kantor di mana aja ada laptop
       </p>
       <p className="absolute bottom-24 right-8 hidden text-right [font-family:var(--font-mono),ui-monospace,monospace] text-[10.5px] font-bold uppercase tracking-[0.14em] text-[#14202B]/60 md:block">
-        Open for 2026
+        Open for project 2026
         <br />
-        Your timezone, handled
+        Timezone lo, gue ikutin
       </p>
 
       {/* Ticker marquee */}
