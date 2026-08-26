@@ -3,7 +3,7 @@ import { Fraunces, Hanken_Grotesk, Space_Mono } from "next/font/google";
 import "@/styles/globals.css";
 import { ThemeProvider } from "@/components/theme-provider";
 import { Toaster } from "sonner";
-import AppShell from "@/components/layouts/AppShell";
+import { AppShell } from "@/components/layout/app-shell";
 
 const fraunces = Fraunces({
   subsets: ["latin"],
@@ -31,11 +31,11 @@ export const metadata: Metadata = {
   metadataBase: new URL("https://asyaepul.id"),
   title: "Asep Syaepul | UI/UX Designer & Frontend Developer",
   description:
-    "Portfolio of Asep Syaepul — UI/UX designer & frontend developer with 7+ years crafting interactive digital products. Design systems, React/Next.js, motion.",
+    "Portfolio Asep Syaepul — UI/UX Designer & Frontend Developer di Jakarta. 7+ tahun merancang produk yang live di production: ERP enterprise, POS retail, mobile app. React, Next.js, TypeScript.",
   openGraph: {
     title: "Asep Syaepul | UI/UX Designer & Frontend Developer",
     description:
-      "Portfolio of Asep Syaepul — UI/UX designer & frontend developer with 7+ years crafting interactive digital products. Design systems, React/Next.js, motion.",
+      "Portfolio Asep Syaepul — UI/UX Designer & Frontend Developer di Jakarta. 7+ tahun merancang produk yang live di production: ERP enterprise, POS retail, mobile app. React, Next.js, TypeScript.",
     url: "https://asyaepul.id",
     siteName: "Asep Syaepul Portfolio",
     images: [
@@ -53,7 +53,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Asep Syaepul | UI/UX Designer & Frontend Developer",
     description:
-      "Portfolio of Asep Syaepul — UI/UX designer & frontend developer with 7+ years crafting interactive digital products. Design systems, React/Next.js, motion.",
+      "Portfolio Asep Syaepul — UI/UX Designer & Frontend Developer di Jakarta. 7+ tahun merancang produk yang live di production: ERP enterprise, POS retail, mobile app. React, Next.js, TypeScript.",
     images: ["/og-image.jpg"],
   },
 };

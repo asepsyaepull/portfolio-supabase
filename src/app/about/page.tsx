@@ -1,5 +1,8 @@
-import AboutPage from "@/components/organism/about/aboutPage";
-import { WorkExperience, WorkExperienceSkeleton } from "@/components/molecules/Timeline/workExperience";
+import { AboutPage } from "@/components/sections/about/about-page";
+import {
+  WorkExperience,
+  WorkExperienceSkeleton,
+} from "@/components/sections/experience/work-experience";
 import { Metadata } from "next";
 import React, { Suspense } from "react";
 

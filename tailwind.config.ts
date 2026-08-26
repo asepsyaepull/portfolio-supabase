@@ -10,10 +10,25 @@ const config: Config = {
   theme: {
   	extend: {
   		fontFamily: {
-  			sans: ["var(--font-geist)", "ui-sans-serif", "system-ui", "sans-serif"],
-  			mono: ["var(--font-geist)", "ui-monospace", "monospace"],
+				display: ["var(--font-display)", "Fraunces", "serif"],
+				body: ["var(--font-body)", "Hanken Grotesk", "sans-serif"],
+				mono: ["var(--font-mono)", "Space Mono", "monospace"],
+				sans: ["var(--font-body)", "ui-sans-serif", "system-ui", "sans-serif"],
   		},
   		colors: {
+				canvas: "var(--canvas)",
+				frame: "var(--frame)",
+				grid: "var(--grid)",
+				ink: {
+					DEFAULT: "var(--ink)",
+					soft: "var(--ink-soft)",
+					faint: "var(--ink-faint)",
+				},
+				brand: {
+					DEFAULT: "var(--brand)",
+					deep: "var(--brand-deep)",
+				},
+				tool: "var(--tool)",
   			background: 'hsl(var(--background))',
   			foreground: 'hsl(var(--foreground))',
   			card: {
