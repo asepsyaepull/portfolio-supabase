@@ -77,7 +77,7 @@ const Hero = () => {
 
         {/* Sub copy */}
         <p className="mt-14 max-w-[46ch] text-[16px] leading-relaxed text-[#4A6173] md:text-lg">
-          7+ tahun ngerancang dan ngebangun produk digital — dari ERP enterprise, POS retail, sampai mobile app. Yang gue bikin bukan cuma mockup: jalan di production, diukur, dipake beneran.
+          7+ tahun merancang dan membangun produk digital: ERP enterprise, POS retail, sampai mobile app. Bukan sekadar mockup — desain saya berjalan di production, terukur, dan dipakai pengguna nyata.
         </p>
 
         {/* CTAs */}
@@ -99,9 +99,9 @@ const Hero = () => {
 
       {/* Corner notes */}
       <p className="absolute bottom-24 left-8 hidden [font-family:var(--font-mono),ui-monospace,monospace] text-[10.5px] font-bold uppercase tracking-[0.14em] text-[#14202B]/60 md:block">
-        Remote, worldwide
+        Remote-first
         <br />
-        Kantor di mana aja ada laptop
+        Bekerja dari mana saja
       </p>
       <p className="absolute bottom-24 right-8 hidden text-right [font-family:var(--font-mono),ui-monospace,monospace] text-[10.5px] font-bold uppercase tracking-[0.14em] text-[#14202B]/60 md:block">
         Open for project 2026
