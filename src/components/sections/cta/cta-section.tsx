@@ -90,10 +90,10 @@ export function CtaSection() {
                 Talk with me
               </a>
               <a
-                href={MAILTO}
+                href="mailto:mail.asepsyaepul@gmail.com?subject=Freelance%20project%20inquiry"
                 className="font-mono text-[13px] font-bold text-white/90 underline decoration-white/40 underline-offset-4 transition-colors hover:text-white hover:decoration-white"
               >
-                or book a call
+                Kirim email langsung
               </a>
             </motion.div>
           </div>

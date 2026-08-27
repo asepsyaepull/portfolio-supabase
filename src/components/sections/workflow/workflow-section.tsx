@@ -20,43 +20,43 @@ type Step = {
 
 const STEPS: Step[] = [
   {
-    label: "01 · SUBSCRIBE",
+    label: "01 · MULAI",
     msgs: [
-      { from: "you", text: "gas. masih ada slot bulan ini kan?", time: "09.02" },
-      { from: "asep", text: "ada, aman 👋 cerita visi nya dulu yuk", time: "09.04" },
+      { from: "you", text: "Halo, ada slot buat project baru? Saya butuh redesign dashboard.", time: "09.02" },
+      { from: "asep", text: "Ada, aman 👋 Ceritain dulu goals-nya — target user siapa, masalah utamanya apa.", time: "09.04" },
     ],
   },
   {
-    label: "02 · SEND IT OVER",
+    label: "02 · KIRIM BRIEF",
     msgs: [
       {
         from: "you",
-        text: "nih brief plus referensi, santai aja dibacanya",
+        text: "Ini brief-nya plus referensi visual. ada 3 flow utama yang perlu diperbaiki.",
         time: "09.15",
         attach: "project-brief.fig",
       },
-      { from: "asep", text: "udah gue baca semua. oke, gue racik dulu 🔥", time: "09.20" },
+      { from: "asep", text: "Sudah saya baca. Saya riset kompetitor dulu, lalu kirim wireframe hari ini.", time: "09.20" },
     ],
   },
   {
-    label: "03 · REFINE",
+    label: "03 · REVISI",
     msgs: [
       {
         from: "asep",
-        text: "v1 jadi. cek ya",
+        text: "Wireframe jadi. Cek alur checkout-nya — saya prioritaskan di sini.",
         time: "14.30",
         attach: "homepage-v1.png",
         reaction: "🔥 2",
       },
-      { from: "you", text: "cepet amat 😳 tombol primary nya kecilin dikit", time: "15.02", reaction: "👍 1" },
-      { from: "asep", text: "beres. revisi masuk paket, santai", time: "15.05" },
+      { from: "you", text: "Oke arahnya bener. Tombol primary kecilin dikit, sama spacing antar section Longgarin.", time: "15.02", reaction: "👍 1" },
+      { from: "asep", text: "Masuk. Revisi termasuk paket — saya update hari ini.", time: "15.05" },
     ],
   },
   {
-    label: "04 · SHIP IT",
+    label: "04 · SHIP",
     msgs: [
-      { from: "asep", text: "udah live 🚀 lighthouse 98 btw", time: "10.41" },
-      { from: "you", text: "gila. project selanjutnya sini lagi ya 🔥", time: "10.44" },
+      { from: "asep", text: "Sudah live. Lighthouse 98, semua flow tested. 🚀", time: "10.41" },
+      { from: "you", text: "Keren. Next project langsung lanjut ya.", time: "10.44" },
     ],
   },
 ];
@@ -125,7 +125,7 @@ export function WorkflowSection() {
         <SectionHeader
           tag="how-it-works.frame"
           title="No forms. No hoops. Just this."
-          subtitle="Satu thread, zero chaos. Begini jalannya."
+          subtitle="Satu thread, langsung jalan. Begini workflow-nya dari awal sampai live."
         />
 
         {/* Chat window */}

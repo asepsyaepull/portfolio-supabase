@@ -32,6 +32,9 @@ export const metadata: Metadata = {
   title: "Asep Syaepul | UI/UX Designer & Frontend Developer",
   description:
     "Portfolio Asep Syaepul — UI/UX Designer & Frontend Developer di Jakarta. 7+ tahun merancang produk yang live di production: ERP enterprise, POS retail, mobile app. React, Next.js, TypeScript.",
+  alternates: {
+    canonical: "https://asyaepul.id",
+  },
   openGraph: {
     title: "Asep Syaepul | UI/UX Designer & Frontend Developer",
     description:
@@ -46,7 +49,7 @@ export const metadata: Metadata = {
         alt: "Asep Syaepul Portfolio Thumbnail",
       },
     ],
-    locale: "en_US",
+    locale: "id_ID",
     type: "website",
   },
   twitter: {
@@ -64,10 +67,41 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" suppressHydrationWarning>
+    <html lang="id" suppressHydrationWarning>
       <body
         className={`${fraunces.variable} ${hanken.variable} ${spaceMono.variable} font-body antialiased bg-[var(--canvas)] text-[var(--ink)]`}
       >
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "Person",
+              name: "Asep Syaepul Rohman",
+              jobTitle: "UI/UX Designer & Frontend Developer",
+              url: "https://asyaepul.id",
+              email: "mail.asepsyaepul@gmail.com",
+              sameAs: [
+                "https://linkedin.com/in/asepsyaepul",
+                "https://github.com/asepsyaepull",
+              ],
+              address: {
+                "@type": "PostalAddress",
+                addressLocality: "Jakarta Selatan",
+                addressCountry: "ID",
+              },
+              knowsAbout: [
+                "UI/UX Design",
+                "Frontend Development",
+                "React",
+                "Next.js",
+                "TypeScript",
+                "Figma",
+                "Design Systems",
+              ],
+            }),
+          }}
+        />
         <ThemeProvider
           attribute="class"
           defaultTheme="light"

@@ -58,7 +58,7 @@ const FAQS = [
     a: (
       <>
         Bisa dua-duanya. <strong>Design-only</strong> (Figma sampai handoff) atau{" "}
-        <strong>design + development</strong> pakai Next.js/React — desain dan kode dari satu orang, jadi
+        <strong>design + development</strong>{" "}pakai Next.js/React — desain dan kode dari satu orang, jadi
         nggak ada drama &ldquo;kok di Figma beda sama di browser?&rdquo;
       </>
     ),

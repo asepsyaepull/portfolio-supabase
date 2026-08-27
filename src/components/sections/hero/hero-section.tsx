@@ -10,7 +10,6 @@ const TICKER_ITEMS = [
   "TYPESCRIPT",
   "FIGMA",
   "DESIGN SYSTEM",
-  "SUPABASE",
   "MOTION",
 ];
 
@@ -29,7 +28,7 @@ export const HeroSection = () => {
       className="relative z-[1] overflow-hidden bg-transparent"
     >
 
-      <div className="relative mx-auto flex min-h-[90vh] max-w-[1280px] flex-col items-center justify-center px-6 pb-14 pt-20 text-center">
+      <div className="relative mx-auto flex min-h-[90vh] max-w-[1280px] flex-col items-center justify-center px-6 pb-14 text-center">
         {/* Status pill */}
         <div className="mb-9 inline-flex items-center gap-2.5 rounded-full border border-ink/15 bg-white/65 px-4 py-2 backdrop-blur-md">
           <span className="h-2 w-2 rounded-full bg-emerald-500 shadow-[0_0_0_3px_rgba(39,192,107,0.18)]" />
@@ -39,7 +38,7 @@ export const HeroSection = () => {
         </div>
 
         {/* Headline wrapped in dashed Figma selection */}
-        <span className="mb-12 inline-block font-mono text-sm md:text-md font-semibold uppercase tracking-[0.16em] text-ink/60">
+        <span className="mb-8 inline-block font-mono text-md md:text-sm font-semibold uppercase tracking-[0.16em] text-ink/60">
           Hi! I'm Asep Syaepul
         </span>
         <div className="omd-sel relative px-5 py-4">
@@ -56,10 +55,9 @@ export const HeroSection = () => {
           </FigmaTag>
 
           <h1 className="heading-display text-hero-headline font-bold uppercase text-brand">
-            UI/UX Design
+            UI/UX Designer
             <br />
-            &amp;
-            <span className="text-brand-deep">Developer.</span>
+            <span className="text-brand-deep">&amp; Developer.</span>
           </h1>
         </div>
 
@@ -72,16 +70,18 @@ export const HeroSection = () => {
         {/* CTAs */}
         <div className="mt-9 flex flex-wrap items-center justify-center gap-3.5">
           <a
-            href="mailto:mail.asepsyaepul@gmail.com?subject=Hiring%20inquiry"
+            href="#work"
             className="omd-btn-primary"
           >
-            Hiring? Email saya
+            Lihat studi kasus
           </a>
           <a
-            href="#work"
+            href="/cv/CV-Asep-Syaepul-Rohman.pdf"
+            target="_blank"
+            rel="noopener noreferrer"
             className="omd-btn-ghost"
           >
-            See the work
+            Download CV ↓
           </a>
         </div>
       </div>

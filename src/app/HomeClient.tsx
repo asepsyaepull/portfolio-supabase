@@ -11,8 +11,8 @@ const SectionSkeleton = () => (
 
 const FeaturedProjects = dynamic(
   () =>
-    import("@/components/sections/projects/featured-projects").then(
-      (mod) => mod.FeaturedProjects
+    import("@/components/sections/projects/workspace-console").then(
+      (mod) => mod.WorkspaceConsole
     ),
   { loading: () => <SectionSkeleton /> }
 );
@@ -38,8 +38,11 @@ const WhySection = dynamic(
   () => import("@/components/sections/why/why-section"),
   { loading: () => <SectionSkeleton /> }
 );
-const HowIBuildSection = dynamic(
-  () => import("@/components/sections/how-i-build/how-i-build-section"),
+const WhoSection = dynamic(
+  () =>
+    import("@/components/sections/who/who-section").then(
+      (mod) => mod.WhoSection
+    ),
   { loading: () => <SectionSkeleton /> }
 );
 const CtaSection = dynamic(
@@ -60,8 +63,11 @@ const FaqSection = dynamic(
   () => import("@/components/sections/faq/faq-section"),
   { loading: () => <SectionSkeleton /> }
 );
-const DropFunSection = dynamic(
-  () => import("@/components/sections/dropfun/drop-fun-section"),
+const ExperienceSection = dynamic(
+  () =>
+    import("@/components/sections/experience/experience-section").then(
+      (mod) => mod.ExperienceSection
+    ),
   { loading: () => <SectionSkeleton /> }
 );
 
@@ -74,12 +80,15 @@ export default function HomeClient({
 }) {
   return (
     <div>
-      <ArcRevealHero greetingHold={800} revealDuration={1800}>
+      <ArcRevealHero greetingHold={400} revealDuration={600}>
         <HeroSection />
       </ArcRevealHero>
       {/* Sections take no id prop — anchor ids live on these wrappers */}
       <div id="work">
         <FeaturedProjects projects={featuredProjects} />
+      </div>
+      <div id="experience">
+        <ExperienceSection />
       </div>
       <div id="about">
         <WhatsupSection />
@@ -88,12 +97,10 @@ export default function HomeClient({
         <WorkflowSection />
       </div>
       <div id="services">
+        <WhoSection />
         <ServicesSection />
       </div>
       <WhySection />
-      <div id="how-i-build">
-        <HowIBuildSection />
-      </div>
       <div id="contact">
         <CtaSection />
       </div>
@@ -101,7 +108,6 @@ export default function HomeClient({
         <PricingSection />
       </div>
       <FaqSection />
-      <DropFunSection />
     </div>
   );
 }

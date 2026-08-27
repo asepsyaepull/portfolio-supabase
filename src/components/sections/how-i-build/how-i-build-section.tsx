@@ -28,9 +28,9 @@ const PHASES: Phase[] = [
   {
     n: "01",
     phase: "DISCOVER",
-    title: "Ngobrol & Riset",
+    title: "Riset & Alignment",
     duration: "HARI 1–2",
-    body: "Kita mulai dari goals, user, dan konteks bisnis. Saya riset kompetitor dan pattern yang sudah terbukti. Nol asumsi.",
+    body: "Kickoff call untuk memahami goals, user, dan konteks bisnis. Saya riset kompetitor, audit produk yang ada, dan memetakan asumsi sebelum menentukan solusi.",
     deliver: ["kickoff call", "competitor teardown", "success metrics"],
     progress: 15,
   },
@@ -39,7 +39,7 @@ const PHASES: Phase[] = [
     phase: "DESIGN",
     title: "Wireframe → Hi-Fi",
     duration: "HARI 3–7",
-    body: "Dari sketsa cepat ke mockup final di Figma. Kamu lihat progres tiap fase — nggak ada kejutan di akhir.",
+    body: "Sketsa cepat berkembang jadi mockup final di Figma. Kamu lihat progres di tiap fase — dari wireframe sampai interactive prototype. Nggak ada kejutan di akhir.",
     deliver: ["wireframe", "hi-fi mockup", "interactive prototype"],
     progress: 45,
   },
@@ -48,7 +48,7 @@ const PHASES: Phase[] = [
     phase: "BUILD",
     title: "Kode Production",
     duration: "HARI 8–14",
-    body: "Desain saya hidupkan sendiri: Next.js + TypeScript + Tailwind. Pixel-perfect, responsif, aksesibel — bukan handoff, satu orang yang sama.",
+    body: "Desain saya hidupkan sendiri: Next.js + TypeScript + Tailwind. Pixel-perfect, responsif, aksesibel. Tidak ada drama handoff — satu orang dari awal sampai deploy.",
     deliver: ["next.js build", "cms setup", "responsive qa"],
     progress: 75,
   },
@@ -57,7 +57,7 @@ const PHASES: Phase[] = [
     phase: "SHIP",
     title: "Launch & Ukur",
     duration: "HARI 15+",
-    body: "Deploy, Lighthouse hijau, monitoring pasca-launch. Desain yang bisa diukur itu desain yang selesai.",
+    body: "Deploy ke production, Lighthouse ≥95, monitoring pasca-launch. Desain yang bisa diukur itu desain yang selesai. Post-launch support termasuk.",
     deliver: ["deploy", "lighthouse ≥ 95", "post-launch support"],
     progress: 100,
   },
@@ -107,7 +107,7 @@ export function HowIBuildSection() {
                 TO <span className="text-brand">LIVE.</span>
               </>
             }
-            subtitle="Timeline tipikal satu project. Geser buat lihat tiap fase — termasuk kapan kamu bakal lihat draft pertama."
+            subtitle="Timeline tipikal satu project. Geser buat lihat tiap fase — termasuk deliverable di tiap tahap."
             className="mb-0"
           />
 
@@ -223,11 +223,30 @@ export function HowIBuildSection() {
           {/* End cap */}
           <div className="flex w-[60vw] shrink-0 snap-start items-center justify-center sm:w-[40%] lg:w-[25%]">
             <p className="text-center font-mono text-xs uppercase leading-relaxed tracking-widest text-ink-faint">
-              — dan ulangi untuk
+              — lalu ulangi untuk
               <br />
               <span className="text-brand">project berikutnya.</span>
             </p>
           </div>
+        </motion.div>
+
+        {/* Process CTA */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.5, delay: 0.1 }}
+          className="mt-14 text-center"
+        >
+          <p className="mb-5 text-[15px] text-ink-soft">
+            Mau proses ini buat project kamu? Ceritakan visinya — saya bantu dari sana.
+          </p>
+          <a
+            href="mailto:mail.asepsyaepul@gmail.com?subject=Project%20inquiry"
+            className="inline-flex items-center gap-2 rounded-full bg-brand px-7 py-3 font-mono text-[13px] font-bold uppercase tracking-wide text-white shadow-[0_12px_26px_-12px_#F0531C] transition-colors hover:bg-brand-deep"
+          >
+            Mulai diskusi
+          </a>
         </motion.div>
       </div>
     </section>
