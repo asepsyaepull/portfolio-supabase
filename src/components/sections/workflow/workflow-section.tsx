@@ -68,7 +68,7 @@ function Avatar({ from }: { from: "you" | "asep" }) {
         from === "asep" ? "bg-brand" : "bg-ink"
       }`}
     >
-      {from === "asep" ? "O" : "Y"}
+      {from === "asep" ? "A" : "Y"}
     </span>
   );
 }
@@ -142,7 +142,7 @@ export function WorkflowSection() {
               <div className="flex items-center gap-3">
                 <span className="flex -space-x-2">
                   <span className="flex h-7 w-7 items-center justify-center rounded-full border-2 border-white bg-brand text-[11px] font-bold text-white">
-                    O
+                    A
                   </span>
                   <span className="flex h-7 w-7 items-center justify-center rounded-full border-2 border-white bg-ink text-[11px] font-bold text-white">
                     Y

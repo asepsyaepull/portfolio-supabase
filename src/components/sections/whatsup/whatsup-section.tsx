@@ -6,6 +6,7 @@ import {
   IconCode,
   IconMouse,
   IconPalette,
+  IconQuote,
   IconSparkles,
   IconStack,
 } from "@tabler/icons-react";
@@ -56,18 +57,18 @@ export function WhatsupSection() {
             <Card variant="dark" className="flex h-full flex-col justify-between p-7 md:p-8">
               <div>
                 <FrameLabel name="STATEMENT.TXT" className="!text-ink-faint" />
-                <blockquote className="heading-display mt-8 text-[clamp(26px,2.8vw,40px)] font-medium leading-[1.15]">
-                  &ldquo;Saya merancang desain yang membuat orang berhenti scroll lalu bertanya,{" "}
-                  <span className="text-brand">siapa yang membuat ini?</span>&rdquo;
-                </blockquote>
-              </div>
-              <div className="mt-8">
-                <p className="font-mono text-[11px] font-bold uppercase tracking-[0.14em] text-white/85">
-                  ASEP, SINCE 2018
-                </p>
                 <div className="mt-4">
                   <StatusBadge status="available">available now</StatusBadge>
                 </div>
+                <blockquote className="heading-display mt-8 text-2xl font-medium">
+                  &ldquo;I&apos;m Asep Syaepul — an UI/UX & Frontend Developer crafting fast, scalable, and immersive digital experiences that merge creativity with engineering precision. specialize in developing SaaS platforms, and interactive web experiences using technologies like {" "}
+                  <span className="text-brand">Next.js, Node.js, and Three.js.</span>&rdquo;
+                </blockquote>
+              </div>
+              <div className="mt-8 pt-4 border-t border-white/10">
+                <p className="font-mono text-[11px] font-bold uppercase tracking-[0.14em] text-white/85">
+                  ASEP SYAEPUL, SINCE 2019
+                </p>
               </div>
             </Card>
           </motion.div>
@@ -101,7 +102,7 @@ export function WhatsupSection() {
             </Card>
           </motion.div>
 
-          {/* REVIEW */}
+          {/* QUOTE / PHILOSOPHY */}
           <motion.div
             initial={{ opacity: 0, y: 28 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -110,12 +111,15 @@ export function WhatsupSection() {
           >
             <Card variant="white" className="h-full flex flex-col justify-between">
               <div>
-                <p className="text-sm tracking-[0.2em] text-brand">★★★★★</p>
+                <div className="flex items-center justify-between">
+                  <FrameLabel name="PHILOSOPHY.TXT" className="!text-ink-faint" />
+                  <IconQuote className="h-4 w-4 text-brand opacity-80" />
+                </div>
                 <p className="mt-4 text-[15px] leading-relaxed text-ink">
-                  &ldquo;Desainnya rapi, komunikasinya cepat. Jarang nemu desainer yang paham kode selevel ini.&rdquo;
+                  &ldquo;Desain bukan hanya tentang tampilan yang memikat, tapi bagaimana ia bekerja — menjembatani empati pengguna dengan presisi kode.&rdquo;
                 </p>
               </div>
-              <FrameLabel name="— Dimas, PM · TRACtoGO" className="mt-5 !text-ink-faint" />
+              <FrameLabel name="— UI/UX & Creative Dev" className="mt-5 !text-ink-faint" />
             </Card>
           </motion.div>
 

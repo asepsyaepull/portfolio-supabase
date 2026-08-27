@@ -45,7 +45,7 @@ export interface Waypoint {
 }
 
 export interface WorkspaceConsoleProps {
-  projects: Project[];
+  projects?: Project[];
 }
 
 export interface DiagramProps {

@@ -1,25 +1,32 @@
 "use client";
 
-import dynamic from "next/dynamic";
-import { HeroSection } from "@/components/sections/hero/hero-section";
 import { ArcRevealHero } from "@/components/sections/hero/arc-reveal-hero";
+import { HeroSection } from "@/components/sections/hero/hero-section";
 import type { Project, Skill } from "@/types/database";
+import dynamic from "next/dynamic";
 
 const SectionSkeleton = () => (
   <div className="m-4 min-h-[60vh] animate-pulse rounded-lg bg-white/40" />
 );
 
-const FeaturedProjects = dynamic(
+const WhatsupSection = dynamic(
+  () =>
+    import("@/components/sections/whatsup/whatsup-section").then(
+      (mod) => mod.WhatsupSection
+    ),
+  { loading: () => <SectionSkeleton /> }
+);
+const WorkspaceConsole = dynamic(
   () =>
     import("@/components/sections/projects/workspace-console").then(
       (mod) => mod.WorkspaceConsole
     ),
   { loading: () => <SectionSkeleton /> }
 );
-const WhatsupSection = dynamic(
+const CinematicSelectedWork = dynamic(
   () =>
-    import("@/components/sections/whatsup/whatsup-section").then(
-      (mod) => mod.WhatsupSection
+    import("@/components/sections/projects/cinematic-selected-work").then(
+      (mod) => mod.CinematicSelectedWork
     ),
   { loading: () => <SectionSkeleton /> }
 );
@@ -30,32 +37,14 @@ const WorkflowSection = dynamic(
     ),
   { loading: () => <SectionSkeleton /> }
 );
-const ServicesSection = dynamic(
-  () => import("@/components/sections/services/services-section"),
-  { loading: () => <SectionSkeleton /> }
-);
 const WhySection = dynamic(
   () => import("@/components/sections/why/why-section"),
-  { loading: () => <SectionSkeleton /> }
-);
-const WhoSection = dynamic(
-  () =>
-    import("@/components/sections/who/who-section").then(
-      (mod) => mod.WhoSection
-    ),
   { loading: () => <SectionSkeleton /> }
 );
 const CtaSection = dynamic(
   () =>
     import("@/components/sections/cta/cta-section").then(
       (mod) => mod.CtaSection
-    ),
-  { loading: () => <SectionSkeleton /> }
-);
-const PricingSection = dynamic(
-  () =>
-    import("@/components/sections/pricing/pricing-section").then(
-      (mod) => mod.PricingSection
     ),
   { loading: () => <SectionSkeleton /> }
 );
@@ -73,7 +62,6 @@ const ExperienceSection = dynamic(
 
 export default function HomeClient({
   featuredProjects,
-  skills,
 }: {
   featuredProjects: Project[];
   skills: Skill[];
@@ -84,28 +72,24 @@ export default function HomeClient({
         <HeroSection />
       </ArcRevealHero>
       {/* Sections take no id prop — anchor ids live on these wrappers */}
-      <div id="work">
-        <FeaturedProjects projects={featuredProjects} />
-      </div>
-      <div id="experience">
-        <ExperienceSection />
-      </div>
       <div id="about">
         <WhatsupSection />
       </div>
       <div id="process">
         <WorkflowSection />
       </div>
-      <div id="services">
-        <WhoSection />
-        <ServicesSection />
+      <div id="work">
+        <WorkspaceConsole projects={featuredProjects} />
+      </div>
+      <div id="selected-work">
+        <CinematicSelectedWork projects={featuredProjects} />
+      </div>
+      <div id="experience">
+        <ExperienceSection />
       </div>
       <WhySection />
       <div id="contact">
         <CtaSection />
-      </div>
-      <div id="pricing">
-        <PricingSection />
       </div>
       <FaqSection />
     </div>

@@ -1,22 +1,21 @@
 "use client";
 
-import React, { useState, useEffect, useCallback } from "react";
-import { motion } from "framer-motion";
 import { SectionHeader } from "@/components/ui/section-header";
-import type { WorkspaceConsoleProps, LogMessage } from "./workspace/workspace-types";
+import { motion } from "framer-motion";
+import { useCallback, useEffect, useState } from "react";
+import { WorkspaceCanvas } from "./workspace/workspace-canvas";
 import {
-  WORKSPACE_TRACKS,
   INITIAL_BOOT_LOGS,
   POINTER_WAYPOINTS,
+  WORKSPACE_TRACKS,
 } from "./workspace/workspace-data";
+import { WorkspaceFooter } from "./workspace/workspace-footer";
 import { WorkspaceHeader } from "./workspace/workspace-header";
 import { WorkspaceSidebar } from "./workspace/workspace-sidebar";
-import { WorkspaceCanvas } from "./workspace/workspace-canvas";
 import { WorkspaceTerminal } from "./workspace/workspace-terminal";
-import { WorkspaceFooter } from "./workspace/workspace-footer";
-import { WorkspaceProjectsGrid } from "./workspace/workspace-projects-grid";
+import type { LogMessage, WorkspaceConsoleProps } from "./workspace/workspace-types";
 
-export function WorkspaceConsole({ projects }: WorkspaceConsoleProps) {
+export function WorkspaceConsole({ projects = [] }: WorkspaceConsoleProps) {
   const [selectedTrackIndex, setSelectedTrackIndex] = useState(0);
   const [pointerIndex, setPointerIndex] = useState(0);
   const [highlightNodeIndex, setHighlightNodeIndex] = useState<number>(0);
@@ -143,9 +142,6 @@ export function WorkspaceConsole({ projects }: WorkspaceConsoleProps) {
           {/* Window Footer */}
           <WorkspaceFooter />
         </motion.div>
-
-        {/* Selected Work Grid */}
-        <WorkspaceProjectsGrid projects={projects} />
       </div>
     </section>
   );

@@ -1,10 +1,9 @@
 "use client";
 
-import React from "react";
-import { IconCheck, IconX } from "@tabler/icons-react";
-import { SectionHeader } from "@/components/ui/section-header";
 import { Card } from "@/components/ui/card";
 import { FrameLabel } from "@/components/ui/figma-tag";
+import { SectionHeader } from "@/components/ui/section-header";
+import { IconCheck, IconX } from "@tabler/icons-react";
 
 const MOST_STUDIOS = [
   "Pitched senior, dikerjain junior.",
@@ -74,16 +73,6 @@ export function WhySection() {
             </ul>
           </Card>
         </div>
-      </div>
-
-      <p className="heading-display mt-16 text-center text-xl font-medium italic text-ink-soft">
-        Same brief, same budget. Hasilnya beda jauh.
-      </p>
-
-      <div className="mt-6 text-center">
-        <a href="#work" className="omd-btn-primary">
-          See the work
-        </a>
       </div>
     </section>
   );

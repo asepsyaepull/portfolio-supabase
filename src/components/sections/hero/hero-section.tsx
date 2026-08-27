@@ -38,9 +38,6 @@ export const HeroSection = () => {
         </div>
 
         {/* Headline wrapped in dashed Figma selection */}
-        <span className="mb-8 inline-block font-mono text-md md:text-sm font-semibold uppercase tracking-[0.16em] text-ink/60">
-          Hi! I'm Asep Syaepul
-        </span>
         <div className="omd-sel relative px-5 py-4">
           <span className="omd-h tl" aria-hidden />
           <span className="omd-h tr" aria-hidden />
@@ -54,17 +51,19 @@ export const HeroSection = () => {
             1440 × 900
           </FigmaTag>
 
-          <h1 className="heading-display text-hero-headline font-bold uppercase text-brand">
-            UI/UX Designer
+          <h1 className="heading-display text-hero-headline font-bold text-brand">
+            Crafting Digital
             <br />
-            <span className="text-brand-deep">&amp; Developer.</span>
+            Experiences
+            <br />
+            <span className="text-brand-deep">That Matter.</span>
           </h1>
         </div>
 
         {/* Sub copy */}
 
         <p className="mt-12 max-w-3xl text-md leading-relaxed text-ink-soft md:text-lg">
-          7+ tahun merancang dan membangun produk digital: ERP enterprise, POS retail, sampai mobile app. Bukan sekadar mockup — desain saya berjalan di production, terukur, dan dipakai pengguna nyata.
+          Building design interfaces that combine beauty with functionality, creating seamless experiences that users love and businesses thrive on.
         </p>
 
         {/* CTAs */}

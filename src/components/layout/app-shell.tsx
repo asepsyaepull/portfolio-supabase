@@ -25,7 +25,7 @@ export function AppShell({ children }: AppShellProps) {
         Skip to main content
       </a>
       {!isAdminOrLogin && <Navbar />}
-      <main id="main-content" className="flex-1">{children}</main>
+      <main id="main-content" className="relative z-10 flex-1 bg-canvas">{children}</main>
       {!isAdminOrLogin && <Footer />}
     </div>
   );
