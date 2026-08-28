@@ -10,9 +10,6 @@ html {
 
 body {
   background-color: var(--canvas);
-  background-image: radial-gradient(var(--canvas-dot, rgba(20, 32, 43, 0.11)) 1.2px, transparent 1.2px);
-  background-size: 24px 24px;
-  background-attachment: fixed;
   color: var(--ink);
 }
 

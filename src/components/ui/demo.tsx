@@ -1,5 +1,5 @@
-import { Component } from "@/components/ui/cinematic-product-scroll-section";
+import PublishedComponent from "@/components/ui/quordix-hero";
 
-export default function DemoOne() {
-  return <Component />;
+export default function Demo() {
+  return <PublishedComponent />;
 }

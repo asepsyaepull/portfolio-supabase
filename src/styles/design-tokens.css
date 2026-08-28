@@ -13,10 +13,10 @@
      ------------------------------------------------------------------------ */
 
   /* Surface & Backgrounds */
-  --canvas: #E6E8EC;          /* Authentic Figma Light Canvas Neutral */
+  --canvas: #F8FAFC;          /* Clean Light Slate Canvas */
   --frame: #FFFFFF;           /* Pure White card/panel surface */
-  --grid: #EFEEE9;            /* Warm Neutral surface/divider/subtle tile */
-  --canvas-dot: rgba(20, 32, 43, 0.11); /* Figma Canvas dot grid marker */
+  --grid: #F1F5F9;            /* Light slate surface/divider/subtle tile */
+  --canvas-dot: rgba(148, 163, 184, 0.4); /* Dot grid marker */
   --canvas-line: rgba(20, 32, 43, 0.05); /* Figma Canvas grid line */
 
   /* Text & Ink */
