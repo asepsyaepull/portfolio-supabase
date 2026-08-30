@@ -6,6 +6,8 @@ import { Navbar } from "./navbar";
 import { Footer } from "./footer";
 import { DotGridBackground } from "@/components/ui/dot-grid-background";
 
+import { HelloPreloader } from "@/components/ui/hello-preloader";
+
 interface AppShellProps {
   children: React.ReactNode;
 }
@@ -25,6 +27,9 @@ export function AppShell({ children }: AppShellProps) {
       >
         Skip to main content
       </a>
+
+      {/* First-load Multilingual Hello Preloader */}
+      {!isAdminOrLogin && <HelloPreloader />}
 
       {/* Global interactive dot-grid background with mouse particles across all sections */}
       {!isAdminOrLogin && <DotGridBackground isFixed={true} />}

@@ -26,6 +26,10 @@ body {
     -ms-overflow-style: none;
     scrollbar-width: none;
   }
+
+  html.preloader-done #hello-preloader-root {
+    display: none !important;
+  }
 }
 
 @keyframes fadeIn {

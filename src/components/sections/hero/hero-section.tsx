@@ -12,10 +12,10 @@ export const HeroSection = () => {
         tagline=""
         titleTop="UI/UX Designer"
         titleGlitch="Developer"
-        subtitle="Briging gap between design and code. I’m a creative technologist who loves building beautiful, user-friendly interfaces that solve real-world problems."
+        subtitle="Bridging the gap between design and code. I’m a creative technologist who loves building beautiful, user-friendly interfaces that solve real-world problems."
         ctaText="Start Project"
         ctaHref="#work"
-        secondaryCtaText="Download CV ↓"
+        secondaryCtaText="Download CV"
         secondaryCtaHref="/cv/CV-Asep-Syaepul-Rohman.pdf"
       />
     </section>

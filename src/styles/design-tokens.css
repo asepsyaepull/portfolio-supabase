@@ -271,10 +271,171 @@
   animation: omd-drop 2s ease-in forwards;
 }
 
+/* --------------------------------------------------------------------------
+   8. HERO GLITCH & TYPOGRAPHIC MOTION
+   -------------------------------------------------------------------------- */
+
+@keyframes qhero-color-toggle {
+  0%, 44% {
+    color: var(--ink, #14202b);
+    text-shadow: none;
+  }
+  42.1%, 44.9% {
+    text-shadow: -2px 0 #00ffff, 2px 0 #ff00ff;
+  }
+  45%, 94% {
+    color: var(--brand, #f0531c);
+    text-shadow: none;
+  }
+  92.1%, 94.9% {
+    text-shadow: -2px 0 #a3e635, 2px 0 #ef4444;
+  }
+  95%, 100% {
+    color: var(--ink, #14202b);
+    text-shadow: none;
+  }
+}
+
+@keyframes qhero-glitch-1 {
+  0%, 42% {
+    opacity: 0;
+    transform: translate(0);
+  }
+  42.1% {
+    opacity: 1;
+    color: #00ffff;
+    clip-path: polygon(0 0, 100% 0, 100% 45%, 0 45%);
+    transform: translate(-10px, -5px) skew(20deg);
+  }
+  43% {
+    color: #ff00ff;
+    transform: translate(10px, 5px) skew(-20deg);
+    clip-path: polygon(0 10%, 100% 0, 100% 30%, 0 35%);
+  }
+  44% {
+    color: var(--brand, #f0531c);
+    transform: translate(-10px, 5px);
+    clip-path: polygon(0 40%, 100% 50%, 100% 80%, 0 90%);
+  }
+  44.9% {
+    opacity: 1;
+  }
+  45% {
+    opacity: 0;
+  }
+  45.1%, 92% {
+    opacity: 0;
+    transform: translate(0);
+  }
+  92.1% {
+    opacity: 1;
+    color: #00ffff;
+    clip-path: polygon(0 60%, 100% 55%, 100% 100%, 0 100%);
+    transform: translate(10px, -5px) skew(10deg);
+  }
+  93% {
+    color: #ff00ff;
+    transform: translate(-5px, 5px) skew(-10deg);
+    clip-path: polygon(0 20%, 100% 20%, 100% 100%, 0 80%);
+  }
+  94.9% {
+    opacity: 1;
+  }
+  95% {
+    opacity: 0;
+  }
+}
+
+@keyframes qhero-glitch-2 {
+  0%, 42% {
+    opacity: 0;
+    transform: translate(0);
+  }
+  42.1% {
+    opacity: 1;
+    color: #a3e635;
+    clip-path: polygon(0 55%, 100% 55%, 100% 100%, 0 100%);
+    transform: translate(10px, 5px);
+  }
+  43% {
+    color: #ef4444;
+    transform: translate(-10px, -5px) skew(10deg);
+    clip-path: polygon(0 20%, 100% 20%, 100% 100%, 0 80%);
+  }
+  45% {
+    opacity: 0;
+  }
+  45.1%, 92% {
+    opacity: 0;
+    transform: translate(0);
+  }
+  92.1% {
+    opacity: 1;
+    color: #a3e635;
+    clip-path: polygon(0 0, 100% 0, 100% 45%, 0 45%);
+    transform: translate(-10px, -5px);
+  }
+  93% {
+    color: #ef4444;
+    transform: translate(10px, 5px) skew(-20deg);
+    clip-path: polygon(0 10%, 100% 0, 100% 30%, 0 35%);
+  }
+  95% {
+    opacity: 0;
+  }
+}
+
+@keyframes qhero-pulse {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.55;
+  }
+}
+
+.qhero-glitch {
+  position: relative;
+  display: inline-block;
+  font-weight: 900;
+  color: var(--ink, #14202b);
+  animation: qhero-color-toggle 7s infinite step-end;
+}
+
+.qhero-glitch::before,
+.qhero-glitch::after {
+  content: attr(data-text);
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  background: var(--canvas, #f8fafc);
+}
+
+.qhero-glitch::before {
+  animation: qhero-glitch-1 7s infinite linear;
+  z-index: 2;
+}
+
+.qhero-glitch::after {
+  animation: qhero-glitch-2 7s infinite linear;
+  z-index: 3;
+}
+
+.qhero-tagline-pulse {
+  animation: qhero-pulse 2s ease-in-out infinite;
+}
+
 /* Accessibility: Reduced motion query */
 @media (prefers-reduced-motion: reduce) {
   .omd-track,
-  .omd-confetto {
+  .omd-confetto,
+  .qhero-glitch,
+  .qhero-glitch::before,
+  .qhero-glitch::after,
+  .qhero-tagline-pulse {
     animation: none !important;
   }
 }

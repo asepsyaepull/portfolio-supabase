@@ -28,7 +28,7 @@ export function WorkspaceSidebar({
     >
       <div>
         {/* Sidebar Section Title */}
-        <div className="mb-2.5 hidden items-center justify-between font-mono text-[11px] font-bold uppercase tracking-wider text-ink-faint md:flex">
+        <div className="mb-2.5 hidden items-center justify-between font-mono text-[11px] font-bold uppercase tracking-wider text-white/40 md:flex">
           <span>Tracks</span>
           <span className="text-[10px] text-ink-faint">04</span>
         </div>

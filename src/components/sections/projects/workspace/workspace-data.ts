@@ -1,4 +1,4 @@
-import type { WorkspaceTrack, LogMessage, Waypoint } from "./workspace-types";
+import type { LogMessage, Waypoint, WorkspaceTrack } from "./workspace-types";
 
 export const WORKSPACE_TRACKS: WorkspaceTrack[] = [
   {
@@ -7,7 +7,39 @@ export const WORKSPACE_TRACKS: WorkspaceTrack[] = [
     gp: "Bench · Live",
     stageLabel: "Workspace",
     stageTag: "Bench · Live",
-    nodeCount: 7,
+    nodeCount: 4,
+    pipeline: {
+      headerTag: "WORKSPACE · CRAFT PIPELINE",
+      headerStatus: "Live · Ready",
+      node1: {
+        tag: "BRIEF & SCOPE",
+        title: "User Goals",
+        subtext: "discovery.fig",
+      },
+      node2: {
+        tag: "DESIGN SYSTEM",
+        title: "Tokens & Patterns",
+        subtext: "reusable-ui",
+      },
+      node3: {
+        tag: "FRONTEND CRAFT",
+        title: "Interactive Code",
+        subtext: "next.js · typescript",
+        isActive: true,
+      },
+      branches: [
+        { label: "Production App", statusColor: "green" },
+        { label: "Tested UX Flow", statusColor: "green" },
+        { label: "Lighthouse 98+", statusColor: "green" },
+      ],
+      terminalLine: "> Craft: build verified -> reusable components & live stages active.",
+      stats: {
+        workflows: "4 tracks",
+        tokens: "140+ vars",
+        avgLatency: "60fps",
+        stack: "Figma · Next.js",
+      },
+    },
     sticky1: {
       lines: [
         "Reuse before you add.",
@@ -37,6 +69,38 @@ export const WORKSPACE_TRACKS: WorkspaceTrack[] = [
     stageLabel: "Frontend Dev",
     stageTag: "Code · Production",
     nodeCount: 4,
+    pipeline: {
+      headerTag: "FRONTEND DEV · PIPELINE",
+      headerStatus: "Production · 0 errors",
+      node1: {
+        tag: "CODE & UI",
+        title: "TypeScript Spec",
+        subtext: "typed components",
+      },
+      node2: {
+        tag: "BUILD ENGINE",
+        title: "Next.js Turbopack",
+        subtext: "app router · ssr",
+      },
+      node3: {
+        tag: "OPTIMIZATION",
+        title: "Performance Tuning",
+        subtext: "memo & edge cache",
+        isActive: true,
+      },
+      branches: [
+        { label: "Edge Bundle", statusColor: "green" },
+        { label: "Zero CLS / INP", statusColor: "green" },
+        { label: "Vercel Deploy", statusColor: "green" },
+      ],
+      terminalLine: "> Build: compiled 48 modules in 184ms -> edge deployed successfully.",
+      stats: {
+        workflows: "3,890",
+        tokens: "128KB",
+        avgLatency: "184ms",
+        stack: "Next.js · Tailwind",
+      },
+    },
     sticky1: {
       lines: [
         "Type safety first.",
@@ -66,6 +130,38 @@ export const WORKSPACE_TRACKS: WorkspaceTrack[] = [
     stageLabel: "Design System",
     stageTag: "Library · 12 parts",
     nodeCount: 4,
+    pipeline: {
+      headerTag: "DESIGN SYSTEM · TOKENS",
+      headerStatus: "Synced · 0 drift",
+      node1: {
+        tag: "SOURCE TOKENS",
+        title: "Figma Variables",
+        subtext: "color · type · space",
+      },
+      node2: {
+        tag: "TOKEN BRIDGE",
+        title: "Semantic CSS",
+        subtext: "tokens.json sync",
+      },
+      node3: {
+        tag: "UI LIBRARY",
+        title: "Accessible Kit",
+        subtext: "radix · tailwind",
+        isActive: true,
+      },
+      branches: [
+        { label: "Storybook Docs", statusColor: "green" },
+        { label: "WCAG AA Tested", statusColor: "green" },
+        { label: "NPM / Lib Export", statusColor: "green" },
+      ],
+      terminalLine: "> Tokens: exported 142 variables -> CSS semantic variables synchronized.",
+      stats: {
+        workflows: "940",
+        tokens: "142 vars",
+        avgLatency: "64ms",
+        stack: "Figma · Radix",
+      },
+    },
     sticky1: {
       lines: [
         "Single source of truth.",
@@ -94,7 +190,39 @@ export const WORKSPACE_TRACKS: WorkspaceTrack[] = [
     gp: "End to end · 7+ yrs",
     stageLabel: "Product Design",
     stageTag: "End to end · 7+ yrs",
-    nodeCount: 5,
+    nodeCount: 4,
+    pipeline: {
+      headerTag: "PRODUCT UX · LIFECYCLE",
+      headerStatus: "Validated · Ready",
+      node1: {
+        tag: "USER RESEARCH",
+        title: "Interviews & Needs",
+        subtext: "user discovery",
+      },
+      node2: {
+        tag: "WIREFRAMING",
+        title: "Flow & Information",
+        subtext: "lo-fi architecture",
+      },
+      node3: {
+        tag: "PROTOTYPING",
+        title: "Hi-Fi Validation",
+        subtext: "interactive figma",
+        isActive: true,
+      },
+      branches: [
+        { label: "Usability Pass", statusColor: "green" },
+        { label: "Design Specs", statusColor: "green" },
+        { label: "Production Ready", statusColor: "green" },
+      ],
+      terminalLine: "> UX: prototype usability score 94/100 -> ready for development handoff.",
+      stats: {
+        workflows: "520",
+        tokens: "28 screens",
+        avgLatency: "4.2 days",
+        stack: "Figma · Prototype",
+      },
+    },
     sticky1: {
       lines: [
         "Talk to users.",

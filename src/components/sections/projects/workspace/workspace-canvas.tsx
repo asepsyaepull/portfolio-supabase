@@ -1,10 +1,8 @@
-"use client";
-
 import React from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { cn } from "@/lib/utils";
 import type { WorkspaceTrack, Waypoint } from "./workspace-types";
-import { WORKSPACE_DIAGRAM_COMPONENTS } from "./workspace-diagrams";
+import { AgentPipelineFlow } from "./agent-pipeline-flow";
 import { WorkspaceStickyNote } from "./workspace-sticky";
 import { WorkspaceChatCard } from "./workspace-chat-card";
 import { WorkspacePointer } from "./workspace-pointer";
@@ -24,8 +22,6 @@ export function WorkspaceCanvas({
   pointerWaypoint,
   className,
 }: WorkspaceCanvasProps) {
-  const SvgDiagram = WORKSPACE_DIAGRAM_COMPONENTS[trackIndex] || WORKSPACE_DIAGRAM_COMPONENTS[0];
-
   return (
     <div
       className={cn(
@@ -61,17 +57,17 @@ export function WorkspaceCanvas({
         </motion.div>
       </AnimatePresence>
 
-      {/* SVG Flow Diagram */}
+      {/* Main Flow Canvas - AI Agent Pipeline Flow */}
       <AnimatePresence mode="wait">
         <motion.div
-          key={`diagram-${trackIndex}`}
+          key={`pipeline-${track.id}`}
           initial={{ opacity: 0, scale: 0.98 }}
           animate={{ opacity: 1, scale: 1 }}
           exit={{ opacity: 0, scale: 0.98 }}
           transition={{ duration: 0.3 }}
-          className="absolute left-4 top-14 w-[92%] sm:w-[75%] md:w-[58%] max-w-[560px]"
+          className="absolute left-4 top-14 w-[92%] sm:w-[85%] md:w-[72%] max-w-[620px]"
         >
-          <SvgDiagram highlightIndex={highlightNodeIndex} />
+          <AgentPipelineFlow pipeline={track.pipeline} />
         </motion.div>
       </AnimatePresence>
 
@@ -135,3 +131,4 @@ export function WorkspaceCanvas({
     </div>
   );
 }
+

@@ -106,7 +106,7 @@ export function WorkspaceConsole({ projects = [] }: WorkspaceConsoleProps) {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-40px" }}
           transition={{ duration: 0.5, ease: "easeOut" }}
-          className="overflow-hidden rounded-[10px] md:rounded-[14px] border border-line-2 bg-white dark:bg-[#121B24] shadow-[0_20px_50px_-32px_rgba(20,19,16,0.32)]"
+          className="overflow-hidden rounded-[12px] md:rounded-[16px] border border-white/10 bg-[#070B10]/95 backdrop-blur-xl shadow-[0_24px_64px_-24px_rgba(0,0,0,0.6)] ring-1 ring-white/5"
         >
           {/* macOS / Figma Window Header */}
           <WorkspaceHeader activeTrackLabel={activeTrack.label} />

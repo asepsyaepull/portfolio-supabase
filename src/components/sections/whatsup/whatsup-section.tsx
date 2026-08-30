@@ -4,11 +4,13 @@ import React from "react";
 import {
   IconBrush,
   IconCode,
+  IconMapPin,
   IconMouse,
   IconPalette,
   IconQuote,
   IconSparkles,
   IconStack,
+  IconWorld,
 } from "@tabler/icons-react";
 import { motion } from "framer-motion";
 import { Card } from "@/components/ui/card";
@@ -38,7 +40,7 @@ export function WhatsupSection() {
           transition={{ duration: 0.55 }}
           className="mb-10"
         >
-          <FrameLabel name="live-feed.txt" className="mb-3 !text-brand" />
+          <FrameLabel name="about-me.txt" className="mb-3 !text-brand" />
           <h2 className="heading-display text-section-headline font-semibold uppercase text-ink">
             What&apos;s Up
           </h2>
@@ -57,18 +59,18 @@ export function WhatsupSection() {
             <Card variant="dark" className="flex h-full flex-col justify-between p-7 md:p-8">
               <div>
                 <FrameLabel name="STATEMENT.TXT" className="!text-ink-faint" />
-                <div className="mt-4">
-                  <StatusBadge status="available">available now</StatusBadge>
-                </div>
                 <blockquote className="heading-display mt-8 text-2xl font-medium">
                   &ldquo;I&apos;m Asep Syaepul — an UI/UX & Frontend Developer crafting fast, scalable, and immersive digital experiences that merge creativity with engineering precision. specialize in developing SaaS platforms, and interactive web experiences using technologies like {" "}
                   <span className="text-brand">Next.js, Node.js, and Three.js.</span>&rdquo;
                 </blockquote>
               </div>
-              <div className="mt-8 pt-4 border-t border-white/10">
+              <div className=" flex justify-between items-center mt-8 pt-4 border-t border-white/10">
                 <p className="font-mono text-[11px] font-bold uppercase tracking-[0.14em] text-white/85">
                   ASEP SYAEPUL, SINCE 2019
                 </p>
+                <div>
+                  <StatusBadge status="available">available now</StatusBadge>
+                </div>
               </div>
             </Card>
           </motion.div>
@@ -174,7 +176,7 @@ export function WhatsupSection() {
             </Card>
           </motion.div>
 
-          {/* CRAFT — hero.frame with live clock */}
+          {/* LOCATION & LIVE STUDIO TIME */}
           <motion.div
             initial={{ opacity: 0, y: 28 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -182,28 +184,73 @@ export function WhatsupSection() {
             transition={{ duration: 0.5, delay: 0.24 }}
             className="md:col-span-2"
           >
-            <Card variant="white" className="h-full">
-              <div className="flex items-center justify-between gap-4">
-                <FrameLabel name="HERO.FRAME" className="!text-ink-faint" />
-                <FrameLabel name="DESIGNED LIVE" className="!text-brand" />
-              </div>
-              {/* mini frame mock */}
-              <div className="mt-5 overflow-hidden rounded-xl border border-line-2">
-                <div className="flex items-center gap-1.5 border-b border-line bg-[#F1F6FA] px-3 py-2">
-                  <span className="h-2 w-2 rounded-full bg-ink-faint/40" />
-                  <span className="h-2 w-2 rounded-full bg-ink-faint/40" />
-                  <span className="h-2 w-2 rounded-full bg-ink-faint/40" />
+            <Card variant="white" className="flex h-full flex-col justify-between">
+              <div>
+                <div className="flex items-center justify-between gap-4">
+                  <FrameLabel name="LOCATION & TIMEZONE" className="!text-ink-faint" />
+                  <span className="inline-flex items-center gap-1.5 font-mono text-[11px] font-bold uppercase tracking-[0.14em] text-brand">
+                    <span className="relative flex h-2 w-2">
+                      <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-brand opacity-75" />
+                      <span className="relative inline-flex h-2 w-2 rounded-full bg-brand" />
+                    </span>
+                    JAKARTA, ID
+                  </span>
                 </div>
-                <div className="relative h-24 bg-[linear-gradient(#14202b0d_1px,transparent_1px),linear-gradient(90deg,#14202b0d_1px,transparent_1px)] [background-size:18px_18px]">
-                  <span className="absolute left-4 top-3 h-3 w-16 rounded-full bg-canvas" />
-                  <span className="absolute left-4 top-9 h-3 w-24 rounded-full bg-brand" />
-                  <span className="absolute bottom-3 right-4 h-6 w-14 rounded-md bg-ink" />
-                  <span className="absolute left-4 top-16 h-2 w-20 rounded-full bg-grid" />
+
+                {/* Location & Studio Terminal Widget */}
+                <div className="mt-5 overflow-hidden rounded-xl border border-line-2 bg-gradient-to-br from-white to-[#F8FAFC]">
+                  <div className="flex items-center justify-between border-b border-line bg-[#F1F6FA] px-3.5 py-2">
+                    <div className="flex items-center gap-1.5">
+                      <span className="h-2 w-2 rounded-full bg-ink-faint/40" />
+                      <span className="h-2 w-2 rounded-full bg-ink-faint/40" />
+                      <span className="h-2 w-2 rounded-full bg-ink-faint/40" />
+                    </div>
+                    <span className="font-mono text-[10px] font-bold uppercase tracking-wider text-ink-soft">
+                      BASE_STATION.GEO
+                    </span>
+                  </div>
+
+                  <div className="relative p-4">
+                    <div className="flex items-start justify-between gap-3">
+                      <div>
+                        <div className="flex items-center gap-1.5 text-[14px] font-bold text-ink">
+                          <IconMapPin className="h-4 w-4 text-brand" />
+                          <span>Jakarta & Bandung, Indonesia</span>
+                        </div>
+                        <p className="mt-1 font-mono text-[11px] text-ink-soft">
+                          6°12&apos;S 106°49&apos;E • UTC+07:00 (WIB)
+                        </p>
+                      </div>
+                      <span className="inline-flex items-center gap-1 rounded-full border border-line-2 bg-white px-2.5 py-1 font-mono text-[10px] font-bold uppercase tracking-wider text-ink">
+                        <IconWorld className="h-3 w-3 text-tool" />
+                        REMOTE READY
+                      </span>
+                    </div>
+
+                    <p className="mt-2.5 text-[13px] leading-relaxed text-ink-soft">
+                      Working across time zones with async workflows and real-time collaboration.
+                    </p>
+                  </div>
                 </div>
               </div>
-              <p className="heading-display mt-5 text-3xl font-semibold tabular-nums text-ink">
-                <LiveClock suffix="WIB" />
-              </p>
+
+              {/* Live Clock Footer */}
+              <div className="mt-5 flex items-end justify-between border-t border-line pt-4">
+                <div>
+                  <p className="font-mono text-[10px] font-bold uppercase tracking-[0.14em] text-ink-faint">
+                    LOCAL STUDIO CLOCK
+                  </p>
+                  <p className="heading-display mt-0.5 text-2xl font-semibold tabular-nums text-ink md:text-3xl">
+                    <LiveClock suffix="WIB" />
+                  </p>
+                </div>
+                <div className="text-right">
+                  <span className="inline-flex items-center gap-1.5 rounded-full border border-line-2 bg-grid/60 px-3 py-1 font-mono text-[11px] font-bold uppercase tracking-[0.1em] text-ink">
+                    <span className="h-1.5 w-1.5 rounded-full bg-status-live animate-pulse" />
+                    ACTIVE NOW
+                  </span>
+                </div>
+              </div>
             </Card>
           </motion.div>
         </div>

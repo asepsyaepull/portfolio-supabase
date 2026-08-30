@@ -68,6 +68,13 @@ export default function RootLayout({
 }) {
   return (
     <html lang="id" suppressHydrationWarning>
+      <head>
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `(function(){try{if(sessionStorage.getItem('asyaepul_portfolio_hello_v1')==='true'&&!location.search.includes('intro=true')){document.documentElement.classList.add('preloader-done');}}catch(e){}})();`,
+          }}
+        />
+      </head>
       <body
         className={`${fraunces.variable} ${hanken.variable} ${spaceMono.variable} font-body antialiased bg-[var(--canvas)] text-[var(--ink)]`}
       >

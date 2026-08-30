@@ -1,6 +1,5 @@
 "use client";
 
-import { ArcRevealHero } from "@/components/sections/hero/arc-reveal-hero";
 import { HeroSection } from "@/components/sections/hero/hero-section";
 import type { Project, Skill } from "@/types/database";
 import dynamic from "next/dynamic";
@@ -68,9 +67,7 @@ export default function HomeClient({
 }) {
   return (
     <div>
-      <ArcRevealHero greetingHold={400} revealDuration={600}>
-        <HeroSection />
-      </ArcRevealHero>
+      <HeroSection />
       {/* Sections take no id prop — anchor ids live on these wrappers */}
       <div id="about">
         <WhatsupSection />

@@ -20,6 +20,35 @@ export interface ChatConfig {
   file: string;
 }
 
+export interface PipelineNode {
+  tag: string;
+  title: string;
+  subtext: string;
+  isActive?: boolean;
+}
+
+export interface PipelineBranch {
+  label: string;
+  statusColor: "green" | "yellow" | "blue";
+  detail?: string;
+}
+
+export interface PipelineConfig {
+  headerTag: string;
+  headerStatus: string;
+  node1: PipelineNode;
+  node2: PipelineNode;
+  node3: PipelineNode;
+  branches: PipelineBranch[];
+  terminalLine: string;
+  stats: {
+    workflows: string;
+    tokens: string;
+    avgLatency: string;
+    stack: string;
+  };
+}
+
 export interface WorkspaceTrack {
   id: string;
   label: string;
@@ -31,6 +60,7 @@ export interface WorkspaceTrack {
   chat: ChatConfig;
   tags: string[];
   nodeCount: number;
+  pipeline?: PipelineConfig;
 }
 
 export interface LogMessage {
@@ -50,4 +80,6 @@ export interface WorkspaceConsoleProps {
 
 export interface DiagramProps {
   highlightIndex?: number;
+  pipeline?: PipelineConfig;
 }
+
