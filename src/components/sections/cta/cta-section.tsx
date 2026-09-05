@@ -5,12 +5,14 @@ import { motion } from "framer-motion";
 import { useClock } from "@/hooks/use-clock";
 import { FigmaTag, FrameLabel } from "@/components/ui/figma-tag";
 import { PricingModal } from "@/components/sections/pricing/pricing-modal";
+import { useLanguage } from "@/context/language-context";
 
 const MAILTO = "mailto:mail.asepsyaepul@gmail.com";
 
 export function CtaSection() {
   const now = useClock();
   const [isPricingModalOpen, setIsPricingModalOpen] = useState(false);
+  const { t } = useLanguage();
 
   return (
     <>
@@ -18,7 +20,7 @@ export function CtaSection() {
         <div className="mx-auto max-w-[1280px]">
           {/* Frame Label */}
           <div className="mb-4 flex items-center justify-between px-2">
-            <FrameLabel name="CONTACT.FRAME" className="!text-brand" />
+            <FrameLabel name={t.cta.frameTag} className="!text-brand" />
             <span className="font-mono text-[11px] font-bold text-ink-faint">
               1280 × 520
             </span>
@@ -32,7 +34,7 @@ export function CtaSection() {
             <span className="omd-h br" aria-hidden />
 
             <FigmaTag variant="blue" className="-top-3 left-6 z-20">
-              contact.fig
+              {t.cta.figmaTag}
             </FigmaTag>
 
             {/* Inner card with overflow-hidden for gradients/grid */}
@@ -56,7 +58,7 @@ export function CtaSection() {
                 transition={{ duration: 0.45 }}
                 className="font-mono text-xs font-bold uppercase italic tracking-[0.22em] text-brand"
               >
-                golden hour in jakarta
+                {t.cta.badge}
               </motion.p>
 
               <motion.h2
@@ -66,7 +68,7 @@ export function CtaSection() {
                 transition={{ duration: 0.55, delay: 0.08 }}
                 className="heading-display mt-5 text-[clamp(44px,8vw,96px)] font-bold uppercase leading-[0.95] tracking-tight text-white"
               >
-                Still building<span className="text-brand">.</span>
+                {t.cta.headline.slice(0, -1)}<span className="text-brand">.</span>
               </motion.h2>
 
               <motion.p
@@ -76,7 +78,7 @@ export function CtaSection() {
                 transition={{ duration: 0.5, delay: 0.16 }}
                 className="mx-auto mt-6 max-w-lg text-base leading-relaxed text-zinc-300 sm:text-lg"
               >
-                Jam {now} di studio. Punya project — atau posisi yang cocok? Ceritakan sekarang, besok masuk antrian.
+                {t.cta.subheadlineTemplate(now)}
               </motion.p>
 
               <motion.div
@@ -90,14 +92,14 @@ export function CtaSection() {
                   href={MAILTO}
                   className="omd-btn-primary !px-8 !py-3.5 text-sm shadow-[0_12px_26px_-8px_#F0531C]"
                 >
-                  Talk with me
+                  {t.cta.talkButton}
                 </a>
                 <button
                   type="button"
                   onClick={() => setIsPricingModalOpen(true)}
                   className="group inline-flex items-center gap-2 font-mono text-[13px] font-bold text-white/90 underline decoration-white/40 underline-offset-4 transition-colors hover:text-white hover:decoration-white cursor-pointer"
                 >
-                  <span>Estimasi Biaya Proyek</span>
+                  <span>{t.cta.pricingEstimateButton}</span>
                 </button>
               </motion.div>
             </div>

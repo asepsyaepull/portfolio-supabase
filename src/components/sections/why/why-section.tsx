@@ -4,31 +4,19 @@ import { Card } from "@/components/ui/card";
 import { FrameLabel } from "@/components/ui/figma-tag";
 import { SectionHeader } from "@/components/ui/section-header";
 import { IconCheck, IconX } from "@tabler/icons-react";
-
-const MOST_STUDIOS = [
-  "Pitched senior, dikerjain junior.",
-  "Booking mingguan, deliver bulan depan.",
-  "Retainer mahal + tagihan kejutan.",
-  "Banyak meeting sebelum pixel pertama.",
-  "Rapi semua… tapi gampang dilupain.",
-];
-
-const ASEP = [
-  "Ngobrol langsung sama orang yang desain.",
-  "First draft hari, bukan kuartal.",
-  "Fixed scope, fixed price.",
-  "Less meetings, more shipping.",
-  "Custom, susah dilupain.",
-];
+import { useLanguage } from "@/context/language-context";
 
 export function WhySection() {
+  const { t } = useLanguage();
+
   return (
     <section id="why" className="relative z-[1] px-4 py-24">
       <SectionHeader
-        tag="the-difference.fig"
+        tag={t.why.tag}
         title={
           <>
-            Same brief. <span className="text-brand">Beda hasil.</span>
+            {t.why.titlePrefix}{" "}
+            <span className="text-brand">{t.why.titleHighlight}</span>
           </>
         }
       />
@@ -36,9 +24,9 @@ export function WhySection() {
       <div className="mx-auto mt-14 grid max-w-5xl gap-8 md:grid-cols-2">
         {/* Most studios — faded */}
         <div className="rounded-[24px] border border-line bg-white/50 p-8 opacity-70 grayscale">
-          <FrameLabel name="cara lain" className="!text-ink-faint" />
+          <FrameLabel name={t.why.studiosTag} className="!text-ink-faint" />
           <ul className="mt-6 space-y-4">
-            {MOST_STUDIOS.map((item) => (
+            {t.why.studiosItems.map((item) => (
               <li
                 key={item}
                 className="flex items-start gap-3 text-[15px] text-ink-faint"
@@ -54,11 +42,11 @@ export function WhySection() {
         <div className="omd-sel relative">
           <Card variant="white" className="relative p-8">
             <span className="absolute -top-5 right-6 z-[1] inline-flex items-center gap-1.5 rounded-full bg-tool px-3 py-1 font-mono text-[11px] font-bold uppercase tracking-wide text-white">
-              pick this one
+              {t.why.asepBadge}
             </span>
-            <FrameLabel name="Asep · selected" className="!text-tool" />
+            <FrameLabel name={t.why.asepTag} className="!text-tool" />
             <ul className="mt-6 space-y-4">
-              {ASEP.map((item) => (
+              {t.why.asepItems.map((item) => (
                 <li
                   key={item}
                   className="flex items-start gap-3 text-[15px] font-medium text-ink"

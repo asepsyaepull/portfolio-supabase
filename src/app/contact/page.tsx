@@ -10,9 +10,11 @@ import { cn } from "@/lib/utils";
 import { useTransition } from "react";
 import { toast } from "sonner";
 import { submitContactForm } from "./actions";
+import { useLanguage } from "@/context/language-context";
 
 export default function ContactPage() {
   const [isPending, startTransition] = useTransition();
+  const { t } = useLanguage();
 
   const handleSubmit = async (formData: FormData) => {
     startTransition(async () => {
@@ -20,7 +22,7 @@ export default function ContactPage() {
       if (result.error) {
         toast.error(result.error);
       } else if (result.success) {
-        toast.success("Pesan Anda berhasil dikirim! Saya akan segera membalasnya.");
+        toast.success(t.contactPage.successMessage);
         const form = document.getElementById("contact-form") as HTMLFormElement;
         form.reset();
       }
@@ -44,28 +46,29 @@ export default function ContactPage() {
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.6 }}
           >
-            <span className="text-lime-600 dark:text-lime-500 font-mono tracking-widest text-xs md:text-sm uppercase mb-4 block">/ CONTACT PORTAL</span>
+            <span className="text-lime-600 dark:text-lime-500 font-mono tracking-widest text-xs md:text-sm uppercase mb-4 block">
+              {t.contactPage.portalTag}
+            </span>
             <h1 className="text-4xl md:text-7xl font-bold text-zinc-900 dark:text-white mb-6 md:mb-8 leading-tight transition-colors">
-                Let's Build <br />
-                <span className="text-zinc-500">Something Great.</span>
+              {t.contactPage.titleLine1} <br />
+              <span className="text-zinc-500">{t.contactPage.titleLine2}</span>
             </h1>
             <p className="text-zinc-600 dark:text-zinc-400 text-base md:text-xl leading-relaxed mb-8 md:mb-12 max-w-md transition-colors">
-                Have a project in mind or a complex business problem to solve?
-                I'm currently available for freelance work and full-time opportunities.
+              {t.contactPage.description}
             </p>
 
             <div className="space-y-8">
-                <ContactInfoItem
-                    icon={<IconMail className="text-lime-500" />}
-                    label="Email"
-                    value="mail.asepsyaepul@gmail.com"
-                    href="mailto:mail.asepsyaepul@gmail.com"
-                />
-                <ContactInfoItem
-                    icon={<IconMapPin className="text-lime-500" />}
-                    label="Location"
-                    value="Cilandak, Jakarta Selatan"
-                />
+              <ContactInfoItem
+                icon={<IconMail className="text-lime-500" />}
+                label={t.contactPage.emailLabel}
+                value="mail.asepsyaepul@gmail.com"
+                href="mailto:mail.asepsyaepul@gmail.com"
+              />
+              <ContactInfoItem
+                icon={<IconMapPin className="text-lime-500" />}
+                label={t.contactPage.locationLabel}
+                value={t.contactPage.locationValue}
+              />
             </div>
           </motion.div>
 
@@ -81,35 +84,43 @@ export default function ContactPage() {
             <form id="contact-form" action={handleSubmit} className="space-y-6 relative z-10">
               <div className="grid md:grid-cols-2 gap-6">
                 <LabelInputContainer>
-                    <label className="text-zinc-600 dark:text-zinc-400 text-xs font-bold uppercase ml-1 mb-2 transition-colors">Full Name</label>
-                    <Input name="name" placeholder="John Doe" type="text" required disabled={isPending} />
+                  <label className="text-zinc-600 dark:text-zinc-400 text-xs font-bold uppercase ml-1 mb-2 transition-colors">
+                    {t.contactPage.fullNameLabel}
+                  </label>
+                  <Input name="name" placeholder={t.contactPage.namePlaceholder} type="text" required disabled={isPending} />
                 </LabelInputContainer>
                 <LabelInputContainer>
-                    <label className="text-zinc-600 dark:text-zinc-400 text-xs font-bold uppercase ml-1 mb-2 transition-colors">Email Address</label>
-                    <Input name="email" placeholder="john@example.com" type="email" required disabled={isPending} />
+                  <label className="text-zinc-600 dark:text-zinc-400 text-xs font-bold uppercase ml-1 mb-2 transition-colors">
+                    {t.contactPage.emailAddressLabel}
+                  </label>
+                  <Input name="email" placeholder={t.contactPage.emailPlaceholder} type="email" required disabled={isPending} />
                 </LabelInputContainer>
               </div>
 
               <LabelInputContainer>
-                <label className="text-zinc-600 dark:text-zinc-400 text-xs font-bold uppercase ml-1 mb-2 transition-colors">Subject</label>
-                <Input name="subject" placeholder="How can I help you?" type="text" required disabled={isPending} />
+                <label className="text-zinc-600 dark:text-zinc-400 text-xs font-bold uppercase ml-1 mb-2 transition-colors">
+                  {t.contactPage.subjectLabel}
+                </label>
+                <Input name="subject" placeholder={t.contactPage.subjectPlaceholder} type="text" required disabled={isPending} />
               </LabelInputContainer>
 
               <LabelInputContainer>
-                <label className="text-zinc-600 dark:text-zinc-400 text-xs font-bold uppercase ml-1 mb-2 transition-colors">Message</label>
-                <TextArea name="message" placeholder="Tell me about your project..." required disabled={isPending} />
+                <label className="text-zinc-600 dark:text-zinc-400 text-xs font-bold uppercase ml-1 mb-2 transition-colors">
+                  {t.contactPage.messageLabel}
+                </label>
+                <TextArea name="message" placeholder={t.contactPage.messagePlaceholder} required disabled={isPending} />
               </LabelInputContainer>
 
               <div className="pt-4">
-                  <HoverBorderGradient
-                    containerClassName="rounded-xl w-full"
-                    as="button"
-                    type="submit"
-                    className="font-bold w-full py-4 flex items-center justify-center gap-3 bg-white dark:bg-zinc-950 text-lime-600 dark:text-lime-500 group-hover:text-lime-700 dark:group-hover:text-lime-400 transition-colors"
-                  >
-                    <span>{isPending ? "SENDING..." : "SEND MESSAGE"}</span>
-                    <IconSend size={18} />
-                  </HoverBorderGradient>
+                <HoverBorderGradient
+                  containerClassName="rounded-xl w-full"
+                  as="button"
+                  type="submit"
+                  className="font-bold w-full py-4 flex items-center justify-center gap-3 bg-white dark:bg-zinc-950 text-lime-600 dark:text-lime-500 group-hover:text-lime-700 dark:group-hover:text-lime-400 transition-colors"
+                >
+                  <span>{isPending ? t.contactPage.submittingButton : t.contactPage.submitButton}</span>
+                  <IconSend size={18} />
+                </HoverBorderGradient>
               </div>
             </form>
           </motion.div>

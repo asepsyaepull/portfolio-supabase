@@ -6,6 +6,7 @@ import {
   ProductItem,
 } from "@/components/ui/cinematic-product-scroll-section";
 import type { Project } from "@/types/database";
+import { useLanguage } from "@/context/language-context";
 
 interface CinematicSelectedWorkProps {
   projects?: Project[];
@@ -18,12 +19,17 @@ interface CinematicSelectedWorkProps {
 
 export function CinematicSelectedWork({
   projects,
-  title = "SELECTED CRAFT",
-  subtitle = "ARCHIVE // 2024 — 2026",
-  description = "A curated selection of high-impact web products, design systems, and frontend engineering crafts.",
-  buttonText = "View Full Archive",
+  title,
+  subtitle,
+  description,
+  buttonText,
   buttonLink = "/projects",
 }: CinematicSelectedWorkProps) {
+  const { t } = useLanguage();
+  const activeTitle = title || t.work.cinematicTitle;
+  const activeSubtitle = subtitle || t.work.cinematicSubtitle;
+  const activeDescription = description || t.work.cinematicDescription;
+  const activeButtonText = buttonText || t.work.cinematicButton;
   // If database projects are passed, transform them to cinematic product items
   const transformedProducts: ProductItem[] | undefined =
     projects && projects.length > 0
@@ -70,10 +76,10 @@ export function CinematicSelectedWork({
   return (
     <CinematicProductScrollSection
       products={transformedProducts}
-      title={title}
-      subtitle={subtitle}
-      description={description}
-      buttonText={buttonText}
+      title={activeTitle}
+      subtitle={activeSubtitle}
+      description={activeDescription}
+      buttonText={activeButtonText}
       buttonLink={buttonLink}
     />
   );

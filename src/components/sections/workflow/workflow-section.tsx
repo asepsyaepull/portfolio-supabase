@@ -4,62 +4,8 @@ import React from "react";
 import { motion } from "framer-motion";
 import { Card } from "@/components/ui/card";
 import { SectionHeader } from "@/components/ui/section-header";
-
-type Msg = {
-  from: "you" | "asep";
-  text: string;
-  time: string;
-  attach?: string;
-  reaction?: string;
-};
-
-type Step = {
-  label: string;
-  msgs: Msg[];
-};
-
-const STEPS: Step[] = [
-  {
-    label: "01 · MULAI",
-    msgs: [
-      { from: "you", text: "Halo, ada slot buat project baru? Saya butuh redesign dashboard.", time: "09.02" },
-      { from: "asep", text: "Ada, aman 👋 Ceritain dulu goals-nya — target user siapa, masalah utamanya apa.", time: "09.04" },
-    ],
-  },
-  {
-    label: "02 · KIRIM BRIEF",
-    msgs: [
-      {
-        from: "you",
-        text: "Ini brief-nya plus referensi visual. ada 3 flow utama yang perlu diperbaiki.",
-        time: "09.15",
-        attach: "project-brief.fig",
-      },
-      { from: "asep", text: "Sudah saya baca. Saya riset kompetitor dulu, lalu kirim wireframe hari ini.", time: "09.20" },
-    ],
-  },
-  {
-    label: "03 · REVISI",
-    msgs: [
-      {
-        from: "asep",
-        text: "Wireframe jadi. Cek alur checkout-nya — saya prioritaskan di sini.",
-        time: "14.30",
-        attach: "homepage-v1.png",
-        reaction: "🔥 2",
-      },
-      { from: "you", text: "Oke arahnya bener. Tombol primary kecilin dikit, sama spacing antar section Longgarin.", time: "15.02", reaction: "👍 1" },
-      { from: "asep", text: "Masuk. Revisi termasuk paket — saya update hari ini.", time: "15.05" },
-    ],
-  },
-  {
-    label: "04 · SHIP",
-    msgs: [
-      { from: "asep", text: "Sudah live. Lighthouse 98, semua flow tested. 🚀", time: "10.41" },
-      { from: "you", text: "Keren. Next project langsung lanjut ya.", time: "10.44" },
-    ],
-  },
-];
+import { useLanguage } from "@/context/language-context";
+import { WorkflowMsg } from "@/locales/types";
 
 function Avatar({ from }: { from: "you" | "asep" }) {
   return (
@@ -73,7 +19,7 @@ function Avatar({ from }: { from: "you" | "asep" }) {
   );
 }
 
-function Bubble({ msg }: { msg: Msg }) {
+function Bubble({ msg }: { msg: WorkflowMsg }) {
   const mine = msg.from === "you";
   return (
     <div className={`flex gap-2.5 ${mine ? "flex-row-reverse" : ""}`}>
@@ -117,15 +63,16 @@ function Bubble({ msg }: { msg: Msg }) {
 }
 
 export function WorkflowSection() {
+  const { t } = useLanguage();
   let msgIndex = -1;
 
   return (
     <section id="process" className="relative z-[1] overflow-x-clip py-20 md:py-28">
       <div className="mx-auto max-w-[1280px] px-6">
         <SectionHeader
-          tag="how-it-works.frame"
-          title="No forms. No hoops. Just this."
-          subtitle="Satu thread, langsung jalan. Begini workflow-nya dari awal sampai live."
+          tag={t.workflow.tag}
+          title={t.workflow.title}
+          subtitle={t.workflow.subtitle}
         />
 
         {/* Chat window */}
@@ -149,12 +96,12 @@ export function WorkflowSection() {
                   </span>
                 </span>
                 <span className="font-mono text-[13px] font-bold text-ink">
-                  &lt;project-channel&gt;
+                  {t.workflow.channelName}
                 </span>
               </div>
               <span className="flex items-center gap-2 font-mono text-[11px] font-bold text-ink-soft">
                 <span className="h-2 w-2 rounded-full bg-emerald-500 shadow-[0_0_0_3px_rgba(39,192,107,0.18)]" />
-                3 online
+                {t.workflow.onlineStatus}
               </span>
             </div>
 
@@ -166,7 +113,7 @@ export function WorkflowSection() {
               variants={{ show: { transition: { staggerChildren: 0.32 } } }}
               className="flex flex-col gap-4 bg-[#FAFCFE] px-5 py-7 md:px-7"
             >
-              {STEPS.map((step) => (
+              {t.workflow.steps.map((step) => (
                 <div key={step.label}>
                   {/* Step divider */}
                   <div className="my-5 flex items-center gap-3 first:mt-0">
@@ -200,7 +147,7 @@ export function WorkflowSection() {
             {/* Fake input */}
             <div className="flex items-center gap-3 border-t border-line px-5 py-3.5 md:px-7">
               <div className="flex-1 rounded-full border border-line-2 px-4 py-2.5 font-mono text-[12px] text-ink-faint">
-                message &lt;project-channel&gt;
+                {t.workflow.inputPlaceholder}
               </div>
               <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-brand text-white">
                 <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">

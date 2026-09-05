@@ -3,6 +3,7 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { ProfileCardPointer } from './profile-card-pointer';
+import { useLanguage } from '@/context/language-context';
 import {
   IconBrandFigma,
   IconBrandFramer,
@@ -14,6 +15,9 @@ import {
 } from "@tabler/icons-react";
 
 export function AboutPage() {
+    const { t } = useLanguage();
+    const about = t.aboutPage;
+
     return (
         <div className="bg-zinc-50 dark:bg-gray-950 pt-20 transition-colors duration-300">
             <div className="container mx-auto px-4 md:px-24 py-20">
@@ -24,16 +28,16 @@ export function AboutPage() {
                         animate={{ opacity: 1, x: 0 }}
                         transition={{ duration: 0.6 }}
                     >
-                        <span className="text-lime-500 font-mono tracking-widest text-sm uppercase">/ WHO AM I</span>
+                        <span className="text-lime-500 font-mono tracking-widest text-sm uppercase">{about.badge}</span>
                         <h1 className="text-4xl md:text-7xl font-bold text-zinc-900 dark:text-white mt-4 mb-8 leading-tight transition-colors">
-                            Design Driven. <br />
-                            <span className="text-zinc-500 text-3xl md:text-5xl">Code Empowered.</span>
+                            {about.headlineMain} <br />
+                            <span className="text-zinc-500 text-3xl md:text-5xl">{about.headlineSub}</span>
                         </h1>
                         <p className="text-lg md:text-xl text-zinc-600 dark:text-zinc-400 leading-relaxed mb-6 transition-colors">
-                            I am <span className="text-zinc-900 dark:text-white font-semibold transition-colors">Asep Syaepul Rohman</span>, a seasoned UI/UX professional with over 7 years of experience in designing and implementing user-centered digital products.
+                            {about.bio1Prefix}<span className="text-zinc-900 dark:text-white font-semibold transition-colors">{about.bio1Name}</span>{about.bio1Suffix}
                         </p>
                         <p className="text-zinc-500 leading-relaxed text-justify">
-                            I bridge the gap between high-fidelity designs and production-ready interfaces. My approach combines psychological research with technical precision, ensuring that every pixel serves a purpose and every line of code delivers performance.
+                            {about.bio2}
                         </p>
                     </motion.div>
                     <motion.div
@@ -49,17 +53,16 @@ export function AboutPage() {
                 {/* Skills Matrix */}
                 <div className="mb-32">
                     <h2 className="text-2xl md:text-4xl font-bold text-zinc-900 dark:text-white mb-12 flex items-center gap-4 transition-colors">
-                        Technical Skills <div className="h-px flex-1 bg-zinc-200 dark:bg-zinc-800 transition-colors" />
+                        {about.skillsTitle} <div className="h-px flex-1 bg-zinc-200 dark:bg-zinc-800 transition-colors" />
                     </h2>
                     <div className="grid md:grid-cols-2 gap-8">
                         {/* Design Column */}
                         <div className="p-8 rounded-3xl bg-white/50 dark:bg-zinc-900/30 border border-black/5 dark:border-white/5 backdrop-blur-sm transition-colors duration-300">
-                            <h3 className="text-lime-600 dark:text-lime-500 font-bold text-xl mb-6">UI/UX & Product Design</h3>
+                            <h3 className="text-lime-600 dark:text-lime-500 font-bold text-xl mb-6">{about.designTitle}</h3>
                             <div className="space-y-4">
-                                <SkillItem label="User Research & Usability Testing" percent={95} />
-                                <SkillItem label="User Flows & Prototyping" percent={90} />
-                                <SkillItem label="Information Architecture" percent={85} />
-                                <SkillItem label="Design Systems" percent={95} />
+                                {about.designSkills.map((skill) => (
+                                    <SkillItem key={skill.label} label={skill.label} percent={skill.percent} />
+                                ))}
                             </div>
                             <div className="flex gap-4 mt-8 pt-8 border-t border-black/5 dark:border-white/5 transition-colors">
                                 <IconBrandFigma className="text-2xl text-zinc-400 hover:text-zinc-900 dark:text-zinc-500 dark:hover:text-white transition-colors" />
@@ -69,12 +72,11 @@ export function AboutPage() {
 
                         {/* Development Column */}
                         <div className="p-8 rounded-3xl bg-white/50 dark:bg-zinc-900/30 border border-black/5 dark:border-white/5 backdrop-blur-sm transition-colors duration-300">
-                            <h3 className="text-lime-600 dark:text-lime-500 font-bold text-xl mb-6">Frontend Development</h3>
+                            <h3 className="text-lime-600 dark:text-lime-500 font-bold text-xl mb-6">{about.devTitle}</h3>
                             <div className="space-y-4">
-                                <SkillItem label="React.js & Next.js" percent={90} />
-                                <SkillItem label="TypeScript" percent={85} />
-                                <SkillItem label="Tailwind CSS" percent={95} />
-                                <SkillItem label="Performance Optimization" percent={80} />
+                                {about.devSkills.map((skill) => (
+                                    <SkillItem key={skill.label} label={skill.label} percent={skill.percent} />
+                                ))}
                             </div>
                             <div className="flex gap-4 mt-8 pt-8 border-t border-black/5 dark:border-white/5 transition-colors">
                                 <IconBrandReact className="text-2xl text-zinc-400 hover:text-zinc-900 dark:text-zinc-500 dark:hover:text-white transition-colors" />
@@ -90,27 +92,18 @@ export function AboutPage() {
                 {/* Education Section */}
                 <div>
                     <h2 className="text-2xl md:text-4xl font-bold text-zinc-900 dark:text-white mb-12 flex items-center gap-4 transition-colors">
-                        Foundations <div className="h-px flex-1 bg-zinc-200 dark:bg-zinc-800 transition-colors" />
+                        {about.foundationsTitle} <div className="h-px flex-1 bg-zinc-200 dark:bg-zinc-800 transition-colors" />
                     </h2>
                     <div className="grid md:grid-cols-3 gap-8">
-                        <EducationCard
-                            school="Binus University"
-                            degree="Bachelor of Information Systems"
-                            year="2018 - 2020"
-                            gpa="GPA: 3.20"
-                        />
-                        <EducationCard
-                            school="Bogor Agricultural University"
-                            degree="Associate's Degree of Informatics"
-                            year="2014 - 2017"
-                            gpa="GPA: 2.81"
-                        />
-                        <EducationCard
-                            school="Dibimbing.id"
-                            degree="Front-End Web Development"
-                            year="2024 - 2025"
-                            gpa="Final Score: 96.93"
-                        />
+                        {about.education.map((edu, idx) => (
+                            <EducationCard
+                                key={idx}
+                                school={edu.school}
+                                degree={edu.degree}
+                                year={edu.year}
+                                gpa={edu.gpa}
+                            />
+                        ))}
                     </div>
                 </div>
             </div>

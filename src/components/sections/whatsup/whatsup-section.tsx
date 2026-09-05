@@ -18,17 +18,20 @@ import { CountUp } from "@/components/ui/count-up";
 import { LiveClock } from "@/components/ui/live-clock";
 import { StatusBadge } from "@/components/ui/badge";
 import { FrameLabel } from "@/components/ui/figma-tag";
+import { useLanguage } from "@/context/language-context";
 
-const CAPABILITIES = [
-  { icon: <IconPalette className="h-4 w-4" />, label: "UI/UX" },
-  { icon: <IconCode className="h-4 w-4" />, label: "Web Dev" },
-  { icon: <IconMouse className="h-4 w-4" />, label: "Prototyping" },
-  { icon: <IconStack className="h-4 w-4" />, label: "Design Systems" },
-  { icon: <IconSparkles className="h-4 w-4" />, label: "Motion" },
-  { icon: <IconBrush className="h-4 w-4" />, label: "Brand" },
-];
+const CAPABILITY_ICONS: Record<string, React.ReactNode> = {
+  "ui/ux": <IconPalette className="h-4 w-4" />,
+  "web dev": <IconCode className="h-4 w-4" />,
+  "prototyping": <IconMouse className="h-4 w-4" />,
+  "design systems": <IconStack className="h-4 w-4" />,
+  "motion": <IconSparkles className="h-4 w-4" />,
+  "brand": <IconBrush className="h-4 w-4" />,
+};
 
 export function WhatsupSection() {
+  const { t } = useLanguage();
+
   return (
     <section id="whatsup" className="relative z-[1] py-20 md:py-28">
       <div className="mx-auto max-w-[1280px] px-6">
@@ -40,9 +43,9 @@ export function WhatsupSection() {
           transition={{ duration: 0.55 }}
           className="mb-10"
         >
-          <FrameLabel name="about-me.txt" className="mb-3 !text-brand" />
+          <FrameLabel name={t.whatsup.tag} className="mb-3 !text-brand" />
           <h2 className="heading-display text-section-headline font-semibold uppercase text-ink">
-            What&apos;s Up
+            {t.whatsup.headline}
           </h2>
         </motion.div>
 
@@ -58,18 +61,18 @@ export function WhatsupSection() {
           >
             <Card variant="dark" className="flex h-full flex-col justify-between p-7 md:p-8">
               <div>
-                <FrameLabel name="STATEMENT.TXT" className="!text-ink-faint" />
+                <FrameLabel name={t.whatsup.statementTag} className="!text-ink-faint" />
                 <blockquote className="heading-display mt-8 text-2xl font-medium">
-                  &ldquo;I&apos;m Asep Syaepul — an UI/UX & Frontend Developer crafting fast, scalable, and immersive digital experiences that merge creativity with engineering precision. specialize in developing SaaS platforms, and interactive web experiences using technologies like {" "}
-                  <span className="text-brand">Next.js, Node.js, and Three.js.</span>&rdquo;
+                  &ldquo;{t.whatsup.statementQuote}{" "}
+                  <span className="text-brand">{t.whatsup.statementHighlight}</span>&rdquo;
                 </blockquote>
               </div>
-              <div className=" flex justify-between items-center mt-8 pt-4 border-t border-white/10">
+              <div className="flex justify-between items-center mt-8 pt-4 border-t border-white/10">
                 <p className="font-mono text-[11px] font-bold uppercase tracking-[0.14em] text-white/85">
-                  ASEP SYAEPUL, SINCE 2019
+                  {t.whatsup.statementSince}
                 </p>
                 <div>
-                  <StatusBadge status="available">available now</StatusBadge>
+                  <StatusBadge status="available">{t.common.status.availableNow}</StatusBadge>
                 </div>
               </div>
             </Card>
@@ -84,13 +87,9 @@ export function WhatsupSection() {
             className="md:col-span-2"
           >
             <Card variant="white">
-              <FrameLabel name="METRICS" className="!text-ink-faint" />
+              <FrameLabel name={t.whatsup.metricsTag} className="!text-ink-faint" />
               <div className="mt-5 grid grid-cols-3 gap-4">
-                {[
-                  { to: 7, prefix: "", suffix: "+", label: "Tahun merancang produk" },
-                  { to: 30, prefix: "", suffix: "+", label: "Project shipped ke production" },
-                  { to: 24, prefix: "<", suffix: "H", label: "Waktu respons email & pesan" },
-                ].map((m) => (
+                {t.whatsup.metrics.map((m) => (
                   <div key={m.label}>
                     <p className="heading-display text-[clamp(30px,3.4vw,48px)] font-semibold leading-none text-ink">
                       <CountUp to={m.to} prefix={m.prefix} suffix={m.suffix} />
@@ -114,14 +113,14 @@ export function WhatsupSection() {
             <Card variant="white" className="h-full flex flex-col justify-between">
               <div>
                 <div className="flex items-center justify-between">
-                  <FrameLabel name="PHILOSOPHY.TXT" className="!text-ink-faint" />
+                  <FrameLabel name={t.whatsup.philosophyTag} className="!text-ink-faint" />
                   <IconQuote className="h-4 w-4 text-brand opacity-80" />
                 </div>
                 <p className="mt-4 text-[15px] leading-relaxed text-ink">
-                  &ldquo;Desain bukan hanya tentang tampilan yang memikat, tapi bagaimana ia bekerja — menjembatani empati pengguna dengan presisi kode.&rdquo;
+                  &ldquo;{t.whatsup.philosophyQuote}&rdquo;
                 </p>
               </div>
-              <FrameLabel name="— UI/UX & Creative Dev" className="mt-5 !text-ink-faint" />
+              <FrameLabel name={t.whatsup.philosophyAuthor} className="mt-5 !text-ink-faint" />
             </Card>
           </motion.div>
 
@@ -133,7 +132,7 @@ export function WhatsupSection() {
             transition={{ duration: 0.5, delay: 0.16 }}
           >
             <Card variant="white" className="h-full">
-              <FrameLabel name="CURRENTLY BUILDING IN" className="!text-ink-faint" />
+              <FrameLabel name={t.whatsup.currentlyBuildingTag} className="!text-ink-faint" />
               <ul className="mt-5 flex flex-col gap-3">
                 {["Figma", "Next.js", "Tailwind"].map((tool, i) => (
                   <li
@@ -161,14 +160,14 @@ export function WhatsupSection() {
             className="md:col-span-2"
           >
             <Card variant="white" className="h-full">
-              <FrameLabel name="CAPABILITIES" className="!text-ink-faint" />
+              <FrameLabel name={t.whatsup.capabilitiesTag} className="!text-ink-faint" />
               <div className="mt-5 flex flex-wrap gap-2.5">
-                {CAPABILITIES.map((cap) => (
+                {t.whatsup.capabilities.map((cap) => (
                   <span
                     key={cap.label}
                     className="inline-flex items-center gap-2 rounded-full border border-line-2 px-4 py-2 font-mono text-[12px] font-bold text-ink transition-colors hover:border-brand hover:text-brand"
                   >
-                    {cap.icon}
+                    {CAPABILITY_ICONS[cap.label.toLowerCase()] || <IconBrush className="h-4 w-4" />}
                     {cap.label}
                   </span>
                 ))}
@@ -187,13 +186,13 @@ export function WhatsupSection() {
             <Card variant="white" className="flex h-full flex-col justify-between">
               <div>
                 <div className="flex items-center justify-between gap-4">
-                  <FrameLabel name="LOCATION & TIMEZONE" className="!text-ink-faint" />
+                  <FrameLabel name={t.whatsup.locationTag} className="!text-ink-faint" />
                   <span className="inline-flex items-center gap-1.5 font-mono text-[11px] font-bold uppercase tracking-[0.14em] text-brand">
                     <span className="relative flex h-2 w-2">
                       <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-brand opacity-75" />
                       <span className="relative inline-flex h-2 w-2 rounded-full bg-brand" />
                     </span>
-                    JAKARTA, ID
+                    {t.whatsup.cityBadge}
                   </span>
                 </div>
 
@@ -206,7 +205,7 @@ export function WhatsupSection() {
                       <span className="h-2 w-2 rounded-full bg-ink-faint/40" />
                     </div>
                     <span className="font-mono text-[10px] font-bold uppercase tracking-wider text-ink-soft">
-                      BASE_STATION.GEO
+                      {t.whatsup.baseStationTag}
                     </span>
                   </div>
 
@@ -215,20 +214,20 @@ export function WhatsupSection() {
                       <div>
                         <div className="flex items-center gap-1.5 text-[14px] font-bold text-ink">
                           <IconMapPin className="h-4 w-4 text-brand" />
-                          <span>Jakarta & Bandung, Indonesia</span>
+                          <span>{t.whatsup.locationTitle}</span>
                         </div>
                         <p className="mt-1 font-mono text-[11px] text-ink-soft">
-                          6°12&apos;S 106°49&apos;E • UTC+07:00 (WIB)
+                          {t.whatsup.coordinates}
                         </p>
                       </div>
                       <span className="inline-flex items-center gap-1 rounded-full border border-line-2 bg-white px-2.5 py-1 font-mono text-[10px] font-bold uppercase tracking-wider text-ink">
                         <IconWorld className="h-3 w-3 text-tool" />
-                        REMOTE READY
+                        {t.common.status.remoteReady}
                       </span>
                     </div>
 
                     <p className="mt-2.5 text-[13px] leading-relaxed text-ink-soft">
-                      Working across time zones with async workflows and real-time collaboration.
+                      {t.whatsup.locationDesc}
                     </p>
                   </div>
                 </div>
@@ -238,7 +237,7 @@ export function WhatsupSection() {
               <div className="mt-5 flex items-end justify-between border-t border-line pt-4">
                 <div>
                   <p className="font-mono text-[10px] font-bold uppercase tracking-[0.14em] text-ink-faint">
-                    LOCAL STUDIO CLOCK
+                    {t.whatsup.localClockTag}
                   </p>
                   <p className="heading-display mt-0.5 text-2xl font-semibold tabular-nums text-ink md:text-3xl">
                     <LiveClock suffix="WIB" />

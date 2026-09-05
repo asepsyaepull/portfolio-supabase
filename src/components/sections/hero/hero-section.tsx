@@ -2,20 +2,23 @@
 
 import { memo } from "react";
 import QuordixHero from "@/components/ui/quordix-hero";
+import { useLanguage } from "@/context/language-context";
 
 export const HeroSection = () => {
+  const { t } = useLanguage();
+
   return (
     <section className="relative w-full overflow-hidden">
       <QuordixHero
         showNavbar={false}
         showBackground={false}
         tagline=""
-        titleTop="UI/UX Designer"
-        titleGlitch="Developer"
-        subtitle="Bridging the gap between design and code. I’m a creative technologist who loves building beautiful, user-friendly interfaces that solve real-world problems."
-        ctaText="Start Project"
+        titleTop={t.hero.titleTop}
+        titleGlitch={t.hero.titleGlitch}
+        subtitle={t.hero.subtitle}
+        ctaText={t.hero.ctaText}
         ctaHref="#work"
-        secondaryCtaText="Download CV"
+        secondaryCtaText={t.hero.secondaryCtaText}
         secondaryCtaHref="/cv/CV-Asep-Syaepul-Rohman.pdf"
       />
     </section>

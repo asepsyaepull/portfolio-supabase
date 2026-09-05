@@ -3,6 +3,7 @@
 import { SectionHeader } from "@/components/ui/section-header";
 import { motion } from "framer-motion";
 import { useCallback, useEffect, useState } from "react";
+import { useLanguage } from "@/context/language-context";
 import { WorkspaceCanvas } from "./workspace/workspace-canvas";
 import {
   INITIAL_BOOT_LOGS,
@@ -16,6 +17,7 @@ import { WorkspaceTerminal } from "./workspace/workspace-terminal";
 import type { LogMessage, WorkspaceConsoleProps } from "./workspace/workspace-types";
 
 export function WorkspaceConsole({ projects = [] }: WorkspaceConsoleProps) {
+  const { t } = useLanguage();
   const [selectedTrackIndex, setSelectedTrackIndex] = useState(0);
   const [pointerIndex, setPointerIndex] = useState(0);
   const [highlightNodeIndex, setHighlightNodeIndex] = useState<number>(0);
@@ -93,10 +95,10 @@ export function WorkspaceConsole({ projects = [] }: WorkspaceConsoleProps) {
       <div className="mx-auto max-w-[1360px] px-4 sm:px-6">
         {/* Section Header */}
         <SectionHeader
-          tag="WORK BENCH & EXPERTISE"
+          tag={t.work.workspaceTag}
           tagColor="brand"
-          title="Interactive Craft & System Console"
-          subtitle="Explore real-time workflows, frontend engineering, design systems, and product delivery in an interactive canvas."
+          title={t.work.workspaceTitle}
+          subtitle={t.work.workspaceSubtitle}
           align="center"
         />
 

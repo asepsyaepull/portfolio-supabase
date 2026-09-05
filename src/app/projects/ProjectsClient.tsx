@@ -4,6 +4,7 @@ import React, { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import Image from "next/image";
 import Link from "next/link";
+import { useLanguage } from "@/context/language-context";
 import {
   IconArrowUpRight,
   IconChevronDown,
@@ -24,6 +25,9 @@ interface Project {
 }
 
 export default function ProjectsClient({ projects }: { projects: Project[] }) {
+  const { t } = useLanguage();
+  const text = t.projectsPage;
+
   return (
     <div className="min-h-screen bg-zinc-50 dark:bg-[#08080a] pt-32 pb-24 text-zinc-900 dark:text-white transition-colors duration-300">
       <div className="container mx-auto px-4 sm:px-6 lg:px-12 max-w-6xl">
@@ -35,13 +39,13 @@ export default function ProjectsClient({ projects }: { projects: Project[] }) {
           className="mb-16 md:mb-20 text-start"
         >
           <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-lime-500/10 border border-lime-500/20 text-lime-600 dark:text-lime-400 font-mono tracking-widest text-xs font-bold uppercase mb-4">
-            / CASE STUDIES & PRODUCTION BUILDS
+            {text.badge}
           </div>
           <h1 className="text-4xl md:text-6xl lg:text-7xl font-extrabold text-zinc-900 dark:text-white tracking-tight leading-[1.08] mb-6">
-            Selected <span className="text-zinc-400 dark:text-zinc-500">Works.</span>
+            {text.titlePrefix} <span className="text-zinc-400 dark:text-zinc-500">{text.titleHighlight}</span>
           </h1>
           <p className="text-zinc-600 dark:text-zinc-400 text-base sm:text-lg max-w-2xl leading-relaxed">
-            A comprehensive showcase of end-to-end user research, design token architecture, and high-performance frontend engineering.
+            {text.description}
           </p>
         </motion.div>
 
@@ -55,7 +59,7 @@ export default function ProjectsClient({ projects }: { projects: Project[] }) {
               viewport={{ once: true, margin: "-60px" }}
               transition={{ duration: 0.45, delay: idx * 0.08 }}
             >
-              <StudioCard project={project} index={idx} />
+              <StudioCard project={project} index={idx} text={text} />
             </motion.div>
           ))}
         </div>
@@ -64,7 +68,15 @@ export default function ProjectsClient({ projects }: { projects: Project[] }) {
   );
 }
 
-function StudioCard({ project, index }: { project: Project; index: number }) {
+function StudioCard({
+  project,
+  index,
+  text,
+}: {
+  project: Project;
+  index: number;
+  text: import("@/locales/types").ProjectsPageDictionary;
+}) {
   const [isOpen, setIsOpen] = useState(false);
   const techList = Array.isArray(project.tech_stack)
     ? project.tech_stack
@@ -119,7 +131,7 @@ function StudioCard({ project, index }: { project: Project; index: number }) {
                 href={`/projects/${project.slug}`}
                 className="inline-flex items-center gap-1.5 px-5 py-2.5 rounded-xl bg-lime-500 hover:bg-lime-400 text-zinc-950 font-bold text-xs uppercase tracking-wider shadow-lg shadow-lime-500/20 active:scale-95 transition-all duration-200"
               >
-                <span>Read Full Case Study</span>
+                <span>{text.readCaseStudy}</span>
                 <IconArrowUpRight className="w-4 h-4 stroke-[2.5]" />
               </Link>
 
@@ -185,7 +197,7 @@ function StudioCard({ project, index }: { project: Project; index: number }) {
                 : "bg-zinc-100 dark:bg-zinc-900/80 border-zinc-200 dark:border-zinc-800 text-zinc-800 dark:text-zinc-300 hover:border-lime-500/40"
             }`}
           >
-            <span>{isOpen ? "Hide Process & Specs" : "See Process & Deliverables"}</span>
+            <span>{isOpen ? text.hideProcess : text.seeProcess}</span>
             <div
               className={`w-5 h-5 rounded-full flex items-center justify-center transition-transform duration-300 ${
                 isOpen
@@ -209,7 +221,7 @@ function StudioCard({ project, index }: { project: Project; index: number }) {
                 <div className="pt-4 grid grid-cols-1 md:grid-cols-12 gap-6 items-start">
                   <div className="md:col-span-6 space-y-2">
                     <span className="font-mono text-[11px] font-bold uppercase tracking-widest text-zinc-400 dark:text-zinc-500 block">
-                      The Architecture & Scope
+                      {text.architectureScope}
                     </span>
                     <p className="text-xs sm:text-sm text-zinc-600 dark:text-zinc-400 leading-relaxed">
                       {project.problem ||
@@ -219,7 +231,7 @@ function StudioCard({ project, index }: { project: Project; index: number }) {
 
                   <div className="md:col-span-6 space-y-2">
                     <span className="font-mono text-[11px] font-bold uppercase tracking-widest text-zinc-400 dark:text-zinc-500 block">
-                      Deliverables & Tech Stack
+                      {text.deliverablesTechStack}
                     </span>
                     <div className="flex flex-wrap gap-2">
                       {techList.map((tech, i) => (
@@ -242,3 +254,4 @@ function StudioCard({ project, index }: { project: Project; index: number }) {
     </div>
   );
 }
+

@@ -5,20 +5,23 @@ import Link from "next/link";
 import { IconMail, IconMenu2, IconX } from "@tabler/icons-react";
 import { ScrollRuler } from "./scroll-ruler";
 import { cn } from "@/lib/utils";
-
-const NAV_ITEMS = [
-  { name: "Home", link: "/" },
-  { name: "About", link: "/#about" },
-  { name: "Work", link: "/#work" },
-  { name: "Process", link: "/#process" },
-  { name: "Experience", link: "/#experience" },
-  { name: "Contact", link: "/#contact" },
-];
+import { useLanguage } from "@/context/language-context";
+import { LanguageToggle } from "@/components/ui/language-toggle";
 
 const EMAIL = "mail.asepsyaepul@gmail.com";
 
 export function Navbar() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const { t } = useLanguage();
+
+  const navItems = [
+    { name: t.common.nav.home, link: "/" },
+    { name: t.common.nav.about, link: "/#about" },
+    { name: t.common.nav.work, link: "/#work" },
+    { name: t.common.nav.process, link: "/#process" },
+    { name: t.common.nav.experience, link: "/#experience" },
+    { name: t.common.nav.contact, link: "/#contact" },
+  ];
 
   // Close menu on Escape key
   React.useEffect(() => {
@@ -53,9 +56,9 @@ export function Navbar() {
 
           {/* Desktop links */}
           <div className="hidden items-center gap-1 lg:flex">
-            {NAV_ITEMS.map((item) => (
+            {navItems.map((item) => (
               <Link
-                key={item.name}
+                key={item.link}
                 href={item.link}
                 className="rounded-full px-3 py-1.5 font-mono text-[13px] font-bold uppercase tracking-wide text-ink-soft transition-colors hover:bg-grid hover:text-ink"
               >
@@ -66,6 +69,8 @@ export function Navbar() {
 
           {/* Right Action */}
           <div className="flex items-center gap-2">
+            <LanguageToggle />
+
             <a
               href="/cv/CV-Asep-Syaepul-Rohman.pdf"
               target="_blank"
@@ -73,7 +78,7 @@ export function Navbar() {
               className="omd-btn-primary hidden truncate !py-2.5 md:inline-flex"
             >
               <IconMail className="h-4 w-4" aria-hidden />
-              Download CV
+              {t.common.buttons.downloadCv}
             </a>
 
             {/* Mobile hamburger button */}
@@ -107,14 +112,19 @@ export function Navbar() {
           className={cn(
             "absolute left-4 right-4 top-[calc(100%+8px)] z-50 mx-auto max-w-5xl overflow-hidden rounded-3xl border border-line bg-white/95 shadow-2xl backdrop-blur-md transition-all duration-200 lg:hidden",
             isMobileMenuOpen
-              ? "max-h-[28rem] opacity-100 pointer-events-auto translate-y-0"
+              ? "max-h-[32rem] opacity-100 pointer-events-auto translate-y-0"
               : "max-h-0 border-transparent opacity-0 pointer-events-none -translate-y-2 shadow-none"
           )}
         >
           <div className="flex flex-col p-3">
-            {NAV_ITEMS.map((item) => (
+            <div className="flex items-center justify-between border-b border-line px-3 py-2 mb-1">
+              <span className="font-mono text-xs font-bold text-ink-soft">LANGUAGE</span>
+              <LanguageToggle />
+            </div>
+
+            {navItems.map((item) => (
               <Link
-                key={item.name}
+                key={item.link}
                 href={item.link}
                 onClick={() => setIsMobileMenuOpen(false)}
                 className="rounded-xl px-4 py-2.5 font-mono text-sm font-bold uppercase text-ink hover:bg-grid"
@@ -127,7 +137,7 @@ export function Navbar() {
               onClick={() => setIsMobileMenuOpen(false)}
               className="omd-btn-primary mt-2 justify-center"
             >
-              <IconMail className="h-4 w-4" aria-hidden /> Email me
+              <IconMail className="h-4 w-4" aria-hidden /> {t.common.buttons.emailMe}
             </a>
           </div>
         </div>

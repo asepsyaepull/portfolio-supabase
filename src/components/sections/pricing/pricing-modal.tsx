@@ -20,6 +20,7 @@ import { toast } from "sonner";
 import { FrameLabel, FigmaTag } from "@/components/ui/figma-tag";
 import { Switch } from "@/components/ui/switch";
 import { cn } from "@/lib/utils";
+import { useLanguage } from "@/context/language-context";
 
 export type ProjectType =
   | "Landing Page"
@@ -72,6 +73,7 @@ interface PricingModalProps {
 }
 
 export function PricingModal({ isOpen, onClose }: PricingModalProps) {
+  const { t, locale } = useLanguage();
   const [projectType, setProjectType] = useState<ProjectType>("Full Website");
   const [pageScope, setPageScope] = useState<PageScope>("4–8 Halaman");
   const [withDev, setWithDev] = useState(true);
@@ -136,23 +138,29 @@ export function PricingModal({ isOpen, onClose }: PricingModalProps) {
     if (withDev) baseDays += 7;
     if (urgent) baseDays = Math.max(5, Math.round(baseDays * 0.6));
 
-    return `${baseDays}–${baseDays + 5} hari kerja`;
-  }, [projectType, pageScope, withDev, urgent]);
+    const dayUnit = locale === "en" ? "business days" : "hari kerja";
+    return `${baseDays}–${baseDays + 5} ${dayUnit}`;
+  }, [projectType, pageScope, withDev, urgent, locale]);
 
   // Summary Text for Email/Copy
   const summaryText = useMemo(() => {
-    return `Halo Asep, saya ingin konsultasi proyek dengan estimasi kalkulator berikut:
-• Tipe Proyek: ${projectType}
-• Skala Halaman: ${pageScope}
-• Paket: ${withDev ? "Design + Development (Next.js/React + TS)" : "Just Design (Figma Only)"}
-• CMS & SEO: ${withCms ? "Ya (+Rp 1.5jt)" : "Tidak"}
-• Advanced Motion / GSAP: ${withMotion ? "Ya (+Rp 1.5jt)" : "Tidak"}
-• Revisi Tambahan: ${extraRevs} round (+Rp ${extraRevs * 500}rb)
-• Urgent Priority: ${urgent ? "Ya (+20% Express)" : "Reguler"}
-• Estimasi Durasi: ${timeline}
-• Total Estimasi: Rp ${fmtPrice(price)}jt / start-from
+    const s = t.pricing.summary;
+    const formattedScope = pageScope.replace("Halaman", locale === "en" ? "Pages" : "Halaman");
+    const yesText = locale === "en" ? "Yes (+Rp 1.5M)" : "Ya (+Rp 1.5jt)";
+    const noText = locale === "en" ? "No" : "Tidak";
 
-Mohon info jadwal ketersediaan untuk diskusi lebih lanjut. Terima kasih!`;
+    return `${s.greeting}
+• ${s.projectType}: ${projectType}
+• ${s.pageScope}: ${formattedScope}
+• ${s.package}: ${withDev ? s.packageDev : s.packageDesign}
+• ${s.cmsSeo}: ${withCms ? yesText : noText}
+• ${s.motion}: ${withMotion ? yesText : noText}
+• ${s.extraRevs}: ${extraRevs} ${s.rounds} (+Rp ${extraRevs * 500}k)
+• ${s.urgent}: ${urgent ? s.urgentYes : s.urgentRegular}
+• ${s.timeline}: ${timeline}
+• ${s.total}: Rp ${fmtPrice(price)}jt / start-from
+
+${s.closing}`;
   }, [
     projectType,
     pageScope,
@@ -163,22 +171,24 @@ Mohon info jadwal ketersediaan untuk diskusi lebih lanjut. Terima kasih!`;
     urgent,
     timeline,
     price,
+    t,
+    locale,
   ]);
 
   const handleCopySummary = () => {
     navigator.clipboard.writeText(summaryText);
     setCopied(true);
-    toast.success("Rincian estimasi berhasil disalin ke clipboard!");
+    toast.success(t.pricing.cta.copyToast);
     setTimeout(() => setCopied(false), 2500);
   };
 
   const mailtoUrl = useMemo(() => {
     const subject = encodeURIComponent(
-      `Inquiry Proyek: ${projectType} (${withDev ? "Design+Dev" : "Design Only"} ~Rp ${fmtPrice(price)}jt)`
+      `${t.pricing.summary.emailSubject}: ${projectType} (${withDev ? "Design+Dev" : "Design Only"} ~Rp ${fmtPrice(price)}jt)`
     );
     const body = encodeURIComponent(summaryText);
     return `mailto:mail.asepsyaepul@gmail.com?subject=${subject}&body=${body}`;
-  }, [projectType, withDev, price, summaryText]);
+  }, [projectType, withDev, price, summaryText, t]);
 
   return (
     <AnimatePresence>
@@ -220,7 +230,7 @@ Mohon info jadwal ketersediaan untuk diskusi lebih lanjut. Terima kasih!`;
 
             {/* Floating Top Tag */}
             <FigmaTag variant="blue" className="top-3 left-5 sm:left-7 z-20">
-              pricing.fig
+              {t.pricing.figmaTag}
             </FigmaTag>
 
             {/* Close Button */}
@@ -273,15 +283,15 @@ Mohon info jadwal ketersediaan untuk diskusi lebih lanjut. Terima kasih!`;
                         jt
                       </span>
                       <span className="font-mono text-xs sm:text-sm font-semibold text-ink/70">
-                        /project
+                        {t.pricing.perProject}
                       </span>
                     </div>
 
                     {/* Subtitle / Package Tag */}
                     <div className="mt-3 flex flex-wrap items-center gap-2 font-mono text-[11px] sm:text-xs font-bold tracking-wider text-ink/80 uppercase">
-                      <span>{withDev ? "DESIGN + DEVELOPMENT" : "JUST DESIGN"}</span>
+                      <span>{withDev ? t.pricing.slider.designAndDev : t.pricing.slider.justDesign}</span>
                       <span>•</span>
-                      <span>FIXED SCOPE</span>
+                      <span>{t.pricing.fixedScope}</span>
                       <span className="text-ink/40 line-through">
                         Rp {fmtPrice(price * 1.35)}jt
                       </span>
@@ -294,24 +304,22 @@ Mohon info jadwal ketersediaan untuk diskusi lebih lanjut. Terima kasih!`;
                     <div className="inline-flex items-center gap-2 rounded-full bg-white/80 px-3.5 py-1 text-xs font-medium text-ink shadow-sm backdrop-blur-sm">
                       <span className="h-2 w-2 rounded-full bg-[#F0531C] animate-pulse" />
                       <span className="font-mono font-bold text-[11px]">
-                        {urgent ? "⚡ Priority slot selected" : "Special rate, slot terbatas"}
+                        {urgent ? t.pricing.prioritySlot : t.pricing.specialRate}
                       </span>
                     </div>
 
                     {/* Check items */}
                     <ul className="space-y-1 text-right font-medium text-xs sm:text-[13px] text-ink/90">
                       <li className="flex items-center justify-end gap-2">
-                        <span>Direct 1-on-1 dengan Asep</span>
+                        <span>{t.pricing.checkDirect}</span>
                         <IconCheck className="h-4 w-4 text-[#F0531C] shrink-0 stroke-[2.5]" />
                       </li>
                       <li className="flex items-center justify-end gap-2">
-                        <span>
-                          <strong>{withDev ? "14+" : "8+"} deliverables</strong> siap pakai
-                        </span>
+                        <span>{withDev ? t.pricing.checkDeliverablesWithDev : t.pricing.checkDeliverablesDesignOnly}</span>
                         <IconCheck className="h-4 w-4 text-[#F0531C] shrink-0 stroke-[2.5]" />
                       </li>
                       <li className="flex items-center justify-end gap-2">
-                        <span>Estimasi {timeline}</span>
+                        <span>{t.pricing.checkTimelinePrefix} {timeline}</span>
                         <IconCheck className="h-4 w-4 text-[#F0531C] shrink-0 stroke-[2.5]" />
                       </li>
                     </ul>
@@ -330,7 +338,7 @@ Mohon info jadwal ketersediaan untuk diskusi lebih lanjut. Terima kasih!`;
                         </span>
                       </div>
                       <span className="text-[11px] text-ink-soft">
-                        Dipilih oleh <strong className="text-ink">30+ founder &amp; tim</strong>
+                        {t.pricing.socialProofPrefix} <strong className="text-ink">{t.pricing.socialProofHighlight}</strong>
                       </span>
                     </div>
                   </div>
@@ -341,7 +349,7 @@ Mohon info jadwal ketersediaan untuk diskusi lebih lanjut. Terima kasih!`;
               <div className="mt-7 rounded-2xl border border-line bg-zinc-50/80 p-4 sm:p-5">
                 <div className="flex items-center justify-between">
                   <FrameLabel
-                    name="PROJECT PARAMETERS &amp; SCOPE"
+                    name={t.pricing.parametersTag}
                     withIcon
                     className="!text-ink-soft font-bold"
                   />
@@ -351,7 +359,7 @@ Mohon info jadwal ketersediaan untuk diskusi lebih lanjut. Terima kasih!`;
                     className="inline-flex items-center gap-1.5 font-mono text-[11px] font-bold text-brand hover:underline"
                   >
                     <IconAdjustmentsHorizontal className="h-3.5 w-3.5" />
-                    {showOptions ? "Sembunyikan Opsi Lanjutan" : "Opsi Lanjutan & Add-ons"}
+                    {showOptions ? t.pricing.hideAdvanced : t.pricing.showAdvanced}
                   </button>
                 </div>
 
@@ -360,7 +368,7 @@ Mohon info jadwal ketersediaan untuk diskusi lebih lanjut. Terima kasih!`;
                   {/* Type */}
                   <div>
                     <label className="font-mono text-[11px] font-bold uppercase tracking-wider text-ink-faint block mb-1.5">
-                      Tipe Proyek
+                      {t.pricing.projectTypeLabel}
                     </label>
                     <div className="flex flex-wrap gap-1.5">
                       {PROJECT_TYPES.map((t) => (
@@ -384,34 +392,37 @@ Mohon info jadwal ketersediaan untuk diskusi lebih lanjut. Terima kasih!`;
                   {/* Scope */}
                   <div>
                     <label className="font-mono text-[11px] font-bold uppercase tracking-wider text-ink-faint block mb-1.5">
-                      Skala Halaman
+                      {t.pricing.pageScopeLabel}
                     </label>
                     <div className="flex flex-wrap gap-1.5">
-                      {PAGE_SCOPES.map((s) => (
-                        <button
-                          key={s}
-                          type="button"
-                          onClick={() => setPageScope(s)}
-                          className={cn(
-                            "rounded-lg border px-3 py-1.5 font-mono text-[12px] font-semibold transition-all",
-                            pageScope === s
-                              ? "border-brand bg-brand text-white font-bold shadow-sm"
-                              : "border-line bg-white text-ink hover:border-ink/40"
-                          )}
-                        >
-                          {s}
-                          {PAGE_ADDON[s] > 0 && (
-                            <span
-                              className={cn(
-                                "ml-1 text-[10px]",
-                                pageScope === s ? "text-white/90" : "text-brand font-bold"
-                              )}
-                            >
-                              +{PAGE_ADDON[s]}jt
-                            </span>
-                          )}
-                        </button>
-                      ))}
+                      {PAGE_SCOPES.map((s) => {
+                        const displayScope = s.replace("Halaman", locale === "en" ? "Pages" : "Halaman");
+                        return (
+                          <button
+                            key={s}
+                            type="button"
+                            onClick={() => setPageScope(s)}
+                            className={cn(
+                              "rounded-lg border px-3 py-1.5 font-mono text-[12px] font-semibold transition-all",
+                              pageScope === s
+                                ? "border-brand bg-brand text-white font-bold shadow-sm"
+                                : "border-line bg-white text-ink hover:border-ink/40"
+                            )}
+                          >
+                            {displayScope}
+                            {PAGE_ADDON[s] > 0 && (
+                              <span
+                                className={cn(
+                                  "ml-1 text-[10px]",
+                                  pageScope === s ? "text-white/90" : "text-brand font-bold"
+                                )}
+                              >
+                                +{PAGE_ADDON[s]}jt
+                              </span>
+                            )}
+                          </button>
+                        );
+                      })}
                     </div>
                   </div>
                 </div>
@@ -430,8 +441,8 @@ Mohon info jadwal ketersediaan untuk diskusi lebih lanjut. Terima kasih!`;
                         {/* CMS */}
                         <div className="flex items-center justify-between p-2.5 rounded-xl border border-line bg-white">
                           <div>
-                            <p className="text-xs font-bold text-ink">CMS &amp; SEO</p>
-                            <p className="font-mono text-[10px] text-ink-faint">+Rp 1.5jt</p>
+                            <p className="text-xs font-bold text-ink">{t.pricing.addons.cmsTitle}</p>
+                            <p className="font-mono text-[10px] text-ink-faint">{t.pricing.addons.cmsDesc}</p>
                           </div>
                           <Switch
                             checked={withCms}
@@ -443,8 +454,8 @@ Mohon info jadwal ketersediaan untuk diskusi lebih lanjut. Terima kasih!`;
                         {/* Motion */}
                         <div className="flex items-center justify-between p-2.5 rounded-xl border border-line bg-white">
                           <div>
-                            <p className="text-xs font-bold text-ink">GSAP 3D Motion</p>
-                            <p className="font-mono text-[10px] text-ink-faint">+Rp 1.5jt</p>
+                            <p className="text-xs font-bold text-ink">{t.pricing.addons.motionTitle}</p>
+                            <p className="font-mono text-[10px] text-ink-faint">{t.pricing.addons.motionDesc}</p>
                           </div>
                           <Switch
                             checked={withMotion}
@@ -457,9 +468,9 @@ Mohon info jadwal ketersediaan untuk diskusi lebih lanjut. Terima kasih!`;
                         <div className="flex items-center justify-between p-2.5 rounded-xl border border-line bg-white">
                           <div>
                             <p className="text-xs font-bold text-ink flex items-center gap-1">
-                              Urgent Express <IconBolt className="h-3 w-3 text-brand" />
+                              {t.pricing.addons.urgentTitle} <IconBolt className="h-3 w-3 text-brand" />
                             </p>
-                            <p className="font-mono text-[10px] text-ink-faint">+20% Slot Prioritas</p>
+                            <p className="font-mono text-[10px] text-ink-faint">{t.pricing.addons.urgentDesc}</p>
                           </div>
                           <Switch
                             checked={urgent}
@@ -472,8 +483,8 @@ Mohon info jadwal ketersediaan untuk diskusi lebih lanjut. Terima kasih!`;
                       {/* Extra revision counter */}
                       <div className="mt-3 flex items-center justify-between p-2.5 rounded-xl border border-line bg-white">
                         <div>
-                          <p className="text-xs font-bold text-ink">Putaran Revisi Ekstra</p>
-                          <p className="font-mono text-[10px] text-ink-faint">+Rp 500rb per putaran (Default 2x included)</p>
+                          <p className="text-xs font-bold text-ink">{t.pricing.addons.revisionsTitle}</p>
+                          <p className="font-mono text-[10px] text-ink-faint">{t.pricing.addons.revisionsDesc}</p>
                         </div>
                         <div className="flex items-center gap-2">
                           <button
@@ -510,7 +521,7 @@ Mohon info jadwal ketersediaan untuk diskusi lebih lanjut. Terima kasih!`;
                     )}
                   >
                     <p className="font-mono text-[11px] font-bold uppercase tracking-wider text-ink-faint">
-                      JUST DESIGN
+                      {t.pricing.slider.justDesign}
                     </p>
                     <p className="heading-display mt-0.5 text-lg font-bold text-ink">
                       Rp {fmtPrice(designPrice)}jt
@@ -525,10 +536,10 @@ Mohon info jadwal ketersediaan untuk diskusi lebih lanjut. Terima kasih!`;
                     )}
                   >
                     <div className="inline-flex rounded-full bg-ink px-2 py-0.5 font-mono text-[9px] font-bold text-white uppercase tracking-wider">
-                      MOST PICKED
+                      {t.pricing.slider.mostPicked}
                     </div>
                     <p className="font-mono mt-0.5 text-[11px] font-bold uppercase tracking-wider text-ink">
-                      DESIGN + DEV
+                      {t.pricing.slider.designAndDev}
                     </p>
                     <p className="heading-display mt-0.5 text-lg font-bold text-[#F0531C]">
                       Rp {fmtPrice(price)}jt
@@ -596,7 +607,7 @@ Mohon info jadwal ketersediaan untuk diskusi lebih lanjut. Terima kasih!`;
 
                 {/* Subtitle Under Slider */}
                 <p className="font-mono mt-7 text-center text-[11px] font-bold uppercase tracking-[0.18em] text-ink-faint">
-                  SLIDE THE LEVER, OR TAP A SIDE
+                  {t.pricing.slider.slideHint}
                 </p>
               </div>
 
@@ -604,47 +615,14 @@ Mohon info jadwal ketersediaan untuk diskusi lebih lanjut. Terima kasih!`;
               <div className="mt-9 space-y-7">
                 {/* 1. Base Design Deliverables (Always Included) */}
                 <div className="grid grid-cols-1 gap-x-6 gap-y-3 sm:grid-cols-2 lg:grid-cols-3 text-left">
-                  <div className="flex items-center gap-2.5 text-xs sm:text-[13px] text-ink font-medium">
-                    <span className="flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-[#FFF1EB] text-[#F0531C]">
-                      <IconCheck className="h-3.5 w-3.5 stroke-[2.5]" />
-                    </span>
-                    <span>One request focus at a time</span>
-                  </div>
-
-                  <div className="flex items-center gap-2.5 text-xs sm:text-[13px] text-ink font-medium">
-                    <span className="flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-[#FFF1EB] text-[#F0531C]">
-                      <IconCheck className="h-3.5 w-3.5 stroke-[2.5]" />
-                    </span>
-                    <span>Design systems &amp; tokens</span>
-                  </div>
-
-                  <div className="flex items-center gap-2.5 text-xs sm:text-[13px] text-ink font-medium">
-                    <span className="flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-[#FFF1EB] text-[#F0531C]">
-                      <IconCheck className="h-3.5 w-3.5 stroke-[2.5]" />
-                    </span>
-                    <span>Web &amp; app UI design</span>
-                  </div>
-
-                  <div className="flex items-center gap-2.5 text-xs sm:text-[13px] text-ink font-medium">
-                    <span className="flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-[#FFF1EB] text-[#F0531C]">
-                      <IconCheck className="h-3.5 w-3.5 stroke-[2.5]" />
-                    </span>
-                    <span>Figma Auto-Layout &amp; assets</span>
-                  </div>
-
-                  <div className="flex items-center gap-2.5 text-xs sm:text-[13px] text-ink font-medium">
-                    <span className="flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-[#FFF1EB] text-[#F0531C]">
-                      <IconCheck className="h-3.5 w-3.5 stroke-[2.5]" />
-                    </span>
-                    <span>Landing &amp; pitch design</span>
-                  </div>
-
-                  <div className="flex items-center gap-2.5 text-xs sm:text-[13px] text-ink font-medium">
-                    <span className="flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-[#FFF1EB] text-[#F0531C]">
-                      <IconCheck className="h-3.5 w-3.5 stroke-[2.5]" />
-                    </span>
-                    <span>Garansi revisi &amp; feedback</span>
-                  </div>
+                  {t.pricing.deliverables.base.map((item, idx) => (
+                    <div key={idx} className="flex items-center gap-2.5 text-xs sm:text-[13px] text-ink font-medium">
+                      <span className="flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-[#FFF1EB] text-[#F0531C]">
+                        <IconCheck className="h-3.5 w-3.5 stroke-[2.5]" />
+                      </span>
+                      <span>{item}</span>
+                    </div>
+                  ))}
                 </div>
 
                 {/* 2. Divider Pill: DESIGN + DEV UNLOCKED */}
@@ -664,7 +642,7 @@ Mohon info jadwal ketersediaan untuk diskusi lebih lanjut. Terima kasih!`;
                     ) : (
                       <IconLock className="h-3.5 w-3.5" />
                     )}
-                    <span>{withDev ? "DESIGN + DEV UNLOCKED" : "DEV IS LOCKED (TAP TO UNLOCK)"}</span>
+                    <span>{withDev ? t.pricing.divider.unlocked : t.pricing.divider.locked}</span>
                   </button>
                 </div>
 
@@ -675,47 +653,14 @@ Mohon info jadwal ketersediaan untuk diskusi lebih lanjut. Terima kasih!`;
                     withDev ? "opacity-100" : "opacity-35 pointer-events-none grayscale"
                   )}
                 >
-                  <div className="flex items-center gap-2.5 text-xs sm:text-[13px] text-ink font-medium">
-                    <span className="flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-[#FFF1EB] text-[#F0531C]">
-                      <IconCheck className="h-3.5 w-3.5 stroke-[2.5]" />
-                    </span>
-                    <span>Next.js 15 &amp; React 19 build</span>
-                  </div>
-
-                  <div className="flex items-center gap-2.5 text-xs sm:text-[13px] text-ink font-medium">
-                    <span className="flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-[#FFF1EB] text-[#F0531C]">
-                      <IconCheck className="h-3.5 w-3.5 stroke-[2.5]" />
-                    </span>
-                    <span>Interactive GSAP prototypes</span>
-                  </div>
-
-                  <div className="flex items-center gap-2.5 text-xs sm:text-[13px] text-ink font-medium">
-                    <span className="flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-[#FFF1EB] text-[#F0531C]">
-                      <IconCheck className="h-3.5 w-3.5 stroke-[2.5]" />
-                    </span>
-                    <span>Custom micro-animations &amp; 3D</span>
-                  </div>
-
-                  <div className="flex items-center gap-2.5 text-xs sm:text-[13px] text-ink font-medium">
-                    <span className="flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-[#FFF1EB] text-[#F0531C]">
-                      <IconCheck className="h-3.5 w-3.5 stroke-[2.5]" />
-                    </span>
-                    <span>Clean TypeScript architecture</span>
-                  </div>
-
-                  <div className="flex items-center gap-2.5 text-xs sm:text-[13px] text-ink font-medium">
-                    <span className="flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-[#FFF1EB] text-[#F0531C]">
-                      <IconCheck className="h-3.5 w-3.5 stroke-[2.5]" />
-                    </span>
-                    <span>Technical SEO &amp; Core Web Vitals</span>
-                  </div>
-
-                  <div className="flex items-center gap-2.5 text-xs sm:text-[13px] text-ink font-medium">
-                    <span className="flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-[#FFF1EB] text-[#F0531C]">
-                      <IconCheck className="h-3.5 w-3.5 stroke-[2.5]" />
-                    </span>
-                    <span>Supabase &amp; Headless CMS setup</span>
-                  </div>
+                  {t.pricing.deliverables.dev.map((item, idx) => (
+                    <div key={idx} className="flex items-center gap-2.5 text-xs sm:text-[13px] text-ink font-medium">
+                      <span className="flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-[#FFF1EB] text-[#F0531C]">
+                        <IconCheck className="h-3.5 w-3.5 stroke-[2.5]" />
+                      </span>
+                      <span>{item}</span>
+                    </div>
+                  ))}
                 </div>
               </div>
 
@@ -726,7 +671,7 @@ Mohon info jadwal ketersediaan untuk diskusi lebih lanjut. Terima kasih!`;
                     href={mailtoUrl}
                     className="omd-btn-primary !w-full sm:!w-auto !px-9 !py-4 text-sm font-bold shadow-[0_12px_28px_-8px_#F0531C] !bg-[#F0531C] hover:!bg-[#D2410E] text-white"
                   >
-                    <span>Start today → Rp {fmtPrice(price)}jt</span>
+                    <span>{t.pricing.cta.startPrefix} {fmtPrice(price)}jt</span>
                   </a>
 
                   <button
@@ -737,19 +682,19 @@ Mohon info jadwal ketersediaan untuk diskusi lebih lanjut. Terima kasih!`;
                     {copied ? (
                       <>
                         <IconCheck className="h-4 w-4 text-emerald-600" />
-                        <span>Disalin!</span>
+                        <span>{t.pricing.cta.copied}</span>
                       </>
                     ) : (
                       <>
                         <IconCopy className="h-4 w-4" />
-                        <span>Salin Rincian</span>
+                        <span>{t.pricing.cta.copyDetails}</span>
                       </>
                     )}
                   </button>
                 </div>
 
                 <p className="font-mono mt-4 text-[11px] text-ink-faint">
-                  No contracts. Cancel or pause anytime · Scope fixed &amp; transparan.
+                  {t.pricing.cta.footnote}
                 </p>
               </div>
             </div>

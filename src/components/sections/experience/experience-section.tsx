@@ -15,146 +15,22 @@ import {
 } from "@tabler/icons-react";
 import { SectionHeader } from "@/components/ui/section-header";
 import { cn } from "@/lib/utils";
-
-/* --------------------------------------------------------------------------
-   EXPERIENCE DATA (Refined, authentic, zero em-dashes)
-   -------------------------------------------------------------------------- */
-
-interface ExperienceItem {
-  id: string;
-  company: string;
-  role: string;
-  period: string;
-  duration: string;
-  type: string;
-  location: string;
-  project: string;
-  description: string;
-  contributions: string[];
-  tech: string[];
-}
-
-const EXPERIENCES: ExperienceItem[] = [
-  {
-    id: "symbolix",
-    company: "Symbolix.ai",
-    role: "Lead UI/UX Developer",
-    period: "Jan 2026 - Jul 2026",
-    duration: "7 mos",
-    type: "Contract",
-    location: "Jakarta, ID",
-    project: "ERP & POS Ecosystem",
-    description:
-      "Merancang ulang sistem transaksi POS dan alur kerja ERP terintegrasi untuk menyederhanakan operasional harian kasir dan tim manajemen.",
-    contributions: [
-      "Membangun arsitektur antarmuka berbasis Next.js dan TypeScript dengan komponen modular.",
-      "Merancang sistem navigasi POS multi-cabang dengan alur checkout yang ringkas.",
-      "Mengadakan usability test langsung dengan pengguna kasir untuk memvalidasi kecepatan transaksi.",
-    ],
-    tech: ["Figma", "React", "Next.js", "TypeScript", "Tailwind CSS"],
-  },
-  {
-    id: "korlantas",
-    company: "Korlantas Polri",
-    role: "Software Developer",
-    period: "Jul 2025 - Feb 2026",
-    duration: "8 mos",
-    type: "Enterprise",
-    location: "Jakarta, ID",
-    project: "National Traffic Monitoring",
-    description:
-      "Mengembangkan aplikasi web pemantauan lalu lintas nasional untuk Korps Lalu Lintas Polri dengan fokus pada stabilitas modul dan respons data real-time.",
-    contributions: [
-      "Mengimplementasikan komponen antarmuka berkinerja tinggi untuk monitoring data berskala besar.",
-      "Memastikan kompatibilitas modul dan kestabilan antarmuka di berbagai peramban internal.",
-      "Optimalisasi waktu render halaman pada visualisasi tabel dan status operasional.",
-    ],
-    tech: ["React", "JavaScript", "HTML5", "CSS3", "REST API", "Git"],
-  },
-  {
-    id: "tractogo",
-    company: "TRACtoGO (Astra SERA)",
-    role: "UI/UX Designer",
-    period: "Dec 2024 - May 2025",
-    duration: "6 mos",
-    type: "Contract",
-    location: "Jakarta, ID",
-    project: "Fleet Rental Platform",
-    description:
-      "Memperbarui pengalaman booking armada kendaraan pada aplikasi web dan mobile dengan standarisasi design system yang konsisten.",
-    contributions: [
-      "Membangun fondasi Design System terstruktur untuk menyelaraskan tim desain dan engineering.",
-      "Menyederhanakan tahapan pemesanan armada rental menjadi alur yang jauh lebih cepat.",
-      "Menyiapkan spesifikasi desain mendalam untuk proses serah terima ke tim React Native.",
-    ],
-    tech: ["Figma", "Design Systems", "Prototyping", "User Research"],
-  },
-  {
-    id: "gizalab",
-    company: "Gizalab",
-    role: "Product Designer & Frontend",
-    period: "Oct 2023 - Aug 2024",
-    duration: "11 mos",
-    type: "Full-time",
-    location: "Bandung, ID (Remote)",
-    project: "Healthcare Suite",
-    description:
-      "Merancang alur produk dari tahap konsep, wireframe resolusi tinggi, hingga penulisan kode frontend siap pakai untuk dashboard kesehatan.",
-    contributions: [
-      "Merancang dashboard manajemen data kesehatan dengan struktur navigasi terarah.",
-      "Menulis kode antarmuka React yang bersih dan mudah dirawat.",
-      "Mengoptimalkan alur registrasi dan onboarding pengguna baru.",
-    ],
-    tech: ["Figma", "React", "JavaScript", "CSS3", "Design Tokens"],
-  },
-  {
-    id: "crewdible",
-    company: "Crewdible",
-    role: "UI/UX Designer",
-    period: "May 2022 - Apr 2023",
-    duration: "1 yr",
-    type: "Full-time",
-    location: "Jakarta, ID",
-    project: "Order Management System",
-    description:
-      "Merombak tampilan Order Management System (OMS) dan manajemen inventaris gudang untuk kebutuhan ribuan merchant e-commerce.",
-    contributions: [
-      "Merancang ulang antarmuka pelacakan inventaris stok barang dan status pengiriman.",
-      "Menyusun prototipe interaktif untuk validasi alur kerja sebelum implementasi.",
-      "Menyelaraskan tampilan agar nyaman diakses dari monitor desktop gudang maupun smartphone.",
-    ],
-    tech: ["Figma", "Responsive Web", "Wireframing", "Prototyping"],
-  },
-  {
-    id: "isuzu",
-    company: "Isuzu Link (Astra Graphia)",
-    role: "UI/UX Designer",
-    period: "Jun 2019 - Apr 2022",
-    duration: "2 yrs 11 mos",
-    type: "Full-time",
-    location: "Jakarta, ID",
-    project: "Automotive Telematics",
-    description:
-      "Merancang fitur dashboard telematika kendaraan komersial untuk pemantauan rute armada dan status teknis kendaraan.",
-    contributions: [
-      "Merancang dashboard visualisasi rute armada dan laporan konsumsi bahan bakar.",
-      "Mengelola pustaka aset visual dan panduan antarmuka untuk beberapa modul paralel.",
-      "Bekerja sama dengan tim engineer dalam pengujian implementasi antarmuka.",
-    ],
-    tech: ["Figma", "Information Architecture", "Prototyping", "Illustrator"],
-  },
-];
+import { useLanguage } from "@/context/language-context";
+import { ExperienceItemLocale } from "@/locales/types";
 
 /* --------------------------------------------------------------------------
    EXPERIENCE SECTION
    -------------------------------------------------------------------------- */
 
 export function ExperienceSection() {
+  const { t } = useLanguage();
   const containerRef = useRef<HTMLDivElement>(null);
   const trackRef = useRef<HTMLDivElement>(null);
   const [trackHeight, setTrackHeight] = useState<number>(0);
   const [hoveredId, setHoveredId] = useState<string | null>(null);
   const prefersReducedMotion = useReducedMotion();
+
+  const experiences = t.experience.items;
 
   // Dynamically calculate the continuous rail track height
   useEffect(() => {
@@ -173,7 +49,7 @@ export function ExperienceSection() {
       observer.disconnect();
       clearTimeout(timer);
     };
-  }, []);
+  }, [experiences]);
 
   // Framer Motion Scroll Progress
   const { scrollYProgress } = useScroll({
@@ -200,10 +76,11 @@ export function ExperienceSection() {
         <SectionHeader
           title={
             <>
-              Work <span className="text-brand">Experience</span>
+              {t.experience.titlePrefix}{" "}
+              <span className="text-brand">{t.experience.titleHighlight}</span>
             </>
           }
-          subtitle="7+ tahun merancang produk digital dan membangun arsitektur frontend skala enterprise."
+          subtitle={t.experience.subtitle}
         />
 
         {/* Timeline Container */}
@@ -230,8 +107,8 @@ export function ExperienceSection() {
 
           {/* Timeline Items */}
           <div className="flex flex-col gap-10 md:gap-14">
-            {EXPERIENCES.map((exp, index) => {
-              const threshold = index / Math.max(EXPERIENCES.length - 1, 1);
+            {experiences.map((exp, index) => {
+              const threshold = index / Math.max(experiences.length - 1, 1);
               return (
                 <TimelineRow
                   key={exp.id}
@@ -258,7 +135,7 @@ export function ExperienceSection() {
    -------------------------------------------------------------------------- */
 
 interface TimelineRowProps {
-  exp: ExperienceItem;
+  exp: ExperienceItemLocale;
   index: number;
   progress: any;
   threshold: number;
