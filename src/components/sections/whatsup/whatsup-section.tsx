@@ -244,12 +244,6 @@ export function WhatsupSection() {
                     <LiveClock suffix="WIB" />
                   </p>
                 </div>
-                <div className="text-right">
-                  <span className="inline-flex items-center gap-1.5 rounded-full border border-line-2 bg-grid/60 px-3 py-1 font-mono text-[11px] font-bold uppercase tracking-[0.1em] text-ink">
-                    <span className="h-1.5 w-1.5 rounded-full bg-status-live animate-pulse" />
-                    ACTIVE NOW
-                  </span>
-                </div>
               </div>
             </Card>
           </motion.div>

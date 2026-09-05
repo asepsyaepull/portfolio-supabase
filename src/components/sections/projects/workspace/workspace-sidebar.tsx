@@ -34,7 +34,7 @@ export function WorkspaceSidebar({
         </div>
 
         {/* Track List / Tabs */}
-        <div className="flex gap-1.5 overflow-x-auto no-scrollbar md:flex-col md:gap-1">
+        <div className="flex gap-1.5 no-scrollbar md:flex-col md:gap-1">
           {tracks.map((track, i) => {
             const isActive = i === selectedIndex;
             return (
