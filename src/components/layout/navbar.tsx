@@ -69,7 +69,7 @@ export function Navbar() {
 
           {/* Right Action */}
           <div className="flex items-center gap-2">
-            <LanguageToggle />
+            <LanguageToggle id="desktop-nav" />
 
             <a
               href="/cv/CV-Asep-Syaepul-Rohman.pdf"
@@ -119,7 +119,7 @@ export function Navbar() {
           <div className="flex flex-col p-3">
             <div className="flex items-center justify-between border-b border-line px-3 py-2 mb-1">
               <span className="font-mono text-xs font-bold text-ink-soft">LANGUAGE</span>
-              <LanguageToggle />
+              <LanguageToggle id="mobile-nav" />
             </div>
 
             {navItems.map((item) => (
