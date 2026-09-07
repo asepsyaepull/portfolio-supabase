@@ -54,13 +54,24 @@ export interface WhatsupDictionary {
   currentlyBuildingTag: string;
   capabilitiesTag: string;
   capabilities: { label: string }[];
-  locationTag: string;
-  cityBadge: string;
-  baseStationTag: string;
-  locationTitle: string;
-  coordinates: string;
-  locationDesc: string;
-  localClockTag: string;
+  capabilitiesSummary?: string;
+  bridgeTag: string;
+  bridgeBadge: string;
+  bridgeTitle: string;
+  bridgeSubtitle: string;
+  bridgeDesignTitle: string;
+  bridgeDesignTokens: string[];
+  bridgeCodeTitle: string;
+  bridgeCodeTokens: string[];
+  bridgePipelineLabel: string;
+  bridgeMetrics: Array<{ label: string; value: string }>;
+  locationTag?: string;
+  cityBadge?: string;
+  baseStationTag?: string;
+  locationTitle?: string;
+  coordinates?: string;
+  locationDesc?: string;
+  localClockTag?: string;
 }
 
 export interface WorkflowMsg {

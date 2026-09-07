@@ -1,24 +1,23 @@
 "use client";
 
-import React from "react";
+import { Card } from "@/components/ui/card";
+import { CountUp } from "@/components/ui/count-up";
+import { FrameLabel } from "@/components/ui/figma-tag";
+import { useLanguage } from "@/context/language-context";
 import {
+  IconArrowsRightLeft,
+  IconBrandFigma,
+  IconBrandReact,
   IconBrush,
   IconCode,
-  IconMapPin,
   IconMouse,
   IconPalette,
   IconQuote,
   IconSparkles,
-  IconStack,
-  IconWorld,
+  IconStack
 } from "@tabler/icons-react";
 import { motion } from "framer-motion";
-import { Card } from "@/components/ui/card";
-import { CountUp } from "@/components/ui/count-up";
-import { LiveClock } from "@/components/ui/live-clock";
-import { StatusBadge } from "@/components/ui/badge";
-import { FrameLabel } from "@/components/ui/figma-tag";
-import { useLanguage } from "@/context/language-context";
+import React from "react";
 
 const CAPABILITY_ICONS: Record<string, React.ReactNode> = {
   "ui/ux": <IconPalette className="h-4 w-4" />,
@@ -71,9 +70,6 @@ export function WhatsupSection() {
                 <p className="font-mono text-[11px] font-bold uppercase tracking-[0.14em] text-white/85">
                   {t.whatsup.statementSince}
                 </p>
-                <div>
-                  <StatusBadge status="available">{t.common.status.availableNow}</StatusBadge>
-                </div>
               </div>
             </Card>
           </motion.div>
@@ -94,7 +90,7 @@ export function WhatsupSection() {
                     <p className="heading-display text-[clamp(30px,3.4vw,48px)] font-semibold leading-none text-ink">
                       <CountUp to={m.to} prefix={m.prefix} suffix={m.suffix} />
                     </p>
-                    <p className="mt-2 font-mono text-[11px] font-bold uppercase tracking-[0.14em] text-ink-soft">
+                    <p className="mt-1.5 font-mono text-[10.5px] sm:text-[11px] font-bold uppercase tracking-[0.12em] text-ink-soft leading-tight">
                       {m.label}
                     </p>
                   </div>
@@ -159,23 +155,38 @@ export function WhatsupSection() {
             transition={{ duration: 0.5, delay: 0.2 }}
             className="md:col-span-2"
           >
-            <Card variant="white" className="h-full">
-              <FrameLabel name={t.whatsup.capabilitiesTag} className="!text-ink-faint" />
-              <div className="mt-5 flex flex-wrap gap-2.5">
-                {t.whatsup.capabilities.map((cap) => (
-                  <span
-                    key={cap.label}
-                    className="inline-flex items-center gap-2 rounded-full border border-line-2 px-4 py-2 font-mono text-[12px] font-bold text-ink transition-colors hover:border-brand hover:text-brand"
-                  >
-                    {CAPABILITY_ICONS[cap.label.toLowerCase()] || <IconBrush className="h-4 w-4" />}
-                    {cap.label}
+            <Card variant="white" className="flex h-full flex-col justify-between">
+              <div>
+                <div className="flex items-center justify-between gap-4">
+                  <FrameLabel name={t.whatsup.capabilitiesTag} className="!text-ink-faint" />
+                  <span className="font-mono text-[11px] font-bold uppercase tracking-[0.14em] text-ink-soft">
+                    {t.whatsup.capabilities.length} Core Disciplines
                   </span>
-                ))}
+                </div>
+                <div className="mt-5 flex flex-wrap gap-2.5">
+                  {t.whatsup.capabilities.map((cap) => (
+                    <span
+                      key={cap.label}
+                      className="inline-flex items-center gap-2 rounded-full border border-line-2 bg-white px-3.5 py-1.5 font-mono text-[12px] font-bold text-ink transition-colors hover:border-brand hover:text-brand"
+                    >
+                      {CAPABILITY_ICONS[cap.label.toLowerCase()] || <IconBrush className="h-4 w-4" />}
+                      {cap.label}
+                    </span>
+                  ))}
+                </div>
               </div>
+
+              {t.whatsup.capabilitiesSummary && (
+                <div className="mt-5 border-t border-line pt-3">
+                  <p className="text-[12.5px] leading-relaxed text-ink-soft">
+                    {t.whatsup.capabilitiesSummary}
+                  </p>
+                </div>
+              )}
             </Card>
           </motion.div>
 
-          {/* LOCATION & LIVE STUDIO TIME */}
+          {/* DESIGN-TO-CODE BRIDGE (DUAL CRAFT) */}
           <motion.div
             initial={{ opacity: 0, y: 28 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -186,63 +197,62 @@ export function WhatsupSection() {
             <Card variant="white" className="flex h-full flex-col justify-between">
               <div>
                 <div className="flex items-center justify-between gap-4">
-                  <FrameLabel name={t.whatsup.locationTag} className="!text-ink-faint" />
-                  <span className="inline-flex items-center gap-1.5 font-mono text-[11px] font-bold uppercase tracking-[0.14em] text-brand">
-                    <span className="relative flex h-2 w-2">
-                      <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-brand opacity-75" />
-                      <span className="relative inline-flex h-2 w-2 rounded-full bg-brand" />
-                    </span>
-                    {t.whatsup.cityBadge}
-                  </span>
+                  <FrameLabel name={t.whatsup.bridgeTag} className="!text-ink-faint" />
                 </div>
 
-                {/* Location & Studio Terminal Widget */}
-                <div className="mt-5 overflow-hidden rounded-xl border border-line-2 bg-gradient-to-br from-white to-[#F8FAFC]">
-                  <div className="flex items-center justify-between border-b border-line bg-[#F1F6FA] px-3.5 py-2">
-                    <div className="flex items-center gap-1.5">
-                      <span className="h-2 w-2 rounded-full bg-ink-faint/40" />
-                      <span className="h-2 w-2 rounded-full bg-ink-faint/40" />
-                      <span className="h-2 w-2 rounded-full bg-ink-faint/40" />
-                    </div>
-                    <span className="font-mono text-[10px] font-bold uppercase tracking-wider text-ink-soft">
-                      {t.whatsup.baseStationTag}
-                    </span>
-                  </div>
+                <div className="mt-4">
+                  <h3 className="heading-display text-lg font-bold tracking-tight text-ink md:text-xl">
+                    {t.whatsup.bridgeTitle}
+                  </h3>
+                  <p className="mt-1 text-[12.5px] leading-relaxed text-ink-soft">
+                    {t.whatsup.bridgeSubtitle}
+                  </p>
+                </div>
 
-                  <div className="relative p-4">
-                    <div className="flex items-start justify-between gap-3">
-                      <div>
-                        <div className="flex items-center gap-1.5 text-[14px] font-bold text-ink">
-                          <IconMapPin className="h-4 w-4 text-brand" />
-                          <span>{t.whatsup.locationTitle}</span>
-                        </div>
-                        <p className="mt-1 font-mono text-[11px] text-ink-soft">
-                          {t.whatsup.coordinates}
-                        </p>
-                      </div>
-                      <span className="inline-flex items-center gap-1 rounded-full border border-line-2 bg-white px-2.5 py-1 font-mono text-[10px] font-bold uppercase tracking-wider text-ink">
-                        <IconWorld className="h-3 w-3 text-tool" />
-                        {t.common.status.remoteReady}
+                {/* Streamlined Bridge Flow Bar */}
+                <div className="mt-4 flex items-center justify-between gap-2 rounded-xl border border-line-2 bg-[#F8FAFC] p-2.5">
+                  <div className="flex items-center gap-2">
+                    <div className="flex h-7 w-7 shrink-0 items-center justify-center rounded-md border border-[#E9D5FF] bg-[#FAF5FF] text-[#7C3AED]">
+                      <IconBrandFigma className="h-4 w-4" />
+                    </div>
+                    <div className="leading-tight">
+                      <span className="text-[12px] font-bold text-ink">
+                        {t.whatsup.bridgeDesignTitle}
+                      </span>
+                      <span className="block font-mono text-[9.5px] text-ink-soft">
+                        Tokens & Flow
                       </span>
                     </div>
+                  </div>
 
-                    <p className="mt-2.5 text-[13px] leading-relaxed text-ink-soft">
-                      {t.whatsup.locationDesc}
-                    </p>
+                  <div className="flex items-center gap-1 font-mono text-[10px] font-bold uppercase tracking-wider text-brand">
+                    <IconArrowsRightLeft className="h-3.5 w-3.5" />
+                  </div>
+
+                  <div className="flex items-center gap-2">
+                    <div className="flex h-7 w-7 shrink-0 items-center justify-center rounded-md border border-[#BFDBFE] bg-[#EFF6FF] text-[#2563EB]">
+                      <IconBrandReact className="h-4 w-4" />
+                    </div>
+                    <div className="leading-tight">
+                      <span className="text-[12px] font-bold text-ink">
+                        {t.whatsup.bridgeCodeTitle}
+                      </span>
+                      <span className="block font-mono text-[9.5px] text-ink-soft">
+                        React & Next.js
+                      </span>
+                    </div>
                   </div>
                 </div>
               </div>
 
-              {/* Live Clock Footer */}
-              <div className="mt-5 flex items-end justify-between border-t border-line pt-4">
-                <div>
-                  <p className="font-mono text-[10px] font-bold uppercase tracking-[0.14em] text-ink-faint">
-                    {t.whatsup.localClockTag}
-                  </p>
-                  <p className="heading-display mt-0.5 text-2xl font-semibold tabular-nums text-ink md:text-3xl">
-                    <LiveClock suffix="WIB" />
-                  </p>
-                </div>
+              {/* Guarantees / Metrics Footer */}
+              <div className="mt-4 flex flex-wrap items-center justify-between gap-2 border-t border-line pt-3 font-mono text-[11px]">
+                {t.whatsup.bridgeMetrics.map((metric) => (
+                  <div key={metric.label} className="flex items-center gap-1.5 text-ink-soft">
+                    <span className="font-bold text-ink">{metric.value}</span>
+                    <span className="text-[10px] uppercase text-ink-faint">{metric.label}</span>
+                  </div>
+                ))}
               </div>
             </Card>
           </motion.div>

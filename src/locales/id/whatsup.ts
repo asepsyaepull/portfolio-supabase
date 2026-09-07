@@ -10,9 +10,9 @@ export const whatsupId: WhatsupDictionary = {
   statementSince: "ASEP SYAEPUL, SEJAK 2019",
   metricsTag: "METRICS",
   metrics: [
-    { to: 7, prefix: "", suffix: "+", label: "Tahun merancang produk" },
-    { to: 30, prefix: "", suffix: "+", label: "Project shipped ke production" },
-    { to: 24, prefix: "<", suffix: "H", label: "Waktu respons pesan" },
+    { to: 7, prefix: "", suffix: "+", label: "Tahun Pengalaman" },
+    { to: 30, prefix: "", suffix: "+", label: "Proyek Rilis" },
+    { to: 24, prefix: "<", suffix: "H", label: "Waktu Respons" },
   ],
   philosophyTag: "PHILOSOPHY.TXT",
   philosophyQuote:
@@ -28,12 +28,31 @@ export const whatsupId: WhatsupDictionary = {
     { label: "Motion" },
     { label: "Brand" },
   ],
-  locationTag: "LOCATION & TIMEZONE",
-  cityBadge: "JAKARTA, ID",
-  baseStationTag: "BASE_STATION.GEO",
-  locationTitle: "Jakarta & Bandung, Indonesia",
-  coordinates: "6°12'S 106°49'E • UTC+07:00 (WIB)",
-  locationDesc:
-    "Bekerja lintas zona waktu dengan workflow asinkron dan kolaborasi real-time.",
-  localClockTag: "LOCAL STUDIO CLOCK",
+  capabilitiesSummary:
+    "Eksplorasi konsep, standardisasi sistem desain, hingga integrasi kode produksi.",
+  bridgeTag: "BRIDGE_ARCHITECTURE.SYS",
+  bridgeBadge: "DUAL CRAFT • ZERO LOSS",
+  bridgeTitle: "Menjembatani Desain & Rekayasa Kode",
+  bridgeSubtitle:
+    "Mengubah token dan visual Figma menjadi komponen React modular yang type-safe dan siap rilis ke production.",
+  bridgeDesignTitle: "Design Systems & UX",
+  bridgeDesignTokens: [
+    "Figma Auto-Layout",
+    "Design Tokens & Vars",
+    "Usability & WCAG",
+    "Micro-interactions",
+  ],
+  bridgeCodeTitle: "Production Engineering",
+  bridgeCodeTokens: [
+    "Next.js & React",
+    "TypeScript Strict",
+    "Tailwind Modular",
+    "Web Vitals & 60 FPS",
+  ],
+  bridgePipelineLabel: "DIRECT HAND-OFF",
+  bridgeMetrics: [
+    { label: "Fidelitas Visual", value: "100%" },
+    { label: "Sinkronisasi Token", value: "Type-Safe" },
+    { label: "Friksi Hand-off", value: "0%" },
+  ],
 };

@@ -29,12 +29,10 @@ export function DotGridBackground({
     let isMobile = false;
 
     const SPACING = 30;
-    const BASE_R = 1.5;
-    const HOVER_R = 100;
-    const SCAN_DUR = 2500;
-    const SCAN_PAUSE = 4000;
-    const DEFAULT_COLOR = "rgba(148,163,184,0.4)";
-    const ACTIVE_COLOR = "#ff5500";
+    const BASE_R = 1.4;
+    const HOVER_R = 90;
+    const DEFAULT_COLOR = "rgba(148, 163, 184, 0.35)";
+    const ACTIVE_COLOR = "#F0531C"; // Signature Flame Orange token
 
     class Particle {
       x = 0;
@@ -48,9 +46,9 @@ export function DotGridBackground({
       reset(w: number, h: number) {
         this.x = Math.random() * w;
         this.y = Math.random() * h;
-        this.vx = (Math.random() - 0.5) * 0.5;
-        this.vy = (Math.random() - 0.5) * 0.5;
-        this.size = Math.random() * 2;
+        this.vx = (Math.random() - 0.5) * 0.4;
+        this.vy = (Math.random() - 0.5) * 0.4;
+        this.size = Math.random() * 1.8;
       }
       update(w: number, h: number) {
         this.x += this.vx;
@@ -61,7 +59,7 @@ export function DotGridBackground({
       draw(c: CanvasRenderingContext2D) {
         c.beginPath();
         c.arc(this.x, this.y, this.size, 0, Math.PI * 2);
-        c.fillStyle = "rgba(249,115,22,0.15)";
+        c.fillStyle = "rgba(240, 83, 28, 0.10)";
         c.fill();
       }
     }
@@ -81,7 +79,7 @@ export function DotGridBackground({
         : window.innerHeight;
       isMobile = window.innerWidth < 768;
       particles.length = 0;
-      const n = isMobile ? 12 : 40;
+      const n = isMobile ? 10 : 35;
       for (let i = 0; i < n; i++) {
         particles.push(new Particle(canvas.width, canvas.height));
       }
@@ -104,46 +102,72 @@ export function DotGridBackground({
       mouseY = -1000;
     };
 
+    const prefersReducedMotion = window.matchMedia(
+      "(prefers-reduced-motion: reduce)"
+    ).matches;
+
     const draw = () => {
       ctx.clearRect(0, 0, canvas.width, canvas.height);
-      particles.forEach((p) => {
-        p.update(canvas.width, canvas.height);
-        p.draw(ctx);
-      });
 
-      const loopTime = performance.now() % (SCAN_DUR + SCAN_PAUSE);
-      const scanY = isMobile
-        ? Math.min(loopTime / SCAN_DUR, 1) * (canvas.height + HOVER_R * 2) -
-          HOVER_R
-        : 0;
+      // 1. Draw subtle ambient floating specks
+      if (!prefersReducedMotion) {
+        particles.forEach((p) => {
+          p.update(canvas.width, canvas.height);
+          p.draw(ctx);
+        });
+      }
 
+      // 2. Batch-draw calm, static slate dot-grid (fast single path call)
+      ctx.fillStyle = DEFAULT_COLOR;
+      ctx.shadowBlur = 0;
+      ctx.shadowColor = "transparent";
+      ctx.beginPath();
       for (let x = 0; x < canvas.width; x += SPACING) {
         for (let y = 0; y < canvas.height; y += SPACING) {
-          const dx = x - mouseX,
-            dy = y - mouseY;
-          const dist = isMobile
-            ? Math.abs(y - scanY)
-            : Math.sqrt(dx * dx + dy * dy);
+          // On desktop, skip dots within cursor hover radius so they can be highlighted
+          if (!isMobile && mouseX >= 0 && mouseY >= 0) {
+            const dx = x - mouseX;
+            const dy = y - mouseY;
+            if (dx * dx + dy * dy < HOVER_R * HOVER_R) {
+              continue;
+            }
+          }
+          ctx.moveTo(x + BASE_R, y);
+          ctx.arc(x, y, BASE_R, 0, Math.PI * 2);
+        }
+      }
+      ctx.fill();
 
-          if (dist < HOVER_R) {
-            const scale = 1 - dist / HOVER_R;
-            ctx.fillStyle = ACTIVE_COLOR;
-            ctx.shadowBlur = isMobile ? 0 : 15;
-            ctx.shadowColor = isMobile ? "transparent" : "rgba(255,85,0,0.4)";
-            ctx.beginPath();
-            ctx.arc(x, y, BASE_R + scale * (isMobile ? 2 : 3), 0, Math.PI * 2);
-            ctx.fill();
-          } else {
-            ctx.fillStyle = DEFAULT_COLOR;
-            ctx.shadowBlur = 0;
-            ctx.shadowColor = "transparent";
-            ctx.beginPath();
-            ctx.arc(x, y, BASE_R, 0, Math.PI * 2);
-            ctx.fill();
+      // 3. Desktop only: interactive hover highlight strictly around cursor
+      // (Never on mobile, avoiding distracting automatic scanning lines)
+      if (!isMobile && mouseX >= 0 && mouseY >= 0) {
+        const minX = Math.max(0, Math.floor((mouseX - HOVER_R) / SPACING) * SPACING);
+        const maxX = Math.min(canvas.width, Math.ceil((mouseX + HOVER_R) / SPACING) * SPACING);
+        const minY = Math.max(0, Math.floor((mouseY - HOVER_R) / SPACING) * SPACING);
+        const maxY = Math.min(canvas.height, Math.ceil((mouseY + HOVER_R) / SPACING) * SPACING);
+
+        for (let x = minX; x <= maxX; x += SPACING) {
+          for (let y = minY; y <= maxY; y += SPACING) {
+            const dx = x - mouseX;
+            const dy = y - mouseY;
+            const distSq = dx * dx + dy * dy;
+            if (distSq < HOVER_R * HOVER_R) {
+              const dist = Math.sqrt(distSq);
+              const scale = 1 - dist / HOVER_R;
+              ctx.fillStyle = ACTIVE_COLOR;
+              ctx.shadowBlur = 12;
+              ctx.shadowColor = "rgba(240, 83, 28, 0.35)";
+              ctx.beginPath();
+              ctx.arc(x, y, BASE_R + scale * 2.5, 0, Math.PI * 2);
+              ctx.fill();
+            }
           }
         }
       }
-      raf = requestAnimationFrame(draw);
+
+      if (!prefersReducedMotion) {
+        raf = requestAnimationFrame(draw);
+      }
     };
 
     window.addEventListener("resize", resize);
