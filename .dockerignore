@@ -1,0 +1,39 @@
+# Dependencies & builds
+node_modules
+.next
+out
+build
+coverage
+
+# Git & agent configs
+.git
+.gitignore
+.agents
+.claude
+.github
+
+# Documentation & temporary assets
+doc
+*.md
+*.tsbuildinfo
+next-env.d.ts
+.DS_Store
+
+# Environment variables (do not bake into image)
+.env*.local
+.env
+
+# Logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Docker files
+Dockerfile*
+docker-compose*
+.dockerignore
+
+# Dynamic uploaded media (persisted via Docker volume instead)
+public/uploads/*
+!public/uploads/.gitkeep

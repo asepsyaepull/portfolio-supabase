@@ -2,6 +2,7 @@ import { fileURLToPath } from "node:url";
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  output: 'standalone',
   reactStrictMode: true,
   allowedDevOrigins: ['192.168.8.171'],
   poweredByHeader: false,

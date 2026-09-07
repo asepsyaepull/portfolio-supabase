@@ -1,0 +1,18 @@
+services:
+  portfolio:
+    container_name: portfolio-app
+    image: ghcr.io/asepsyaepull/portfolio-supabase:latest
+    build:
+      context: .
+      dockerfile: Dockerfile
+    restart: unless-stopped
+    ports:
+      - "3000:3000"
+    env_file:
+      - .env.local
+    volumes:
+      # Persistent volume for local uploaded media files
+      - ./public/uploads:/app/public/uploads
+    environment:
+      - NODE_ENV=production
+      - PORT=3000
