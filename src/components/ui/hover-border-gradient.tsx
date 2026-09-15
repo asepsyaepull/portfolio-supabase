@@ -35,18 +35,18 @@ export function HoverBorderGradient({
     return directions[nextIndex];
   };
 
-  // Vibrant Lime 400 for better visibility on dark backgrounds
+  // Brand Flame Orange (#F0531C)
   const movingMap: Record<Direction, string> = {
-    TOP: "radial-gradient(60% 100% at 50% 0%, #a3e635 0%, rgba(163, 230, 53, 0) 100%)",
-    LEFT: "radial-gradient(100% 60% at 0% 50%, #a3e635 0%, rgba(163, 230, 53, 0) 100%)",
+    TOP: "radial-gradient(60% 100% at 50% 0%, #F0531C 0%, rgba(240, 83, 28, 0) 100%)",
+    LEFT: "radial-gradient(100% 60% at 0% 50%, #F0531C 0%, rgba(240, 83, 28, 0) 100%)",
     BOTTOM:
-      "radial-gradient(60% 100% at 50% 100%, #a3e635 0%, rgba(163, 230, 53, 0) 100%)",
+      "radial-gradient(60% 100% at 50% 100%, #F0531C 0%, rgba(240, 83, 28, 0) 100%)",
     RIGHT:
-      "radial-gradient(100% 60% at 100% 50%, #a3e635 0%, rgba(163, 230, 53, 0) 100%)",
+      "radial-gradient(100% 60% at 100% 50%, #F0531C 0%, rgba(240, 83, 28, 0) 100%)",
   };
 
   const highlight =
-    "radial-gradient(100% 200% at 50% 50%, #a3e635 0%, rgba(163, 230, 53, 0) 100%)";
+    "radial-gradient(100% 200% at 50% 50%, #F0531C 0%, rgba(240, 83, 28, 0) 100%)";
 
   useEffect(() => {
     if (!hovered) {

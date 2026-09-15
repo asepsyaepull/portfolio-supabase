@@ -42,6 +42,8 @@ export interface MetricItem {
 export interface WhatsupDictionary {
   tag: string;
   headline: string;
+  viewAbout?: string;
+  readStory?: string;
   statementTag: string;
   statementQuote: string;
   statementHighlight: string;
@@ -229,14 +231,39 @@ export interface FooterDictionary {
   marqueeItems: string[];
 }
 
+export interface ContactFaqItem {
+  question: string;
+  answer: string;
+}
+
 export interface ContactPageDictionary {
   portalTag: string;
+  badge: string;
   titleLine1: string;
   titleLine2: string;
   description: string;
   emailLabel: string;
   locationLabel: string;
   locationValue: string;
+  availabilityLabel: string;
+  availabilityValue: string;
+  timezoneLabel: string;
+  timezoneValue: string;
+  copyEmailBtn: string;
+  copiedEmailText: string;
+  directChatBtn: string;
+  socialHeading: string;
+  
+  // Studio Specs
+  specs: {
+    spec1: { num: string; label: string; desc: string };
+    spec2: { num: string; label: string; desc: string };
+    spec3: { num: string; label: string; desc: string };
+    spec4: { num: string; label: string; desc: string };
+  };
+
+  // Form Composer
+  formCardTag: string;
   fullNameLabel: string;
   emailAddressLabel: string;
   subjectLabel: string;
@@ -248,6 +275,13 @@ export interface ContactPageDictionary {
   submitButton: string;
   submittingButton: string;
   successMessage: string;
+  scopeTitle: string;
+  scopeChips: string[];
+
+  // Collab FAQ
+  faqHeading: string;
+  faqSubheading: string;
+  faqs: ContactFaqItem[];
 }
 
 export interface EducationItem {

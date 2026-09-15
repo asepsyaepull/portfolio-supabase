@@ -3,6 +3,8 @@ import { WhatsupDictionary } from "../types";
 export const whatsupEn: WhatsupDictionary = {
   tag: "about-me.txt",
   headline: "What's Up",
+  viewAbout: "Explore Full Bio & Journey",
+  readStory: "Full Story",
   statementTag: "STATEMENT.TXT",
   statementQuote:
     "I'm Asep Syaepul — a seasoned UI/UX professional with over 7 years of experience in designing and developing user-centered digital products. Experienced in building SaaS platforms and interactive web experiences using technologies like ",

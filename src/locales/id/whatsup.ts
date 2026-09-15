@@ -3,6 +3,8 @@ import { WhatsupDictionary } from "../types";
 export const whatsupId: WhatsupDictionary = {
   tag: "about-me.txt",
   headline: "What's Up",
+  viewAbout: "Selengkapnya Tentang Saya",
+  readStory: "Profil Lengkap",
   statementTag: "STATEMENT.TXT",
   statementQuote:
     "Saya Asep Syaepul — seorang profesional UI/UX berpengalaman lebih dari 7 tahun dalam merancang dan mengembangkan produk digital yang berorientasi pada pengguna. Berpengalaman mengembangkan platform SaaS dan pengalaman web interaktif menggunakan teknologi seperti ",

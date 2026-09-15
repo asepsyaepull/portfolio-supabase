@@ -5,6 +5,7 @@ import { CountUp } from "@/components/ui/count-up";
 import { FrameLabel } from "@/components/ui/figma-tag";
 import { useLanguage } from "@/context/language-context";
 import {
+  IconArrowRight,
   IconArrowsRightLeft,
   IconBrandFigma,
   IconBrandReact,
@@ -14,9 +15,10 @@ import {
   IconPalette,
   IconQuote,
   IconSparkles,
-  IconStack
+  IconStack,
 } from "@tabler/icons-react";
 import { motion } from "framer-motion";
+import Link from "next/link";
 import React from "react";
 
 const CAPABILITY_ICONS: Record<string, React.ReactNode> = {
@@ -40,12 +42,21 @@ export function WhatsupSection() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.55 }}
-          className="mb-10"
+          className="mb-10 flex flex-col justify-between gap-4 sm:flex-row sm:items-end"
         >
-          <FrameLabel name={t.whatsup.tag} className="mb-3 !text-brand" />
-          <h2 className="heading-display text-section-headline font-semibold uppercase text-ink">
-            {t.whatsup.headline}
-          </h2>
+          <div>
+            <FrameLabel name={t.whatsup.tag} className="mb-3 !text-brand" />
+            <h2 className="heading-display text-section-headline font-semibold uppercase text-ink">
+              {t.whatsup.headline}
+            </h2>
+          </div>
+          <Link
+            href="/about"
+            className="group inline-flex items-center gap-2 self-start rounded-full border border-line bg-white/90 px-4 py-2 font-mono text-xs font-bold uppercase tracking-wider text-ink shadow-xs backdrop-blur-xs transition-all hover:border-brand hover:text-brand sm:self-auto"
+          >
+            <span>{t.whatsup.viewAbout || "Selengkapnya Tentang Saya"}</span>
+            <IconArrowRight className="h-3.5 w-3.5 text-brand transition-transform group-hover:translate-x-1" />
+          </Link>
         </motion.div>
 
         {/* Bento grid */}
@@ -66,10 +77,17 @@ export function WhatsupSection() {
                   <span className="text-brand">{t.whatsup.statementHighlight}</span>&rdquo;
                 </blockquote>
               </div>
-              <div className="flex justify-between items-center mt-8 pt-4 border-t border-white/10">
+              <div className="flex flex-wrap items-center justify-between gap-3 mt-8 pt-4 border-t border-white/10">
                 <p className="font-mono text-[11px] font-bold uppercase tracking-[0.14em] text-white/85">
                   {t.whatsup.statementSince}
                 </p>
+                <Link
+                  href="/about"
+                  className="group inline-flex items-center gap-1.5 rounded-full border border-white/20 bg-white/10 px-3 py-1 font-mono text-[11px] font-bold uppercase tracking-wider text-white transition-all hover:border-brand hover:bg-brand"
+                >
+                  <span>{t.whatsup.readStory || "Profil Lengkap"}</span>
+                  <IconArrowRight className="h-3 w-3 transition-transform group-hover:translate-x-0.5" />
+                </Link>
               </div>
             </Card>
           </motion.div>

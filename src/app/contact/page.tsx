@@ -1,174 +1,37 @@
-"use client";
-import React from "react";
-import { motion } from "framer-motion";
-import { IconMail, IconBrandGithub, IconBrandLinkedin, IconBrandDribbble, IconSend, IconMapPin } from "@tabler/icons-react";
-import { Spotlight } from "@/components/ui/spotlight";
-import { Input, TextArea } from "@/components/ui/input";
-import { HoverBorderGradient } from "@/components/ui/hover-border-gradient";
-import { cn } from "@/lib/utils";
+import { Metadata } from "next";
+import ContactClient from "./ContactClient";
 
-import { useTransition } from "react";
-import { toast } from "sonner";
-import { submitContactForm } from "./actions";
-import { useLanguage } from "@/context/language-context";
+export const metadata: Metadata = {
+  title: "Contact | Asep Syaepul",
+  description:
+    "Hubungi Asep Syaepul untuk kolaborasi desain UI/UX, rekayasa frontend Next.js/React, atau konsultasi design system. Terbuka untuk proyek freelance dan peran full-time di Jakarta maupun remote.",
+  alternates: {
+    canonical: "https://asyaepul.id/contact",
+  },
+  openGraph: {
+    title: "Contact | Asep Syaepul",
+    description:
+      "Hubungi Asep Syaepul — UI/UX Designer & Frontend Developer. Terbuka untuk diskusi proyek, konsultasi design system, dan peluang karir baru.",
+    url: "https://asyaepul.id/contact",
+    siteName: "Asep Syaepul Portfolio",
+    images: [
+      {
+        url: "/og-image.jpg",
+        width: 1200,
+        height: 630,
+        alt: "Asep Syaepul - Contact & Inquiry",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Contact | Asep Syaepul",
+    description:
+      "Hubungi Asep Syaepul untuk kolaborasi desain UI/UX dan rekayasa frontend siap produksi.",
+    images: ["/og-image.jpg"],
+  },
+};
 
 export default function ContactPage() {
-  const [isPending, startTransition] = useTransition();
-  const { t } = useLanguage();
-
-  const handleSubmit = async (formData: FormData) => {
-    startTransition(async () => {
-      const result = await submitContactForm(formData);
-      if (result.error) {
-        toast.error(result.error);
-      } else if (result.success) {
-        toast.success(t.contactPage.successMessage);
-        const form = document.getElementById("contact-form") as HTMLFormElement;
-        form.reset();
-      }
-    });
-  };
-
-  return (
-    <div className="min-h-screen bg-zinc-50 dark:bg-gray-950 relative overflow-hidden flex flex-col items-center justify-center py-20 md:py-32 transition-colors duration-300">
-      {/* Background Effects */}
-      <Spotlight
-        className="-top-40 left-0 md:left-60 md:-top-20"
-        fill="rgba(163, 230, 53, 0.2)"
-      />
-
-      <div className="container mx-auto px-4 md:px-24 relative z-10">
-        <div className="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
-
-          {/* Left Column: Context & Info */}
-          <motion.div
-            initial={{ opacity: 0, x: -30 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.6 }}
-          >
-            <span className="text-lime-600 dark:text-lime-500 font-mono tracking-widest text-xs md:text-sm uppercase mb-4 block">
-              {t.contactPage.portalTag}
-            </span>
-            <h1 className="text-4xl md:text-7xl font-bold text-zinc-900 dark:text-white mb-6 md:mb-8 leading-tight transition-colors">
-              {t.contactPage.titleLine1} <br />
-              <span className="text-zinc-500">{t.contactPage.titleLine2}</span>
-            </h1>
-            <p className="text-zinc-600 dark:text-zinc-400 text-base md:text-xl leading-relaxed mb-8 md:mb-12 max-w-md transition-colors">
-              {t.contactPage.description}
-            </p>
-
-            <div className="space-y-8">
-              <ContactInfoItem
-                icon={<IconMail className="text-lime-500" />}
-                label={t.contactPage.emailLabel}
-                value="mail.asepsyaepul@gmail.com"
-                href="mailto:mail.asepsyaepul@gmail.com"
-              />
-              <ContactInfoItem
-                icon={<IconMapPin className="text-lime-500" />}
-                label={t.contactPage.locationLabel}
-                value={t.contactPage.locationValue}
-              />
-            </div>
-          </motion.div>
-
-          {/* Right Column: Premium Contact Form */}
-          <motion.div
-            initial={{ opacity: 0, x: 30 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.6, delay: 0.2 }}
-            className="bg-white/50 dark:bg-zinc-900/40 backdrop-blur-md p-8 md:p-12 rounded-[40px] border border-black/5 dark:border-white/5 relative overflow-hidden transition-colors duration-300"
-          >
-            <div className="absolute top-0 right-0 h-40 w-40 bg-lime-500/5 blur-[80px] -z-10" />
-
-            <form id="contact-form" action={handleSubmit} className="space-y-6 relative z-10">
-              <div className="grid md:grid-cols-2 gap-6">
-                <LabelInputContainer>
-                  <label className="text-zinc-600 dark:text-zinc-400 text-xs font-bold uppercase ml-1 mb-2 transition-colors">
-                    {t.contactPage.fullNameLabel}
-                  </label>
-                  <Input name="name" placeholder={t.contactPage.namePlaceholder} type="text" required disabled={isPending} />
-                </LabelInputContainer>
-                <LabelInputContainer>
-                  <label className="text-zinc-600 dark:text-zinc-400 text-xs font-bold uppercase ml-1 mb-2 transition-colors">
-                    {t.contactPage.emailAddressLabel}
-                  </label>
-                  <Input name="email" placeholder={t.contactPage.emailPlaceholder} type="email" required disabled={isPending} />
-                </LabelInputContainer>
-              </div>
-
-              <LabelInputContainer>
-                <label className="text-zinc-600 dark:text-zinc-400 text-xs font-bold uppercase ml-1 mb-2 transition-colors">
-                  {t.contactPage.subjectLabel}
-                </label>
-                <Input name="subject" placeholder={t.contactPage.subjectPlaceholder} type="text" required disabled={isPending} />
-              </LabelInputContainer>
-
-              <LabelInputContainer>
-                <label className="text-zinc-600 dark:text-zinc-400 text-xs font-bold uppercase ml-1 mb-2 transition-colors">
-                  {t.contactPage.messageLabel}
-                </label>
-                <TextArea name="message" placeholder={t.contactPage.messagePlaceholder} required disabled={isPending} />
-              </LabelInputContainer>
-
-              <div className="pt-4">
-                <HoverBorderGradient
-                  containerClassName="rounded-xl w-full"
-                  as="button"
-                  type="submit"
-                  className="font-bold w-full py-4 flex items-center justify-center gap-3 bg-white dark:bg-zinc-950 text-lime-600 dark:text-lime-500 group-hover:text-lime-700 dark:group-hover:text-lime-400 transition-colors"
-                >
-                  <span>{isPending ? t.contactPage.submittingButton : t.contactPage.submitButton}</span>
-                  <IconSend size={18} />
-                </HoverBorderGradient>
-              </div>
-            </form>
-          </motion.div>
-
-        </div>
-      </div>
-    </div>
-  );
+  return <ContactClient />;
 }
-
-const ContactInfoItem = ({ icon, label, value, href }: { icon: React.ReactNode, label: string, value: string, href?: string }) => (
-    <div className="flex items-center gap-5 group">
-        <div className="h-12 w-12 rounded-2xl bg-white dark:bg-zinc-900 border border-black/5 dark:border-white/5 flex items-center justify-center group-hover:border-lime-500/50 transition-colors duration-300">
-            {icon}
-        </div>
-        <div>
-            <p className="text-zinc-500 text-xs font-bold uppercase tracking-tighter">{label}</p>
-            {href ? (
-                <a href={href} className="text-zinc-900 dark:text-white text-lg font-medium hover:text-lime-600 dark:hover:text-lime-500 transition-colors">{value}</a>
-            ) : (
-                <p className="text-zinc-900 dark:text-white text-lg font-medium transition-colors">{value}</p>
-            )}
-        </div>
-    </div>
-);
-
-const SocialIcon = ({ icon, href, label }: { icon: React.ReactNode, href: string, label: string }) => (
-    <a
-        href={href}
-        target="_blank"
-        rel="noopener noreferrer"
-        aria-label={label}
-        className="h-12 w-12 rounded-full bg-white dark:bg-zinc-900 border border-black/5 dark:border-white/5 flex items-center justify-center text-zinc-600 dark:text-zinc-400 hover:text-lime-600 hover:border-lime-500/50 dark:hover:text-lime-500 dark:hover:border-lime-500/50 transition-all duration-300"
-    >
-        {React.cloneElement(icon as React.ReactElement, { size: 20 })}
-    </a>
-);
-
-const LabelInputContainer = ({
-    children,
-    className,
-  }: {
-    children: React.ReactNode;
-    className?: string;
-  }) => {
-    return (
-      <div className={cn("flex flex-col space-y-2 w-full", className)}>
-        {children}
-      </div>
-    );
-  };

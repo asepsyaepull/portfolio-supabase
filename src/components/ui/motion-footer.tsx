@@ -420,15 +420,15 @@ export function CinematicFooter({
 
                 <MagneticButton
                   as="a"
-                  href="/#work"
+                  href="/projects"
                   className="footer-glass-pill px-5 md:px-6 py-2.5 md:py-3 rounded-full text-muted-foreground font-medium text-xs md:text-sm hover:text-foreground"
                 >
-                  Work
+                  Projects
                 </MagneticButton>
 
                 <MagneticButton
                   as="a"
-                  href="/#about"
+                  href="/about"
                   className="footer-glass-pill px-5 md:px-6 py-2.5 md:py-3 rounded-full text-muted-foreground font-medium text-xs md:text-sm hover:text-foreground"
                 >
                   About
@@ -436,10 +436,10 @@ export function CinematicFooter({
 
                 <MagneticButton
                   as="a"
-                  href="/#process"
+                  href="/contact"
                   className="footer-glass-pill px-5 md:px-6 py-2.5 md:py-3 rounded-full text-muted-foreground font-medium text-xs md:text-sm hover:text-foreground"
                 >
-                  Process
+                  Contact
                 </MagneticButton>
               </div>
             </div>

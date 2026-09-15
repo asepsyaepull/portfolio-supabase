@@ -15,10 +15,10 @@ const WhatsupSection = dynamic(
     ),
   { loading: () => <SectionSkeleton /> }
 );
-const WorkspaceConsole = dynamic(
+const WorkflowSection = dynamic(
   () =>
-    import("@/components/sections/projects/workspace-console").then(
-      (mod) => mod.WorkspaceConsole
+    import("@/components/sections/workflow/workflow-section").then(
+      (mod) => mod.WorkflowSection
     ),
   { loading: () => <SectionSkeleton /> }
 );
@@ -29,15 +29,11 @@ const CinematicSelectedWork = dynamic(
     ),
   { loading: () => <SectionSkeleton /> }
 );
-const WorkflowSection = dynamic(
+const WorkspaceConsole = dynamic(
   () =>
-    import("@/components/sections/workflow/workflow-section").then(
-      (mod) => mod.WorkflowSection
+    import("@/components/sections/projects/workspace-console").then(
+      (mod) => mod.WorkspaceConsole
     ),
-  { loading: () => <SectionSkeleton /> }
-);
-const WhySection = dynamic(
-  () => import("@/components/sections/why/why-section"),
   { loading: () => <SectionSkeleton /> }
 );
 const CtaSection = dynamic(
@@ -49,13 +45,6 @@ const CtaSection = dynamic(
 );
 const FaqSection = dynamic(
   () => import("@/components/sections/faq/faq-section"),
-  { loading: () => <SectionSkeleton /> }
-);
-const ExperienceSection = dynamic(
-  () =>
-    import("@/components/sections/experience/experience-section").then(
-      (mod) => mod.ExperienceSection
-    ),
   { loading: () => <SectionSkeleton /> }
 );
 
@@ -72,19 +61,15 @@ export default function HomeClient({
       <div id="about">
         <WhatsupSection />
       </div>
-      <div id="process">
-        <WorkflowSection />
-      </div>
-      <div id="work">
-        <WorkspaceConsole projects={featuredProjects} />
-      </div>
       <div id="selected-work">
         <CinematicSelectedWork projects={featuredProjects} />
       </div>
-      <div id="experience">
-        <ExperienceSection />
+      <div id="process">
+        <WorkspaceConsole projects={featuredProjects} />
       </div>
-      <WhySection />
+      <div>
+        <WorkflowSection />
+      </div>
       <div id="contact">
         <CtaSection />
       </div>

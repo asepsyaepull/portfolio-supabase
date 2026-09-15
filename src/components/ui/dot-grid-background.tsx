@@ -154,11 +154,12 @@ export function DotGridBackground({
             if (distSq < HOVER_R * HOVER_R) {
               const dist = Math.sqrt(distSq);
               const scale = 1 - dist / HOVER_R;
-              ctx.fillStyle = ACTIVE_COLOR;
-              ctx.shadowBlur = 12;
-              ctx.shadowColor = "rgba(240, 83, 28, 0.35)";
+              const opacity = 0.12 + scale * 0.4;
+              ctx.fillStyle = `rgba(240, 83, 28, ${opacity.toFixed(2)})`;
+              ctx.shadowBlur = 6 * scale;
+              ctx.shadowColor = `rgba(240, 83, 28, ${(scale * 0.2).toFixed(2)})`;
               ctx.beginPath();
-              ctx.arc(x, y, BASE_R + scale * 2.5, 0, Math.PI * 2);
+              ctx.arc(x, y, BASE_R + scale * 1.2, 0, Math.PI * 2);
               ctx.fill();
             }
           }
