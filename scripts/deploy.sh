@@ -21,12 +21,12 @@ if command -v pm2 &> /dev/null; then
 fi
 
 echo "📦 Pulling latest image from GHCR..."
-docker compose pull
+sudo docker compose pull
 
 echo "🐳 Launching Docker container..."
-docker compose up -d
+sudo docker compose up -d
 
 echo "🧹 Pruning old unused images..."
-docker image prune -f
+sudo docker image prune -f
 
 echo "✅ Deploy completed successfully at $(date)"
