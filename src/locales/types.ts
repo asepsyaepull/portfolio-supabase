@@ -291,6 +291,8 @@ export interface ProjectsPageDictionary {
   titlePrefix: string;
   titleHighlight: string;
   description: string;
+  allFilter: string;
+  filterLabel?: string;
   readCaseStudy: string;
   seeProcess: string;
   hideProcess: string;
@@ -299,6 +301,17 @@ export interface ProjectsPageDictionary {
   backToProjects: string;
   launchProject: string;
   unavailable: string;
+  emptyProjects?: string;
+  quickSpecs?: {
+    production: string;
+    disciplines: string;
+    impact: string;
+    systems: string;
+  };
+  ctaTitle?: string;
+  ctaDescription?: string;
+  ctaButton?: string;
+  viewDetails?: string;
 }
 
 export interface WorkSectionDictionary {
