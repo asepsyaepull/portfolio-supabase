@@ -1,28 +1,34 @@
-import { AboutPage } from "@/components/sections/about/about-page";
-import {
-  WorkExperience,
-  WorkExperienceSkeleton,
-} from "@/components/sections/experience/work-experience";
 import { Metadata } from "next";
-import React, { Suspense } from "react";
-
-import { JourneyTitle } from "@/components/sections/about/journey-title";
+import AboutClient from "./AboutClient";
 
 export const metadata: Metadata = {
   title: "About | Asep Syaepul",
-  description: "Learn more about Asep Syaepul's professional journey, skills, and experience.",
+  description:
+    "Pelajari profil profesional, keahlian teknis, dan perjalanan karir Asep Syaepul sebagai UI/UX Designer & Frontend Developer dengan 7+ tahun pengalaman.",
+  openGraph: {
+    title: "About | Asep Syaepul",
+    description:
+      "Profil Asep Syaepul — UI/UX Designer & Frontend Developer. Menjembatani desain fidelitas tinggi dan rekayasa kode siap produksi.",
+    url: "https://asyaepul.id/about",
+    siteName: "Asep Syaepul Portfolio",
+    images: [
+      {
+        url: "/og-image.jpg",
+        width: 1200,
+        height: 630,
+        alt: "Asep Syaepul - About",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "About | Asep Syaepul",
+    description:
+      "Profil Asep Syaepul — UI/UX Designer & Frontend Developer dengan 7+ tahun pengalaman.",
+    images: ["/og-image.jpg"],
+  },
 };
 
-export default function About() {
-  return (
-    <div className="bg-zinc-50 dark:bg-gray-950 min-h-screen transition-colors duration-300">
-      <AboutPage />
-      <div className="container mx-auto px-4 md:px-24 pb-20">
-        <JourneyTitle />
-        <Suspense fallback={<WorkExperienceSkeleton />}>
-          <WorkExperience />
-        </Suspense>
-      </div>
-    </div>
-  );
+export default function AboutPage() {
+  return <AboutClient />;
 }

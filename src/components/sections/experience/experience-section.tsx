@@ -88,7 +88,7 @@ export function ExperienceSection() {
           {/* Continuous Scroll Tracing Beam (Dead-center aligned: 12px mobile / 212px desktop) */}
           <div
             ref={trackRef}
-            className="pointer-events-none absolute bottom-6 top-5 z-0 left-[11px] md:left-[211px] w-[2px]"
+            className="pointer-events-none absolute bottom-6 top-7 z-0 left-[12px] md:left-[212px] -translate-x-1/2 w-[2px]"
           >
             {/* Background muted track line */}
             <div className="h-full w-[2px] rounded-full bg-zinc-200/80 dark:bg-zinc-800" />
@@ -178,8 +178,8 @@ function TimelineRow({
       {/* --------------------------------------------------------------------
           1. LEFT COLUMN (DESKTOP): Period, Duration, Location (Width: 200px)
           -------------------------------------------------------------------- */}
-      <div className="hidden w-[200px] shrink-0 flex-col items-end pr-8 pt-4 md:flex text-right">
-        <p className="font-mono text-xs font-bold uppercase tracking-wider text-ink">
+      <div className="hidden w-[200px] shrink-0 flex-col items-end pr-8 pt-7 md:pt-[39px] md:flex text-right">
+        <p className="font-mono text-xs font-bold uppercase tracking-wider text-ink leading-tight">
           {exp.period}
         </p>
         <p className="mt-1 font-mono text-[11px] text-ink-faint">
@@ -192,9 +192,9 @@ function TimelineRow({
       </div>
 
       {/* --------------------------------------------------------------------
-          2. CENTER RAIL: Milestone Node (Width: 24px, Dead Center: 12px)
+          2. CENTER RAIL: Milestone Node (Width: 24px, Dead Center: 12px / 212px)
           -------------------------------------------------------------------- */}
-      <div className="absolute left-0 md:relative md:left-auto w-[24px] shrink-0 flex justify-center pt-4 z-10">
+      <div className="absolute left-0 md:relative md:left-auto w-[24px] shrink-0 flex justify-center pt-7 md:pt-[39px] z-10">
         <div
           className={cn(
             "h-[18px] w-[18px] rounded-full border-2 bg-[var(--frame)] transition-all duration-300 flex items-center justify-center shadow-sm",

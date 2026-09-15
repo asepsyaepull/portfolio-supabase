@@ -46,4 +46,10 @@ export const aboutPageEn: AboutPageDictionary = {
     },
   ],
   journeyTitle: "Professional Journey",
+  statusBadge: "Available for Select Contracts",
+  experienceYears: "7+ Years Experience",
+  location: "Jakarta, Indonesia",
+  rolesHeadline: "UI/UX Designer & Frontend Developer",
+  viewProjectsBtn: "View Selected Works",
+  contactBtn: "Get In Touch",
 };

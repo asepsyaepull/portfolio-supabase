@@ -46,4 +46,10 @@ export const aboutPageId: AboutPageDictionary = {
     },
   ],
   journeyTitle: "Perjalanan Profesional",
+  statusBadge: "Tersedia untuk Kontrak & Proyek Baru",
+  experienceYears: "7+ Tahun Pengalaman",
+  location: "Jakarta, Indonesia",
+  rolesHeadline: "UI/UX Designer & Frontend Developer",
+  viewProjectsBtn: "Lihat Portofolio",
+  contactBtn: "Hubungi Saya",
 };

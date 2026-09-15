@@ -278,6 +278,12 @@ export interface AboutPageDictionary {
   foundationsTitle: string;
   education: EducationItem[];
   journeyTitle: string;
+  statusBadge?: string;
+  experienceYears?: string;
+  location?: string;
+  rolesHeadline?: string;
+  viewProjectsBtn?: string;
+  contactBtn?: string;
 }
 
 export interface ProjectsPageDictionary {
