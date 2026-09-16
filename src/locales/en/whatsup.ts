@@ -2,13 +2,13 @@ import { WhatsupDictionary } from "../types";
 
 export const whatsupEn: WhatsupDictionary = {
   tag: "about-me.txt",
-  headline: "What's Up",
+  headline: "Overview & Craft",
   viewAbout: "Explore Full Bio & Journey",
   readStory: "Full Story",
   statementTag: "STATEMENT.TXT",
   statementQuote:
-    "I'm Asep Syaepul — a seasoned UI/UX professional with over 7 years of experience in designing and developing user-centered digital products. Experienced in building SaaS platforms and interactive web experiences using technologies like ",
-  statementHighlight: "Next.js, Node.js, and Three.js.",
+    "I'm Asep Syaepul — a UI/UX Designer & Frontend Developer with over 7 years of track record architecting user-centered digital products. Specialized in scalable design systems and interactive web platforms built with ",
+  statementHighlight: "Next.js, TypeScript, and the modern React ecosystem.",
   statementSince: "ASEP SYAEPUL, SINCE 2019",
   metricsTag: "METRICS",
   metrics: [
@@ -18,8 +18,8 @@ export const whatsupEn: WhatsupDictionary = {
   ],
   philosophyTag: "PHILOSOPHY.TXT",
   philosophyQuote:
-    "Design is not merely how it looks, but how it works — bridging user empathy with precise code.",
-  philosophyAuthor: "— UI/UX & Creative Dev",
+    "Design is not merely how it looks, but how it works — unifying user empathy with production-grade engineering precision.",
+  philosophyAuthor: "— Asep Syaepul",
   currentlyBuildingTag: "CURRENTLY BUILDING IN",
   capabilitiesTag: "CAPABILITIES",
   capabilities: [

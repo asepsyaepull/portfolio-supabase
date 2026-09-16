@@ -2,78 +2,78 @@ import { WorkflowDictionary } from "../types";
 
 export const workflowId: WorkflowDictionary = {
   tag: "how-it-works.frame",
-  title: "Tanpa birokrasi berbelit. Cukup ini.",
+  title: "Kolaborasi terarah tanpa friksi birokrasi.",
   subtitle:
-    "Satu thread percakapan langsung jalan. Begini alur kerjanya dari brief awal hingga live di production.",
+    "Komunikasi langsung dalam satu saluran terpadu. Dari brief awal, eksplorasi desain, hingga rilis di production.",
   channelName: "<project-channel>",
   onlineStatus: "3 online",
-  inputPlaceholder: "pesan <project-channel>",
+  inputPlaceholder: "ketik pesan di <project-channel>",
   steps: [
     {
-      label: "01 · MULAI",
+      label: "01 · INISIASI",
       msgs: [
         {
           from: "you",
-          text: "Halo, ada slot buat project baru? Saya butuh redesign dashboard.",
+          text: "Halo Asep, ada slot untuk proyek baru? Kami membutuhkan redesain dashboard sistem.",
           time: "09.02",
         },
         {
           from: "asep",
-          text: "Ada, aman 👋 Ceritain dulu goals-nya — target user siapa, masalah utamanya apa.",
+          text: "Halo! Slot tersedia 👋 Mari diskusikan objektif utama — siapa target pengguna dan kendala kunci yang ingin diselesaikan?",
           time: "09.04",
         },
       ],
     },
     {
-      label: "02 · KIRIM BRIEF",
+      label: "02 · BRIEF & RISET",
       msgs: [
         {
           from: "you",
-          text: "Ini brief-nya plus referensi visual. Ada 3 flow utama yang perlu diperbaiki.",
+          text: "Ini dokumen brief dan referensi visualnya. Ada 3 flow utama yang perlu dioptimalkan.",
           time: "09.15",
           attach: "project-brief.fig",
         },
         {
           from: "asep",
-          text: "Sudah saya baca. Saya riset kompetitor dulu, lalu kirim wireframe hari ini.",
+          text: "Brief sudah saya pelajari. Saya lakukan riset alur kompetitor dan siapkan draf wireframe awal hari ini.",
           time: "09.20",
         },
       ],
     },
     {
-      label: "03 · REVISI",
+      label: "03 · ITERASI",
       msgs: [
         {
           from: "asep",
-          text: "Wireframe jadi. Cek alur checkout-nya — saya prioritaskan di sini.",
+          text: "Draf wireframe selesai. Silakan tinjau alur checkout yang menjadi prioritas konversi kita.",
           time: "14.30",
           attach: "homepage-v1.png",
           reaction: "🔥 2",
         },
         {
           from: "you",
-          text: "Oke arahnya bener. Tombol primary kecilin dikit, sama spacing antar section longgarin.",
+          text: "Arahnya sudah sangat tepat. Tombol primary bisa dibuat sedikit lebih proporsional, serta spacing antar-section diperlonggar.",
           time: "15.02",
           reaction: "👍 1",
         },
         {
           from: "asep",
-          text: "Masuk. Revisi termasuk paket — saya update hari ini.",
+          text: "Dipahami. Masukan Anda langsung saya terapkan dalam iterasi hari ini.",
           time: "15.05",
         },
       ],
     },
     {
-      label: "04 · SHIP",
+      label: "04 · DEPLOY",
       msgs: [
         {
           from: "asep",
-          text: "Sudah live. Lighthouse 98, semua flow tested. 🚀",
+          text: "Implementasi selesai dan live di production. Skor Lighthouse 98, seluruh flow teruji optimal. 🚀",
           time: "10.41",
         },
         {
           from: "you",
-          text: "Keren. Next project langsung lanjut ya.",
+          text: "Hasilnya luar biasa. Kita jadwalkan sprint proyek berikutnya.",
           time: "10.44",
         },
       ],

@@ -10,10 +10,10 @@ const config: Config = {
   theme: {
   	extend: {
   		fontFamily: {
-				display: ["var(--font-display)", "Fraunces", "serif"],
-				body: ["var(--font-body)", "Hanken Grotesk", "sans-serif"],
+				display: ["var(--font-display)", "var(--font-sans)", "Plus Jakarta Sans", "ui-sans-serif", "system-ui", "sans-serif"],
+				body: ["var(--font-body)", "var(--font-sans)", "Plus Jakarta Sans", "ui-sans-serif", "system-ui", "sans-serif"],
+				sans: ["var(--font-sans)", "Plus Jakarta Sans", "ui-sans-serif", "system-ui", "sans-serif"],
 				mono: ["var(--font-mono)", "Space Mono", "monospace"],
-				sans: ["var(--font-body)", "ui-sans-serif", "system-ui", "sans-serif"],
   		},
   		colors: {
 				canvas: "var(--canvas)",

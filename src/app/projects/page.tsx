@@ -7,14 +7,14 @@ export const revalidate = 60; // Revalidate every 60 seconds (ISR)
 export const metadata: Metadata = {
   title: "Projects | Asep Syaepul",
   description:
-    "Jelajahi portofolio studi kasus desain UI/UX dan rekayasa frontend produksi oleh Asep Syaepul — platform enterprise ERP, POS retail modern, hingga aplikasi mobile.",
+    "Explore case studies in UI/UX design and production frontend engineering by Asep Syaepul — enterprise ERP platforms, modern retail POS, and mobile applications.",
   alternates: {
     canonical: "https://asyaepul.id/projects",
   },
   openGraph: {
     title: "Projects | Asep Syaepul",
     description:
-      "Studi kasus desain UI/UX dan rekayasa frontend siap produksi: ERP enterprise, POS retail, aplikasi rental mobil, dan automotive ecosystem.",
+      "Production-ready UI/UX design and frontend case studies: enterprise ERP, retail POS, vehicle rental mobile app, and automotive ecosystems.",
     url: "https://asyaepul.id/projects",
     siteName: "Asep Syaepul Portfolio",
     images: [
@@ -30,7 +30,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Projects | Asep Syaepul",
     description:
-      "Studi kasus desain UI/UX dan rekayasa frontend siap produksi oleh Asep Syaepul.",
+      "Production-ready UI/UX design and frontend case studies by Asep Syaepul.",
     images: ["/og-image.jpg"],
   },
 };

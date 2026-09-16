@@ -55,7 +55,7 @@ export function QuordixHeroGlitchTitle({
   return (
     <div
       className={cn(
-        "flex flex-col items-center justify-center text-center gap-2 relative select-none font-display md:font-mono text-[clamp(2.5rem,8vw,6rem)] font-black leading-[0.85] tracking-tight uppercase",
+        "flex flex-col items-center justify-center text-center gap-2 relative select-none font-display text-[clamp(2.5rem,8vw,6rem)] font-black leading-[0.85] tracking-tight uppercase",
         className
       )}
     >

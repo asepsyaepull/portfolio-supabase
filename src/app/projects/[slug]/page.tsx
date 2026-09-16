@@ -234,7 +234,7 @@ export default async function ProjectDetailPage({
           className="inline-flex items-center gap-2 font-mono text-xs font-bold uppercase tracking-wider text-zinc-500 hover:text-brand transition-colors mb-8 group"
         >
           <IconArrowLeft className="w-4 h-4 transition-transform group-hover:-translate-x-1" />
-          <span>Kembali ke Proyek</span>
+          <span>Back to Projects</span>
         </Link>
 
         {/* Studio Spec Card Shell */}
@@ -380,12 +380,12 @@ export default async function ProjectDetailPage({
                       rel="noopener noreferrer"
                       className="inline-flex items-center justify-center gap-2.5 px-6 py-3.5 rounded-xl bg-brand hover:bg-brand-deep text-white font-mono font-bold text-xs uppercase tracking-wider shadow-brand shadow-[0_12px_26px_-12px_#F0531C] active:scale-95 transition-all duration-200 w-full"
                     >
-                      <span>Buka Proyek</span>
+                      <span>Open Live Project</span>
                       <IconExternalLink className="w-4 h-4 stroke-[2.5]" />
                     </a>
                   ) : (
                     <div className="inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-xl bg-zinc-100 dark:bg-zinc-900 text-zinc-400 dark:text-zinc-500 font-mono font-bold text-xs uppercase tracking-wider border border-zinc-200 dark:border-zinc-800 cursor-not-allowed opacity-70 w-full">
-                      <span>Studi Kasus Internal</span>
+                      <span>Internal Case Study</span>
                     </div>
                   )}
 
@@ -394,7 +394,7 @@ export default async function ProjectDetailPage({
                     href="/projects"
                     className="inline-flex items-center justify-center gap-2 px-5 py-3 rounded-xl bg-white dark:bg-[#121215] hover:bg-zinc-100 dark:hover:bg-zinc-900 text-zinc-800 dark:text-zinc-200 border border-zinc-200 dark:border-zinc-800 font-mono font-bold text-xs uppercase tracking-wider hover:border-brand/40 transition-colors w-full"
                   >
-                    <span>Lihat Proyek Lainnya</span>
+                    <span>View More Projects</span>
                   </Link>
                 </div>
               </div>

@@ -2,63 +2,63 @@ import { WorkflowDictionary } from "../types";
 
 export const workflowEn: WorkflowDictionary = {
   tag: "how-it-works.frame",
-  title: "No forms. No hoops. Just this.",
+  title: "Direct collaboration. Zero friction.",
   subtitle:
-    "One dedicated conversation thread. Here is the streamlined workflow from initial brief to live production.",
+    "A dedicated, transparent workflow. From initial brief and interactive design to live production deployment.",
   channelName: "<project-channel>",
   onlineStatus: "3 online",
   inputPlaceholder: "message <project-channel>",
   steps: [
     {
-      label: "01 · START",
+      label: "01 · KICKOFF",
       msgs: [
         {
           from: "you",
-          text: "Hey! Do you have an open slot for a new project? I need a dashboard redesign.",
+          text: "Hi Asep! Do you have an open slot for a new project? We need a dashboard redesign.",
           time: "09.02",
         },
         {
           from: "asep",
-          text: "Yes, ready to roll 👋 Tell me about your primary goals — who is the target audience and what's the main challenge?",
+          text: "Hello! Yes, ready to roll 👋 Let's align on your primary goals — who is the target user and what is the key problem to solve?",
           time: "09.04",
         },
       ],
     },
     {
-      label: "02 · SEND BRIEF",
+      label: "02 · BRIEF & RESEARCH",
       msgs: [
         {
           from: "you",
-          text: "Here is the project brief and visual references. There are 3 critical flows to revamp.",
+          text: "Here is our project brief and visual benchmarks. There are 3 core flows to overhaul.",
           time: "09.15",
           attach: "project-brief.fig",
         },
         {
           from: "asep",
-          text: "Got it, reviewed! I'll do competitive research and deliver initial wireframes today.",
+          text: "Brief thoroughly reviewed! I'll conduct rapid flow benchmarking and deliver initial wireframes today.",
           time: "09.20",
         },
       ],
     },
     {
-      label: "03 · REVISE",
+      label: "03 · ITERATE",
       msgs: [
         {
           from: "asep",
-          text: "Wireframes ready. Take a look at the checkout flow — that was the primary priority.",
+          text: "Interactive wireframes are ready. Please review the checkout funnel — prioritized for conversion.",
           time: "14.30",
           attach: "homepage-v1.png",
           reaction: "🔥 2",
         },
         {
           from: "you",
-          text: "Looks on point. Just make the primary button slightly more compact and loosen section spacing.",
+          text: "Right on target. Let's refine the primary CTA proportions and give sections slightly more breathing room.",
           time: "15.02",
           reaction: "👍 1",
         },
         {
           from: "asep",
-          text: "Noted. Revisions are included in the package — updates will be pushed today.",
+          text: "Noted! Revisions are fully covered — I'll push the updated layout today.",
           time: "15.05",
         },
       ],
@@ -68,12 +68,12 @@ export const workflowEn: WorkflowDictionary = {
       msgs: [
         {
           from: "asep",
-          text: "It's live! Lighthouse score 98, all user flows verified & tested. 🚀",
+          text: "Successfully deployed and live in production! Lighthouse score 98, all user flows thoroughly validated. 🚀",
           time: "10.41",
         },
         {
           from: "you",
-          text: "Outstanding work. Let's line up the next project right away.",
+          text: "Exceptional execution. Let's line up the next phase right away.",
           time: "10.44",
         },
       ],

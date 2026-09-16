@@ -1,19 +1,19 @@
 import { ContactPageDictionary } from "../types";
 
 export const contactPageEn: ContactPageDictionary = {
-  portalTag: "/ CONTACT PORTAL & INQUIRIES",
-  badge: "OPEN FOR NEW PROJECTS & ROLES",
+  portalTag: "/ CONTACT PORTAL & INQUIRY",
+  badge: "OPEN FOR NEW PROJECTS & STRATEGIC ROLES",
   titleLine1: "Let's Build",
   titleLine2: "Something Remarkable.",
   description:
-    "Have an ambitious product idea, need a comprehensive design system audit, or looking for a seasoned frontend engineer to accelerate your launch? Let's discuss how we can partner.",
+    "Have a new product concept, need a design system overhaul, or seeking a seasoned frontend engineer to accelerate your sprint release? Let's discuss how we can create meaningful impact together.",
   emailLabel: "Official Email",
   locationLabel: "Location & Base",
   locationValue: "Cilandak, South Jakarta (ID)",
-  availabilityLabel: "Current Availability",
-  availabilityValue: "Available for Freelance & Full-time",
+  availabilityLabel: "Availability Status",
+  availabilityValue: "Available for Select Contracts & Full-time",
   timezoneLabel: "Working Timezone",
-  timezoneValue: "WIB (UTC+7) · Global Sync Ready",
+  timezoneValue: "WIB (UTC+7) · Global Collaboration Ready",
   copyEmailBtn: "Copy Email",
   copiedEmailText: "Email Copied!",
   directChatBtn: "Chat on WhatsApp",
@@ -23,22 +23,22 @@ export const contactPageEn: ContactPageDictionary = {
     spec1: {
       num: "01",
       label: "RESPONSE TIME",
-      desc: "< 24 Hours SLA (Quick Turnaround)",
+      desc: "< 24 Business Hours (Fast SLA)",
     },
     spec2: {
       num: "02",
-      label: "WORK ENGAGEMENT",
-      desc: "Remote / Hybrid / Onsite JKT",
+      label: "WORK MODE",
+      desc: "Remote / Hybrid / Onsite Jakarta",
     },
     spec3: {
       num: "03",
-      label: "DISCIPLINES",
+      label: "CORE DISCIPLINES",
       desc: "UI/UX Design & Frontend Code",
     },
     spec4: {
       num: "04",
       label: "DELIVERABLES",
-      desc: "Figma Tokens & Clean Code",
+      desc: "Figma Tokens & Production Code",
     },
   },
 
@@ -46,42 +46,42 @@ export const contactPageEn: ContactPageDictionary = {
   fullNameLabel: "Full Name",
   emailAddressLabel: "Email Address",
   subjectLabel: "Subject Line",
-  messageLabel: "Project Brief & Scope",
-  namePlaceholder: "e.g. Alexander Pierce",
+  messageLabel: "Project Requirements & Goals",
+  namePlaceholder: "e.g. Alex Morgan",
   emailPlaceholder: "alex@company.com",
   subjectPlaceholder: "e.g. Mobile App Redesign & Design System Architecture",
   messagePlaceholder:
-    "Tell me about your product vision, desired launch timeline, and key technical or design challenges to address...",
-  submitButton: "SEND INQUIRY MESSAGE",
-  submittingButton: "TRANSMITTING...",
+    "Share your product vision, target launch timeline, and key challenges you are aiming to solve...",
+  submitButton: "Send Message",
+  submittingButton: "Sending Message...",
   successMessage:
-    "Thank you! Your inquiry has been sent. I will review your notes and get back to you within 24 hours.",
-  scopeTitle: "Select Project Scope / Category:",
+    "Thank you! Your message has been sent successfully. I will review and respond within 24 business hours.",
+  scopeTitle: "Select Primary Scope & Needs:",
   scopeChips: [
     "UI/UX Design",
     "Frontend Web (Next.js/React)",
     "Design System & Tokens",
     "Mobile App Design",
-    "Consultation & Code Review",
+    "Consulting & Code Audit",
   ],
 
   faqHeading: "Collaboration Expectations",
-  faqSubheading: "Clear answers to frequent questions before kicking off our journey together.",
+  faqSubheading: "Common questions regarding project kickoffs, deliverables, and confidentiality.",
   faqs: [
     {
-      question: "How quickly can we initiate the project?",
+      question: "How quickly can we kick off a project?",
       answer:
-        "Typically, we can organize a discovery call and launch Sprint 0 within 3 to 5 business days after agreeing upon scope and roadmap.",
+        "Typically, discovery alignment and sprint planning commence within 3–5 business days following brief review and mutual scope sign-off.",
     },
     {
-      question: "What exact deliverables will you provide?",
+      question: "What exact deliverables will I receive upon completion?",
       answer:
-        "Depending on project needs: fully systematized Figma files (auto-layout, design tokens, responsive components), developer handoff specs, and/or production-ready frontend repositories (Next.js, TypeScript, Tailwind) prepared for deployment.",
+        "Depending on engagement scope: Structured Figma libraries (auto-layout, design tokens, component variants), interactive clickable prototypes, hand-off documentation, and/or a production-ready Next.js & TypeScript repository ready for turnkey deployment.",
     },
     {
-      question: "Are you comfortable signing a non-disclosure agreement (NDA)?",
+      question: "Are you open to signing a Non-Disclosure Agreement (NDA)?",
       answer:
-        "Absolutely. I respect intellectual property and business confidentiality and am glad to execute a mutual NDA before reviewing proprietary requirements.",
+        "Certainly. Business confidentiality is paramount, and I am fully prepared to sign a mutual Non-Disclosure Agreement (NDA) prior to proprietary discussions.",
     },
   ],
 };

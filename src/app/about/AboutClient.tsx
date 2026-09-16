@@ -26,7 +26,7 @@ import { ExperienceItemLocale } from "@/locales/types";
 import { cn } from "@/lib/utils";
 
 export default function AboutClient() {
-  const { t } = useLanguage();
+  const { t, locale } = useLanguage();
   const about = t.aboutPage;
   const experiences = t.experience.items;
 
@@ -51,7 +51,7 @@ export default function AboutClient() {
               <span>{about.badge}</span>
             </div>
 
-            {/* Headline with editorial Fraunces font */}
+            {/* Headline with Plus Jakarta Sans font */}
             <h1 className="heading-display font-display text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-extrabold text-zinc-900 dark:text-white tracking-tight leading-[1.05] mb-6">
               {about.headlineMain}{" "}
               <span className="text-zinc-400 dark:text-zinc-500 block sm:inline">
@@ -102,60 +102,45 @@ export default function AboutClient() {
             </div>
           </motion.div>
 
-          {/* Right Column: Studio Profile Card */}
+          {/* Right Column: Visual Photo Card with Metric Chips */}
           <motion.div
             initial={{ opacity: 0, scale: 0.96 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.6, delay: 0.15 }}
-            className="lg:col-span-5 flex justify-center w-full"
+            className="lg:col-span-5 flex justify-center lg:justify-end"
           >
-            <div className="relative w-full max-w-sm">
-              {/* Figma Layer Selection Tab */}
-              <div className="absolute -top-3.5 left-4 font-mono text-[11px] font-bold text-brand bg-white dark:bg-[#121214] px-3 py-1 rounded-md border border-brand/30 shadow-sm flex items-center gap-1.5 z-20 tracking-wider">
-                <IconLayoutGrid className="w-3.5 h-3.5 text-brand" />
-                <span>01 asep-profile.fig</span>
-              </div>
+            <div className="relative w-full max-w-sm sm:max-w-md">
+              {/* Decorative Accent Glow */}
+              <div className="absolute -inset-1.5 bg-gradient-to-r from-brand/30 via-brand/10 to-transparent rounded-[32px] blur-xl opacity-70 pointer-events-none" />
 
-              {/* Main Card Frame with 4 Corner Figma Handles */}
-              <div className="group relative rounded-3xl bg-white dark:bg-[#121215] border border-zinc-200 dark:border-zinc-800 p-4 sm:p-5 shadow-xl hover:shadow-2xl hover:border-brand/40 dark:hover:border-brand/40 transition-all duration-300">
-                {/* 4 Corner Figma Handles */}
-                <span className="absolute -top-1.5 -left-1.5 w-3 h-3 bg-white dark:bg-[#121215] border-2 border-brand rounded-[2px] opacity-0 group-hover:opacity-100 transition-opacity duration-200 z-30" />
-                <span className="absolute -top-1.5 -right-1.5 w-3 h-3 bg-white dark:bg-[#121215] border-2 border-brand rounded-[2px] opacity-0 group-hover:opacity-100 transition-opacity duration-200 z-30" />
-                <span className="absolute -bottom-1.5 -left-1.5 w-3 h-3 bg-white dark:bg-[#121215] border-2 border-brand rounded-[2px] opacity-0 group-hover:opacity-100 transition-opacity duration-200 z-30" />
-                <span className="absolute -bottom-1.5 -right-1.5 w-3 h-3 bg-white dark:bg-[#121215] border-2 border-brand rounded-[2px] opacity-0 group-hover:opacity-100 transition-opacity duration-200 z-30" />
-
-                {/* Profile Photo Container */}
-                <div className="relative aspect-[4/5] w-full overflow-hidden rounded-2xl bg-zinc-100 dark:bg-zinc-900 border border-zinc-200/80 dark:border-zinc-800/80">
+              {/* Photo Frame Container */}
+              <div className="relative rounded-[28px] overflow-hidden bg-white dark:bg-[#121215] border border-zinc-200/90 dark:border-zinc-800/90 shadow-2xl">
+                {/* Visual Image */}
+                <div className="relative h-96 sm:h-[430px] w-full bg-zinc-100 dark:bg-zinc-900">
                   <Image
-                    src="/assets/images/profile.webp"
+                    src="/images/asep-profile.webp"
                     alt="Asep Syaepul Rohman"
                     fill
-                    sizes="(max-width: 768px) 100vw, 400px"
+                    sizes="(max-width: 768px) 100vw, 40vw"
                     priority
-                    className="object-cover object-top transition-transform duration-700 ease-out group-hover:scale-105"
+                    className="object-cover object-top"
                   />
-                  {/* Subtle gradient scrim */}
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/65 via-transparent to-transparent opacity-85" />
-
-                  {/* On-image Info Overlay */}
-                  <div className="absolute bottom-3 left-3 right-3 text-white">
-                    <p className="font-display font-bold text-lg leading-tight drop-shadow-sm">
-                      Asep Syaepul Rohman
-                    </p>
-                    <p className="font-mono text-[11px] text-brand font-bold tracking-wide drop-shadow-sm mt-0.5">
-                      {about.rolesHeadline || "UI/UX Designer & Frontend Developer"}
-                    </p>
-                  </div>
+                  {/* Subtle Vignette Overlay */}
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-80" />
                 </div>
 
-                {/* Status & Meta Info */}
-                <div className="mt-4 pt-3 border-t border-zinc-200 dark:border-zinc-800 flex flex-col gap-2">
-                  <div className="flex items-center justify-between text-xs">
-                    <span className="inline-flex items-center gap-1.5 text-zinc-700 dark:text-zinc-300 font-medium">
-                      <span className="w-2 h-2 rounded-full bg-emerald-500 animate-ping" />
-                      <span className="text-[11.5px]">{about.statusBadge || "Available for Projects"}</span>
-                    </span>
-                    <span className="font-mono text-[11px] font-bold text-brand">
+                {/* Bottom Floating Spec Bar */}
+                <div className="p-4 sm:p-5 bg-white/95 dark:bg-[#121215]/95 backdrop-blur-md border-t border-zinc-100 dark:border-zinc-800/80 flex flex-col gap-2">
+                  <div className="flex items-center justify-between">
+                    <div>
+                      <span className="font-mono text-xs font-bold text-zinc-900 dark:text-white uppercase tracking-wider block">
+                        Asep Syaepul Rohman
+                      </span>
+                      <span className="font-mono text-[11px] text-zinc-500">
+                        {about.rolesHeadline || "UI/UX Designer & Frontend Developer"}
+                      </span>
+                    </div>
+                    <span className="px-2.5 py-1 rounded-full bg-brand/10 border border-brand/20 font-mono text-[11px] font-bold text-brand">
                       7+ YOE
                     </span>
                   </div>
@@ -252,10 +237,10 @@ export default function AboutClient() {
 
             {/* Card 2: Frontend Engineering */}
             <div className="relative w-full">
-              {/* Figma Layer Selection Tab */}
+              {/* Code Selection Tab */}
               <div className="absolute -top-3.5 left-4 sm:left-6 font-mono text-[11px] font-bold text-brand bg-white dark:bg-[#121214] px-3 py-1 rounded-md border border-brand/30 shadow-sm flex items-center gap-1.5 z-20 tracking-wider">
                 <IconCode className="w-3.5 h-3.5 text-brand" />
-                <span>03 frontend-stack.spec</span>
+                <span>03 engineering.spec</span>
               </div>
 
               <div className="group relative rounded-3xl bg-white dark:bg-[#121215] border border-zinc-200 dark:border-zinc-800 p-6 sm:p-8 shadow-xl hover:shadow-2xl hover:border-brand/40 dark:hover:border-brand/40 transition-all duration-300">
@@ -265,7 +250,7 @@ export default function AboutClient() {
                       {about.devTitle}
                     </h3>
                     <p className="font-mono text-xs text-brand font-bold tracking-wider mt-1 uppercase">
-                      React · Next.js · TypeScript · Tailwind
+                      Next.js · TypeScript · Web Performance
                     </p>
                   </div>
                   <div className="w-10 h-10 rounded-xl bg-brand/10 border border-brand/20 flex items-center justify-center text-brand">
@@ -323,16 +308,18 @@ export default function AboutClient() {
 
           {/* Design-to-Code Craft Bridge Highlight */}
           <div className="mt-8 rounded-2xl bg-white dark:bg-[#121215] border border-zinc-200 dark:border-zinc-800 p-5 sm:p-6 flex flex-col md:flex-row items-center justify-between gap-4 shadow-md">
-            <div className="flex items-center gap-3">
-              <div className="w-10 h-10 rounded-xl bg-brand/10 border border-brand/20 flex items-center justify-center text-brand shrink-0">
-                <IconSparkles className="w-5 h-5" />
+            <div className="flex items-center gap-4">
+              <div className="w-11 h-11 rounded-2xl bg-brand/10 border border-brand/20 flex items-center justify-center text-brand flex-shrink-0">
+                <IconSparkles className="w-5 h-5 text-brand" />
               </div>
-              <div>
-                <h4 className="font-display font-bold text-sm sm:text-base text-zinc-900 dark:text-white">
-                  The Dual-Craft Advantage: Design + Engineering
+              <div className="text-left">
+                <h4 className="font-bold text-sm sm:text-base text-zinc-900 dark:text-white">
+                  {locale === "id" ? "Sinergi Desain & Kode Tanpa Friksi" : "Design-to-Code Synergy"}
                 </h4>
-                <p className="text-xs text-zinc-500 dark:text-zinc-400 mt-0.5">
-                  Eliminating the friction between high-fidelity Figma tokens and pixel-perfect Next.js implementation.
+                <p className="text-xs sm:text-sm text-zinc-600 dark:text-zinc-400">
+                  {locale === "id"
+                    ? "Menghilangkan kesenjangan hand-off antara prototipe Figma dan komponen kode produksi."
+                    : "Zero-loss translation from interactive Figma specs to production React components."}
                 </p>
               </div>
             </div>
@@ -391,7 +378,9 @@ export default function AboutClient() {
                   </div>
 
                   <div className="pt-4 border-t border-zinc-100 dark:border-zinc-800/80 flex items-center justify-between">
-                    <span className="font-mono text-[10px] uppercase text-zinc-400">Grade / Result</span>
+                    <span className="font-mono text-[10px] uppercase text-zinc-400">
+                      {locale === "id" ? "Predikat / Hasil" : "Grade / Result"}
+                    </span>
                     <span className="inline-block px-3 py-1 rounded-full bg-zinc-100 dark:bg-zinc-900 text-zinc-800 dark:text-zinc-200 font-mono text-xs font-bold border border-zinc-200 dark:border-zinc-800">
                       {edu.gpa}
                     </span>
@@ -424,27 +413,31 @@ export default function AboutClient() {
         <div className="relative rounded-3xl bg-white dark:bg-[#121215] border border-zinc-200 dark:border-zinc-800 p-8 sm:p-12 shadow-xl text-center overflow-hidden">
           <div className="relative z-10 max-w-2xl mx-auto flex flex-col items-center">
             <span className="font-mono text-xs font-bold uppercase tracking-widest text-brand mb-2">
-              Ready to collaborate?
+              {locale === "id" ? "Siap Berkolaborasi?" : "Ready to collaborate?"}
             </span>
             <h3 className="heading-display font-display text-3xl sm:text-4xl font-extrabold text-zinc-900 dark:text-white tracking-tight mb-4">
-              Let&apos;s turn complex design ideas into seamless products.
+              {locale === "id"
+                ? "Mari wujudkan ide produk kompleks menjadi solusi digital yang intuitif."
+                : "Let's turn complex design ideas into seamless products."}
             </h3>
             <p className="text-sm sm:text-base text-zinc-600 dark:text-zinc-400 mb-8 max-w-lg">
-              Available for full product design, design system architecture, or full-stack frontend engineering roles.
+              {locale === "id"
+                ? "Tersedia untuk perancangan produk digital menyeluruh, arsitektur design system, atau peran engineering frontend."
+                : "Available for full product design, design system architecture, or full-stack frontend engineering roles."}
             </p>
             <div className="flex flex-wrap items-center justify-center gap-3">
               <Link
                 href="/contact"
                 className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-brand hover:bg-brand-deep text-white font-mono font-bold text-xs uppercase tracking-wider shadow-brand shadow-[0_12px_26px_-12px_#F0531C] active:scale-95 transition-all duration-200"
               >
-                <span>{t.common.buttons.emailMe}</span>
+                <span>{t.common.buttons.talkWithMe}</span>
                 <IconArrowUpRight className="w-4 h-4 stroke-[2.5]" />
               </Link>
               <Link
                 href="/projects"
                 className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-zinc-100 dark:bg-zinc-900 hover:bg-zinc-200 dark:hover:bg-zinc-800 text-zinc-800 dark:text-zinc-200 font-mono font-bold text-xs uppercase tracking-wider hover:text-brand transition-colors duration-200"
               >
-                <span>{t.projectsPage.badge}</span>
+                <span>{about.viewProjectsBtn || t.common.buttons.viewArchive}</span>
               </Link>
             </div>
           </div>

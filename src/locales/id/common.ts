@@ -2,24 +2,24 @@ import { CommonDictionary } from "../types";
 
 export const commonId: CommonDictionary = {
   nav: {
-    home: "Home",
-    about: "About",
-    work: "Work",
-    process: "Process",
-    experience: "Experience",
-    contact: "Contact",
+    home: "Beranda",
+    about: "Tentang",
+    work: "Karya",
+    process: "Alur Kerja",
+    experience: "Pengalaman",
+    contact: "Kontak",
   },
   buttons: {
-    downloadCv: "Download CV",
-    emailMe: "Email me",
-    talkWithMe: "Talk with me",
+    downloadCv: "Unduh CV",
+    emailMe: "Kirim Email",
+    talkWithMe: "Hubungi Saya",
     startProject: "Mulai Proyek",
-    viewArchive: "Lihat Arsip Lengkap",
-    send: "KIRIM PESAN",
-    sending: "MENGIRIM...",
+    viewArchive: "Lihat Semua Karya",
+    send: "Kirim Pesan",
+    sending: "Mengirim Pesan...",
   },
   status: {
-    availableNow: "tersedia sekarang",
-    remoteReady: "SIAP REMOTE",
+    availableNow: "Tersedia untuk Proyek Baru",
+    remoteReady: "SIAP REMOTE & HYBRID",
   },
 };

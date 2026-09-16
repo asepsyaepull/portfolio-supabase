@@ -253,6 +253,13 @@ export interface CinematicFooterProps {
   githubUrl?: string;
   linkedinUrl?: string;
   creatorName?: string;
+  contactBtnText?: string;
+  cvBtnText?: string;
+  navLinks?: {
+    projects?: string;
+    about?: string;
+    contact?: string;
+  };
 }
 
 export function CinematicFooter({
@@ -264,6 +271,13 @@ export function CinematicFooter({
   githubUrl = "https://github.com/asepsyaepull",
   linkedinUrl = "https://linkedin.com/in/asepsyaepul",
   creatorName = "Asep Syaepul",
+  contactBtnText = "Get in Touch",
+  cvBtnText = "Download CV",
+  navLinks = {
+    projects: "Projects",
+    about: "About",
+    contact: "Contact",
+  },
 }: CinematicFooterProps) {
   const wrapperRef = useRef<HTMLDivElement>(null);
   const giantTextRef = useRef<HTMLDivElement>(null);
@@ -377,7 +391,7 @@ export function CinematicFooter({
                   className="footer-glass-pill px-6 md:px-10 py-3.5 md:py-5 rounded-full text-foreground font-bold text-sm md:text-base flex items-center gap-3 group"
                 >
                   <IconMail className="w-5 h-5 text-muted-foreground group-hover:text-foreground transition-colors" />
-                  <span>Get in Touch</span>
+                  <span>{contactBtnText}</span>
                   <IconSparkles className="w-4 h-4 text-brand opacity-80 group-hover:opacity-100 transition-opacity" />
                 </MagneticButton>
 
@@ -389,7 +403,7 @@ export function CinematicFooter({
                   className="footer-glass-pill px-6 md:px-10 py-3.5 md:py-5 rounded-full text-foreground font-bold text-sm md:text-base flex items-center gap-3 group"
                 >
                   <IconFileText className="w-5 h-5 text-muted-foreground group-hover:text-foreground transition-colors" />
-                  <span>Download CV</span>
+                  <span>{cvBtnText}</span>
                   <IconExternalLink className="w-3.5 h-3.5 opacity-60 group-hover:opacity-100 transition-opacity" />
                 </MagneticButton>
               </div>
@@ -423,7 +437,7 @@ export function CinematicFooter({
                   href="/projects"
                   className="footer-glass-pill px-5 md:px-6 py-2.5 md:py-3 rounded-full text-muted-foreground font-medium text-xs md:text-sm hover:text-foreground"
                 >
-                  Projects
+                  {navLinks.projects || "Projects"}
                 </MagneticButton>
 
                 <MagneticButton
@@ -431,7 +445,7 @@ export function CinematicFooter({
                   href="/about"
                   className="footer-glass-pill px-5 md:px-6 py-2.5 md:py-3 rounded-full text-muted-foreground font-medium text-xs md:text-sm hover:text-foreground"
                 >
-                  About
+                  {navLinks.about || "About"}
                 </MagneticButton>
 
                 <MagneticButton
@@ -439,7 +453,7 @@ export function CinematicFooter({
                   href="/contact"
                   className="footer-glass-pill px-5 md:px-6 py-2.5 md:py-3 rounded-full text-muted-foreground font-medium text-xs md:text-sm hover:text-foreground"
                 >
-                  Contact
+                  {navLinks.contact || "Contact"}
                 </MagneticButton>
               </div>
             </div>

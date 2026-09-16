@@ -4,11 +4,11 @@ import AboutClient from "./AboutClient";
 export const metadata: Metadata = {
   title: "About | Asep Syaepul",
   description:
-    "Pelajari profil profesional, keahlian teknis, dan perjalanan karir Asep Syaepul sebagai UI/UX Designer & Frontend Developer dengan 7+ tahun pengalaman.",
+    "Explore the professional background, technical expertise, and career journey of Asep Syaepul — UI/UX Designer & Frontend Developer with 7+ years of experience.",
   openGraph: {
     title: "About | Asep Syaepul",
     description:
-      "Profil Asep Syaepul — UI/UX Designer & Frontend Developer. Menjembatani desain fidelitas tinggi dan rekayasa kode siap produksi.",
+      "Profile of Asep Syaepul — UI/UX Designer & Frontend Developer bridging high-fidelity design and production-ready code.",
     url: "https://asyaepul.id/about",
     siteName: "Asep Syaepul Portfolio",
     images: [
@@ -24,7 +24,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "About | Asep Syaepul",
     description:
-      "Profil Asep Syaepul — UI/UX Designer & Frontend Developer dengan 7+ tahun pengalaman.",
+      "Profile of Asep Syaepul — UI/UX Designer & Frontend Developer with 7+ years of experience.",
     images: ["/og-image.jpg"],
   },
 };

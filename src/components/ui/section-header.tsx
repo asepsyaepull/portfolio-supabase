@@ -16,7 +16,7 @@ interface SectionHeaderProps {
 
 /**
  * Standard Section Header for landing pages.
- * Enforces uniform typography (Space Mono label + Fraunces display title + Body subtitle).
+ * Enforces uniform typography (Space Mono label + Plus Jakarta Sans display title + Body subtitle).
  */
 export function SectionHeader({
   tag,

@@ -78,7 +78,7 @@ export default function ProjectsClient({ projects }: { projects: ProjectItem[] }
             <span>{text.badge}</span>
           </div>
 
-          {/* Editorial Display Headline (Fraunces font) */}
+          {/* Editorial Display Headline (Plus Jakarta Sans font) */}
           <h1 className="heading-display font-display text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-extrabold text-zinc-900 dark:text-white tracking-tight leading-[1.05] mb-6">
             {text.titlePrefix}{" "}
             <span className="text-zinc-400 dark:text-zinc-500 block sm:inline">
@@ -353,7 +353,7 @@ function StudioCard({
                 <span>{displayNum}</span>
               </div>
 
-              {/* Title with Fraunces font */}
+              {/* Title with Plus Jakarta Sans font */}
               <h3 className="heading-display font-display text-2xl sm:text-3xl md:text-4xl font-extrabold tracking-tight text-zinc-900 dark:text-white leading-tight">
                 {project.name}
               </h3>

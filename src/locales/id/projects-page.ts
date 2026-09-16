@@ -5,7 +5,7 @@ export const projectsPageId: ProjectsPageDictionary = {
   titlePrefix: "Karya",
   titleHighlight: "Pilihan.",
   description:
-    "Pameran komprehensif riset pengguna end-to-end, arsitektur design token, dan rekayasa frontend siap produksi dengan performa optimal.",
+    "Koleksi studi kasus riset pengguna mendalam, arsitektur design token, dan rekayasa frontend siap produksi dengan kinerja tinggi.",
   allFilter: "Semua Proyek",
   filterLabel: "Kategori Proyek",
   readCaseStudy: "Baca Studi Kasus",
@@ -15,17 +15,17 @@ export const projectsPageId: ProjectsPageDictionary = {
   deliverablesTechStack: "Hasil Kerja & Tech Stack",
   backToProjects: "Kembali ke Proyek",
   launchProject: "Buka Proyek",
-  unavailable: "Tidak Tersedia",
-  emptyProjects: "Belum ada proyek yang cocok dengan filter ini.",
+  unavailable: "Tautan Internal",
+  emptyProjects: "Belum ada proyek yang cocok dengan filter kategori ini.",
   quickSpecs: {
     production: "Live di Production",
     disciplines: "UI/UX & Frontend Stack",
-    impact: "Performa & Konversi Tinggi",
-    systems: "Token & Accessible Component",
+    impact: "Konversi & Kecepatan Tinggi",
+    systems: "Design Token & Aksesibilitas",
   },
   ctaTitle: "Punya proyek atau ide yang ingin diwujudkan?",
   ctaDescription:
-    "Mari berkolaborasi merancang antarmuka presisi tinggi dan membangun arsitektur frontend yang tangguh dan scalable.",
+    "Mari berkolaborasi merancang antarmuka berpresisi tinggi dan membangun arsitektur frontend yang skalabel serta berkinerja tinggi.",
   ctaButton: "Hubungi Saya",
   viewDetails: "Lihat Detail",
 };

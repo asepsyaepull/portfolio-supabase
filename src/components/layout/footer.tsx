@@ -20,6 +20,13 @@ export function Footer(props: CinematicFooterProps) {
       githubUrl="https://github.com/asepsyaepull"
       linkedinUrl="https://linkedin.com/in/asepsyaepul"
       marqueeItems={t.footer.marqueeItems}
+      contactBtnText={t.common.buttons.talkWithMe}
+      cvBtnText={t.common.buttons.downloadCv}
+      navLinks={{
+        projects: t.common.nav.work,
+        about: t.common.nav.about,
+        contact: t.common.nav.contact,
+      }}
       {...props}
     />
   );

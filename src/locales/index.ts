@@ -9,7 +9,7 @@ export const dictionaries: Record<Locale, Dictionary> = {
   en: enDictionary,
 };
 
-export const DEFAULT_LOCALE: Locale = "id";
+export const DEFAULT_LOCALE: Locale = "en";
 
 export function getDictionary(locale: Locale): Dictionary {
   return dictionaries[locale] || dictionaries[DEFAULT_LOCALE];

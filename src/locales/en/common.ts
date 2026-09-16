@@ -11,15 +11,15 @@ export const commonEn: CommonDictionary = {
   },
   buttons: {
     downloadCv: "Download CV",
-    emailMe: "Email me",
-    talkWithMe: "Talk with me",
+    emailMe: "Email Me",
+    talkWithMe: "Get in Touch",
     startProject: "Start Project",
     viewArchive: "View Full Archive",
-    send: "SEND MESSAGE",
-    sending: "SENDING...",
+    send: "Send Message",
+    sending: "Sending...",
   },
   status: {
-    availableNow: "available now",
+    availableNow: "Available for Projects",
     remoteReady: "REMOTE READY",
   },
 };

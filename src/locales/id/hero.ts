@@ -4,7 +4,7 @@ export const heroId: HeroDictionary = {
   titleTop: "UI/UX Designer",
   titleGlitch: "Developer",
   subtitle:
-    "Menjembatani batas antara desain dan kode. Saya adalah creative technologist yang bersemangat membangun antarmuka digital yang memukau, mudah digunakan, dan memecahkan masalah nyata.",
+    "Menyatukan presisi desain visual dan keandalan arsitektur frontend. Berpengalaman 7+ tahun merancang dan membangun produk digital live di production — dari platform SaaS enterprise hingga aplikasi mobile berkinerja tinggi.",
   ctaText: "Mulai Proyek",
-  secondaryCtaText: "Download CV",
+  secondaryCtaText: "Unduh CV",
 };

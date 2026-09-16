@@ -27,23 +27,18 @@ const LanguageContext = createContext<LanguageContextType | undefined>(
   undefined
 );
 
-const STORAGE_KEY = "asyaepul_portfolio_locale";
+const STORAGE_KEY = "asyaepul_portfolio_locale_v2";
 
 export function LanguageProvider({ children }: { children: React.ReactNode }) {
   const [locale, setLocaleState] = useState<Locale>(DEFAULT_LOCALE);
   const [mounted, setMounted] = useState(false);
 
-  // Initialize from localStorage or browser preferences on mount
+  // Initialize from localStorage on mount (defaults to DEFAULT_LOCALE = "en" on first visit)
   useEffect(() => {
     try {
       const saved = localStorage.getItem(STORAGE_KEY) as Locale | null;
       if (saved && (saved === "id" || saved === "en")) {
         setLocaleState(saved);
-      } else if (typeof navigator !== "undefined" && navigator.language) {
-        // If user's primary language starts with 'en', initialize with English
-        if (navigator.language.toLowerCase().startsWith("en")) {
-          setLocaleState("en");
-        }
       }
     } catch (e) {
       console.warn("Could not read locale from localStorage:", e);

@@ -2,18 +2,18 @@ import { ContactPageDictionary } from "../types";
 
 export const contactPageId: ContactPageDictionary = {
   portalTag: "/ PORTAL KONTAK & INQUIRY",
-  badge: "OPEN FOR NEW PROJECTS & ROLES",
-  titleLine1: "Mari Bangun",
-  titleLine2: "Sesuatu yang Luar Biasa.",
+  badge: "TERSEDIA UNTUK PROYEK & PERAN STRATEGIS",
+  titleLine1: "Mari Wujudkan",
+  titleLine2: "Produk Digital Berdampak.",
   description:
-    "Punya ide produk baru, kebutuhan audit design system, atau butuh engineer frontend berpengalaman untuk mempercepat rilis? Mari diskusikan bagaimana kita bisa berkolaborasi.",
+    "Punya visi produk baru, kebutuhan audit design system, atau memerlukan engineer frontend berpengalaman untuk mempercepat peluncuran? Mari diskusikan bagaimana kita bisa menciptakan dampak bersama.",
   emailLabel: "Email Resmi",
   locationLabel: "Lokasi & Domisili",
   locationValue: "Cilandak, Jakarta Selatan (ID)",
   availabilityLabel: "Status Ketersediaan",
-  availabilityValue: "Tersedia untuk Freelance & Full-time",
+  availabilityValue: "Tersedia untuk Kontrak & Full-time",
   timezoneLabel: "Zona Waktu Kerja",
-  timezoneValue: "WIB (UTC+7) · Siap Sync Global",
+  timezoneValue: "WIB (UTC+7) · Siap Kolaborasi Global",
   copyEmailBtn: "Salin Email",
   copiedEmailText: "Email Tersalin!",
   directChatBtn: "Chat WhatsApp",
@@ -22,23 +22,23 @@ export const contactPageId: ContactPageDictionary = {
   specs: {
     spec1: {
       num: "01",
-      label: "WAKTU RESPON",
-      desc: "< 24 Jam Kerja (SLA Cepat)",
+      label: "WAKTU RESPONS",
+      desc: "< 24 Jam Kerja (Respons Cepat)",
     },
     spec2: {
       num: "02",
       label: "MODE KERJA",
-      desc: "Remote / Hybrid / Onsite JKT",
+      desc: "Remote / Hybrid / Onsite Jakarta",
     },
     spec3: {
       num: "03",
-      label: "DISIPLIN",
+      label: "KEAHLIAN UTAMA",
       desc: "UI/UX Design & Frontend Code",
     },
     spec4: {
       num: "04",
       label: "DELIVERABLES",
-      desc: "Figma Tokens & Clean Code",
+      desc: "Figma Tokens & Kode Produksi",
     },
   },
 
@@ -52,10 +52,10 @@ export const contactPageId: ContactPageDictionary = {
   subjectPlaceholder: "cth. Redesain Aplikasi Mobile & Design System",
   messagePlaceholder:
     "Ceritakan tentang visi produk Anda, target timeline, dan tantangan utama yang ingin diselesaikan...",
-  submitButton: "KIRIM PESAN INQUIRY",
-  submittingButton: "MENGIRIM PESAN...",
+  submitButton: "Kirim Pesan",
+  submittingButton: "Mengirim Pesan...",
   successMessage:
-    "Terima kasih! Pesan Anda telah terkirim. Saya akan meninjau dan merespon dalam waktu maksimal 24 jam.",
+    "Terima kasih! Pesan Anda telah berhasil terkirim. Saya akan meninjau dan merespons dalam waktu maksimal 24 jam kerja.",
   scopeTitle: "Pilih Lingkup / Kategori Kebutuhan:",
   scopeChips: [
     "UI/UX Design",
@@ -71,17 +71,17 @@ export const contactPageId: ContactPageDictionary = {
     {
       question: "Seberapa cepat kita bisa memulai proyek?",
       answer:
-        "Biasanya saya bisa memulai discovery call dan sprint pertama dalam waktu 3-5 hari kerja setelah brief dan kesepakatan cakupan proyek disetujui.",
+        "Biasanya saya dapat memulai sesi discovery call dan sprint pertama dalam 3–5 hari kerja setelah brief dan kesepakatan cakupan proyek disetujui bersama.",
     },
     {
       question: "Apa saja deliverables yang akan saya terima?",
       answer:
-        "Tergantung kebutuhan: File Figma rapi bersistem (auto-layout, tokens, components), panduan handoff, prototipe interaktif, dan/atau repositori kode frontend produksi (Next.js, TypeScript, Tailwind) siap deploy.",
+        "Tergantung paket yang dipilih: File Figma terstruktur lengkap (auto-layout, tokens, components), panduan hand-off teknis, prototipe interaktif, dan/atau repositori kode frontend produksi (Next.js, TypeScript, Tailwind) yang siap dideploy.",
     },
     {
       question: "Apakah tersedia perjanjian kerahasiaan (NDA)?",
       answer:
-        "Tentu saja. Saya sangat menghormati privasi bisnis Anda dan siap menandatangani mutual Non-Disclosure Agreement (NDA) sebelum pembahasan detail proprietary dimulai.",
+        "Tentu saja. Saya sangat menghormati kerahasiaan strategi bisnis Anda dan siap menandatangani mutual Non-Disclosure Agreement (NDA) sebelum pembahasan detail teknis dimulai.",
     },
   ],
 };

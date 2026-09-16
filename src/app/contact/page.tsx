@@ -4,14 +4,14 @@ import ContactClient from "./ContactClient";
 export const metadata: Metadata = {
   title: "Contact | Asep Syaepul",
   description:
-    "Hubungi Asep Syaepul untuk kolaborasi desain UI/UX, rekayasa frontend Next.js/React, atau konsultasi design system. Terbuka untuk proyek freelance dan peran full-time di Jakarta maupun remote.",
+    "Get in touch with Asep Syaepul for UI/UX design partnerships, Next.js/React frontend engineering, or design system consultations. Available for freelance projects and full-time roles.",
   alternates: {
     canonical: "https://asyaepul.id/contact",
   },
   openGraph: {
     title: "Contact | Asep Syaepul",
     description:
-      "Hubungi Asep Syaepul — UI/UX Designer & Frontend Developer. Terbuka untuk diskusi proyek, konsultasi design system, dan peluang karir baru.",
+      "Contact Asep Syaepul — UI/UX Designer & Frontend Developer. Open for project collaborations, design system consultations, and new career opportunities.",
     url: "https://asyaepul.id/contact",
     siteName: "Asep Syaepul Portfolio",
     images: [
@@ -27,7 +27,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Contact | Asep Syaepul",
     description:
-      "Hubungi Asep Syaepul untuk kolaborasi desain UI/UX dan rekayasa frontend siap produksi.",
+      "Connect with Asep Syaepul for UI/UX design and production-ready frontend engineering collaborations.",
     images: ["/og-image.jpg"],
   },
 };

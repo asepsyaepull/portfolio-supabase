@@ -2,39 +2,39 @@ import { FaqDictionary } from "../types";
 
 export const faqId: FaqDictionary = {
   tag: "faq.fig",
-  title: "The nosy section",
-  subtitle: "Semua yang ingin ditanya, tanpa perlu call dulu.",
+  title: "Pertanyaan Umum",
+  subtitle: "Transparansi alur kerja, model kolaborasi, dan deliverables.",
   items: [
     {
       label: "hiring.frame",
-      q: "Saya recruiter — ada posisi full-time yang cocok?",
-      a: "Bisa banget. Selain freelance, saya terbuka untuk full-time sebagai UI/UX Designer atau UX Engineer di Jabodetabek. Langsung email ke mail.asepsyaepul@gmail.com — CV siap dikirim, respons <24 jam.",
+      q: "Apakah terbuka untuk posisi full-time atau kontrak?",
+      a: "Tentu saja. Selain proyek lepas (freelance), saya terbuka untuk peluang peran full-time atau kontrak sebagai Senior UI/UX Designer atau Frontend Developer di area Jabodetabek maupun remote global. Silakan kirimkan tawaran kerja sama ke mail.asepsyaepul@gmail.com — CV dan portofolio siap dikirimkan dengan waktu respons maksimal 24 jam.",
       emailText: "mail.asepsyaepul@gmail.com",
     },
     {
       label: "how-it-works.frame",
-      q: "Gimana cara kerjanya — langganan atau per project?",
-      a: "Dua-duanya bisa. Project-based untuk scope jelas (landing page, redesign), retainer bulanan kalau butuh design/dev terus-menerus tanpa mikir ulang kontrak. Diskusi dulu, kita pilih format yang paling sesuai.",
+      q: "Bagaimana model kerja sama yang tersedia — per proyek atau retainer?",
+      a: "Keduanya didukung. Model berbasis proyek (project-based) sangat ideal untuk cakupan yang terdefinisi jelas (misal: redesain dashboard, perancangan MVP, landing page). Sementara model retainer bulanan cocok untuk kebutuhan perancangan produk dan iterasi frontend berkelanjutan tanpa beban administratif berulang.",
     },
     {
       label: "speed.frame",
-      q: "Secepat apa draft pertama jadi?",
-      a: "Umumnya hari, bukan minggu — first draft UI datang dalam 2–4 hari kerja setelah brief lengkap. Revisi berikutnya rata-rata 1–2 hari, tergantung panjang feedback kamu.",
+      q: "Berapa lama estimasi penyelesaian draf pertama?",
+      a: "Umumnya dalam hitungan hari kerja, bukan berminggu-minggu — draf awal antarmuka biasanya siap ditinjau dalam 2–4 hari kerja setelah brief dan aset lengkap disepakati. Siklus revisi berikutnya rata-rata membutuhkan waktu 1–2 hari kerja.",
     },
     {
       label: "queue.frame",
-      q: "Berapa banyak project yang dihandle barengan?",
-      a: "Maksimal 2–3 aktif sekaligus. Sengaja dibikin sempit biar kualitas nggak ditawar dan respon tetap <24 jam. Kalau penuh, kamu dapet slot antrian dengan estimasi jelas.",
+      q: "Berapa banyak proyek yang ditangani dalam satu waktu?",
+      a: "Saya membatasi kapasitas maksimal 2–3 proyek aktif secara bersamaan. Batasan ini diterapkan secara disiplin demi menjaga fokus mendalam, standar kualitas tinggi, dan komunikasi harian yang responsif.",
     },
     {
       label: "scope.fig",
-      q: "Design doang atau sekalian full-build?",
-      a: "Bisa dua-duanya. Design-only (Figma sampai handoff) atau design + development pakai Next.js/React — desain dan kode dari satu orang, jadi nggak ada drama 'kok di Figma beda sama di browser?'",
+      q: "Apakah melayani desain saja atau termasuk implementasi kode?",
+      a: "Bisa keduanya sesuai kebutuhan Anda. Desain saja (file Figma terstruktur lengkap dengan panduan hand-off dan prototipe) atau paket terintegrasi desain + pengembangan frontend berbasis Next.js, React, dan TypeScript. Menggabungkan desain dan rekayasa kode pada satu arsitek menjamin fidelitas visual 100% tanpa celah hand-off.",
     },
     {
       label: "revisions.frame",
-      q: "Kalau draft pertama kurang oke gimana?",
-      a: "Bilang apa adanya — itu normal. Setiap paket termasuk revisi, dan arah desain baru dikunci bareng sebelum eksekusi lanjut. Nggak ada biaya siluman buat 'ubah arah' di awal.",
+      q: "Bagaimana mekanisme evaluasi dan revisi desain?",
+      a: "Umpan balik yang jujur dan konstruktif adalah bagian alami dari proses desain. Setiap paket mencakup putaran revisi terstruktur, dan arah konsep visual selalu diselaraskan bersama sebelum masuk ke tahap rekayasa kode mendalam. Seluruh cakupan disepakati transparan tanpa biaya tersembunyi.",
     },
   ],
 };

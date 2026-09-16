@@ -3,10 +3,10 @@ import { CtaDictionary } from "../types";
 export const ctaId: CtaDictionary = {
   frameTag: "CONTACT.FRAME",
   figmaTag: "contact.fig",
-  badge: "golden hour in jakarta",
-  headline: "Still building.",
+  badge: "TERSEDIA UNTUK KOLABORASI",
+  headline: "Siap berkolaborasi.",
   subheadlineTemplate: (time: string) =>
-    `Jam ${time} di studio. Punya project atau posisi yang cocok? Yuk, ceritakan sekarang.`,
-  talkButton: "Talk with me",
-  pricingEstimateButton: "Estimasi Biaya Proyek",
+    `Saat ini pukul ${time} di Jakarta. Punya ide proyek atau peluang peran strategis? Mari diskusikan sekarang.`,
+  talkButton: "Hubungi Saya",
+  pricingEstimateButton: "Kalkulator Estimasi Proyek",
 };

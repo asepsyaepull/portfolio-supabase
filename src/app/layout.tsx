@@ -1,22 +1,14 @@
 import type { Metadata } from "next";
-import { Fraunces, Hanken_Grotesk, Space_Mono } from "next/font/google";
+import { Plus_Jakarta_Sans, Space_Mono } from "next/font/google";
 import "@/styles/globals.css";
 import { ThemeProvider } from "@/components/theme-provider";
 import { Toaster } from "sonner";
 import { AppShell } from "@/components/layout/app-shell";
 
-const fraunces = Fraunces({
+const plusJakartaSans = Plus_Jakarta_Sans({
   subsets: ["latin"],
-  weight: "variable",
-  axes: ["opsz"],
-  variable: "--font-display",
-  display: "swap",
-});
-
-const hanken = Hanken_Grotesk({
-  subsets: ["latin"],
-  weight: ["400", "500", "600", "700"],
-  variable: "--font-body",
+  weight: ["300", "400", "500", "600", "700", "800"],
+  variable: "--font-sans",
   display: "swap",
 });
 
@@ -31,14 +23,14 @@ export const metadata: Metadata = {
   metadataBase: new URL("https://asyaepul.id"),
   title: "Asep Syaepul | UI/UX Designer & Frontend Developer",
   description:
-    "Portfolio Asep Syaepul — UI/UX Designer & Frontend Developer di Jakarta. 7+ tahun merancang produk yang live di production: ERP enterprise, POS retail, mobile app. React, Next.js, TypeScript.",
+    "Portfolio of Asep Syaepul — UI/UX Designer & Frontend Developer based in Jakarta. 7+ years crafting and engineering production-grade digital products: enterprise ERP, retail POS, and modern mobile apps.",
   alternates: {
     canonical: "https://asyaepul.id",
   },
   openGraph: {
     title: "Asep Syaepul | UI/UX Designer & Frontend Developer",
     description:
-      "Portfolio Asep Syaepul — UI/UX Designer & Frontend Developer di Jakarta. 7+ tahun merancang produk yang live di production: ERP enterprise, POS retail, mobile app. React, Next.js, TypeScript.",
+      "Portfolio of Asep Syaepul — UI/UX Designer & Frontend Developer based in Jakarta. 7+ years crafting and engineering production-grade digital products: enterprise ERP, retail POS, and modern mobile apps.",
     url: "https://asyaepul.id",
     siteName: "Asep Syaepul Portfolio",
     images: [
@@ -49,14 +41,14 @@ export const metadata: Metadata = {
         alt: "Asep Syaepul Portfolio Thumbnail",
       },
     ],
-    locale: "id_ID",
+    locale: "en_US",
     type: "website",
   },
   twitter: {
     card: "summary_large_image",
     title: "Asep Syaepul | UI/UX Designer & Frontend Developer",
     description:
-      "Portfolio Asep Syaepul — UI/UX Designer & Frontend Developer di Jakarta. 7+ tahun merancang produk yang live di production: ERP enterprise, POS retail, mobile app. React, Next.js, TypeScript.",
+      "Portfolio of Asep Syaepul — UI/UX Designer & Frontend Developer based in Jakarta. 7+ years crafting and engineering production-grade digital products: enterprise ERP, retail POS, and modern mobile apps.",
     images: ["/og-image.jpg"],
   },
 };
@@ -67,7 +59,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="id" suppressHydrationWarning>
+    <html lang="en" suppressHydrationWarning>
       <head>
         <script
           dangerouslySetInnerHTML={{
@@ -76,7 +68,7 @@ export default function RootLayout({
         />
       </head>
       <body
-        className={`${fraunces.variable} ${hanken.variable} ${spaceMono.variable} font-body antialiased bg-[var(--canvas)] text-[var(--ink)]`}
+        className={`${plusJakartaSans.variable} ${spaceMono.variable} font-sans antialiased bg-[var(--canvas)] text-[var(--ink)]`}
       >
         <script
           type="application/ld+json"

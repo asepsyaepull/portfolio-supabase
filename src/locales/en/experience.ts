@@ -5,7 +5,7 @@ export const experienceEn: ExperienceDictionary = {
   titlePrefix: "Work",
   titleHighlight: "Experience",
   subtitle:
-    "7+ years crafting digital products and building enterprise-grade frontend architectures.",
+    "7+ years architecting high-impact digital products and production-ready enterprise frontend systems.",
   items: [
     {
       id: "symbolix",
@@ -17,11 +17,11 @@ export const experienceEn: ExperienceDictionary = {
       location: "Jakarta, ID",
       project: "ERP & POS Ecosystem",
       description:
-        "Redesigned the point-of-sale transaction interface and unified ERP workflows to streamline day-to-day operations for cashiers and store managers.",
+        "Redesigned transactional POS and integrated enterprise ERP workflows, streamlining daily operations for store cashiers and management teams.",
       contributions: [
-        "Architected a scalable Next.js & TypeScript UI with modular, testable components.",
-        "Engineered multi-branch POS navigation with an expedited checkout flow.",
-        "Facilitated on-site usability testing with cashier staff to validate checkout velocity.",
+        "Architected modular component libraries with Next.js and TypeScript for rapid cross-module scaling.",
+        "Engineered multi-store POS interfaces featuring keyboard-first shortcuts and rapid checkout flows.",
+        "Conducted structured usability tests with retail operators to validate checkout speed and transaction accuracy.",
       ],
       tech: ["Figma", "React", "Next.js", "TypeScript", "Tailwind CSS"],
     },
@@ -35,11 +35,11 @@ export const experienceEn: ExperienceDictionary = {
       location: "Jakarta, ID",
       project: "National Traffic Monitoring",
       description:
-        "Engineered a nationwide traffic accident monitoring web application for the National Police Traffic Corps, focusing on component stability and low-latency live telemetry.",
+        "Engineered national traffic accident monitoring web applications for the Indonesian National Police Traffic Corps with real-time data integrity.",
       contributions: [
-        "Implemented high-performance UI components handling high-throughput telemetry data.",
-        "Guaranteed cross-browser resilience across legacy and modern enterprise environments.",
-        "Optimized page rendering latency for large tabular datasets and live status maps.",
+        "Implemented high-throughput data visualization interfaces handling thousands of real-time records.",
+        "Ensured cross-browser compatibility and UI stability across legacy and modern agency environments.",
+        "Optimized client-side rendering performance on high-frequency tabular analytics views.",
       ],
       tech: ["React", "JavaScript", "PHP", "Laravel", "HTML5", "CSS3", "REST API", "Git"],
     },
@@ -53,10 +53,10 @@ export const experienceEn: ExperienceDictionary = {
       location: "Jakarta, ID",
       project: "Fleet Rental Platform",
       description:
-        "Revamped the fleet booking experience across web and mobile apps, establishing unified design system tokens to accelerate feature delivery.",
+        "Overhauled vehicle fleet booking experiences across web and mobile platforms with unified design system governance.",
       contributions: [
-        "Built a structured Design System bridging product design and frontend engineering teams.",
-        "Streamlined the vehicle reservation funnel into a faster, frictionless multi-step flow.",
+        "Built comprehensive Figma design systems aligning product design and engineering sprints.",
+        "Streamlined fleet booking user flows, substantially reducing customer reservation steps.",
         "Prepared comprehensive interaction specs for handoff to the React Native engineering team.",
       ],
       tech: ["Figma", "Design Systems", "Prototyping", "User Research"],
@@ -69,16 +69,16 @@ export const experienceEn: ExperienceDictionary = {
       duration: "11 mos",
       type: "Full-time",
       location: "Bandung, ID (Remote)",
-      project: "Healthcare Suite",
+      project: "Healthcare & Diagnostic Platform",
       description:
-        "Designed end-to-end product flows from conceptual wireframes to high-fidelity prototypes for a digital banking application.",
+        "Designed end-to-end product flows from wireframe conceptualization to high-fidelity prototypes for a clinical laboratory analytics and diagnostic management platform.",
       contributions: [
-        "Designed banking data management dashboards with clear visual hierarchies and intuitive navigation.",
-        "Authored comprehensive design specifications for seamless engineering handoff.",
-        "Constructed interactive prototypes to communicate and validate complex financial workflows.",
-        "Optimized layout responsiveness for both desktop monitors and mobile devices.",
+        "Designed clinical data management dashboards with clear visual hierarchies and intuitive workflows.",
+        "Authored comprehensive design tokens and interaction specifications for seamless engineering handoff.",
+        "Constructed interactive prototypes to validate diagnostic test workflows with medical specialists.",
+        "Optimized layout responsiveness across clinic desktop workstations and tablet devices.",
       ],
-      tech: ["Figma", "Design Tokens", "Prototyping"],
+      tech: ["Figma", "Design Tokens", "Prototyping", "User Research"],
     },
     {
       id: "crewdible",
