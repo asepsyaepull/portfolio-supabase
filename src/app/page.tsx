@@ -3,7 +3,7 @@ import HomeClient from "./HomeClient";
 import { getStaticClient } from "@/lib/supabase/server";
 import { Project, Skill } from "@/types/database";
 
-export const revalidate = 3600; // Revalidate setiap 1 jam (ISR)
+export const dynamic = "force-dynamic";
 
 export const metadata: Metadata = {
   title: "Asep Syaepul | UI/UX Designer & Frontend Developer",
