@@ -115,6 +115,44 @@ export default async function ProjectsPage() {
             link: "https://isuzu-astra.com",
             is_featured: true,
           },
+          {
+            id: 4,
+            name: "PT Liftech Digital Transformation",
+            slug: "pt-liftech",
+            category: "Digital Transformation",
+            description:
+              "Full-cycle digital transformation from UX auditing and wireframing to technical deployment.",
+            image:
+              "https://images.unsplash.com/photo-1558655146-d09347e92766?q=80&w=800&auto=format&fit=crop",
+            tech_stack: ["TypeScript", "Next.js"],
+            problem:
+              "Legacy manual paper workflows caused operational bottlenecks and slow turnaround time across nationwide industrial elevator servicing.",
+            solution:
+              "Designed and deployed responsive technician portal and automated scheduling system, cutting report turnaround from 48h to real-time.",
+            role: "Lead UI/UX Consultant & Frontend Architect",
+            timeline: "2023",
+            link: "#",
+            is_featured: true,
+          },
+          {
+            id: 5,
+            name: "OMS Crewdible",
+            slug: "oms-crewdible",
+            category: "Web App",
+            description:
+              "Order Management System revamp increasing conversion rates by 24% with full responsive performance.",
+            image:
+              "https://images.unsplash.com/photo-1677442136019-21780ecad995?q=80&w=1600&auto=format&fit=crop",
+            tech_stack: ["React", "Node.js"],
+            problem:
+              "Merchants on Crewdible experienced fragmented multi-warehouse inventory views and delayed bulk order processing during flash sales.",
+            solution:
+              "Revamped user flows for order batching, automated stock synchronization across e-commerce marketplaces, and introduced consolidated order tables.",
+            role: "Senior UI/UX Designer & Frontend Engineer",
+            timeline: "2022",
+            link: "https://crewdible.com",
+            is_featured: true,
+          },
         ];
 
   return <ProjectsClient projects={displayProjects as any[]} />;

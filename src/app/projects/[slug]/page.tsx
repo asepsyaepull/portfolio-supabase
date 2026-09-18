@@ -123,7 +123,108 @@ Fleet managers struggled to track vehicle status, leading to unpredicted downtim
 - **25% Growth** in active fleet owner adoption within the first two quarters.
 - **40% Reduction** in unscheduled commercial vehicle downtime.`,
   },
+  "pt-liftech": {
+    name: "PT Liftech Digital Transformation",
+    slug: "pt-liftech",
+    category: "Digital Transformation",
+    description:
+      "Full-cycle digital transformation from UX auditing and wireframing to technical deployment.",
+    image:
+      "https://images.unsplash.com/photo-1558655146-d09347e92766?q=80&w=800&auto=format&fit=crop",
+    tech_stack: ["TypeScript", "Next.js", "Tailwind CSS"],
+    problem:
+      "Legacy manual paper workflows caused operational bottlenecks and slow turnaround time across nationwide industrial elevator servicing.",
+    solution:
+      "Designed and deployed responsive technician portal and automated scheduling system, cutting report turnaround from 48h to real-time.",
+    role: "Lead UI/UX Consultant & Frontend Architect",
+    timeline: "2023",
+    link: "#",
+    tags: "Industrial UX, Digital Transformation, Workflow Automation",
+    tools: "Figma, Next.js, TypeScript, Tailwind CSS",
+    long_description: `## Overview
+PT Liftech is an industrial heavy equipment and elevator engineering firm serving major infrastructure hubs across Indonesia.
+
+### The Challenge
+Field inspection reports were manually transcribed from physical carbon copies, leading to dispatch delays and fragmented inventory logs.
+
+### The Solution & Architecture
+- **Field Technician PWA**: Built an offline-ready mobile web portal with instant equipment ID scanning and automated report generation.
+- **Central Dispatch Console**: Created real-time telemetry dashboard for dispatch coordinators to monitor technician status.
+
+### Key Metrics & Impact
+- **100% Paperless** transition across all field service teams.
+- **60% Acceleration** in customer maintenance certification issuance.`,
+  },
+  "oms-crewdible": {
+    name: "OMS Crewdible",
+    slug: "oms-crewdible",
+    category: "Web App",
+    description:
+      "Order Management System revamp increasing conversion rates by 24% with full responsive performance.",
+    image:
+      "https://images.unsplash.com/photo-1677442136019-21780ecad995?q=80&w=1600&auto=format&fit=crop",
+    tech_stack: ["React", "Node.js", "TypeScript", "Tailwind CSS"],
+    problem:
+      "Merchants on Crewdible experienced fragmented multi-warehouse inventory views and delayed bulk order processing during flash sales.",
+    solution:
+      "Revamped user flows for order batching, automated stock synchronization across e-commerce marketplaces, and introduced consolidated order tables.",
+    role: "Senior UI/UX Designer & Frontend Engineer",
+    timeline: "2022",
+    link: "https://crewdible.com",
+    tags: "E-Commerce, Logistics, Order Management, SaaS",
+    tools: "Figma, React, Node.js, TypeScript",
+    long_description: `## Overview
+Crewdible operates an e-commerce fulfillment network providing on-demand warehousing and order fulfillment for micro and enterprise online sellers.
+
+### The Challenge
+When landing on the Crewdible dashboard for the first time, new users had difficulty finding marketplace product settings and getting detailed information on transactions.
+
+### The Solution & Architecture
+- **Consolidated Batch Order Processing**: Redesigned bulk dispatch interface reducing clicks per order by 50%.
+- **Real-Time Stock Alerts**: Integrated proactive threshold notifications preventing out-of-stock cancellations.
+
+### Key Metrics & Impact
+- **24% Increase** in order fulfillment conversion rate.
+- **35% Drop** in merchant support tickets regarding inventory discrepancy.`,
+  },
+  "qr-digital-menu": {
+    name: "QR Digital Menu",
+    slug: "qr-digital-menu",
+    category: "Product Designer",
+    description:
+      "Contactless restaurant dining and ordering interface featuring instant table QR scanning, custom modifiers, and split bill checkout.",
+    image:
+      "https://images.unsplash.com/photo-1555396273-367ea4eb4db5?q=80&w=800&auto=format&fit=crop",
+    tech_stack: ["React", "TypeScript", "Tailwind CSS", "Framer Motion"],
+    problem:
+      "Dine-in restaurants suffered from order bottlenecks during peak rush hours, with high waiter dependency for menu inquiries.",
+    solution:
+      "Engineered lightweight zero-download mobile web menu with dynamic item modifiers and seamless table-side ordering.",
+    role: "Lead Product Designer",
+    timeline: "2023",
+    link: "#",
+    tags: "F&B, QR Ordering, Mobile Web, Micro-interactions",
+    tools: "Figma, React, TypeScript, Tailwind CSS",
+    long_description: `## Overview
+QR Digital Menu is a zero-friction, contactless dining web application designed for fast-paced modern restaurants and cafes.
+
+### The Challenge
+Patrons experienced wait times during peak dinner hours waiting for paper menus and waiter dispatch, hurting table turnover rate.
+
+### The Solution & Architecture
+- **Fast Loading Mobile Web Experience**: Optimized bundle under 60KB for instant loading via camera QR scan.
+- **Visual Modifier Engine**: Interactive dish customization with live price updates.
+
+### Key Metrics & Impact
+- **18% Increase** in average order value via suggestive modifier upselling.
+- **22% Improvement** in table turnover during peak rush.`,
+  },
 };
+
+// Aliases for legacy and DB slugs
+FALLBACK_PROJECTS_MAP["crewdible-oms-redesign"] = FALLBACK_PROJECTS_MAP["oms-crewdible"];
+FALLBACK_PROJECTS_MAP["tractogo-web-dan-mobile-application-ux-enhancement"] = FALLBACK_PROJECTS_MAP["tractogo"];
+FALLBACK_PROJECTS_MAP["isuzu-link-mobile-apps"] = FALLBACK_PROJECTS_MAP["isuzu-link"];
 
 // Generate Static Params for build time optimization
 export async function generateStaticParams() {
