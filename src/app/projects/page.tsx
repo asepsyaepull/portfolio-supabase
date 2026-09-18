@@ -39,7 +39,7 @@ export default async function ProjectsPage() {
   const supabase = getStaticClient();
   const { data: projects, error } = await supabase
     .from("projects")
-    .select("id, name, slug, category, description, image, image_url, tech_stack, problem, solution, role, timeline, link, is_featured")
+    .select("id, name, slug, category, description, image, tech_stack, problem, solution, link, is_featured")
     .order("order_index", { ascending: true })
     .order("created_at", { ascending: false });
 
