@@ -63,67 +63,6 @@ export const WORKSPACE_TRACKS: WorkspaceTrack[] = [
     tags: ["figma", "next.js", "tailwind", "typescript"],
   },
   {
-    id: "frontend-dev",
-    label: "Frontend Dev",
-    gp: "Next.js · TypeScript",
-    stageLabel: "Frontend Dev",
-    stageTag: "Code · Production",
-    nodeCount: 4,
-    pipeline: {
-      headerTag: "FRONTEND DEV · PIPELINE",
-      headerStatus: "Production · 0 errors",
-      node1: {
-        tag: "CODE & UI",
-        title: "TypeScript Spec",
-        subtext: "typed components",
-      },
-      node2: {
-        tag: "BUILD ENGINE",
-        title: "Next.js Turbopack",
-        subtext: "app router · ssr",
-      },
-      node3: {
-        tag: "OPTIMIZATION",
-        title: "Performance Tuning",
-        subtext: "memo & edge cache",
-        isActive: true,
-      },
-      branches: [
-        { label: "Edge Bundle", statusColor: "green" },
-        { label: "Zero CLS / INP", statusColor: "green" },
-        { label: "Vercel Deploy", statusColor: "green" },
-      ],
-      terminalLine: "> Build: compiled 48 modules in 184ms -> edge deployed successfully.",
-      stats: {
-        workflows: "3,890",
-        tokens: "128KB",
-        avgLatency: "184ms",
-        stack: "Next.js · Tailwind",
-      },
-    },
-    sticky1: {
-      lines: [
-        "Type safety first.",
-        "Write clean code,",
-        "build scalable apps.",
-        "Ship with confidence.",
-      ],
-      theme: "coral",
-    },
-    sticky2: {
-      line1: "Performance target?",
-      line2: "Lighthouse 98+",
-      theme: "yellow",
-    },
-    chat: {
-      title: "Frontend Engineering",
-      user: "Optimize component re-renders and cache data fetching.",
-      ai: "Implemented SWR caching and memoized component tree.",
-      file: "Editing useProjects.ts",
-    },
-    tags: ["react", "next.js", "typescript", "tailwind"],
-  },
-  {
     id: "design-system",
     label: "Design System",
     gp: "Library · 12 parts",
@@ -244,6 +183,67 @@ export const WORKSPACE_TRACKS: WorkspaceTrack[] = [
       file: "Editing onboarding.fig",
     },
     tags: ["research", "wireframing", "usability", "metrics"],
+  },
+  {
+    id: "frontend-dev",
+    label: "Frontend Dev",
+    gp: "Next.js · TypeScript",
+    stageLabel: "Frontend Dev",
+    stageTag: "Code · Production",
+    nodeCount: 4,
+    pipeline: {
+      headerTag: "FRONTEND DEV · PIPELINE",
+      headerStatus: "Production · 0 errors",
+      node1: {
+        tag: "CODE & UI",
+        title: "TypeScript Spec",
+        subtext: "typed components",
+      },
+      node2: {
+        tag: "BUILD ENGINE",
+        title: "Next.js Turbopack",
+        subtext: "app router · ssr",
+      },
+      node3: {
+        tag: "OPTIMIZATION",
+        title: "Performance Tuning",
+        subtext: "memo & edge cache",
+        isActive: true,
+      },
+      branches: [
+        { label: "Edge Bundle", statusColor: "green" },
+        { label: "Zero CLS / INP", statusColor: "green" },
+        { label: "Vercel Deploy", statusColor: "green" },
+      ],
+      terminalLine: "> Build: compiled 48 modules in 184ms -> edge deployed successfully.",
+      stats: {
+        workflows: "3,890",
+        tokens: "128KB",
+        avgLatency: "184ms",
+        stack: "Next.js · Tailwind",
+      },
+    },
+    sticky1: {
+      lines: [
+        "Type safety first.",
+        "Write clean code,",
+        "build scalable apps.",
+        "Ship with confidence.",
+      ],
+      theme: "coral",
+    },
+    sticky2: {
+      line1: "Performance target?",
+      line2: "Lighthouse 98+",
+      theme: "yellow",
+    },
+    chat: {
+      title: "Frontend Engineering",
+      user: "Optimize component re-renders and cache data fetching.",
+      ai: "Implemented SWR caching and memoized component tree.",
+      file: "Editing useProjects.ts",
+    },
+    tags: ["react", "next.js", "typescript", "tailwind"],
   },
 ];
 

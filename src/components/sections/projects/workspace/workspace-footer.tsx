@@ -10,7 +10,7 @@ interface WorkspaceFooterProps {
 
 export function WorkspaceFooter({
   figureId = "FIG. 004 — Four tracks, one bench",
-  description = "Workspace, frontend dev, design systems, product — select a track to inspect live flow",
+  description = "Workspace, design system, product design, frontend dev — select a track to inspect live flow",
   className,
 }: WorkspaceFooterProps) {
   return (

@@ -22,10 +22,10 @@ const WorkflowSection = dynamic(
     ),
   { loading: () => <SectionSkeleton /> }
 );
-const CinematicSelectedWork = dynamic(
+const SelectedWorkBento = dynamic(
   () =>
-    import("@/components/sections/projects/cinematic-selected-work").then(
-      (mod) => mod.CinematicSelectedWork
+    import("@/components/sections/projects/selected-work-bento").then(
+      (mod) => mod.SelectedWorkBento
     ),
   { loading: () => <SectionSkeleton /> }
 );
@@ -62,7 +62,7 @@ export default function HomeClient({
         <WhatsupSection />
       </div>
       <div id="selected-work">
-        <CinematicSelectedWork projects={featuredProjects} />
+        <SelectedWorkBento projects={featuredProjects} />
       </div>
       <div id="process">
         <WorkspaceConsole projects={featuredProjects} />
