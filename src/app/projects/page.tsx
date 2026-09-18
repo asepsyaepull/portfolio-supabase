@@ -2,7 +2,7 @@ import { getStaticClient } from "@/lib/supabase/server";
 import ProjectsClient from "./ProjectsClient";
 import { Metadata } from "next";
 
-export const revalidate = 60; // Revalidate every 60 seconds (ISR)
+export const dynamic = "force-dynamic";
 
 export const metadata: Metadata = {
   title: "Projects | Asep Syaepul",

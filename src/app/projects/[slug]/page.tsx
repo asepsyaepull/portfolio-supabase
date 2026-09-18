@@ -18,8 +18,8 @@ import remarkGfm from "remark-gfm";
 import rehypeRaw from "rehype-raw";
 import { Metadata, ResolvingMetadata } from "next";
 
-// Halaman di-cache (ISR): regenerate saat build + setiap 1 jam + on-demand saat slug baru
-export const revalidate = 3600;
+// Render dinamis langsung dari PostgreSQL VPS (hindari cache dummy saat build GH Actions)
+export const dynamic = "force-dynamic";
 
 // Fallback project details if database is unavailable or row is empty
 const FALLBACK_PROJECTS_MAP: Record<string, any> = {
@@ -225,22 +225,6 @@ Patrons experienced wait times during peak dinner hours waiting for paper menus 
 FALLBACK_PROJECTS_MAP["crewdible-oms-redesign"] = FALLBACK_PROJECTS_MAP["oms-crewdible"];
 FALLBACK_PROJECTS_MAP["tractogo-web-dan-mobile-application-ux-enhancement"] = FALLBACK_PROJECTS_MAP["tractogo"];
 FALLBACK_PROJECTS_MAP["isuzu-link-mobile-apps"] = FALLBACK_PROJECTS_MAP["isuzu-link"];
-
-// Generate Static Params for build time optimization
-export async function generateStaticParams() {
-  const supabase = getStaticClient();
-  const { data: projects } = await supabase.from("projects").select("slug");
-  const slugs = new Set<string>();
-
-  if (projects && projects.length > 0) {
-    projects.forEach((p: any) => {
-      if (p.slug) slugs.add(p.slug);
-    });
-  }
-  Object.keys(FALLBACK_PROJECTS_MAP).forEach((slug) => slugs.add(slug));
-
-  return Array.from(slugs).map((slug) => ({ slug }));
-}
 
 export async function generateMetadata(
   { params }: { params: Promise<{ slug: string }> },
