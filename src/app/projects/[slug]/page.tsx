@@ -234,12 +234,15 @@ Patrons experienced wait times during peak dinner hours waiting for paper menus 
   },
 };
 
-<<<<<<< HEAD
 // Aliases for legacy and DB slugs
-FALLBACK_PROJECTS_MAP["crewdible-oms-redesign"] = FALLBACK_PROJECTS_MAP["oms-crewdible"];
-FALLBACK_PROJECTS_MAP["tractogo-web-dan-mobile-application-ux-enhancement"] = FALLBACK_PROJECTS_MAP["tractogo"];
-FALLBACK_PROJECTS_MAP["isuzu-link-mobile-apps"] = FALLBACK_PROJECTS_MAP["isuzu-link"];
-=======
+FALLBACK_PROJECTS_MAP["crewdible-oms-redesign"] =
+  FALLBACK_PROJECTS_MAP["oms-crewdible"];
+FALLBACK_PROJECTS_MAP[
+  "tractogo-web-dan-mobile-application-ux-enhancement"
+] = FALLBACK_PROJECTS_MAP["tractogo"];
+FALLBACK_PROJECTS_MAP["isuzu-link-mobile-apps"] =
+  FALLBACK_PROJECTS_MAP["isuzu-link"];
+
 // Helper: Extract prominent metrics from markdown or problem/solution
 interface ProjectMetric {
   value: string;
@@ -388,7 +391,6 @@ export async function generateStaticParams() {
 
   return Array.from(slugs).map((slug) => ({ slug }));
 }
->>>>>>> e946a9b (refactor: extract project detail client components and add markdown parsing utilities)
 
 export async function generateMetadata(
   { params }: { params: Promise<{ slug: string }> },
