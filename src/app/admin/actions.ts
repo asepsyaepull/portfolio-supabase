@@ -3,7 +3,7 @@
 import { from } from "@/lib/pg-client";
 
 export async function updateOrderIndex(
-  table: "projects" | "skills",
+  table: "projects" | "skills" | "ui_gallery",
   items: { id: number | string; order_index: number }[]
 ) {
   for (const item of items) {

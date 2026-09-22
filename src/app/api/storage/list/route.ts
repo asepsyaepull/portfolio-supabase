@@ -2,33 +2,38 @@ import { NextResponse } from "next/server";
 import { readdir, stat } from "fs/promises";
 import { join } from "path";
 
-const UPLOAD_DIR = join(process.cwd(), "public", "uploads", "covers");
+const BASE_UPLOAD_DIR = join(process.cwd(), "public", "uploads");
 
 export async function GET() {
   try {
-    let files: string[];
-    try {
-      files = await readdir(UPLOAD_DIR);
-    } catch {
-      return NextResponse.json({ files: [] });
-    }
+    const folders = ["covers", "gallery"];
+    const allItems: { name: string; url: string; size: number; date: string }[] = [];
 
-    const items = await Promise.all(
-      files
-        .filter((f) => !f.startsWith("."))
-        .map(async (name) => {
-          const s = await stat(join(UPLOAD_DIR, name)).catch(() => null);
-          return {
-            name,
-            url: `/uploads/covers/${name}`,
+    for (const folder of folders) {
+      const folderPath = join(BASE_UPLOAD_DIR, folder);
+      try {
+        const files = await readdir(folderPath);
+        for (const name of files) {
+          if (name.startsWith(".")) continue;
+          const s = await stat(join(folderPath, name)).catch(() => null);
+          allItems.push({
+            name: `${folder}/${name}`,
+            url: `/uploads/${folder}/${name}`,
             size: s?.size || 0,
             date: s?.mtime?.toISOString() || "",
-          };
-        })
-    );
+          });
+        }
+      } catch {
+        // Folder might not exist yet
+      }
+    }
 
-    return NextResponse.json({ files: items });
+    // Sort newest first
+    allItems.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
+
+    return NextResponse.json({ files: allItems });
   } catch {
     return NextResponse.json({ files: [] });
   }
 }
+

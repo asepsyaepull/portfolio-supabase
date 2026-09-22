@@ -38,7 +38,8 @@ export async function DELETE(req: NextRequest) {
     }
     for (const p of paths) {
       try {
-        await unlink(join(UPLOAD_DIR, p));
+        const cleanPath = p.replace(/^\/?uploads\//, "");
+        await unlink(join(UPLOAD_DIR, cleanPath));
       } catch {}
     }
     return NextResponse.json({ ok: true });

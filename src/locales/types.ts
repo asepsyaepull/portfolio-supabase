@@ -346,6 +346,21 @@ export interface ProjectsPageDictionary {
   ctaDescription?: string;
   ctaButton?: string;
   viewDetails?: string;
+  tabCaseStudies?: string;
+  tabGallery?: string;
+  galleryBadge?: string;
+  galleryTitlePrefix?: string;
+  galleryTitleHighlight?: string;
+  galleryDescription?: string;
+  allGalleryFilter?: string;
+  emptyGallery?: string;
+  inspectShot?: string;
+  openFigma?: string;
+  livePreview?: string;
+  lightboxClose?: string;
+  lightboxNext?: string;
+  lightboxPrev?: string;
+  lightboxToolsLabel?: string;
 }
 
 export interface WorkSectionDictionary {

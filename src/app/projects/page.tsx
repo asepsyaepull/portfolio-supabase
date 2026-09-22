@@ -39,7 +39,9 @@ export default async function ProjectsPage() {
   const supabase = getStaticClient();
   const { data: projects, error } = await supabase
     .from("projects")
-    .select("id, name, slug, category, description, image, tech_stack, problem, solution, link, is_featured")
+    .select(
+      "id, name, slug, category, description, image, tech_stack, problem, solution, link, is_featured, role, timeline"
+    )
     .order("order_index", { ascending: true })
     .order("created_at", { ascending: false });
 
@@ -52,6 +54,116 @@ export default async function ProjectsPage() {
       full: error,
     });
   }
+
+  // Fetch UI gallery shots from PostgreSQL
+  const { data: galleries, error: galleryError } = await supabase
+    .from("ui_gallery")
+    .select(
+      "id, title, slug, category, description, image_url, thumbnail_url, tools, aspect_ratio, figma_url, preview_url, is_featured, order_index, created_at"
+    )
+    .order("order_index", { ascending: true })
+    .order("created_at", { ascending: false });
+
+  if (galleryError) {
+    console.warn("UI Gallery table not yet queried or empty, using curated fallback:", galleryError.message);
+  }
+
+  // Fallback UI Gallery items
+  const fallbackGalleries = [
+    {
+      id: "g1",
+      title: "Fintech Telemetry & Liquidity Dashboard",
+      slug: "fintech-telemetry-dashboard",
+      category: "Web Dashboard",
+      description:
+        "Eksplorasi antarmuka analitik keuangan dense-data dengan palet gelap, grafik real-time telemetry, dan panel liquiditas interaktif.",
+      image_url:
+        "https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=1600&auto=format&fit=crop",
+      tools: ["Figma", "AutoLayout", "Tailwind CSS", "Design Tokens"],
+      aspect_ratio: "16/10",
+      figma_url: "https://figma.com",
+      preview_url: null,
+      is_featured: true,
+    },
+    {
+      id: "g2",
+      title: "AetherPay - Minimalist Mobile Wallet & Split Bill",
+      slug: "aetherpay-mobile-wallet",
+      category: "Mobile App",
+      description:
+        "Konsep aplikasi dompet digital iOS dengan interaksi split bill gestural, micro-haptics feedback, dan hierarki tipografi ultra-bersih.",
+      image_url:
+        "https://images.unsplash.com/photo-1563986768609-322da13575f3?q=80&w=1600&auto=format&fit=crop",
+      tools: ["Figma", "iOS HIG", "Design System", "Prototyping"],
+      aspect_ratio: "4/3",
+      figma_url: "https://figma.com",
+      preview_url: null,
+      is_featured: true,
+    },
+    {
+      id: "g3",
+      title: "Pulse AI - Developer Cloud Platform Landing Page",
+      slug: "pulse-ai-cloud-landing",
+      category: "Landing Page",
+      description:
+        "Desain halaman arahan developer tool modern beraksen gelap dengan glow aksen oranye, animated code terminal preview, dan bento feature grid.",
+      image_url:
+        "https://images.unsplash.com/photo-1507238691740-187a5b1d37b8?q=80&w=1600&auto=format&fit=crop",
+      tools: ["Figma", "Tailwind CSS", "Framer Motion"],
+      aspect_ratio: "16/10",
+      figma_url: "https://figma.com",
+      preview_url: "https://pulse-ai.preview.com",
+      is_featured: true,
+    },
+    {
+      id: "g4",
+      title: "Studio Token - Core UI Design System Components",
+      slug: "studio-token-design-system",
+      category: "Design System",
+      description:
+        "Spesifikasi token komponen atomik untuk status pills, segmented switches, dynamic form fields, dan color variables yang siap di-code ke frontend.",
+      image_url:
+        "https://images.unsplash.com/photo-1581291518857-4e27b48ff24e?q=80&w=1600&auto=format&fit=crop",
+      tools: ["Figma Variables", "Design Tokens", "Accessibility WCAG"],
+      aspect_ratio: "16/10",
+      figma_url: "https://figma.com",
+      preview_url: null,
+      is_featured: true,
+    },
+    {
+      id: "g5",
+      title: "Nexus Logistics - Realtime Fleet Dispatch Console",
+      slug: "nexus-fleet-dispatch-console",
+      category: "Web Dashboard",
+      description:
+        "Desain konsol armada truk operasional dengan peta pelacakan langsung, routing efisiensi bahan bakar, dan quick actions dispatch.",
+      image_url:
+        "https://images.unsplash.com/photo-1460925895917-afdab827c52f?q=80&w=1600&auto=format&fit=crop",
+      tools: ["Figma", "GIS Mapping", "AutoLayout"],
+      aspect_ratio: "16/10",
+      figma_url: "https://figma.com",
+      preview_url: null,
+      is_featured: true,
+    },
+    {
+      id: "g6",
+      title: "Vanguard E-Commerce - Luxury Watchmaker Storefront",
+      slug: "vanguard-luxury-storefront",
+      category: "Landing Page",
+      description:
+        "Eksplorasi visual editorial storefront dengan fotografi sinematik, micro-animations hover showcase, dan minimal checkout drawer.",
+      image_url:
+        "https://images.unsplash.com/photo-1523275335684-37898b6baf30?q=80&w=1600&auto=format&fit=crop",
+      tools: ["Figma", "Editorial Layout", "Prototyping"],
+      aspect_ratio: "4/3",
+      figma_url: "https://figma.com",
+      preview_url: null,
+      is_featured: true,
+    },
+  ];
+
+  const displayGalleries =
+    galleries && galleries.length > 0 ? galleries : fallbackGalleries;
 
   // Gunakan data fallback jika query error atau tabel kosong
   const displayProjects =
@@ -155,5 +267,10 @@ export default async function ProjectsPage() {
           },
         ];
 
-  return <ProjectsClient projects={displayProjects as any[]} />;
+  return (
+    <ProjectsClient
+      projects={displayProjects as any[]}
+      galleries={displayGalleries as any[]}
+    />
+  );
 }

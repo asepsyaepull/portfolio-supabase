@@ -30,3 +30,21 @@ export interface Skill {
   created_at?: string;
   order_index?: number;
 }
+
+export interface UIGallery {
+  id: string | number;
+  title: string;
+  slug: string;
+  category: string;
+  description?: string;
+  image_url: string;
+  thumbnail_url?: string;
+  tools?: string[] | string;
+  aspect_ratio?: string;
+  figma_url?: string | null;
+  preview_url?: string | null;
+  is_featured?: boolean;
+  order_index?: number;
+  created_at?: string;
+  updated_at?: string;
+}

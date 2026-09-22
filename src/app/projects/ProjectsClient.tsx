@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useMemo } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import Image from "next/image";
 import Link from "next/link";
@@ -16,6 +16,13 @@ import {
   IconCode,
   IconMail,
   IconDownload,
+  IconBriefcase,
+  IconPhoto,
+  IconX,
+  IconZoomIn,
+  IconChevronLeft,
+  IconChevronRight,
+  IconBrandFigma,
 } from "@tabler/icons-react";
 import type { ProjectsPageDictionary } from "@/locales/types";
 
@@ -36,29 +43,76 @@ export interface ProjectItem {
   is_featured?: boolean;
 }
 
-export default function ProjectsClient({ projects }: { projects: ProjectItem[] }) {
+export interface UIGalleryItem {
+  id: string | number;
+  title: string;
+  slug: string;
+  category: string;
+  description?: string;
+  image_url: string;
+  thumbnail_url?: string;
+  tools?: string[] | string;
+  aspect_ratio?: string;
+  figma_url?: string | null;
+  preview_url?: string | null;
+  is_featured?: boolean;
+  order_index?: number;
+  created_at?: string;
+}
+
+export default function ProjectsClient({
+  projects,
+  galleries = [],
+}: {
+  projects: ProjectItem[];
+  galleries?: UIGalleryItem[];
+}) {
   const { t } = useLanguage();
   const text = t.projectsPage;
-  const [selectedCategory, setSelectedCategory] = useState<string>("ALL");
 
-  // Extract unique categories for filter tabs
-  const categories = useMemo(() => {
-    const set = new Set<string>();
-    projects.forEach((p) => {
-      if (p.category) {
-        set.add(p.category.trim());
-      }
+  // View Mode Switcher: "CASE_STUDIES" vs "UI_GALLERY"
+  const [viewMode, setViewMode] = useState<"CASE_STUDIES" | "UI_GALLERY">(
+    "CASE_STUDIES"
+  );
+
+  // Lightbox Modal State
+  const [lightboxIndex, setLightboxIndex] = useState<number | null>(null);
+
+  // Lightbox Keyboard and Navigation Handlers
+  const handleCloseLightbox = useCallback(() => {
+    setLightboxIndex(null);
+  }, []);
+
+  const handleNextLightbox = useCallback(() => {
+    setLightboxIndex((prev) => {
+      if (prev === null) return null;
+      return prev + 1 >= galleries.length ? 0 : prev + 1;
     });
-    return Array.from(set);
-  }, [projects]);
+  }, [galleries.length]);
 
-  // Filter projects based on selection
-  const filteredProjects = useMemo(() => {
-    if (selectedCategory === "ALL") return projects;
-    return projects.filter(
-      (p) => p.category?.toLowerCase() === selectedCategory.toLowerCase()
-    );
-  }, [projects, selectedCategory]);
+  const handlePrevLightbox = useCallback(() => {
+    setLightboxIndex((prev) => {
+      if (prev === null) return null;
+      return prev - 1 < 0 ? galleries.length - 1 : prev - 1;
+    });
+  }, [galleries.length]);
+
+  useEffect(() => {
+    if (lightboxIndex === null) return;
+    const onKeyDown = (e: KeyboardEvent) => {
+      if (e.key === "Escape") handleCloseLightbox();
+      if (e.key === "ArrowRight") handleNextLightbox();
+      if (e.key === "ArrowLeft") handlePrevLightbox();
+    };
+    window.addEventListener("keydown", onKeyDown);
+    const originalOverflow = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+
+    return () => {
+      window.removeEventListener("keydown", onKeyDown);
+      document.body.style.overflow = originalOverflow;
+    };
+  }, [lightboxIndex, handleCloseLightbox, handleNextLightbox, handlePrevLightbox]);
 
   return (
     <div className="relative min-h-screen pt-28 sm:pt-32 pb-24 text-zinc-900 dark:text-white">
@@ -70,24 +124,42 @@ export default function ProjectsClient({ projects }: { projects: ProjectItem[] }
           initial={{ opacity: 0, y: 24 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.55 }}
-          className="mb-14 md:mb-18 text-start"
+          className="mb-10 md:mb-14 text-start"
         >
           {/* Flame Orange Brand Status Badge */}
           <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-brand/10 border border-brand/20 text-brand font-mono tracking-widest text-xs font-bold uppercase mb-4">
             <span className="w-2 h-2 rounded-full bg-brand animate-pulse" />
-            <span>{text.badge}</span>
+            <span>
+              {viewMode === "CASE_STUDIES"
+                ? text.badge
+                : text.galleryBadge || "/ DESIGN EXPLORATIONS & CRAFT"}
+            </span>
           </div>
 
-          {/* Editorial Display Headline (Plus Jakarta Sans font) */}
+          {/* Editorial Display Headline */}
           <h1 className="heading-display font-display text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-extrabold text-zinc-900 dark:text-white tracking-tight leading-[1.05] mb-6">
-            {text.titlePrefix}{" "}
-            <span className="text-zinc-400 dark:text-zinc-500 block sm:inline">
-              {text.titleHighlight}
-            </span>
+            {viewMode === "CASE_STUDIES" ? (
+              <>
+                {text.titlePrefix}{" "}
+                <span className="text-zinc-400 dark:text-zinc-500 block sm:inline">
+                  {text.titleHighlight}
+                </span>
+              </>
+            ) : (
+              <>
+                {text.galleryTitlePrefix || "Visual"}{" "}
+                <span className="text-zinc-400 dark:text-zinc-500 block sm:inline">
+                  {text.galleryTitleHighlight || "Archive."}
+                </span>
+              </>
+            )}
           </h1>
 
           <p className="text-base sm:text-lg md:text-xl text-zinc-600 dark:text-zinc-400 max-w-2xl leading-relaxed mb-8">
-            {text.description}
+            {viewMode === "CASE_STUDIES"
+              ? text.description
+              : text.galleryDescription ||
+                "A curated collection of interface explorations, mobile & dashboard concepts, and component craft designed with typographic precision and aesthetic polish."}
           </p>
 
           {/* Quick Studio Highlight Spec Pills */}
@@ -98,7 +170,7 @@ export default function ProjectsClient({ projects }: { projects: ProjectItem[] }
               </div>
               <div className="text-left">
                 <div className="font-mono text-[10px] uppercase tracking-wider text-zinc-400 dark:text-zinc-500 font-bold">
-                  01 Live Builds
+                  01 Production
                 </div>
                 <div className="text-xs font-semibold text-zinc-800 dark:text-zinc-200 truncate">
                   {text.quickSpecs?.production || "100% Production"}
@@ -151,92 +223,148 @@ export default function ProjectsClient({ projects }: { projects: ProjectItem[] }
         </motion.div>
 
         {/* ===================================================================
-            2. INTERACTIVE CATEGORY FILTER TABS
+            2. MAIN DUAL-VIEW MODE SWITCHER (Case Studies vs UI Gallery)
             =================================================================== */}
-        <div className="mb-12">
-          <div className="flex flex-wrap items-center gap-2 p-1.5 rounded-2xl bg-white/80 dark:bg-[#121215]/80 backdrop-blur-md border border-zinc-200/80 dark:border-zinc-800 shadow-sm w-fit max-w-full overflow-x-auto">
-            {/* "All" Tab */}
+        <div className="mb-12 pb-4 border-b border-zinc-200/80 dark:border-zinc-800/80 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+          <div className="inline-flex p-1.5 rounded-2xl bg-zinc-100/90 dark:bg-[#121215] border border-zinc-200/80 dark:border-zinc-800 shadow-inner max-w-full overflow-x-auto">
+            {/* Case Studies Tab */}
             <button
-              onClick={() => setSelectedCategory("ALL")}
-              className={`relative px-4 py-2 rounded-xl text-xs font-mono font-bold uppercase tracking-wider transition-all duration-200 flex items-center gap-1.5 ${
-                selectedCategory === "ALL"
-                  ? "bg-brand text-white shadow-brand shadow-[0_4px_14px_-4px_#F0531C]"
-                  : "text-zinc-600 dark:text-zinc-400 hover:text-brand hover:bg-zinc-100/60 dark:hover:bg-zinc-900/60"
+              onClick={() => setViewMode("CASE_STUDIES")}
+              className={`relative px-4 sm:px-5 py-2.5 rounded-xl text-xs sm:text-sm font-mono font-bold tracking-wide transition-all duration-200 flex items-center gap-2 flex-shrink-0 ${
+                viewMode === "CASE_STUDIES"
+                  ? "text-white shadow-sm"
+                  : "text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-white"
               }`}
             >
-              <span>{text.allFilter}</span>
+              {viewMode === "CASE_STUDIES" && (
+                <motion.div
+                  layoutId="activeViewModeTab"
+                  className="absolute inset-0 bg-brand rounded-xl shadow-brand shadow-[0_4px_16px_-4px_#F0531C]"
+                  transition={{ type: "spring", stiffness: 450, damping: 32 }}
+                />
+              )}
+              <IconBriefcase className="w-4 h-4 relative z-10" />
+              <span className="relative z-10">
+                {text.tabCaseStudies || "Case Studies"}
+              </span>
               <span
-                className={`px-1.5 py-0.2 rounded-md text-[10px] ${
-                  selectedCategory === "ALL"
+                className={`relative z-10 text-[10px] font-mono font-bold px-2 py-0.5 rounded-md transition-colors ${
+                  viewMode === "CASE_STUDIES"
                     ? "bg-white/20 text-white"
-                    : "bg-zinc-100 dark:bg-zinc-800 text-zinc-500"
+                    : "bg-zinc-200 dark:bg-zinc-800 text-zinc-500"
                 }`}
               >
                 {projects.length}
               </span>
             </button>
 
-            {/* Dynamic Category Tabs */}
-            {categories.map((cat) => {
-              const count = projects.filter(
-                (p) => p.category?.toLowerCase() === cat.toLowerCase()
-              ).length;
-              const isSelected =
-                selectedCategory.toLowerCase() === cat.toLowerCase();
+            {/* UI Gallery Tab */}
+            <button
+              onClick={() => setViewMode("UI_GALLERY")}
+              className={`relative px-4 sm:px-5 py-2.5 rounded-xl text-xs sm:text-sm font-mono font-bold tracking-wide transition-all duration-200 flex items-center gap-2 flex-shrink-0 ${
+                viewMode === "UI_GALLERY"
+                  ? "text-white shadow-sm"
+                  : "text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-white"
+              }`}
+            >
+              {viewMode === "UI_GALLERY" && (
+                <motion.div
+                  layoutId="activeViewModeTab"
+                  className="absolute inset-0 bg-brand rounded-xl shadow-brand shadow-[0_4px_16px_-4px_#F0531C]"
+                  transition={{ type: "spring", stiffness: 450, damping: 32 }}
+                />
+              )}
+              <IconPhoto className="w-4 h-4 relative z-10" />
+              <span className="relative z-10">
+                {text.tabGallery || "UI Gallery & Visual Archive"}
+              </span>
+              <span
+                className={`relative z-10 text-[10px] font-mono font-bold px-2 py-0.5 rounded-md transition-colors ${
+                  viewMode === "UI_GALLERY"
+                    ? "bg-white/20 text-white"
+                    : "bg-zinc-200 dark:bg-zinc-800 text-zinc-500"
+                }`}
+              >
+                {galleries.length}
+              </span>
+            </button>
+          </div>
 
-              return (
-                <button
-                  key={cat}
-                  onClick={() => setSelectedCategory(cat)}
-                  className={`relative px-4 py-2 rounded-xl text-xs font-mono font-bold uppercase tracking-wider transition-all duration-200 flex items-center gap-1.5 ${
-                    isSelected
-                      ? "bg-brand text-white shadow-brand shadow-[0_4px_14px_-4px_#F0531C]"
-                      : "text-zinc-600 dark:text-zinc-400 hover:text-brand hover:bg-zinc-100/60 dark:hover:bg-zinc-900/60"
-                  }`}
-                >
-                  <span>{cat}</span>
-                  <span
-                    className={`px-1.5 py-0.2 rounded-md text-[10px] ${
-                      isSelected
-                        ? "bg-white/20 text-white"
-                        : "bg-zinc-100 dark:bg-zinc-800 text-zinc-500"
-                    }`}
-                  >
-                    {count}
-                  </span>
-                </button>
-              );
-            })}
+          <div className="font-mono text-xs text-zinc-500 dark:text-zinc-400 flex items-center gap-2">
+            <span className="w-2 h-2 rounded-full bg-brand/80 animate-pulse" />
+            <span>
+              {viewMode === "CASE_STUDIES"
+                ? `${projects.length} Production Case Studies`
+                : `${galleries.length} Visual Explorations & Shots`}
+            </span>
           </div>
         </div>
 
         {/* ===================================================================
-            3. STUDIO CARDS VERTICAL LIST
+            3. VIEW MODE CONTENT: CASE STUDIES
             =================================================================== */}
-        {filteredProjects.length === 0 ? (
-          <div className="p-12 rounded-3xl bg-white dark:bg-[#121215] border border-zinc-200 dark:border-zinc-800 text-center">
-            <p className="text-zinc-500 font-mono text-sm">
-              {text.emptyProjects || "No projects found matching this filter."}
-            </p>
-          </div>
-        ) : (
-          <div className="flex flex-col gap-12 md:gap-16">
-            {filteredProjects.map((project, idx) => (
-              <motion.div
-                key={project.id || project.slug || idx}
-                initial={{ opacity: 0, y: 25 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, margin: "-60px" }}
-                transition={{ duration: 0.45, delay: idx * 0.08 }}
-              >
-                <StudioCard project={project} index={idx} text={text} />
-              </motion.div>
-            ))}
+        {viewMode === "CASE_STUDIES" && (
+          <div>
+            {projects.length === 0 ? (
+              <div className="p-12 rounded-3xl bg-white dark:bg-[#121215] border border-zinc-200 dark:border-zinc-800 text-center">
+                <p className="text-zinc-500 font-mono text-sm">
+                  {text.emptyProjects || "No projects found."}
+                </p>
+              </div>
+            ) : (
+              <div className="flex flex-col gap-12 md:gap-16">
+                {projects.map((project, idx) => (
+                  <motion.div
+                    key={project.id || project.slug || idx}
+                    initial={{ opacity: 0, y: 25 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true, margin: "-60px" }}
+                    transition={{ duration: 0.45, delay: idx * 0.08 }}
+                  >
+                    <StudioCard project={project} index={idx} text={text} />
+                  </motion.div>
+                ))}
+              </div>
+            )}
           </div>
         )}
 
         {/* ===================================================================
-            4. STUDIO BOTTOM CTA SECTION
+            4. VIEW MODE CONTENT: UI GALLERY / VISUAL ARCHIVE
+            =================================================================== */}
+        {viewMode === "UI_GALLERY" && (
+          <div>
+            {galleries.length === 0 ? (
+              <div className="p-12 rounded-3xl bg-white dark:bg-[#121215] border border-zinc-200 dark:border-zinc-800 text-center">
+                <p className="text-zinc-500 font-mono text-sm">
+                  {text.emptyGallery || "No design explorations found."}
+                </p>
+              </div>
+            ) : (
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                {galleries.map((item, idx) => (
+                  <motion.div
+                    key={item.id || item.slug || idx}
+                    initial={{ opacity: 0, y: 24 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true, margin: "-40px" }}
+                    transition={{ duration: 0.45, delay: idx * 0.07 }}
+                  >
+                    <GalleryCard
+                      item={item}
+                      index={idx}
+                      text={text}
+                      onInspect={() => setLightboxIndex(idx)}
+                    />
+                  </motion.div>
+                ))}
+              </div>
+            )}
+          </div>
+        )}
+
+        {/* ===================================================================
+            5. STUDIO BOTTOM CTA SECTION
             =================================================================== */}
         <motion.div
           initial={{ opacity: 0, y: 24 }}
@@ -303,10 +431,352 @@ export default function ProjectsClient({ projects }: { projects: ProjectItem[] }
           </div>
         </motion.div>
       </div>
+
+      {/* ===================================================================
+          6. INTERACTIVE LIGHTBOX MODAL
+          =================================================================== */}
+      <AnimatePresence>
+        {lightboxIndex !== null && galleries[lightboxIndex] && (
+          <GalleryLightboxModal
+            item={galleries[lightboxIndex]}
+            currentIndex={lightboxIndex}
+            total={galleries.length}
+            text={text}
+            onClose={handleCloseLightbox}
+            onNext={handleNextLightbox}
+            onPrev={handlePrevLightbox}
+          />
+        )}
+      </AnimatePresence>
     </div>
   );
 }
 
+{/* =========================================================================
+    UI GALLERY CARD COMPONENT
+    ========================================================================= */}
+function GalleryCard({
+  item,
+  index,
+  text,
+  onInspect,
+}: {
+  item: UIGalleryItem;
+  index: number;
+  text: ProjectsPageDictionary;
+  onInspect: () => void;
+}) {
+  const displayNum = index + 1 < 10 ? `0${index + 1}` : `${index + 1}`;
+  const toolList = Array.isArray(item.tools)
+    ? item.tools
+    : typeof item.tools === "string"
+    ? (item.tools as string).split(",").map((s) => s.trim())
+    : [];
+
+  return (
+    <div className="relative w-full h-full flex flex-col">
+      {/* Figma Layer Selection Tab */}
+      <div className="absolute -top-3.5 left-4 sm:left-6 font-mono text-[11px] font-bold text-brand bg-white dark:bg-[#121214] px-3 py-1 rounded-md border border-brand/30 shadow-sm flex items-center gap-1.5 z-20 tracking-wider">
+        <IconLayoutGrid className="w-3.5 h-3.5 text-brand" />
+        <span>
+          {displayNum} {item.slug || `shot-${displayNum}`}.fig
+        </span>
+      </div>
+
+      {/* Main Card Frame with 4 Corner Figma Handles */}
+      <div className="group relative rounded-2xl sm:rounded-3xl bg-white dark:bg-[#121215] border border-zinc-200 dark:border-zinc-800 p-5 sm:p-7 shadow-lg hover:shadow-2xl hover:border-brand/40 dark:hover:border-brand/40 transition-all duration-300 flex flex-col justify-between flex-1 overflow-hidden">
+        {/* 4 Corner Figma Handles */}
+        <span className="absolute -top-1.5 -left-1.5 w-3 h-3 bg-white dark:bg-[#121215] border-2 border-brand rounded-[2px] opacity-0 group-hover:opacity-100 transition-opacity duration-200 z-30 pointer-events-none" />
+        <span className="absolute -top-1.5 -right-1.5 w-3 h-3 bg-white dark:bg-[#121215] border-2 border-brand rounded-[2px] opacity-0 group-hover:opacity-100 transition-opacity duration-200 z-30 pointer-events-none" />
+        <span className="absolute -bottom-1.5 -left-1.5 w-3 h-3 bg-white dark:bg-[#121215] border-2 border-brand rounded-[2px] opacity-0 group-hover:opacity-100 transition-opacity duration-200 z-30 pointer-events-none" />
+        <span className="absolute -bottom-1.5 -right-1.5 w-3 h-3 bg-white dark:bg-[#121215] border-2 border-brand rounded-[2px] opacity-0 group-hover:opacity-100 transition-opacity duration-200 z-30 pointer-events-none" />
+
+        <div>
+          {/* Mockup Canvas Container */}
+          <div
+            onClick={onInspect}
+            className="group/img relative w-full aspect-[16/10] rounded-xl sm:rounded-2xl overflow-hidden border border-zinc-200/80 dark:border-zinc-800/80 bg-zinc-100 dark:bg-zinc-900 cursor-pointer shadow-inner mb-5"
+          >
+            <Image
+              src={item.image_url}
+              alt={item.title}
+              fill
+              sizes="(max-width: 768px) 100vw, 50vw"
+              className="object-cover object-top transition-transform duration-700 ease-out group-hover/img:scale-105"
+            />
+
+            {/* Dark glassmorphic hover overlay */}
+            <div className="absolute inset-0 bg-black/40 opacity-0 group-hover/img:opacity-100 backdrop-blur-[2px] transition-all duration-300 flex items-center justify-center gap-3">
+              <span className="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-white/90 dark:bg-zinc-900/90 text-zinc-900 dark:text-white text-xs font-mono font-bold uppercase tracking-wider shadow-lg transform translate-y-2 group-hover/img:translate-y-0 transition-transform duration-200">
+                <IconZoomIn className="w-4 h-4 text-brand" />
+                <span>{text.inspectShot || "Inspect Shot"}</span>
+              </span>
+            </div>
+
+            {/* Category Pill floating top-right */}
+            <div className="absolute top-3 right-3 z-10">
+              <span className="px-2.5 py-1 rounded-md text-[10px] font-mono font-bold uppercase tracking-wider bg-black/70 text-white backdrop-blur-md border border-white/10 shadow-sm">
+                {item.category}
+              </span>
+            </div>
+          </div>
+
+          {/* Title & Description */}
+          <h3 className="heading-display font-display text-xl sm:text-2xl font-extrabold text-zinc-900 dark:text-white tracking-tight leading-snug mb-2 group-hover:text-brand transition-colors">
+            {item.title}
+          </h3>
+
+          {item.description && (
+            <p className="text-xs sm:text-sm text-zinc-600 dark:text-zinc-400 leading-relaxed line-clamp-2 mb-4">
+              {item.description}
+            </p>
+          )}
+        </div>
+
+        {/* Bottom Metadata & Quick Action Bar */}
+        <div className="pt-4 border-t border-zinc-100 dark:border-zinc-800/80 flex flex-wrap items-center justify-between gap-3 mt-auto">
+          {/* Tools / Tags */}
+          <div className="flex flex-wrap gap-1.5">
+            {toolList.slice(0, 3).map((tool, i) => (
+              <span
+                key={i}
+                className="px-2 py-0.5 text-[10px] font-mono font-medium rounded-md bg-zinc-100 dark:bg-zinc-900 text-zinc-700 dark:text-zinc-300 border border-zinc-200 dark:border-zinc-800"
+              >
+                {tool}
+              </span>
+            ))}
+            {toolList.length > 3 && (
+              <span className="px-1.5 py-0.5 text-[9px] font-mono font-bold rounded-md bg-zinc-100 dark:bg-zinc-900 text-zinc-500 border border-zinc-200 dark:border-zinc-800">
+                +{toolList.length - 3}
+              </span>
+            )}
+          </div>
+
+          {/* Action Links */}
+          <div className="flex items-center gap-2">
+            {item.figma_url && (
+              <a
+                href={item.figma_url}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-zinc-100 dark:bg-zinc-900 hover:bg-zinc-200 dark:hover:bg-zinc-800 text-zinc-700 dark:text-zinc-300 font-mono text-xs font-semibold hover:text-brand transition-colors"
+                title={text.openFigma || "Open in Figma"}
+              >
+                <IconBrandFigma className="w-3.5 h-3.5 text-[#F24E1E]" />
+                <span className="hidden sm:inline text-[11px]">Figma</span>
+              </a>
+            )}
+
+            {item.preview_url && (
+              <a
+                href={item.preview_url}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-1 px-3 py-1.5 rounded-lg bg-zinc-100 dark:bg-zinc-900 hover:bg-zinc-200 dark:hover:bg-zinc-800 text-zinc-700 dark:text-zinc-300 font-mono text-xs font-semibold hover:text-brand transition-colors"
+                title={text.livePreview || "Live Preview"}
+              >
+                <IconExternalLink className="w-3.5 h-3.5" />
+                <span className="hidden sm:inline text-[11px]">Preview</span>
+              </a>
+            )}
+
+            <button
+              onClick={onInspect}
+              className="inline-flex items-center gap-1 px-3 py-1.5 rounded-lg bg-brand/10 hover:bg-brand text-brand hover:text-white border border-brand/20 font-mono text-xs font-bold transition-all duration-200"
+            >
+              <IconZoomIn className="w-3.5 h-3.5" />
+              <span className="text-[11px]">{text.inspectShot || "Inspect"}</span>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+{/* =========================================================================
+    GALLERY LIGHTBOX MODAL COMPONENT
+    ========================================================================= */}
+function GalleryLightboxModal({
+  item,
+  currentIndex,
+  total,
+  text,
+  onClose,
+  onNext,
+  onPrev,
+}: {
+  item: UIGalleryItem;
+  currentIndex: number;
+  total: number;
+  text: ProjectsPageDictionary;
+  onClose: () => void;
+  onNext: () => void;
+  onPrev: () => void;
+}) {
+  const toolList = Array.isArray(item.tools)
+    ? item.tools
+    : typeof item.tools === "string"
+    ? (item.tools as string).split(",").map((s) => s.trim())
+    : [];
+
+  return (
+    <motion.div
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+      transition={{ duration: 0.25 }}
+      onClick={onClose}
+      className="fixed inset-0 z-50 bg-black/85 backdrop-blur-xl flex items-center justify-center p-3 sm:p-6 lg:p-8"
+    >
+      {/* Navigation Arrow Left */}
+      {total > 1 && (
+        <button
+          onClick={(e) => {
+            e.stopPropagation();
+            onPrev();
+          }}
+          className="absolute left-2 sm:left-6 z-50 w-11 h-11 sm:w-13 sm:h-13 rounded-2xl bg-zinc-900/80 hover:bg-brand text-zinc-300 hover:text-white border border-zinc-700/60 flex items-center justify-center transition-all duration-200 shadow-xl backdrop-blur-md"
+          title={text.lightboxPrev || "Previous"}
+        >
+          <IconChevronLeft className="w-6 h-6 stroke-[2.5]" />
+        </button>
+      )}
+
+      {/* Navigation Arrow Right */}
+      {total > 1 && (
+        <button
+          onClick={(e) => {
+            e.stopPropagation();
+            onNext();
+          }}
+          className="absolute right-2 sm:right-6 z-50 w-11 h-11 sm:w-13 sm:h-13 rounded-2xl bg-zinc-900/80 hover:bg-brand text-zinc-300 hover:text-white border border-zinc-700/60 flex items-center justify-center transition-all duration-200 shadow-xl backdrop-blur-md"
+          title={text.lightboxNext || "Next"}
+        >
+          <IconChevronRight className="w-6 h-6 stroke-[2.5]" />
+        </button>
+      )}
+
+      {/* Modal Dialog Content Container */}
+      <motion.div
+        initial={{ scale: 0.95, opacity: 0, y: 15 }}
+        animate={{ scale: 1, opacity: 1, y: 0 }}
+        exit={{ scale: 0.95, opacity: 0, y: 15 }}
+        transition={{ duration: 0.25, ease: "easeOut" }}
+        onClick={(e) => e.stopPropagation()}
+        className="relative w-full max-w-5xl max-h-[92vh] flex flex-col rounded-2xl sm:rounded-3xl bg-[#0e0e11] border border-zinc-800 shadow-2xl overflow-hidden"
+      >
+        {/* Top Control Bar */}
+        <div className="h-12 bg-zinc-900/90 border-b border-zinc-800/90 px-4 sm:px-6 flex items-center justify-between flex-shrink-0">
+          <div className="flex items-center gap-2 sm:gap-3">
+            <div className="flex items-center gap-1.5">
+              <span className="w-3 h-3 rounded-full bg-rose-500/80" />
+              <span className="w-3 h-3 rounded-full bg-amber-500/80" />
+              <span className="w-3 h-3 rounded-full bg-emerald-500/80" />
+            </div>
+            <span className="font-mono text-xs text-zinc-400 font-medium pl-2 truncate max-w-[180px] sm:max-w-xs">
+              {item.slug}.fig
+            </span>
+          </div>
+
+          <div className="flex items-center gap-3">
+            <span className="font-mono text-[11px] text-zinc-500 bg-zinc-800/80 px-2.5 py-1 rounded-md border border-zinc-700/50">
+              {currentIndex + 1} / {total}
+            </span>
+
+            <button
+              onClick={onClose}
+              className="w-8 h-8 rounded-lg bg-zinc-800/80 hover:bg-rose-500 text-zinc-400 hover:text-white flex items-center justify-center transition-colors"
+              title={text.lightboxClose || "Close (Esc)"}
+            >
+              <IconX className="w-4 h-4 stroke-[2.5]" />
+            </button>
+          </div>
+        </div>
+
+        {/* Middle Image Showcase Area */}
+        <div className="relative flex-1 bg-black/60 min-h-[300px] max-h-[62vh] sm:max-h-[68vh] overflow-hidden flex items-center justify-center p-3 sm:p-5">
+          <div className="relative w-full h-full min-h-[280px]">
+            <Image
+              src={item.image_url}
+              alt={item.title}
+              fill
+              sizes="(max-width: 1280px) 100vw, 1200px"
+              className="object-contain"
+              priority
+            />
+          </div>
+        </div>
+
+        {/* Bottom Info Drawer */}
+        <div className="p-4 sm:p-6 bg-zinc-950 border-t border-zinc-800/80 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 flex-shrink-0">
+          <div className="space-y-1.5 max-w-2xl">
+            <div className="flex items-center gap-2.5 flex-wrap">
+              <span className="px-2.5 py-0.5 rounded-md text-[10px] font-mono font-bold uppercase tracking-wider bg-brand/15 text-brand border border-brand/30">
+                {item.category}
+              </span>
+              <h4 className="heading-display font-display text-lg sm:text-xl font-bold text-white tracking-tight">
+                {item.title}
+              </h4>
+            </div>
+
+            {item.description && (
+              <p className="text-xs sm:text-sm text-zinc-400 leading-relaxed">
+                {item.description}
+              </p>
+            )}
+
+            {toolList.length > 0 && (
+              <div className="flex flex-wrap gap-1.5 pt-1">
+                <span className="font-mono text-[10px] text-zinc-500 uppercase tracking-wider self-center mr-1">
+                  {text.lightboxToolsLabel || "Tools"}:
+                </span>
+                {toolList.map((t, i) => (
+                  <span
+                    key={i}
+                    className="px-2 py-0.5 text-[10px] font-mono rounded bg-zinc-900 text-zinc-300 border border-zinc-800"
+                  >
+                    {t}
+                  </span>
+                ))}
+              </div>
+            )}
+          </div>
+
+          <div className="flex items-center gap-2.5 flex-shrink-0 self-end sm:self-center">
+            {item.figma_url && (
+              <a
+                href={item.figma_url}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-[#1e1e24] hover:bg-[#282830] text-white font-mono text-xs font-bold border border-zinc-700/60 shadow-sm transition-colors"
+              >
+                <IconBrandFigma className="w-4 h-4 text-[#F24E1E]" />
+                <span>{text.openFigma || "Figma"}</span>
+              </a>
+            )}
+
+            {item.preview_url && (
+              <a
+                href={item.preview_url}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-brand hover:bg-brand-deep text-white font-mono text-xs font-bold shadow-brand shadow-[0_4px_16px_-4px_#F0531C] transition-all"
+              >
+                <IconExternalLink className="w-4 h-4" />
+                <span>{text.livePreview || "Live Demo"}</span>
+              </a>
+            )}
+          </div>
+        </div>
+      </motion.div>
+    </motion.div>
+  );
+}
+
+{/* =========================================================================
+    ORIGINAL STUDIO CARD COMPONENT (FOR CASE STUDIES)
+    ========================================================================= */}
 function StudioCard({
   project,
   index,
@@ -462,7 +932,7 @@ function StudioCard({
         </div>
 
         {/* Card Divider */}
-        <div className="h-px w-full bg-zinc-200 dark:bg-zinc-800/80 my-6" />
+        <div className="h-px w-full bg-zinc-200 dark:border-zinc-800/80 my-6" />
 
         {/* Expandable Architecture & Deliverables Drawer */}
         <div>

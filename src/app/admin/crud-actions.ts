@@ -70,6 +70,30 @@ export async function deleteContact(id: string | number) {
   return from("contacts").delete().eq("id", id);
 }
 
+// ── UI Gallery CRUD ──
+export async function getUIGalleries() {
+  return from("ui_gallery")
+    .select("*")
+    .order("order_index", { ascending: true })
+    .order("created_at", { ascending: false });
+}
+
+export async function getUIGalleryById(id: string) {
+  return from("ui_gallery").select("*").eq("id", id).single();
+}
+
+export async function insertUIGallery(data: any) {
+  return from("ui_gallery").insert([data]);
+}
+
+export async function updateUIGallery(id: string, data: any) {
+  return from("ui_gallery").update(data).eq("id", id);
+}
+
+export async function deleteUIGallery(id: string | number) {
+  return from("ui_gallery").delete().eq("id", id);
+}
+
 // ── Dashboard Stats ──
 export async function getProjectCount() {
   return from("projects").select("*", { count: "exact", head: true });
@@ -79,4 +103,8 @@ export async function getFeaturedCount() {
   return from("projects")
     .select("*", { count: "exact", head: true })
     .eq("is_featured", true);
+}
+
+export async function getGalleryCount() {
+  return from("ui_gallery").select("*", { count: "exact", head: true });
 }

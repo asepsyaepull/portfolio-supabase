@@ -717,7 +717,7 @@ function ImageUploadField({
           }}
           className={`border-2 border-dashed rounded-2xl p-8 flex flex-col items-center justify-center gap-2 transition-colors cursor-pointer ${
             dragOver
-              ? "border-lime-500 bg-lime-50 dark:bg-lime-900/10"
+              ? "border-brand bg-brand/10 dark:bg-brand/10"
               : "border-zinc-200 dark:border-zinc-700 hover:border-zinc-300 dark:hover:border-zinc-600"
           }`}
         >
