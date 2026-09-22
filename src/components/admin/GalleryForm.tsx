@@ -168,7 +168,7 @@ export default function GalleryForm({
           </div>
           <div>
             <h3 className="text-base font-bold text-zinc-900 dark:text-white">
-              Informasi Desain &amp; Shot
+              Informasi Desain & Shot
             </h3>
             <p className={helperClass}>
               Detail utama shot untuk ditampilkan di kartu galeri dan modal lightbox.
@@ -189,7 +189,7 @@ export default function GalleryForm({
               required
               value={formData.title}
               onChange={(e) => handleTitleChange(e.target.value)}
-              placeholder="Contoh: Fintech Telemetry &amp; Liquidity Dashboard"
+              placeholder="Contoh: Fintech Telemetry & Liquidity Dashboard"
               className={inputClass}
             />
           </div>
@@ -284,7 +284,7 @@ export default function GalleryForm({
           {/* Tools */}
           <div className="space-y-2 md:col-span-2">
             <label htmlFor="gallery-tools" className={labelClass}>
-              Alat &amp; Desain Stack (Pisahkan dengan koma)
+              Alat & Desain Stack (Pisahkan dengan koma)
             </label>
             <input
               id="gallery-tools"
@@ -309,7 +309,7 @@ export default function GalleryForm({
           </div>
           <div>
             <h3 className="text-base font-bold text-zinc-900 dark:text-white">
-              Mockup Desain &amp; Gambar Shot
+              Mockup Desain & Gambar Shot
             </h3>
             <p className={helperClass}>
               Upload file gambar shot langsung dari perangkat Anda atau gunakan URL gambar eksternal.
@@ -379,7 +379,7 @@ export default function GalleryForm({
                         <IconUpload size={24} />
                       </div>
                       <p className="text-sm font-semibold text-zinc-800 dark:text-zinc-200 mb-1">
-                        Tarik &amp; lepaskan file gambar di sini
+                        Tarik & lepaskan file gambar di sini
                       </p>
                       <p className="text-xs text-zinc-400 dark:text-zinc-500 mb-4 max-w-xs">
                         Mendukung PNG, JPG, WebP, SVG, atau GIF hingga 15MB.
@@ -474,9 +474,9 @@ export default function GalleryForm({
             {/* Aspect Ratio Selector */}
             <div className="space-y-2.5 pt-2 border-t border-zinc-100 dark:border-zinc-800/80">
               <div className="flex items-center justify-between">
-                <label className={labelClass}>
+                <span className={labelClass}>
                   Rasio Aspek Mockup
-                </label>
+                </span>
                 <span className="text-xs font-mono font-bold text-brand bg-brand/10 px-2 py-0.5 rounded-md">
                   {formData.aspect_ratio}
                 </span>
@@ -581,7 +581,7 @@ export default function GalleryForm({
           </div>
           <div>
             <h3 className="text-base font-bold text-zinc-900 dark:text-white">
-              Tautan Eksternal &amp; Visibilitas
+              Tautan Eksternal & Visibilitas
             </h3>
             <p className={helperClass}>
               Tautan menuju file Figma atau live preview serta pengaturan urutan tampilan.
@@ -641,7 +641,7 @@ export default function GalleryForm({
               onChange={(e) =>
                 setFormData({
                   ...formData,
-                  order_index: parseInt(e.target.value) || 0,
+                  order_index: parseInt(e.target.value, 10) || 0,
                 })
               }
               className={monoInputClass}
@@ -682,12 +682,12 @@ export default function GalleryForm({
         <button
           type="submit"
           disabled={isSubmitting || uploading}
-          className="inline-flex items-center gap-2 px-7 py-3 rounded-xl bg-brand hover:bg-brand-deep text-white font-semibold text-sm shadow-brand shadow-[0_12px_26px_-12px_#F0531C] active:scale-95 transition-all duration-200 disabled:opacity-50"
+          className="inline-flex items-center gap-2 px-7 py-3 rounded-xl bg-brand hover:bg-brand-deep text-white font-semibold text-sm shadow-[0_12px_26px_-12px_#F0531C] active:scale-95 transition-all duration-200 disabled:opacity-50"
         >
           {isSubmitting ? (
             <IconLoader2 size={18} className="animate-spin" />
           ) : (
-            <IconCheck size={18} className="stroke-[2.5]" />
+            <IconCheck size={18} stroke={2.5} />
           )}
           <span>{isSubmitting ? "Menyimpan..." : "Simpan Desain Shot"}</span>
         </button>
