@@ -44,11 +44,11 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
         {/* Brand Studio Header */}
         <div className="h-16 flex items-center px-6 border-b border-zinc-200 dark:border-zinc-800 shrink-0">
           <div className="flex items-center gap-3">
-            <div className="w-8 h-8 rounded-xl bg-brand text-white flex items-center justify-center font-bold text-xs shadow-brand shadow-[0_4px_14px_-4px_#F0531C]">
+            <div className="w-8 h-8 rounded-xl bg-brand text-white flex items-center justify-center font-bold text-xs shadow-[0_4px_14px_-4px_#F0531C]">
               AS
             </div>
             <div>
-              <span className="font-bold text-sm text-zinc-900 dark:text-white tracking-tight block leading-tight">
+              <span className="font-display font-bold text-sm text-zinc-900 dark:text-white tracking-tight block leading-tight">
                 Asep Studio
               </span>
               <span className="font-mono text-[10px] text-brand font-bold uppercase tracking-wider">
@@ -74,18 +74,18 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
               <Link
                 key={item.href}
                 href={item.href}
-                className={`flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-xs font-mono font-bold tracking-wide transition-all ${
+                className={`flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-[13px] font-sans transition-all ${
                   isActive
-                    ? "bg-brand/10 text-brand border border-brand/20 shadow-sm"
-                    : "text-zinc-600 dark:text-zinc-400 hover:bg-zinc-100 dark:hover:bg-zinc-900 hover:text-zinc-900 dark:hover:text-white"
+                    ? "bg-brand/10 text-brand font-semibold border border-brand/20 shadow-sm"
+                    : "text-zinc-600 dark:text-zinc-400 font-medium hover:bg-zinc-100 dark:hover:bg-zinc-900 hover:text-zinc-900 dark:hover:text-white"
                 }`}
               >
-                <span className={isActive ? "text-brand" : "text-zinc-500"}>
+                <span className={isActive ? "text-brand" : "text-zinc-500 dark:text-zinc-400"}>
                   {item.icon}
                 </span>
                 <span>{item.name}</span>
                 {item.href === "/admin/gallery" && (
-                  <span className="ml-auto px-1.5 py-0.5 rounded text-[9px] bg-brand/20 text-brand font-mono font-bold uppercase">
+                  <span className="ml-auto px-1.5 py-0.5 rounded text-[9px] bg-brand/20 text-brand font-mono font-bold uppercase tracking-wider">
                     New
                   </span>
                 )}
@@ -95,11 +95,11 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
         </div>
 
         {/* Sidebar Footer Actions */}
-        <div className="p-4 border-t border-zinc-200 dark:border-zinc-800 space-y-2 shrink-0">
+        <div className="p-4 border-t border-zinc-200 dark:border-zinc-800 space-y-1.5 shrink-0">
           <Link
             href="/"
             target="_blank"
-            className="flex items-center justify-between px-3.5 py-2.5 rounded-xl text-xs font-mono font-semibold text-zinc-600 dark:text-zinc-400 hover:text-brand hover:bg-zinc-100 dark:hover:bg-zinc-900 transition-colors border border-transparent hover:border-zinc-200 dark:hover:border-zinc-800"
+            className="flex items-center justify-between px-3.5 py-2.5 rounded-xl text-[13px] font-sans font-medium text-zinc-600 dark:text-zinc-400 hover:text-brand hover:bg-zinc-100 dark:hover:bg-zinc-900 transition-colors border border-transparent hover:border-zinc-200 dark:hover:border-zinc-800"
           >
             <span className="flex items-center gap-2">
               <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
@@ -110,7 +110,7 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
 
           <button
             onClick={handleLogout}
-            className="flex items-center gap-2.5 px-3.5 py-2.5 w-full rounded-xl text-xs font-mono font-bold text-rose-600 dark:text-rose-400 hover:bg-rose-50 dark:hover:bg-rose-950/30 transition-colors"
+            className="flex items-center gap-2.5 px-3.5 py-2.5 w-full rounded-xl text-[13px] font-sans font-medium text-rose-600 dark:text-rose-400 hover:bg-rose-50 dark:hover:bg-rose-950/30 transition-colors"
           >
             <IconLogout size={16} />
             <span>Logout</span>
@@ -123,10 +123,10 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
         {/* Mobile Header */}
         <header className="h-16 bg-white/70 dark:bg-[#121215]/70 backdrop-blur-md border-b border-zinc-200 dark:border-zinc-800 flex items-center justify-between px-6 shrink-0 md:hidden z-10 transition-colors">
           <div className="flex items-center gap-2.5">
-            <div className="w-7 h-7 rounded-lg bg-brand text-white flex items-center justify-center font-bold text-xs shadow-brand shadow-[0_2px_8px_-2px_#F0531C]">
+            <div className="w-7 h-7 rounded-lg bg-brand text-white flex items-center justify-center font-bold text-xs shadow-[0_2px_8px_-2px_#F0531C]">
               AS
             </div>
-            <span className="font-bold text-sm text-zinc-900 dark:text-white">
+            <span className="font-display font-bold text-sm text-zinc-900 dark:text-white">
               Studio CMS
             </span>
           </div>
@@ -145,7 +145,7 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
 
         {/* Desktop Header */}
         <header className="h-16 hidden md:flex items-center justify-between px-8 border-b border-zinc-200/60 dark:border-zinc-800/60 bg-white/40 dark:bg-[#121215]/40 backdrop-blur-md shrink-0">
-          <div className="text-xs font-mono text-zinc-400 dark:text-zinc-500">
+          <div className="text-xs font-sans font-medium text-zinc-500 dark:text-zinc-400">
             Asep Syaepul Studio &bull; Workspace Control Panel
           </div>
           <div className="flex items-center gap-3">
