@@ -197,7 +197,3 @@ class QueryBuilder {
 export function from(table: string): QueryBuilder {
   return new QueryBuilder(table);
 }
-
-export function supabaseLike() {
-  return { from };
-}

@@ -1,4 +1,4 @@
-import { createClient } from "@/lib/supabase/server";
+import { from } from "@/lib/pg-client";
 import Link from "next/link";
 import { IconPlus } from "@tabler/icons-react";
 import SortableProjectsList from "@/components/admin/SortableProjectsList";
@@ -7,9 +7,7 @@ export const dynamic = "force-dynamic";
 export const revalidate = 0;
 
 export default async function AdminProjectsPage() {
-  const supabase = await createClient();
-  const { data: projects, error } = await supabase
-    .from("projects")
+  const { data: projects, error } = await from("projects")
     .select("*")
     .order("order_index", { ascending: true })
     .order("created_at", { ascending: false });

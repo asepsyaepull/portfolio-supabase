@@ -1,7 +1,7 @@
 "use client";
 
 import { HeroSection } from "@/components/sections/hero/hero-section";
-import type { Project, Skill } from "@/types/database";
+import type { Project } from "@/types/database";
 import dynamic from "next/dynamic";
 
 const SectionSkeleton = () => (
@@ -52,7 +52,6 @@ export default function HomeClient({
   featuredProjects,
 }: {
   featuredProjects: Project[];
-  skills: Skill[];
 }) {
   return (
     <div>

@@ -1,5 +1,5 @@
 import type { MetadataRoute } from "next";
-import { getStaticClient } from "@/lib/supabase/server";
+import { from } from "@/lib/pg-client";
 
 export const dynamic = "force-dynamic";
 
@@ -34,8 +34,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   ];
 
   try {
-    const supabase = getStaticClient();
-    const { data: projects } = await supabase.from("projects").select("slug, updated_at");
+    const { data: projects } = await from("projects").select("slug, updated_at");
 
     if (projects && projects.length > 0) {
       const projectRoutes = projects.map((p: any) => ({

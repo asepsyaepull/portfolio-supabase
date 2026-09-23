@@ -1,8 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { usePathname } from "next/navigation";
-import { createClient } from "@/lib/supabase/client";
+import { usePathname, useRouter } from "next/navigation";
 import {
   IconLayoutDashboard,
   IconLogout,
@@ -14,16 +13,14 @@ import {
   IconSparkles,
   IconArrowUpRight,
 } from "@tabler/icons-react";
-import { useRouter } from "next/navigation";
 import { ThemeToggle } from "@/components/ui/theme-toggle";
 
 export default function AdminLayout({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
   const router = useRouter();
-  const supabase = createClient();
 
   const handleLogout = async () => {
-    await supabase.auth.signOut();
+    await fetch("/api/auth/logout", { method: "POST" });
     router.push("/login");
   };
 

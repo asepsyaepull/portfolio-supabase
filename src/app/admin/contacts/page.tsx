@@ -1,4 +1,4 @@
-import { createClient } from "@/lib/supabase/server";
+import { from } from "@/lib/pg-client";
 import { IconMail, IconCalendar, IconArrowBackUp } from "@tabler/icons-react";
 import DeleteContactButton from "@/components/admin/DeleteContactButton";
 
@@ -6,9 +6,7 @@ export const dynamic = "force-dynamic";
 export const revalidate = 0;
 
 export default async function AdminContactsPage() {
-  const supabase = await createClient();
-  const { data: contacts, error } = await supabase
-    .from("contacts")
+  const { data: contacts, error } = await from("contacts")
     .select("*")
     .order("created_at", { ascending: false });
 

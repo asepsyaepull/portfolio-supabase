@@ -1,4 +1,4 @@
-import { createClient } from "@/lib/supabase/server";
+import { from } from "@/lib/pg-client";
 import Link from "next/link";
 import { IconPlus, IconPhoto } from "@tabler/icons-react";
 import SortableGalleryList from "@/components/admin/SortableGalleryList";
@@ -7,9 +7,7 @@ export const dynamic = "force-dynamic";
 export const revalidate = 0;
 
 export default async function AdminGalleryPage() {
-  const supabase = await createClient();
-  const { data: galleries, error } = await supabase
-    .from("ui_gallery")
+  const { data: galleries, error } = await from("ui_gallery")
     .select("*")
     .order("order_index", { ascending: true })
     .order("created_at", { ascending: false });

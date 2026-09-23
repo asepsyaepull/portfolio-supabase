@@ -1,4 +1,4 @@
-import { getStaticClient } from "@/lib/supabase/server";
+import { from } from "@/lib/pg-client";
 import ProjectsClient from "./ProjectsClient";
 import { Metadata } from "next";
 
@@ -36,9 +36,7 @@ export const metadata: Metadata = {
 };
 
 export default async function ProjectsPage() {
-  const supabase = getStaticClient();
-  const { data: projects, error } = await supabase
-    .from("projects")
+  const { data: projects, error } = await from("projects")
     .select(
       "id, name, slug, category, description, image, tech_stack, problem, solution, link, is_featured, role, timeline"
     )
@@ -56,8 +54,7 @@ export default async function ProjectsPage() {
   }
 
   // Fetch UI gallery shots from PostgreSQL
-  const { data: galleries, error: galleryError } = await supabase
-    .from("ui_gallery")
+  const { data: galleries, error: galleryError } = await from("ui_gallery")
     .select(
       "id, title, slug, category, description, image_url, thumbnail_url, tools, aspect_ratio, figma_url, preview_url, is_featured, order_index, created_at"
     )

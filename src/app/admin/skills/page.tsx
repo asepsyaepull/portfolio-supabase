@@ -1,4 +1,4 @@
-import { createClient } from "@/lib/supabase/server";
+import { from } from "@/lib/pg-client";
 import Link from "next/link";
 import { IconPlus, IconCode } from "@tabler/icons-react";
 import SortableSkillsList from "@/components/admin/SortableSkillsList";
@@ -7,9 +7,7 @@ export const dynamic = "force-dynamic";
 export const revalidate = 0;
 
 export default async function AdminSkillsPage() {
-  const supabase = await createClient();
-  const { data: skills, error } = await supabase
-    .from("skills")
+  const { data: skills, error } = await from("skills")
     .select("*")
     .order("order_index", { ascending: true })
     .order("created_at", { ascending: false });

@@ -120,16 +120,6 @@ export interface ExperienceDictionary {
   items: ExperienceItemLocale[];
 }
 
-export interface WhyDictionary {
-  tag: string;
-  titlePrefix: string;
-  titleHighlight: string;
-  studiosTag: string;
-  studiosItems: string[];
-  asepBadge: string;
-  asepTag: string;
-  asepItems: string[];
-}
 
 export interface FaqItem {
   label: string;
@@ -382,7 +372,6 @@ export interface Dictionary {
   whatsup: WhatsupDictionary;
   workflow: WorkflowDictionary;
   experience: ExperienceDictionary;
-  why: WhyDictionary;
   faq: FaqDictionary;
   pricing: PricingDictionary;
   cta: CtaDictionary;

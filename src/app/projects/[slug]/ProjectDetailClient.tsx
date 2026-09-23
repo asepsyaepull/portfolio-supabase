@@ -4,11 +4,9 @@ import React, { useState } from "react";
 import Link from "next/link";
 import { toast } from "sonner";
 import {
-  IconArrowLeft,
   IconArrowUpRight,
   IconCheck,
   IconCopy,
-  IconShare,
   IconMaximize,
   IconX,
 } from "@tabler/icons-react";
@@ -132,7 +130,7 @@ export function ProjectImagePreview({
             alt={alt}
             fill
             sizes="(max-width: 1280px) 100vw, 1200px"
-            className="object-cover object-top transition-transform duration-500 group-hover:scale-[1.015]"
+            className="object-cover object-center transition-transform duration-500 group-hover:scale-[1.015]"
             priority
           />
         </div>
@@ -154,7 +152,7 @@ export function ProjectImagePreview({
           </button>
 
           <div
-            className="relative max-w-6xl w-full max-h-[90vh] aspect-[16/10] rounded-2xl overflow-hidden shadow-2xl border border-white/10"
+            className="relative max-w-6xl w-full max-h-[90vh] aspect-[16/10] rounded-2xl overflow-hidden shadow-2xl"
             onClick={(e) => e.stopPropagation()}
           >
             <Image

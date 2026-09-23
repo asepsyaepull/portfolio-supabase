@@ -6,7 +6,6 @@ import Image from "next/image";
 import Link from "next/link";
 import { useLanguage } from "@/context/language-context";
 import {
-  IconLayoutGrid,
   IconDownload,
   IconMail,
   IconArrowUpRight,
@@ -118,7 +117,7 @@ export default function AboutClient() {
                 {/* Visual Image */}
                 <div className="relative h-96 sm:h-[430px] w-full bg-zinc-100 dark:bg-zinc-900">
                   <Image
-                    src="/images/asep-profile.webp"
+                    src="/assets/images/profile.webp"
                     alt="Asep Syaepul Rohman"
                     fill
                     sizes="(max-width: 768px) 100vw, 40vw"

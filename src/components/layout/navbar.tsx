@@ -10,8 +10,6 @@ import { cn } from "@/lib/utils";
 import { useLanguage } from "@/context/language-context";
 import { LanguageToggle } from "@/components/ui/language-toggle";
 
-const EMAIL = "mail.asepsyaepul@gmail.com";
-
 export function Navbar() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const { t } = useLanguage();

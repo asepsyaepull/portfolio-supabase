@@ -44,34 +44,3 @@ export function Switch({
     </button>
   );
 }
-
-interface OptionPillProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
-  active: boolean;
-  children: React.ReactNode;
-}
-
-/**
- * Option selector pill button (active state has brand border + tinted bg).
- */
-export function OptionPill({
-  active,
-  children,
-  className,
-  ...props
-}: OptionPillProps) {
-  return (
-    <button
-      type="button"
-      className={cn(
-        "rounded-full border px-4 py-2.5 font-mono text-[13px] font-semibold transition-all duration-200",
-        active
-          ? "border-brand bg-brand/[0.08] font-bold text-ink"
-          : "border-ink/15 bg-white text-ink-soft hover:border-ink hover:text-ink",
-        className
-      )}
-      {...props}
-    >
-      {children}
-    </button>
-  );
-}

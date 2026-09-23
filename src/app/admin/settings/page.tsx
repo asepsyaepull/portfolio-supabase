@@ -1,16 +1,16 @@
 "use client";
 
-import { useState, useEffect, useMemo } from "react";
-import { createClient } from "@/lib/supabase/client";
-import { IconDeviceFloppy } from "@tabler/icons-react";
+import { useState, useEffect } from "react";
 
 export default function AdminSettingsPage() {
-  const supabase = useMemo(() => createClient(), []);
   const [user, setUser] = useState<{ email?: string } | null>(null);
 
   useEffect(() => {
-    supabase.auth.getUser().then(({ data }) => setUser(data.user));
-  }, [supabase]);
+    fetch("/api/auth/me")
+      .then((res) => res.json())
+      .then((data) => setUser(data.user))
+      .catch(() => setUser(null));
+  }, []);
 
   return (
     <div className="flex flex-col gap-6">

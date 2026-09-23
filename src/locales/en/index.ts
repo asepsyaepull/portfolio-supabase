@@ -4,7 +4,6 @@ import { heroEn } from "./hero";
 import { whatsupEn } from "./whatsup";
 import { workflowEn } from "./workflow";
 import { experienceEn } from "./experience";
-import { whyEn } from "./why";
 import { faqEn } from "./faq";
 import { pricingEn } from "./pricing";
 import { ctaEn } from "./cta";
@@ -20,7 +19,6 @@ export const enDictionary: Dictionary = {
   whatsup: whatsupEn,
   workflow: workflowEn,
   experience: experienceEn,
-  why: whyEn,
   faq: faqEn,
   pricing: pricingEn,
   cta: ctaEn,

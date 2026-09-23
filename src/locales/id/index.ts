@@ -4,7 +4,6 @@ import { heroId } from "./hero";
 import { whatsupId } from "./whatsup";
 import { workflowId } from "./workflow";
 import { experienceId } from "./experience";
-import { whyId } from "./why";
 import { faqId } from "./faq";
 import { pricingId } from "./pricing";
 import { ctaId } from "./cta";
@@ -20,7 +19,6 @@ export const idDictionary: Dictionary = {
   whatsup: whatsupId,
   workflow: workflowId,
   experience: experienceId,
-  why: whyId,
   faq: faqId,
   pricing: pricingId,
   cta: ctaId,

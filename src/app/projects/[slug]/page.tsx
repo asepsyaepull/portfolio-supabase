@@ -1,31 +1,24 @@
-import { getStaticClient } from "@/lib/supabase/server";
-import { notFound } from "next/navigation";
-import Image from "next/image";
-import Link from "next/link";
+import { from } from "@/lib/pg-client";
 import {
   IconArrowLeft,
   IconArrowRight,
   IconArrowUpRight,
-  IconTarget,
-  IconLayersLinked,
-  IconTools,
-  IconCalendar,
-  IconUser,
-  IconTags,
-  IconExternalLink,
   IconBriefcase,
-  IconSparkles,
-  IconCheck,
-  IconCircleCheck,
-  IconChevronRight,
+  IconCalendar,
   IconCode,
-  IconCompass,
-  IconChartBar,
+  IconExternalLink,
+  IconSparkles,
+  IconTags,
+  IconTools,
+  IconUser
 } from "@tabler/icons-react";
-import ReactMarkdown from "react-markdown";
-import remarkGfm from "remark-gfm";
-import rehypeRaw from "rehype-raw";
 import { Metadata, ResolvingMetadata } from "next";
+import Image from "next/image";
+import Link from "next/link";
+import { notFound } from "next/navigation";
+import ReactMarkdown from "react-markdown";
+import rehypeRaw from "rehype-raw";
+import remarkGfm from "remark-gfm";
 import {
   ProjectHeaderActions,
   ProjectImagePreview,
@@ -378,8 +371,7 @@ function cleanMarkdownDescription(markdown?: string, displayImage?: string): str
 
 // Generate Static Params for build time optimization
 export async function generateStaticParams() {
-  const supabase = getStaticClient();
-  const { data: projects } = await supabase.from("projects").select("slug");
+  const { data: projects } = await from("projects").select("slug");
   const slugs = new Set<string>();
 
   if (projects && projects.length > 0) {
@@ -398,9 +390,7 @@ export async function generateMetadata(
 ): Promise<Metadata> {
   const { slug } = await params;
 
-  const supabase = getStaticClient();
-  const { data: project } = await supabase
-    .from("projects")
+  const { data: project } = await from("projects")
     .select("name, description, image")
     .eq("slug", slug)
     .single();
@@ -447,11 +437,8 @@ export default async function ProjectDetailPage({
 }) {
   const { slug } = await params;
 
-  const supabase = getStaticClient();
-
   // Fetch active project
-  const { data: dbProject } = await supabase
-    .from("projects")
+  const { data: dbProject } = await from("projects")
     .select("*")
     .eq("slug", slug)
     .single();
@@ -463,8 +450,7 @@ export default async function ProjectDetailPage({
   }
 
   // Fetch all projects for Previous / Next navigation
-  const { data: allDbProjects } = await supabase
-    .from("projects")
+  const { data: allDbProjects } = await from("projects")
     .select("id, name, slug, category, image, description")
     .order("order_index", { ascending: true })
     .order("created_at", { ascending: false });
@@ -534,8 +520,12 @@ export default async function ProjectDetailPage({
   }
 
   return (
-    <div className="relative min-h-screen pt-28 sm:pt-32 pb-24 text-zinc-900 dark:text-white bg-[var(--canvas)] transition-colors">
-      <div className="container mx-auto px-4 sm:px-6 lg:px-12 max-w-6xl">
+    <div className="relative min-h-screen pt-28 sm:pt-32 pb-24 text-zinc-900 dark:text-white">
+      {/* Ambient background glows for visual depth */}
+      <div className="absolute top-24 left-[-10%] w-[45%] h-[40%] bg-brand/5 blur-[140px] rounded-full pointer-events-none" />
+      <div className="absolute top-1/2 right-[-10%] w-[40%] h-[40%] bg-tool/5 blur-[150px] rounded-full pointer-events-none" />
+
+      <div className="container relative z-10 mx-auto px-4 sm:px-6 lg:px-12 max-w-6xl">
         {/* ===================================================================
             1. TOP BAR: BREADCRUMB & QUICK ACTIONS
             =================================================================== */}
@@ -573,22 +563,15 @@ export default async function ProjectDetailPage({
             =================================================================== */}
         <header className="mb-10 sm:mb-14 text-start">
           {/* Category Badge with Studio Pulse */}
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-brand/10 border border-brand/20 text-brand font-mono tracking-widest text-[11px] font-bold uppercase mb-4">
-            <span className="w-2 h-2 rounded-full bg-brand animate-pulse" />
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-zinc-50 dark:bg-[#121215]/95 dark:border-zinc-800/80 border border-zinc-200/80 text-brand font-mono tracking-widest text-[11px] font-bold uppercase mb-4">
+            <span className="w-2 h-2 rounded-full bg-brand" />
             <span>{project.category}</span>
           </div>
 
           {/* Headline Display */}
-          <h1 className="heading-display font-display text-4xl sm:text-5xl md:text-6xl font-extrabold text-zinc-900 dark:text-white tracking-tight leading-[1.08] mb-5">
+          <h1 className="heading-display font-display text-3xl sm:text-4xl md:text-5xl font-extrabold text-zinc-900 dark:text-white tracking-tight leading-[1.08] mb-5">
             {project.name}
           </h1>
-
-          {/* Executive Summary */}
-          {cleanSummary && (
-            <p className="text-base sm:text-lg md:text-xl text-zinc-600 dark:text-zinc-400 max-w-3xl leading-relaxed mb-6 font-normal">
-              {cleanSummary}
-            </p>
-          )}
 
           {/* Quick Spec Highlights Strip */}
           <div className="flex flex-wrap items-center gap-x-6 gap-y-2 text-xs font-mono text-zinc-500 dark:text-zinc-400 pt-1">
@@ -636,11 +619,11 @@ export default async function ProjectDetailPage({
             =================================================================== */}
         {parsedMetrics.length > 0 && (
           <section className="mb-12 sm:mb-16">
-            <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 p-5 sm:p-6 rounded-2xl bg-zinc-50 dark:bg-zinc-900/50 border border-zinc-200/80 dark:border-zinc-800/80">
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 p-5 sm:p-6 rounded-2xl bg-zinc-100/70 dark:bg-zinc-900/50 backdrop-blur-sm border border-zinc-200/80 dark:border-zinc-800/80">
               {parsedMetrics.map((m, idx) => (
                 <div
                   key={idx}
-                  className="flex flex-col gap-1 text-start p-3.5 rounded-xl bg-white dark:bg-[#121215] border border-zinc-200/60 dark:border-zinc-800/60"
+                  className="flex flex-col gap-1 text-start p-3.5 rounded-xl bg-white/90 dark:bg-[#121215]/90 backdrop-blur-sm border border-zinc-200/60 dark:border-zinc-800/60 shadow-xs"
                 >
                   <div className="font-display text-2xl sm:text-3xl font-extrabold text-brand tracking-tight">
                     {m.value}
@@ -657,11 +640,11 @@ export default async function ProjectDetailPage({
         {/* ===================================================================
             5. MAIN CASE STUDY & STICKY SPECIFICATIONS SIDEBAR
             =================================================================== */}
-        <section className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14 text-start mb-20">
-          {/* Main Case Study Column (Left: 68%) */}
+        <section className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-10 text-start mb-20">
+          {/* Main Case Study Column (Left: 67%) */}
           <div className="lg:col-span-8 flex flex-col gap-8">
-            <div className="p-6 sm:p-10 rounded-3xl bg-white dark:bg-[#121215] border border-zinc-200/80 dark:border-zinc-800 shadow-sm">
-              <article className="prose prose-zinc dark:prose-invert max-w-none text-zinc-700 dark:text-zinc-300 font-body leading-relaxed prose-headings:font-display prose-headings:tracking-tight prose-headings:font-bold prose-h1:text-2xl sm:prose-h1:text-3xl prose-h1:mt-10 prose-h1:mb-4 prose-h1:pb-2 prose-h1:border-b prose-h1:border-zinc-200/60 dark:prose-h1:border-zinc-800/60 prose-h2:text-2xl sm:prose-h2:text-3xl prose-h2:mt-10 prose-h2:mb-4 prose-h2:pb-2 prose-h2:border-b prose-h2:border-zinc-200/60 dark:prose-h2:border-zinc-800/60 prose-h3:text-lg sm:prose-h3:text-xl prose-h3:mt-8 prose-h3:mb-3 prose-p:my-4 prose-ul:my-4 prose-ol:my-4 prose-li:my-1.5 prose-strong:text-zinc-900 dark:prose-strong:text-white prose-a:text-brand hover:prose-a:text-brand-deep prose-img:rounded-2xl prose-img:shadow-md prose-code:font-mono prose-code:text-brand prose-code:bg-zinc-100 dark:prose-code:bg-zinc-900 prose-code:px-1.5 prose-code:py-0.5 prose-code:rounded-md">
+            <div className="p-6 sm:p-8 lg:p-9 rounded-3xl bg-white/95 dark:bg-[#121215]/95 backdrop-blur-md border border-zinc-200/80 dark:border-zinc-800 shadow-sm">
+              <article className="prose prose-zinc dark:prose-invert prose-lg max-w-none text-zinc-700 dark:text-zinc-300 font-body text-[16px] sm:text-[17px] lg:text-[16px] leading-[1.8] sm:leading-[1.85] prose-headings:font-display prose-headings:tracking-tight prose-headings:font-bold prose-h1:text-2xl sm:prose-h1:text-2xl lg:prose-h1:text-3xl prose-h1:mt-12 prose-h1:mb-5 prose-h1:pb-3 prose-h1:border-b prose-h1:border-zinc-200/60 dark:prose-h1:border-zinc-800/60 prose-h2:text-xl sm:prose-h2:text-2xl lg:prose-h2:text-3xl prose-h2:mt-12 prose-h2:mb-5 prose-h2:pb-3 prose-h2:border-b prose-h2:border-zinc-200/60 dark:prose-h2:border-zinc-800/60 prose-h3:text-lg sm:prose-h3:text-xl lg:prose-h3:text-2xl prose-h3:mt-8 prose-h3:mb-3 prose-p:my-5 sm:prose-p:my-6 prose-ul:my-6 prose-ul:space-y-2.5 prose-ol:my-6 prose-ol:space-y-2.5 prose-li:my-1.5 prose-li:leading-relaxed prose-strong:text-zinc-900 dark:prose-strong:text-white prose-a:text-brand hover:prose-a:text-brand-deep prose-img:rounded-2xl prose-img:shadow-md prose-code:font-mono prose-code:text-brand prose-code:bg-zinc-100 dark:prose-code:bg-zinc-900 prose-code:px-1.5 prose-code:py-0.5 prose-code:rounded-md prose-blockquote:border-l-4 prose-blockquote:border-brand prose-blockquote:bg-zinc-50 dark:prose-blockquote:bg-zinc-900/40 prose-blockquote:py-2 prose-blockquote:px-5 prose-blockquote:rounded-r-xl">
                 <ReactMarkdown
                   remarkPlugins={[remarkGfm]}
                   rehypePlugins={[rehypeRaw]}
@@ -695,11 +678,11 @@ export default async function ProjectDetailPage({
             </div>
           </div>
 
-          {/* Sticky Specifications Sidebar (Right: 32%) */}
+          {/* Sticky Specifications Sidebar (Right: 33%) */}
           <aside className="lg:col-span-4 flex flex-col gap-6">
             <div className="lg:sticky lg:top-28 space-y-6">
               {/* Studio Specification Card */}
-              <div className="p-6 sm:p-7 rounded-3xl bg-white dark:bg-[#121215] border border-zinc-200/80 dark:border-zinc-800 shadow-sm flex flex-col gap-6">
+              <div className="p-6 sm:p-7 rounded-3xl bg-white/95 dark:bg-[#121215]/95 backdrop-blur-md border border-zinc-200/80 dark:border-zinc-800 shadow-sm flex flex-col gap-6">
                 <div className="flex items-center justify-between pb-4 border-b border-zinc-200/80 dark:border-zinc-800">
                   <div className="flex items-center gap-2">
                     <span className="w-2 h-2 rounded-full bg-brand" />
@@ -782,7 +765,7 @@ export default async function ProjectDetailPage({
               </div>
 
               {/* Consultation / Hire Banner */}
-              <div className="p-6 rounded-3xl bg-zinc-100 dark:bg-zinc-900/60 border border-zinc-200/80 dark:border-zinc-800 text-start flex flex-col gap-3">
+              <div className="p-6 rounded-3xl bg-zinc-100/80 dark:bg-zinc-900/60 backdrop-blur-sm border border-zinc-200/80 dark:border-zinc-800 text-start flex flex-col gap-3">
                 <div className="flex items-center gap-2 text-brand">
                   <IconSparkles className="w-4 h-4" />
                   <h4 className="font-mono text-xs font-bold uppercase tracking-wider text-zinc-900 dark:text-white">
@@ -826,7 +809,7 @@ export default async function ProjectDetailPage({
             {prevProject ? (
               <Link
                 href={`/projects/${prevProject.slug}`}
-                className="group p-5 rounded-2xl bg-white dark:bg-[#121215] border border-zinc-200/80 dark:border-zinc-800 hover:border-brand/40 dark:hover:border-brand/40 shadow-sm transition-all duration-200 flex items-center gap-4 text-start"
+                className="group p-5 rounded-2xl bg-white/95 dark:bg-[#121215]/95 backdrop-blur-sm border border-zinc-200/80 dark:border-zinc-800 hover:border-brand/40 dark:hover:border-brand/40 shadow-sm transition-all duration-200 flex items-center gap-4 text-start"
               >
                 <div className="relative w-16 h-16 rounded-xl overflow-hidden bg-zinc-100 dark:bg-zinc-900 flex-shrink-0 border border-zinc-200 dark:border-zinc-800">
                   <Image
@@ -864,7 +847,7 @@ export default async function ProjectDetailPage({
             {nextProject ? (
               <Link
                 href={`/projects/${nextProject.slug}`}
-                className="group p-5 rounded-2xl bg-white dark:bg-[#121215] border border-zinc-200/80 dark:border-zinc-800 hover:border-brand/40 dark:hover:border-brand/40 shadow-sm transition-all duration-200 flex items-center justify-between gap-4 text-start"
+                className="group p-5 rounded-2xl bg-white/95 dark:bg-[#121215]/95 backdrop-blur-sm border border-zinc-200/80 dark:border-zinc-800 hover:border-brand/40 dark:hover:border-brand/40 shadow-sm transition-all duration-200 flex items-center justify-between gap-4 text-start"
               >
                 <div className="flex-1 min-w-0">
                   <div className="flex items-center gap-1 font-mono text-[10px] uppercase font-bold text-zinc-400 group-hover:text-brand transition-colors">

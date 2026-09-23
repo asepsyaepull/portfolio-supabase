@@ -5,8 +5,6 @@ import { cn } from "@/lib/utils";
 import { DotGridBackground } from "@/components/ui/dot-grid-background";
 import StatusBadge from "@/components/ui/badge";
 
-export { DotGridBackground, StatusBadge };
-
 /* ─────────────────────────────────────────────────────────────────────────────
    1. TAGLINE COMPONENT
 ───────────────────────────────────────────────────────────────────────────── */

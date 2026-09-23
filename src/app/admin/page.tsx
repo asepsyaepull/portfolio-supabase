@@ -1,4 +1,4 @@
-import { createClient } from "@/lib/supabase/server";
+import { from } from "@/lib/pg-client";
 import Link from "next/link";
 import {
   IconFolder,
@@ -13,8 +13,6 @@ export const dynamic = "force-dynamic";
 export const revalidate = 0;
 
 export default async function AdminDashboardPage() {
-  const supabase = await createClient();
-
   const [
     projectsRes,
     featuredRes,
@@ -22,19 +20,16 @@ export default async function AdminDashboardPage() {
     recentProjectsRes,
     recentGalleriesRes,
   ] = await Promise.all([
-    supabase.from("projects").select("*", { count: "exact", head: true }),
-    supabase
-      .from("projects")
+    from("projects").select("*", { count: "exact", head: true }),
+    from("projects")
       .select("*", { count: "exact", head: true })
       .eq("is_featured", true),
-    supabase.from("ui_gallery").select("*", { count: "exact", head: true }),
-    supabase
-      .from("projects")
+    from("ui_gallery").select("*", { count: "exact", head: true }),
+    from("projects")
       .select("id, name, slug, category, is_featured, created_at")
       .order("created_at", { ascending: false })
       .limit(4),
-    supabase
-      .from("ui_gallery")
+    from("ui_gallery")
       .select("id, title, slug, category, created_at")
       .order("created_at", { ascending: false })
       .limit(4),
