@@ -4,7 +4,7 @@ export const heroEn: HeroDictionary = {
   titleTop: "UI/UX Designer",
   titleGlitch: "Developer",
   subtitle:
-    "Bridging the gap between high-fidelity design systems and scalable frontend engineering. 7+ years delivering production-grade digital products — from enterprise SaaS ecosystems to high-performance web applications.",
-  ctaText: "Start Project",
-  secondaryCtaText: "Download CV",
+    "Bridging the gap between UI/UX design and frontend. 7+ years building digital products — from enterprise SaaS ecosystems to mobile and web applications.",
+  ctaText: "View Portfolio",
+  secondaryCtaText: "Contact Me",
 };

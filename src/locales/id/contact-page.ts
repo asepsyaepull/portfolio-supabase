@@ -3,11 +3,11 @@ import { ContactPageDictionary } from "../types";
 export const contactPageId: ContactPageDictionary = {
   portalTag: "/ PORTAL KONTAK & INQUIRY",
   badge: "TERSEDIA UNTUK PROYEK & PERAN STRATEGIS",
-  titleLine1: "Mari Wujudkan",
-  titleLine2: "Produk Digital Berdampak.",
+  titleLine1: "Mari Diskusikan",
+  titleLine2: "Kebutuhan Anda",
   description:
-    "Punya visi produk baru, kebutuhan audit design system, atau memerlukan engineer frontend berpengalaman untuk mempercepat peluncuran? Mari diskusikan bagaimana kita bisa menciptakan dampak bersama.",
-  emailLabel: "Email Resmi",
+    "Mari diskusikan ide, kebutuhan proyek, atau tantangan yang sedang dihadapi. Saya siap mendengarkan dan menawarkan solusi terbaik untuk kebutuhan Anda.",
+  emailLabel: "Email",
   locationLabel: "Lokasi & Domisili",
   locationValue: "Cilandak, Jakarta Selatan (ID)",
   availabilityLabel: "Status Ketersediaan",
@@ -56,7 +56,7 @@ export const contactPageId: ContactPageDictionary = {
   submittingButton: "Mengirim Pesan...",
   successMessage:
     "Terima kasih! Pesan Anda telah berhasil terkirim. Saya akan meninjau dan merespons dalam waktu maksimal 24 jam kerja.",
-  scopeTitle: "Pilih Lingkup / Kategori Kebutuhan:",
+  scopeTitle: "Pilih Kebutuhan:",
   scopeChips: [
     "UI/UX Design",
     "Frontend Web (Next.js/React)",

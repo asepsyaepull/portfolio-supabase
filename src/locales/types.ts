@@ -5,7 +5,6 @@ export interface CommonDictionary {
     home: string;
     about: string;
     work: string;
-    process: string;
     experience: string;
     contact: string;
   };
@@ -253,7 +252,7 @@ export interface ContactPageDictionary {
   copiedEmailText: string;
   directChatBtn: string;
   socialHeading: string;
-  
+
   // Studio Specs
   specs: {
     spec1: { num: string; label: string; desc: string };
@@ -332,6 +331,7 @@ export interface ProjectsPageDictionary {
   hideProcess: string;
   architectureScope: string;
   deliverablesTechStack: string;
+  outcomeLabel?: string;
   backToProjects: string;
   launchProject: string;
   unavailable: string;
@@ -371,6 +371,9 @@ export interface WorkSectionDictionary {
   cinematicSubtitle: string;
   cinematicDescription: string;
   cinematicButton: string;
+  archiveCalloutTag: string;
+  archiveCalloutTitle: string;
+  archiveCalloutDescription: string;
 }
 
 export interface Dictionary {

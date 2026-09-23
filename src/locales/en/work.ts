@@ -1,13 +1,19 @@
 import { WorkSectionDictionary } from "../types";
 
 export const workEn: WorkSectionDictionary = {
-  workspaceTag: "WORK BENCH & EXPERTISE",
-  workspaceTitle: "Interactive Craft & System Console",
+  workspaceTag: "PROCESS & WORKFLOW",
+  workspaceTitle: "Systems & Work Process",
   workspaceSubtitle:
-    "Explore real-time workflows, frontend engineering, design systems, and product delivery in an interactive canvas.",
-  cinematicTitle: "SELECTED CRAFT",
-  cinematicSubtitle: "ARCHIVE // 2024 — 2026",
+    "Exploring the creative process, from ideation, design, and development to digital product deployment.",
+  cinematicTitle: "SELECTED PORTFOLIO",
+  cinematicSubtitle: "FEATURED PROJECTS // 2024 — 2026",
   cinematicDescription:
-    "A curated selection of high-impact web products, design systems, and frontend engineering crafts.",
-  cinematicButton: "View Full Archive",
+    "This portfolio showcases some of the finest projects I have crafted over the past few years. Each project features unique challenges, solutions, and outcomes reflecting my capabilities and expertise in web development.",
+  cinematicButton: "See More",
+  archiveCalloutTag: "/ CONTINUOUS PORTFOLIO",
+  archiveCalloutTitle:
+    "Want to explore more architecture case studies, design flows, and prototypes?",
+  archiveCalloutDescription:
+    "Complete documentation available from UX Discovery through production-ready code implementation.",
 };
+

@@ -2,13 +2,13 @@ import { AboutPageDictionary } from "../types";
 
 export const aboutPageEn: AboutPageDictionary = {
   badge: "/ PROFESSIONAL PROFILE",
-  headlineMain: "Design Driven.",
-  headlineSub: "Engineering Powered.",
+  headlineMain: "UI/UX Design",
+  headlineSub: "& Developer",
   bio1Prefix: "I'm ",
   bio1Name: "Asep Syaepul Rohman",
   bio1Suffix:
-    ", a Senior UI/UX Designer & Frontend Engineer with over 7 years of experience crafting and scaling production digital products.",
-  bio2: "I bridge the gap between high-fidelity design systems and production-grade web interfaces. My approach fuses rigorous user research with frontend precision, ensuring every interface component fulfills a business objective and achieves peak runtime performance.",
+    ", a UI/UX Designer & Frontend Developer with 7+ years of experience designing and building production-scale digital product ecosystems.",
+  bio2: "Bridging the gap between high-fidelity design and frontend development. My approach combines targeted user research with clean, structured code implementation, ensuring every interface component fulfills a real functional purpose and delivers optimal performance.",
   skillsTitle: "Core Disciplines & Capabilities",
   designTitle: "UI/UX & Product Design",
   designSkills: [
@@ -50,6 +50,6 @@ export const aboutPageEn: AboutPageDictionary = {
   experienceYears: "7+ Years Experience",
   location: "Jakarta, Indonesia",
   rolesHeadline: "UI/UX Designer & Frontend Developer",
-  viewProjectsBtn: "View Full Archive",
-  contactBtn: "Get in Touch",
+  viewProjectsBtn: "View All Projects",
+  contactBtn: "Contact Me",
 };

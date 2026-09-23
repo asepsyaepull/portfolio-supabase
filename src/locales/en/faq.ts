@@ -8,7 +8,7 @@ export const faqEn: FaqDictionary = {
     {
       label: "hiring.frame",
       q: "I'm a recruiter or hiring manager — are you open to full-time roles?",
-      a: "Absolutely. Alongside select contract initiatives, I am actively open to high-impact full-time roles as a Senior UI/UX Designer or Frontend Engineer in Greater Jakarta or globally remote. Reach out directly at mail.asepsyaepul@gmail.com — resume and comprehensive case studies are ready upon request with a response guaranteed within 24 hours.",
+      a: "Absolutely. Alongside select contract initiatives, I am actively open to high-impact full-time roles as a Senior UI/UX Designer or Frontend Engineer in Greater Jakarta or remote. Reach out directly at mail.asepsyaepul@gmail.com — resume and comprehensive case studies are ready upon request with a response guaranteed within 24 hours.",
       emailText: "mail.asepsyaepul@gmail.com",
     },
     {

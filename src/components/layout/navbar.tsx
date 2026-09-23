@@ -21,7 +21,6 @@ export function Navbar() {
     { name: t.common.nav.home, link: "/" },
     { name: t.common.nav.about, link: "/about" },
     { name: t.common.nav.work, link: "/projects" },
-    { name: t.common.nav.process, link: "/#process" },
     { name: t.common.nav.contact, link: "/contact" },
   ];
 

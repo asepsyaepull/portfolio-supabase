@@ -9,12 +9,12 @@ export const experienceId: ExperienceDictionary = {
   items: [
     {
       id: "symbolix",
-      company: "Symbolix.ai",
-      role: "Lead UI/UX Developer",
+      company: "PT Dinamika Simbolis Indonesia",
+      role: "UI/UX Developer",
       period: "Jan 2026 - Jul 2026",
       duration: "7 bln",
       type: "Kontrak",
-      location: "Jakarta, ID",
+      location: "Tangerang, ID",
       project: "Ekosistem ERP & POS",
       description:
         "Merancang ulang sistem transaksi POS dan alur kerja ERP terintegrasi untuk menyederhanakan operasional harian kasir dan tim manajemen.",
@@ -27,7 +27,7 @@ export const experienceId: ExperienceDictionary = {
     },
     {
       id: "korlantas",
-      company: "Korlantas Polri",
+      company: "PT Technonusa Prima Solusi",
       role: "Software Developer",
       period: "Jul 2025 - Feb 2026",
       duration: "8 bln",
@@ -45,7 +45,7 @@ export const experienceId: ExperienceDictionary = {
     },
     {
       id: "tractogo",
-      company: "TRACtoGO (Astra SERA)",
+      company: "PT Serasi Autoraya",
       role: "UI/UX Designer",
       period: "Des 2024 - Mei 2025",
       duration: "6 bln",
@@ -63,20 +63,19 @@ export const experienceId: ExperienceDictionary = {
     },
     {
       id: "gizalab",
-      company: "Gizalab",
-      role: "Product Designer & Frontend",
+      company: "PT Laluasa Cipta Asia",
+      role: "Senior Product Designer",
       period: "Okt 2023 - Agu 2024",
       duration: "11 bln",
       type: "Full-time",
-      location: "Bandung, ID (Remote)",
-      project: "Healthcare & Diagnostic Platform",
+      location: "Jakarta, ID",
+      project: "Digital Financial & Investment Platform",
       description:
-        "Merancang alur produk digital dari tahap konsep wireframe hingga prototipe fidelitas tinggi untuk platform analitik laboratorium klinis dan data diagnostik kesehatan.",
+        "Merancang alur produk digital dari tahap konsep wireframe hingga prototipe fidelitas tinggi untuk platform finansial dan investasi digital.",
       contributions: [
-        "Merancang dashboard manajemen hasil laboratorium dan rekam medis dengan navigasi terarah.",
-        "Menyusun spesifikasi token desain dan dokumentasi komponen untuk serah terima efisien ke tim engineering.",
-        "Membangun prototipe interaktif untuk validasi alur kerja staf medis dan teknisi laboratorium.",
-        "Mengoptimalkan keterbacaan data dan responsivitas tampilan pada monitor desktop maupun tablet klinik.",
+        "Memimpin seluruh siklus desain produk mulai dari discovery strategis, penyelarasan stakeholder, hingga prototipe responsif fidelitas tinggi di Figma.",
+        "Meningkatkan kepuasan pengguna (CSAT) sebesar 28% melalui restrukturisasi arsitektur informasi produk dan penyempurnaan alur interaksi.",
+        "Menyusun spesifikasi desain interaksi serta memimpin sesi penyelarasan lintas tim untuk memastikan fidelitas visual dan fungsional di tahap produksi.",
       ],
       tech: ["Figma", "Design Tokens", "Prototyping", "User Research"],
     },

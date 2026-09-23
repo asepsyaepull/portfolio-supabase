@@ -3,11 +3,11 @@ import { ContactPageDictionary } from "../types";
 export const contactPageEn: ContactPageDictionary = {
   portalTag: "/ CONTACT PORTAL & INQUIRY",
   badge: "OPEN FOR NEW PROJECTS & STRATEGIC ROLES",
-  titleLine1: "Let's Build",
-  titleLine2: "Something Remarkable.",
+  titleLine1: "Let's Discuss",
+  titleLine2: "Your Needs.",
   description:
-    "Have a new product concept, need a design system overhaul, or seeking a seasoned frontend engineer to accelerate your sprint release? Let's discuss how we can create meaningful impact together.",
-  emailLabel: "Official Email",
+    "Let's discuss ideas, project needs, or current challenges. I am ready to listen and offer the best solutions tailored to your requirements.",
+  emailLabel: "Email",
   locationLabel: "Location & Base",
   locationValue: "Cilandak, South Jakarta (ID)",
   availabilityLabel: "Availability Status",
@@ -56,7 +56,7 @@ export const contactPageEn: ContactPageDictionary = {
   submittingButton: "Sending Message...",
   successMessage:
     "Thank you! Your message has been sent successfully. I will review and respond within 24 business hours.",
-  scopeTitle: "Select Primary Scope & Needs:",
+  scopeTitle: "Select Needs:",
   scopeChips: [
     "UI/UX Design",
     "Frontend Web (Next.js/React)",

@@ -33,7 +33,7 @@ export default function AboutClient() {
   return (
     <div className="relative min-h-screen pt-28 sm:pt-32 pb-24 text-zinc-900 dark:text-white">
       <div className="container mx-auto px-4 sm:px-6 lg:px-12 max-w-6xl">
-        
+
         {/* ===================================================================
             1. HERO / BIO INTRODUCTION
             =================================================================== */}
@@ -406,43 +406,6 @@ export default function AboutClient() {
 
           <AboutTimeline experiences={experiences} />
         </div>
-
-        {/* ===================================================================
-            5. BOTTOM CTA BRIDGE
-            =================================================================== */}
-        <div className="relative rounded-3xl bg-white dark:bg-[#121215] border border-zinc-200 dark:border-zinc-800 p-8 sm:p-12 shadow-xl text-center overflow-hidden">
-          <div className="relative z-10 max-w-2xl mx-auto flex flex-col items-center">
-            <span className="font-mono text-xs font-bold uppercase tracking-widest text-brand mb-2">
-              {locale === "id" ? "Siap Berkolaborasi?" : "Ready to collaborate?"}
-            </span>
-            <h3 className="heading-display font-display text-3xl sm:text-4xl font-extrabold text-zinc-900 dark:text-white tracking-tight mb-4">
-              {locale === "id"
-                ? "Mari wujudkan ide produk kompleks menjadi solusi digital yang intuitif."
-                : "Let's turn complex design ideas into seamless products."}
-            </h3>
-            <p className="text-sm sm:text-base text-zinc-600 dark:text-zinc-400 mb-8 max-w-lg">
-              {locale === "id"
-                ? "Tersedia untuk perancangan produk digital menyeluruh, arsitektur design system, atau peran engineering frontend."
-                : "Available for full product design, design system architecture, or full-stack frontend engineering roles."}
-            </p>
-            <div className="flex flex-wrap items-center justify-center gap-3">
-              <Link
-                href="/contact"
-                className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-brand hover:bg-brand-deep text-white font-mono font-bold text-xs uppercase tracking-wider shadow-brand shadow-[0_12px_26px_-12px_#F0531C] active:scale-95 transition-all duration-200"
-              >
-                <span>{t.common.buttons.talkWithMe}</span>
-                <IconArrowUpRight className="w-4 h-4 stroke-[2.5]" />
-              </Link>
-              <Link
-                href="/projects"
-                className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-zinc-100 dark:bg-zinc-900 hover:bg-zinc-200 dark:hover:bg-zinc-800 text-zinc-800 dark:text-zinc-200 font-mono font-bold text-xs uppercase tracking-wider hover:text-brand transition-colors duration-200"
-              >
-                <span>{about.viewProjectsBtn || t.common.buttons.viewArchive}</span>
-              </Link>
-            </div>
-          </div>
-        </div>
-
       </div>
     </div>
   );

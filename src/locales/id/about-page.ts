@@ -2,13 +2,13 @@ import { AboutPageDictionary } from "../types";
 
 export const aboutPageId: AboutPageDictionary = {
   badge: "/ PROFIL PROFESIONAL",
-  headlineMain: "Berorientasi Desain.",
-  headlineSub: "Diperkuat Rekayasa Kode.",
+  headlineMain: "Desain UI/UX",
+  headlineSub: "& Developer",
   bio1Prefix: "Saya ",
   bio1Name: "Asep Syaepul Rohman",
   bio1Suffix:
     ", UI/UX Designer & Frontend Developer dengan 7+ tahun pengalaman dalam merancang dan membangun ekosistem produk digital berskala produksi.",
-  bio2: "Saya menjembatani jurang pemisah antara desain fidelitas tinggi dan antarmuka web siap produksi. Pendekatan saya memadukan riset pengguna yang terarah dengan presisi rekayasa teknis, memastikan setiap komponen antarmuka memiliki tujuan fungsional nyata dan menghasilkan performa optimal.",
+  bio2: "Menjembatani antara desain fidelitas tinggi dengan frontend development. Pendekatan yang saya terapkan yaitu memadukan riset pengguna yang terarah dengan implementasi kode yang terstruktur dan rapi, memastikan setiap komponen antarmuka memiliki tujuan fungsional nyata dan menghasilkan performa optimal.",
   skillsTitle: "Keahlian & Disiplin Utama",
   designTitle: "Desain UI/UX & Produk",
   designSkills: [

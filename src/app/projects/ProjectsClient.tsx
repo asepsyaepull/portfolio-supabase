@@ -11,11 +11,6 @@ import {
   IconCheck,
   IconLayoutGrid,
   IconExternalLink,
-  IconSparkles,
-  IconLayersLinked,
-  IconCode,
-  IconMail,
-  IconDownload,
   IconBriefcase,
   IconPhoto,
   IconX,
@@ -25,6 +20,8 @@ import {
   IconBrandFigma,
 } from "@tabler/icons-react";
 import type { ProjectsPageDictionary } from "@/locales/types";
+import ReactMarkdown from "react-markdown";
+import remarkGfm from "remark-gfm";
 
 export interface ProjectItem {
   id: string | number;
@@ -115,7 +112,7 @@ export default function ProjectsClient({
   }, [lightboxIndex, handleCloseLightbox, handleNextLightbox, handlePrevLightbox]);
 
   return (
-    <div className="relative min-h-screen pt-28 sm:pt-32 pb-24 text-zinc-900 dark:text-white">
+    <div className="relative min-h-screen pt-28 sm:pt-32 pb-40 text-zinc-900 dark:text-white">
       <div className="container mx-auto px-4 sm:px-6 lg:px-12 max-w-6xl">
         {/* ===================================================================
             1. HEADER SECTION & BRAND BADGE
@@ -161,65 +158,6 @@ export default function ProjectsClient({
               : text.galleryDescription ||
                 "A curated collection of interface explorations, mobile & dashboard concepts, and component craft designed with typographic precision and aesthetic polish."}
           </p>
-
-          {/* Quick Studio Highlight Spec Pills */}
-          <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 pt-2">
-            <div className="p-3.5 rounded-2xl bg-white dark:bg-[#121215] border border-zinc-200/80 dark:border-zinc-800 shadow-sm flex items-center gap-3">
-              <div className="w-8 h-8 rounded-xl bg-brand/10 border border-brand/20 flex items-center justify-center flex-shrink-0 text-brand">
-                <IconLayersLinked className="w-4 h-4" />
-              </div>
-              <div className="text-left">
-                <div className="font-mono text-[10px] uppercase tracking-wider text-zinc-400 dark:text-zinc-500 font-bold">
-                  01 Production
-                </div>
-                <div className="text-xs font-semibold text-zinc-800 dark:text-zinc-200 truncate">
-                  {text.quickSpecs?.production || "100% Production"}
-                </div>
-              </div>
-            </div>
-
-            <div className="p-3.5 rounded-2xl bg-white dark:bg-[#121215] border border-zinc-200/80 dark:border-zinc-800 shadow-sm flex items-center gap-3">
-              <div className="w-8 h-8 rounded-xl bg-brand/10 border border-brand/20 flex items-center justify-center flex-shrink-0 text-brand">
-                <IconCode className="w-4 h-4" />
-              </div>
-              <div className="text-left">
-                <div className="font-mono text-[10px] uppercase tracking-wider text-zinc-400 dark:text-zinc-500 font-bold">
-                  02 Disciplines
-                </div>
-                <div className="text-xs font-semibold text-zinc-800 dark:text-zinc-200 truncate">
-                  {text.quickSpecs?.disciplines || "UI/UX & Code"}
-                </div>
-              </div>
-            </div>
-
-            <div className="p-3.5 rounded-2xl bg-white dark:bg-[#121215] border border-zinc-200/80 dark:border-zinc-800 shadow-sm flex items-center gap-3">
-              <div className="w-8 h-8 rounded-xl bg-brand/10 border border-brand/20 flex items-center justify-center flex-shrink-0 text-brand">
-                <IconSparkles className="w-4 h-4" />
-              </div>
-              <div className="text-left">
-                <div className="font-mono text-[10px] uppercase tracking-wider text-zinc-400 dark:text-zinc-500 font-bold">
-                  03 Architecture
-                </div>
-                <div className="text-xs font-semibold text-zinc-800 dark:text-zinc-200 truncate">
-                  {text.quickSpecs?.systems || "Token & Scalable"}
-                </div>
-              </div>
-            </div>
-
-            <div className="p-3.5 rounded-2xl bg-white dark:bg-[#121215] border border-zinc-200/80 dark:border-zinc-800 shadow-sm flex items-center gap-3">
-              <div className="w-8 h-8 rounded-xl bg-brand/10 border border-brand/20 flex items-center justify-center flex-shrink-0 text-brand">
-                <IconCheck className="w-4 h-4" />
-              </div>
-              <div className="text-left">
-                <div className="font-mono text-[10px] uppercase tracking-wider text-zinc-400 dark:text-zinc-500 font-bold">
-                  04 Result
-                </div>
-                <div className="text-xs font-semibold text-zinc-800 dark:text-zinc-200 truncate">
-                  {text.quickSpecs?.impact || "High Conversion"}
-                </div>
-              </div>
-            </div>
-          </div>
         </motion.div>
 
         {/* ===================================================================
@@ -363,77 +301,10 @@ export default function ProjectsClient({
           </div>
         )}
 
-        {/* ===================================================================
-            5. STUDIO BOTTOM CTA SECTION
-            =================================================================== */}
-        <motion.div
-          initial={{ opacity: 0, y: 24 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.55 }}
-          className="mt-24 md:mt-32"
-        >
-          <div className="relative w-full">
-            {/* Figma Layer Selection Tab */}
-            <div className="absolute -top-3.5 left-4 sm:left-6 font-mono text-[11px] font-bold text-brand bg-white dark:bg-[#121214] px-3 py-1 rounded-md border border-brand/30 shadow-sm flex items-center gap-1.5 z-20 tracking-wider">
-              <IconLayoutGrid className="w-3.5 h-3.5 text-brand" />
-              <span>04 get-in-touch.fig</span>
-            </div>
-
-            {/* Main Card Frame with 4 Corner Figma Handles */}
-            <div className="group relative rounded-3xl bg-white dark:bg-[#121215] border border-zinc-200 dark:border-zinc-800 p-8 sm:p-12 shadow-xl hover:shadow-2xl hover:border-brand/40 dark:hover:border-brand/40 transition-all duration-300">
-              <span className="absolute -top-1.5 -left-1.5 w-3 h-3 bg-white dark:bg-[#121215] border-2 border-brand rounded-[2px] opacity-0 group-hover:opacity-100 transition-opacity duration-200 z-30 pointer-events-none" />
-              <span className="absolute -top-1.5 -right-1.5 w-3 h-3 bg-white dark:bg-[#121215] border-2 border-brand rounded-[2px] opacity-0 group-hover:opacity-100 transition-opacity duration-200 z-30 pointer-events-none" />
-              <span className="absolute -bottom-1.5 -left-1.5 w-3 h-3 bg-white dark:bg-[#121215] border-2 border-brand rounded-[2px] opacity-0 group-hover:opacity-100 transition-opacity duration-200 z-30 pointer-events-none" />
-              <span className="absolute -bottom-1.5 -right-1.5 w-3 h-3 bg-white dark:bg-[#121215] border-2 border-brand rounded-[2px] opacity-0 group-hover:opacity-100 transition-opacity duration-200 z-30 pointer-events-none" />
-
-              <div className="max-w-2xl text-start">
-                <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-brand/10 border border-brand/20 text-brand font-mono tracking-widest text-[11px] font-bold uppercase mb-4">
-                  <span>/ READY TO COLLABORATE</span>
-                </div>
-                <h3 className="heading-display font-display text-3xl sm:text-4xl md:text-5xl font-extrabold text-zinc-900 dark:text-white tracking-tight mb-4">
-                  {text.ctaTitle || "Have a project or ambitious idea in mind?"}
-                </h3>
-                <p className="text-zinc-600 dark:text-zinc-400 text-sm sm:text-base leading-relaxed mb-8">
-                  {text.ctaDescription ||
-                    "Let's collaborate to craft pixel-precise user interfaces and engineer robust, high-performance web applications that scale."}
-                </p>
-
-                <div className="flex flex-wrap items-center gap-3.5">
-                  <Link
-                    href="/contact"
-                    className="inline-flex items-center gap-2 px-6 py-3.5 rounded-xl bg-brand hover:bg-brand-deep text-white font-mono font-bold text-xs uppercase tracking-wider shadow-brand shadow-[0_12px_26px_-12px_#F0531C] active:scale-95 transition-all duration-200"
-                  >
-                    <IconMail className="w-4 h-4 stroke-[2.5]" />
-                    <span>{text.ctaButton || "Get in Touch"}</span>
-                  </Link>
-
-                  <a
-                    href="/cv/CV-Asep-Syaepul-Rohman.pdf"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="inline-flex items-center gap-2 px-5 py-3.5 rounded-xl bg-white dark:bg-[#121215] hover:bg-zinc-100 dark:hover:bg-zinc-900 text-zinc-900 dark:text-white border border-zinc-200 dark:border-zinc-800 font-mono font-bold text-xs uppercase tracking-wider hover:border-brand/40 active:scale-95 transition-all duration-200"
-                  >
-                    <IconDownload className="w-4 h-4 stroke-[2]" />
-                    <span>{t.common.buttons.downloadCv}</span>
-                  </a>
-
-                  <Link
-                    href="/about"
-                    className="inline-flex items-center gap-2 px-5 py-3.5 rounded-xl bg-zinc-100 dark:bg-zinc-900/80 hover:bg-zinc-200 dark:hover:bg-zinc-800 text-zinc-700 dark:text-zinc-300 font-mono font-bold text-xs uppercase tracking-wider hover:text-brand transition-colors duration-200"
-                  >
-                    <span>{t.common.nav.about}</span>
-                    <IconArrowUpRight className="w-4 h-4 stroke-[2.5]" />
-                  </Link>
-                </div>
-              </div>
-            </div>
-          </div>
-        </motion.div>
       </div>
 
       {/* ===================================================================
-          6. INTERACTIVE LIGHTBOX MODAL
+          5. INTERACTIVE LIGHTBOX MODAL
           =================================================================== */}
       <AnimatePresence>
         {lightboxIndex !== null && galleries[lightboxIndex] && (
@@ -774,6 +645,32 @@ function GalleryLightboxModal({
   );
 }
 
+// Helper: Clean executive summary text from raw markdown image tags and symbols
+function cleanExecutiveSummary(text?: string): string {
+  if (!text) return "";
+  // Strip markdown image syntax: ![alt](url)
+  let cleaned = text.replace(/!\[.*?\]\(.*?\)/g, "").trim();
+  // Strip bold tags
+  cleaned = cleaned.replace(/\*\*(.*?)\*\*/g, "$1");
+  // Clean multiple newlines
+  cleaned = cleaned.replace(/\n+/g, " ").trim();
+  return cleaned;
+}
+
+// Helper: Format bullet points & numbered lists so that collapsed lines become valid markdown lists
+function formatMarkdownContent(text?: string): string {
+  if (!text) return "";
+  // 1. Strip markdown images if any: ![alt](url)
+  let formatted = text.replace(/!\[.*?\]\(.*?\)/g, "").trim();
+  // 2. Replace non-breaking spaces (\u00A0) with standard space
+  formatted = formatted.replace(/\u00a0/g, " ");
+  // 3. Add line breaks before bullet points if concatenated on a single line
+  formatted = formatted.replace(/([^\n])\s*-\s+\*\*/g, "$1\n\n- **");
+  // 4. Add line breaks before numbered points if concatenated
+  formatted = formatted.replace(/([^\n])\s*(\d+\.)\s+\*\*/g, "$1\n\n$2 **");
+  return formatted.trim();
+}
+
 {/* =========================================================================
     ORIGINAL STUDIO CARD COMPONENT (FOR CASE STUDIES)
     ========================================================================= */}
@@ -846,7 +743,7 @@ function StudioCard({
               </div>
 
               <p className="text-sm sm:text-base text-zinc-600 dark:text-zinc-400 leading-relaxed mt-4 line-clamp-3">
-                {project.description}
+                {cleanExecutiveSummary(project.description)}
               </p>
             </div>
 
@@ -967,21 +864,90 @@ function StudioCard({
               >
                 <div className="pt-5 grid grid-cols-1 md:grid-cols-12 gap-6 items-start">
                   {/* Scope & Architecture */}
-                  <div className="md:col-span-6 space-y-2">
-                    <span className="font-mono text-[11px] font-bold uppercase tracking-widest text-brand block">
-                      {text.architectureScope}
-                    </span>
-                    <p className="text-xs sm:text-sm text-zinc-600 dark:text-zinc-400 leading-relaxed">
-                      {project.problem ||
-                        "Structured modular design tokens, scalable component trees, strict keyboard accessibility, and optimized network resource caching."}
-                    </p>
+                  <div className="md:col-span-6 space-y-4">
+                    <div>
+                      <span className="font-mono text-[11px] font-bold uppercase tracking-widest text-brand block mb-1.5">
+                        {text.architectureScope}
+                      </span>
+                      <div className="prose prose-xs sm:prose-sm dark:prose-invert max-w-none text-zinc-600 dark:text-zinc-400">
+                        <ReactMarkdown
+                          remarkPlugins={[remarkGfm]}
+                          components={{
+                            p: ({ children }) => (
+                              <p className="text-xs sm:text-sm text-zinc-600 dark:text-zinc-400 leading-relaxed my-1">
+                                {children}
+                              </p>
+                            ),
+                            ul: ({ children }) => (
+                              <ul className="text-xs sm:text-sm text-zinc-600 dark:text-zinc-400 space-y-1.5 my-2 list-disc pl-4 marker:text-brand">
+                                {children}
+                              </ul>
+                            ),
+                            ol: ({ children }) => (
+                              <ol className="text-xs sm:text-sm text-zinc-600 dark:text-zinc-400 space-y-1.5 my-2 list-decimal pl-4 marker:text-brand marker:font-mono marker:font-semibold">
+                                {children}
+                              </ol>
+                            ),
+                            li: ({ children }) => (
+                              <li className="leading-relaxed">
+                                {children}
+                              </li>
+                            ),
+                            strong: ({ children }) => (
+                              <strong className="text-zinc-900 dark:text-white font-semibold">
+                                {children}
+                              </strong>
+                            ),
+                          }}
+                        >
+                          {formatMarkdownContent(
+                            project.problem ||
+                              "Structured modular design tokens, scalable component trees, strict keyboard accessibility, and optimized network resource caching."
+                          )}
+                        </ReactMarkdown>
+                      </div>
+                    </div>
+
                     {project.solution && (
-                      <p className="text-xs sm:text-sm text-zinc-600 dark:text-zinc-400 leading-relaxed pt-1">
-                        <strong className="text-zinc-900 dark:text-white font-semibold">
-                          Outcome:{" "}
-                        </strong>
-                        {project.solution}
-                      </p>
+                      <div className="pt-3 border-t border-zinc-200/80 dark:border-zinc-800/80">
+                        <span className="font-mono text-[11px] font-bold uppercase tracking-widest text-brand block mb-1.5">
+                          {text.outcomeLabel || "Outcome & Solution"}
+                        </span>
+                        <div className="prose prose-xs sm:prose-sm dark:prose-invert max-w-none text-zinc-600 dark:text-zinc-400">
+                          <ReactMarkdown
+                            remarkPlugins={[remarkGfm]}
+                            components={{
+                              p: ({ children }) => (
+                                <p className="text-xs sm:text-sm text-zinc-600 dark:text-zinc-400 leading-relaxed my-1">
+                                  {children}
+                                </p>
+                              ),
+                              ul: ({ children }) => (
+                                <ul className="text-xs sm:text-sm text-zinc-600 dark:text-zinc-400 space-y-1.5 my-2 list-disc pl-4 marker:text-brand">
+                                  {children}
+                                </ul>
+                              ),
+                              ol: ({ children }) => (
+                                <ol className="text-xs sm:text-sm text-zinc-600 dark:text-zinc-400 space-y-1.5 my-2 list-decimal pl-4 marker:text-brand marker:font-mono marker:font-semibold">
+                                  {children}
+                                </ol>
+                              ),
+                              li: ({ children }) => (
+                                <li className="leading-relaxed">
+                                  {children}
+                                </li>
+                              ),
+                              strong: ({ children }) => (
+                                <strong className="text-zinc-900 dark:text-white font-semibold">
+                                  {children}
+                                </strong>
+                              ),
+                            }}
+                          >
+                            {formatMarkdownContent(project.solution)}
+                          </ReactMarkdown>
+                        </div>
+                      </div>
                     )}
                   </div>
 

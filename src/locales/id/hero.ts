@@ -4,7 +4,7 @@ export const heroId: HeroDictionary = {
   titleTop: "UI/UX Designer",
   titleGlitch: "Developer",
   subtitle:
-    "Menyatukan presisi desain visual dan keandalan arsitektur frontend. Berpengalaman 7+ tahun merancang dan membangun produk digital live di production — dari platform SaaS enterprise hingga aplikasi mobile berkinerja tinggi.",
-  ctaText: "Mulai Proyek",
-  secondaryCtaText: "Unduh CV",
+    "Menjembatani antara desain UI/UX dan frontend. 7+ tahun membangun produk digital — dari ekosistem SaaS enterprise hingga aplikasi mobile dan web.",
+  ctaText: "Lihat Portofolio",
+  secondaryCtaText: "Hubungi Saya",
 };

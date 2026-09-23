@@ -19,7 +19,7 @@ export const HeroSection = () => {
         ctaText={t.hero.ctaText}
         ctaHref="#work"
         secondaryCtaText={t.hero.secondaryCtaText}
-        secondaryCtaHref="/cv/CV-Asep-Syaepul-Rohman.pdf"
+        secondaryCtaHref="/contact"
       />
     </section>
   );

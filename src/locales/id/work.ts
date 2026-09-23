@@ -1,13 +1,18 @@
 import { WorkSectionDictionary } from "../types";
 
 export const workId: WorkSectionDictionary = {
-  workspaceTag: "MEJA KERJA & KEAHLIAN",
-  workspaceTitle: "Konsol Sistem & Karya Interaktif",
+  workspaceTag: "PROSES & ALUR KERJA",
+  workspaceTitle: "SISTEM & PROSES KERJA",
   workspaceSubtitle:
-    "Jelajahi alur kerja real-time, rekayasa frontend, design system, dan hasil produk dalam kanvas interaktif.",
-  cinematicTitle: "KARYA PILIHAN",
-  cinematicSubtitle: "ARSIP // 2024 — 2026",
+    "Menjelajahi proses kreatif, mulai dari ideasi, desain, pengembangan, hingga deployment produk digital.",
+  cinematicTitle: "PORTOFOLIO PILIHAN",
+  cinematicSubtitle: "PROYEK PILIHAN // 2024 — 2026",
   cinematicDescription:
-    "Koleksi kurasi produk web berdampak tinggi, design system, dan rekayasa frontend.",
-  cinematicButton: "Lihat Semua Arsip",
+    "Portofolio ini menampilkan beberapa proyek terbaik yang telah saya kerjakan selama beberapa tahun terakhir. Setiap proyek memiliki tantangan, solusi, dan hasil yang unik yang menggambarkan kemampuan dan keahlian saya di bidang pengembangan web.",
+  cinematicButton: "Lihat Lebih Banyak",
+  archiveCalloutTag: "/ PORTOFOLIO BERKELANJUTAN",
+  archiveCalloutTitle:
+    "Ingin melihat studi kasus arsitektur, flow design, dan prototype lainnya?",
+  archiveCalloutDescription:
+    "Tersedia dokumentasi lengkap mulai dari UX Discovery hingga implementasi kode produksi.",
 };

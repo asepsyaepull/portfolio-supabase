@@ -9,12 +9,12 @@ export const experienceEn: ExperienceDictionary = {
   items: [
     {
       id: "symbolix",
-      company: "Symbolix.ai",
-      role: "Lead UI/UX Developer",
+      company: "PT Dinamika Simbolis Indonesia",
+      role: "UI/UX Developer",
       period: "Jan 2026 - Jul 2026",
       duration: "7 mos",
       type: "Contract",
-      location: "Jakarta, ID",
+      location: "Tangerang, ID",
       project: "ERP & POS Ecosystem",
       description:
         "Redesigned transactional POS and integrated enterprise ERP workflows, streamlining daily operations for store cashiers and management teams.",
@@ -27,7 +27,7 @@ export const experienceEn: ExperienceDictionary = {
     },
     {
       id: "korlantas",
-      company: "Korlantas Polri",
+      company: "PT Technonusa Prima Solusi",
       role: "Software Developer",
       period: "Jul 2025 - Feb 2026",
       duration: "8 mos",
@@ -45,7 +45,7 @@ export const experienceEn: ExperienceDictionary = {
     },
     {
       id: "tractogo",
-      company: "TRACtoGO (Astra SERA)",
+      company: "PT Serasi Autoraya",
       role: "UI/UX Designer",
       period: "Dec 2024 - May 2025",
       duration: "6 mos",
@@ -63,20 +63,19 @@ export const experienceEn: ExperienceDictionary = {
     },
     {
       id: "gizalab",
-      company: "Gizalab",
-      role: "Product Designer & Frontend",
+      company: "PT Laluasa Cipta Asia",
+      role: "Senior Product Designer",
       period: "Oct 2023 - Aug 2024",
       duration: "11 mos",
       type: "Full-time",
-      location: "Bandung, ID (Remote)",
-      project: "Healthcare & Diagnostic Platform",
+      location: "Jakarta, ID",
+      project: "Digital Financial & Investment Platform",
       description:
-        "Designed end-to-end product flows from wireframe conceptualization to high-fidelity prototypes for a clinical laboratory analytics and diagnostic management platform.",
+        "Designed end-to-end product flows from wireframe conceptualization to high-fidelity prototypes for a digital financial and investment platform.",
       contributions: [
-        "Designed clinical data management dashboards with clear visual hierarchies and intuitive workflows.",
-        "Authored comprehensive design tokens and interaction specifications for seamless engineering handoff.",
-        "Constructed interactive prototypes to validate diagnostic test workflows with medical specialists.",
-        "Optimized layout responsiveness across clinic desktop workstations and tablet devices.",
+        "Directed the complete product design lifecycle from strategic discovery, stakeholder alignment, and wireframing to high-fidelity responsive prototypes in Figma.",
+        "Boosted user satisfaction (CSAT) by 28% by restructuring product information architecture and refining interaction feedback loops.",
+        "Established clear interaction design specifications and led cross-departmental alignment sessions to guarantee high visual and functional fidelity in production.",
       ],
       tech: ["Figma", "Design Tokens", "Prototyping", "User Research"],
     },

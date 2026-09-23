@@ -13,6 +13,7 @@ export const projectsPageEn: ProjectsPageDictionary = {
   hideProcess: "Hide Specifications",
   architectureScope: "Architecture & Scope",
   deliverablesTechStack: "Deliverables & Stack",
+  outcomeLabel: "Outcome & Solution",
   backToProjects: "Back to Projects",
   launchProject: "Open Project",
   unavailable: "Internal Link",

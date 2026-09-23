@@ -3,9 +3,8 @@ import { CommonDictionary } from "../types";
 export const commonId: CommonDictionary = {
   nav: {
     home: "Beranda",
-    about: "Tentang",
-    work: "Karya",
-    process: "Alur Kerja",
+    about: "Tentang Saya",
+    work: "Proyek",
     experience: "Pengalaman",
     contact: "Kontak",
   },
@@ -14,7 +13,7 @@ export const commonId: CommonDictionary = {
     emailMe: "Kirim Email",
     talkWithMe: "Hubungi Saya",
     startProject: "Mulai Proyek",
-    viewArchive: "Lihat Semua Karya",
+    viewArchive: "Lihat Semua Proyek",
     send: "Kirim Pesan",
     sending: "Mengirim Pesan...",
   },

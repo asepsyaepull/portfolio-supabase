@@ -8,7 +8,7 @@ export const faqId: FaqDictionary = {
     {
       label: "hiring.frame",
       q: "Apakah terbuka untuk posisi full-time atau kontrak?",
-      a: "Tentu saja. Selain proyek lepas (freelance), saya terbuka untuk peluang peran full-time atau kontrak sebagai Senior UI/UX Designer atau Frontend Developer di area Jabodetabek maupun remote global. Silakan kirimkan tawaran kerja sama ke mail.asepsyaepul@gmail.com — CV dan portofolio siap dikirimkan dengan waktu respons maksimal 24 jam.",
+      a: "Tentu saja. Selain proyek lepas (freelance), saya terbuka untuk peluang peran full-time atau kontrak sebagai Senior UI/UX Designer atau Frontend Developer di area Jabodetabek maupun remote. Silakan kirimkan tawaran kerja sama ke mail.asepsyaepul@gmail.com — CV dan portofolio siap dikirimkan dengan waktu respons maksimal 24 jam.",
       emailText: "mail.asepsyaepul@gmail.com",
     },
     {

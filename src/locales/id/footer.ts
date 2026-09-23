@@ -1,7 +1,7 @@
 import { FooterDictionary } from "../types";
 
 export const footerId: FooterDictionary = {
-  heading: "Siap mewujudkan produk digital luar biasa?",
+  heading: "Mari wujudkan ide luar biasamu.",
   giantText: "ASEP SYAEPUL",
   marqueeItems: [
     "UI/UX Engineering",

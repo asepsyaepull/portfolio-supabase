@@ -1,11 +1,11 @@
 import { ProjectsPageDictionary } from "../types";
 
 export const projectsPageId: ProjectsPageDictionary = {
-  badge: "/ STUDI KASUS & PRODUK PRODUKSI",
-  titlePrefix: "Karya",
+  badge: "/ PROYEK PILIHAN & STUDI KASUS",
+  titlePrefix: "Proyek",
   titleHighlight: "Pilihan.",
   description:
-    "Koleksi studi kasus riset pengguna mendalam, arsitektur design token, dan rekayasa frontend siap produksi dengan kinerja tinggi.",
+    "Koleksi studi kasus riset pengguna, tampilan desain UI/UX, arsitektur design token, dan rekayasa frontend siap produksi.",
   allFilter: "Semua Proyek",
   filterLabel: "Kategori Proyek",
   readCaseStudy: "Baca Studi Kasus",
@@ -13,6 +13,7 @@ export const projectsPageId: ProjectsPageDictionary = {
   hideProcess: "Sembunyikan Spesifikasi",
   architectureScope: "Arsitektur & Ruang Lingkup",
   deliverablesTechStack: "Hasil Kerja & Tech Stack",
+  outcomeLabel: "Hasil & Solusi",
   backToProjects: "Kembali ke Proyek",
   launchProject: "Buka Proyek",
   unavailable: "Tautan Internal",

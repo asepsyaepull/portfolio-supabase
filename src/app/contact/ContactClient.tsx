@@ -1,32 +1,27 @@
 "use client";
 
-import React, { useState, useRef, useTransition } from "react";
-import { motion } from "framer-motion";
-import Link from "next/link";
-import { useLanguage } from "@/context/language-context";
-import { submitContactForm } from "./actions";
-import { toast } from "sonner";
 import { FigmaTag, FrameLabel } from "@/components/ui/figma-tag";
 import { Input, TextArea } from "@/components/ui/input";
+import { useLanguage } from "@/context/language-context";
+import { cn } from "@/lib/utils";
 import {
-  IconMail,
-  IconMapPin,
-  IconBrandWhatsapp,
+  IconArrowUpRight,
+  IconBrandDribbble,
   IconBrandGithub,
   IconBrandLinkedin,
-  IconBrandDribbble,
-  IconSend,
-  IconCopy,
   IconCheck,
-  IconClock,
-  IconSparkles,
+  IconCopy,
   IconDownload,
-  IconArrowUpRight,
-  IconMessageCircle,
-  IconHelpCircle,
+  IconMail,
+  IconMapPin,
+  IconSend,
   IconShieldCheck,
+  IconSparkles
 } from "@tabler/icons-react";
-import { cn } from "@/lib/utils";
+import { motion } from "framer-motion";
+import React, { useRef, useState, useTransition } from "react";
+import { toast } from "sonner";
+import { submitContactForm } from "./actions";
 
 const EMAIL_ADDRESS = "mail.asepsyaepul@gmail.com";
 
@@ -101,40 +96,14 @@ export default function ContactClient() {
             </h1>
 
             {/* Narrative Description */}
-            <p className="text-base sm:text-lg text-zinc-600 dark:text-zinc-400 leading-relaxed max-w-2xl">
+            <p className="text-base sm:text-lg text-zinc-600 dark:text-zinc-400 leading-relaxed max-w-3xl">
               {contact.description}
             </p>
           </div>
         </div>
 
         {/* ===================================================================
-            2. STUDIO HIGHLIGHTS BAR (4 Bento Spec Pills)
-            =================================================================== */}
-        <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4 mb-16">
-          <SpecCard
-            num={contact.specs.spec1.num}
-            label={contact.specs.spec1.label}
-            desc={contact.specs.spec1.desc}
-          />
-          <SpecCard
-            num={contact.specs.spec2.num}
-            label={contact.specs.spec2.label}
-            desc={contact.specs.spec2.desc}
-          />
-          <SpecCard
-            num={contact.specs.spec3.num}
-            label={contact.specs.spec3.label}
-            desc={contact.specs.spec3.desc}
-          />
-          <SpecCard
-            num={contact.specs.spec4.num}
-            label={contact.specs.spec4.label}
-            desc={contact.specs.spec4.desc}
-          />
-        </div>
-
-        {/* ===================================================================
-            3. MAIN STUDIO STAGE (2 Columns)
+            2. MAIN STUDIO STAGE (2 Columns)
             =================================================================== */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-start mb-24">
           {/* LEFT COLUMN: Channels, Live Status, Socials */}
@@ -149,21 +118,23 @@ export default function ContactClient() {
             <div className="rounded-3xl border border-zinc-200 dark:border-zinc-800 bg-white/80 dark:bg-[#121215]/80 backdrop-blur-md p-6 sm:p-7 shadow-lg space-y-6">
               {/* Email item with Quick Copy */}
               <div className="flex flex-col gap-2">
-                <p className="font-mono text-[11px] font-bold uppercase tracking-wider text-zinc-400 dark:text-zinc-500">
-                  {contact.emailLabel}
-                </p>
-                <div className="flex items-center justify-between gap-3 p-3.5 rounded-2xl bg-zinc-50 dark:bg-zinc-900/60 border border-zinc-200/60 dark:border-zinc-800/60">
+                <div className="flex items-center justify-between gap-3">
                   <div className="flex items-center gap-3 min-w-0">
-                    <div className="w-9 h-9 rounded-xl bg-brand/10 text-brand flex items-center justify-center shrink-0">
-                      <IconMail className="w-5 h-5" />
+                    <div className="w-9 h-9 rounded-xl bg-zinc-100 dark:bg-zinc-800/60 text-zinc-500 flex items-center justify-center shrink-0">
+                      <IconMail className="w-5 h-5 text-brand" />
                     </div>
-                    <a
-                      href={`mailto:${EMAIL_ADDRESS}`}
-                      className="text-xs sm:text-sm font-semibold text-zinc-900 dark:text-white hover:text-brand transition-colors truncate"
-                      title={EMAIL_ADDRESS}
-                    >
-                      {EMAIL_ADDRESS}
+                    <div className="flex flex-col truncate">
+                      <p className="font-mono text-[10px] uppercase font-bold tracking-wider text-zinc-400 dark:text-zinc-500">
+                        {contact.emailLabel}
+                      </p>
+                      <a
+                        href={`mailto:${EMAIL_ADDRESS}`}
+                        className="text-xs sm:text-sm font-semibold text-zinc-900 dark:text-white hover:text-brand transition-colors truncate"
+                        title={EMAIL_ADDRESS}
+                      >
+                        {EMAIL_ADDRESS}
                     </a>
+                    </div>
                   </div>
                   <button
                     type="button"
@@ -182,8 +153,7 @@ export default function ContactClient() {
                       </>
                     ) : (
                       <>
-                        <IconCopy className="w-3.5 h-3.5" />
-                        <span>{contact.copyEmailBtn}</span>
+                          <IconCopy className="w-3.5 h-3.5" />
                       </>
                     )}
                   </button>
@@ -267,36 +237,6 @@ export default function ContactClient() {
                 {/* Background Ambient Glow */}
                 <div className="absolute -top-12 -right-12 h-56 w-56 bg-brand/10 blur-[90px] -z-10 rounded-full pointer-events-none" />
 
-                {/* Scope Selection Chips */}
-                <div className="mb-7">
-                  <div className="flex items-center gap-2 mb-3">
-                    <IconSparkles className="w-4 h-4 text-brand" />
-                    <p className="font-mono text-xs font-bold uppercase tracking-wider text-zinc-600 dark:text-zinc-300">
-                      {contact.scopeTitle}
-                    </p>
-                  </div>
-                  <div className="flex flex-wrap gap-2">
-                    {contact.scopeChips.map((chip) => {
-                      const isActive = selectedScope === chip;
-                      return (
-                        <button
-                          key={chip}
-                          type="button"
-                          onClick={() => handleScopeSelect(chip)}
-                          className={cn(
-                            "px-3 py-1.5 rounded-lg text-xs font-mono font-bold transition-all duration-200 border cursor-pointer",
-                            isActive
-                              ? "bg-brand text-white border-brand shadow-[0_4px_14px_-2px_#F0531C] scale-[1.02]"
-                              : "bg-zinc-100/90 dark:bg-zinc-900/80 hover:bg-zinc-200 dark:hover:bg-zinc-800 text-zinc-700 dark:text-zinc-300 border-zinc-200 dark:border-zinc-800 hover:border-brand/40"
-                          )}
-                        >
-                          {chip}
-                        </button>
-                      );
-                    })}
-                  </div>
-                </div>
-
                 {/* The Contact Form */}
                 <form
                   ref={formRef}
@@ -330,6 +270,33 @@ export default function ContactClient() {
                         required
                         disabled={isPending}
                       />
+                    </div>
+                  </div>
+
+                  {/* Scope Selection Chips */}
+                  <div className="mb-7">
+                    <label className="block font-mono text-[11px] font-bold uppercase tracking-wider text-zinc-500 dark:text-zinc-400 mb-1.5">
+                      {contact.scopeTitle}
+                    </label>
+                    <div className="flex flex-wrap gap-2">
+                      {contact.scopeChips.map((chip) => {
+                        const isActive = selectedScope === chip;
+                        return (
+                          <button
+                            key={chip}
+                            type="button"
+                            onClick={() => handleScopeSelect(chip)}
+                            className={cn(
+                              "px-3 py-1.5 rounded-lg text-xs font-mono font-bold transition-all duration-200 border cursor-pointer",
+                              isActive
+                                ? "bg-brand text-white border-brand shadow-[0_4px_14px_-2px_#F0531C] scale-[1.02]"
+                                : "bg-zinc-100/90 dark:bg-zinc-900/80 hover:bg-zinc-200 dark:hover:bg-zinc-800 text-zinc-700 dark:text-zinc-300 border-zinc-200 dark:border-zinc-800 hover:border-brand/40"
+                            )}
+                          >
+                            {chip}
+                          </button>
+                        );
+                      })}
                     </div>
                   </div>
 
@@ -405,41 +372,7 @@ export default function ContactClient() {
         {/* ===================================================================
             4. COLLABORATION FAQ / EXPECTATIONS BENTO
             =================================================================== */}
-        <div className="pt-8 border-t border-zinc-200/80 dark:border-zinc-800/80">
-          <div className="max-w-2xl mb-10">
-            <div className="inline-flex items-center gap-2 text-brand font-mono text-xs font-bold uppercase tracking-wider mb-2">
-              <IconHelpCircle className="w-4 h-4" />
-              <span>FAQ / PROTOCOL</span>
-            </div>
-            <h2 className="heading-display font-display text-2xl sm:text-3xl font-bold text-zinc-900 dark:text-white mb-3">
-              {contact.faqHeading}
-            </h2>
-            <p className="text-sm text-zinc-600 dark:text-zinc-400">
-              {contact.faqSubheading}
-            </p>
-          </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            {contact.faqs.map((faq, idx) => (
-              <div
-                key={idx}
-                className="rounded-2xl border border-zinc-200 dark:border-zinc-800 bg-white/70 dark:bg-[#121215]/70 backdrop-blur-md p-6 shadow-sm hover:border-brand/40 transition-all duration-300 flex flex-col justify-between"
-              >
-                <div>
-                  <span className="font-mono text-xs font-bold text-brand mb-3 block">
-                    0{idx + 1}
-                  </span>
-                  <h3 className="text-base font-bold text-zinc-900 dark:text-white mb-2 leading-snug">
-                    {faq.question}
-                  </h3>
-                  <p className="text-xs sm:text-sm text-zinc-600 dark:text-zinc-400 leading-relaxed">
-                    {faq.answer}
-                  </p>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
       </div>
     </div>
   );

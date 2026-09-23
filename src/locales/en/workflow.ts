@@ -1,25 +1,25 @@
 import { WorkflowDictionary } from "../types";
 
 export const workflowEn: WorkflowDictionary = {
-  tag: "how-it-works.frame",
-  title: "Direct collaboration. Zero friction.",
+  tag: "how-i-works.frame",
+  title: "HOW I WORK",
   subtitle:
-    "A dedicated, transparent workflow. From initial brief and interactive design to live production deployment.",
+    "Direct communication in a single unified channel. From initial brief and design exploration to production release.",
   channelName: "<project-channel>",
   onlineStatus: "3 online",
-  inputPlaceholder: "message <project-channel>",
+  inputPlaceholder: "type a message in <project-channel>",
   steps: [
     {
-      label: "01 · KICKOFF",
+      label: "01 · INITIATION",
       msgs: [
         {
           from: "you",
-          text: "Hi Asep! Do you have an open slot for a new project? We need a dashboard redesign.",
+          text: "Hi Asep, are you currently open for a new project? We need a system dashboard redesign.",
           time: "09.02",
         },
         {
           from: "asep",
-          text: "Hello! Yes, ready to roll 👋 Let's align on your primary goals — who is the target user and what is the key problem to solve?",
+          text: "Hello! Yes, I'm open for new projects. Let's discuss the main goals, target users, and key challenges you want to solve.",
           time: "09.04",
         },
       ],
@@ -29,51 +29,56 @@ export const workflowEn: WorkflowDictionary = {
       msgs: [
         {
           from: "you",
-          text: "Here is our project brief and visual benchmarks. There are 3 core flows to overhaul.",
+          text: "Here's the project brief and visual references. There are 3 main flows that need optimization.",
           time: "09.15",
           attach: "project-brief.fig",
         },
         {
           from: "asep",
-          text: "Brief thoroughly reviewed! I'll conduct rapid flow benchmarking and deliver initial wireframes today.",
+          text: "Got it, I've reviewed the brief. I'll do a quick UX competitive research, then prepare the initial wireframe draft.",
           time: "09.20",
         },
       ],
     },
     {
-      label: "03 · ITERATE",
+      label: "03 · ITERATION",
       msgs: [
         {
           from: "asep",
-          text: "Interactive wireframes are ready. Please review the checkout funnel — prioritized for conversion.",
+          text: "The wireframe draft is ready. Please review the primary user flows prioritized for this project.",
           time: "14.30",
           attach: "homepage-v1.png",
           reaction: "🔥 2",
         },
         {
           from: "you",
-          text: "Right on target. Let's refine the primary CTA proportions and give sections slightly more breathing room.",
+          text: "The direction is spot on. I think the primary button could be slightly more proportional, and the spacing between sections could be a bit looser.",
           time: "15.02",
           reaction: "👍 1",
         },
         {
           from: "asep",
-          text: "Noted! Revisions are fully covered — I'll push the updated layout today.",
+          text: "Understood, I've revised the design with adjusted primary buttons and looser section spacing. Please take another look.",
           time: "15.05",
+        },
+        {
+          from: "you",
+          text: "Perfect, the revisions match our expectations. Let's proceed to the implementation phase.",
+          time: "16.10",
         },
       ],
     },
     {
-      label: "04 · SHIP",
+      label: "04 · DEPLOY",
       msgs: [
         {
           from: "asep",
-          text: "Successfully deployed and live in production! Lighthouse score 98, all user flows thoroughly validated. 🚀",
+          text: "I've completed the implementation and it's live in production. All user flows have been tested and verified optimal. 🚀",
           time: "10.41",
         },
         {
           from: "you",
-          text: "Exceptional execution. Let's line up the next phase right away.",
+          text: "Awesome! We can schedule the sprint for our next project.",
           time: "10.44",
         },
       ],

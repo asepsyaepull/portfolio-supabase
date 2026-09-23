@@ -4,8 +4,7 @@ export const commonEn: CommonDictionary = {
   nav: {
     home: "Home",
     about: "About",
-    work: "Work",
-    process: "Process",
+    work: "Projects",
     experience: "Experience",
     contact: "Contact",
   },

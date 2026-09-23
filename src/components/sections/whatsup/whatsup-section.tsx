@@ -11,6 +11,7 @@ import {
   IconBrandReact,
   IconBrush,
   IconCode,
+  IconDeviceMobile,
   IconMouse,
   IconPalette,
   IconQuote,
@@ -24,6 +25,8 @@ import React from "react";
 const CAPABILITY_ICONS: Record<string, React.ReactNode> = {
   "ui/ux": <IconPalette className="h-4 w-4" />,
   "web dev": <IconCode className="h-4 w-4" />,
+  "web development": <IconCode className="h-4 w-4" />,
+  "web & mobile apps": <IconDeviceMobile className="h-4 w-4" />,
   "prototyping": <IconMouse className="h-4 w-4" />,
   "design systems": <IconStack className="h-4 w-4" />,
   "motion": <IconSparkles className="h-4 w-4" />,

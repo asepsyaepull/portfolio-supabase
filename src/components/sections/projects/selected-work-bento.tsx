@@ -23,6 +23,9 @@ export interface SelectedWorkBentoProps {
   description?: string;
   buttonText?: string;
   buttonLink?: string;
+  archiveTag?: string;
+  archiveTitle?: string;
+  archiveDescription?: string;
 }
 
 export function SelectedWorkBento({
@@ -32,18 +35,32 @@ export function SelectedWorkBento({
   description,
   buttonText,
   buttonLink = "/projects",
+  archiveTag,
+  archiveTitle,
+  archiveDescription,
 }: SelectedWorkBentoProps) {
   const { t } = useLanguage();
 
-  const activeTitle = title || t.work.cinematicTitle || "KARYA PILIHAN";
+  const activeTitle = title || t.work.cinematicTitle || "PROJECTS";
   const activeSubtitle =
-    subtitle || t.work.cinematicSubtitle || "ARSIP // 2024 — 2026";
+    subtitle || t.work.cinematicSubtitle || "SELECTED WORK";
   const activeDescription =
     description ||
     t.work.cinematicDescription ||
     "Koleksi kurasi produk web berdampak tinggi, design system, dan rekayasa frontend.";
   const activeButtonText =
-    buttonText || t.work.cinematicButton || "Lihat Semua Arsip";
+    buttonText || t.work.cinematicButton || "View All";
+
+  const activeArchiveTag =
+    archiveTag || t.work.archiveCalloutTag || "/ CONTINUOUS ARCHIVE";
+  const activeArchiveTitle =
+    archiveTitle ||
+    t.work.archiveCalloutTitle ||
+    "Ingin melihat studi kasus arsitektur, flow design, dan prototype lainnya?";
+  const activeArchiveDescription =
+    archiveDescription ||
+    t.work.archiveCalloutDescription ||
+    "Tersedia dokumentasi lengkap mulai dari UX Discovery hingga implementasi kode produksi.";
 
   const titleParts = activeTitle.split(" ");
   const titleFirst = titleParts[0];
@@ -165,13 +182,13 @@ export function SelectedWorkBento({
               </div>
               <div>
                 <div className="font-mono text-[11px] font-bold uppercase tracking-wider text-brand mb-0.5">
-                  / CONTINUOUS ARCHIVE
+                  {activeArchiveTag}
                 </div>
                 <h4 className="font-display text-base sm:text-lg font-bold text-ink dark:text-white">
-                  Ingin melihat studi kasus arsitektur, flow design, dan prototype lainnya?
+                  {activeArchiveTitle}
                 </h4>
                 <p className="text-xs sm:text-sm text-ink-soft dark:text-zinc-400 mt-0.5">
-                  Tersedia dokumentasi lengkap mulai dari UX Discovery hingga implementasi kode produksi.
+                  {activeArchiveDescription}
                 </p>
               </div>
             </div>
@@ -251,7 +268,7 @@ function HeroBentoCard({ project }: { project: Project }) {
                 <span>{project.timeline || "2023 — 2024"}</span>
               </div>
 
-              {/* Problem / Solution Highlight Box */}
+              {/* Problem / Solution Highlight Box
               <div className="p-4 rounded-xl bg-brand/5 border border-brand/15 text-xs text-ink dark:text-zinc-300 font-normal leading-relaxed mb-5">
                 <div className="flex items-center gap-1.5 font-mono text-[10.5px] font-bold uppercase tracking-wider text-brand mb-1">
                   <IconSparkles className="w-3.5 h-3.5" />
@@ -262,7 +279,7 @@ function HeroBentoCard({ project }: { project: Project }) {
                     project.problem ||
                     "Unified transactional workflows into a high-performance system, cutting design handoff latency by 45% with multi-branch synchronization."}
                 </p>
-              </div>
+              </div> */}
 
               {/* Description */}
               <p className="text-sm text-ink-soft dark:text-zinc-300 leading-relaxed mb-6 font-normal">
