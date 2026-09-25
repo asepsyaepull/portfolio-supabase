@@ -93,7 +93,6 @@ export function SelectedWorkBento({
         >
           <div className="max-w-2xl text-left">
             <div className="flex items-center gap-2 mb-3">
-              <span className="w-2 h-2 rounded-full bg-brand animate-pulse" />
               <FrameLabel name={activeSubtitle} className="!text-brand" />
             </div>
 
@@ -231,10 +230,18 @@ export function SelectedWorkBento({
 
             <Link
               href={buttonLink}
-              className="omd-btn-primary w-full sm:w-auto px-6 py-3.5 font-mono text-xs font-bold uppercase tracking-wider shrink-0 flex items-center justify-center gap-2 rounded-xl shadow-brand hover:bg-brand-deep cursor-pointer transition-all duration-200 active:scale-95"
+              className="group/btn relative omd-btn-primary w-full sm:w-auto px-6 py-3.5 font-mono text-xs font-bold uppercase tracking-wider shrink-0 flex items-center justify-center gap-2 rounded-xl shadow-brand hover:bg-brand-deep cursor-pointer transition-all duration-200 active:scale-95 overflow-hidden"
             >
-              <span>{activeButtonText}</span>
-              <IconArrowUpRight className="w-4 h-4 stroke-[2.5]" />
+              {/* Shimmer light sweep */}
+              <span className="absolute inset-0 -translate-x-full group-hover/btn:translate-x-full transition-transform duration-700 ease-out bg-gradient-to-r from-transparent via-white/25 to-transparent pointer-events-none" />
+
+              <span className="relative z-10">{activeButtonText}</span>
+
+              {/* Animated Arrow (Fly out & Fly in micro-interaction) */}
+              <div className="relative z-10 w-4 h-4 overflow-hidden">
+                <IconArrowUpRight className="w-4 h-4 stroke-[2.5] transition-transform duration-300 ease-out group-hover/btn:translate-x-4 group-hover/btn:-translate-y-4" />
+                <IconArrowUpRight className="absolute inset-0 w-4 h-4 stroke-[2.5] -translate-x-4 translate-y-4 transition-transform duration-300 ease-out group-hover/btn:translate-x-0 group-hover/btn:translate-y-0" />
+              </div>
             </Link>
           </motion.div>
         </div>
@@ -287,10 +294,6 @@ function HeroBentoCard({ project }: { project: Project }) {
                 <span className="font-mono text-[11px] font-bold text-brand uppercase tracking-[0.16em]">
                   / {project.category || "FLAGSHIP PRODUCTION"}
                 </span>
-                <span className="w-1.5 h-1.5 rounded-full bg-emerald-500" />
-                <span className="font-mono text-[10px] font-bold text-emerald-600 dark:text-emerald-400 uppercase tracking-widest">
-                  LIVE
-                </span>
               </div>
 
               {/* Title */}
@@ -340,10 +343,20 @@ function HeroBentoCard({ project }: { project: Project }) {
               <div className="flex flex-wrap items-center gap-3 pt-2">
                 <Link
                   href={`/projects/${slug}`}
-                  className="omd-btn-primary px-6 py-3 font-mono text-xs font-bold uppercase tracking-wider rounded-xl shadow-brand hover:bg-brand-deep cursor-pointer transition-all duration-200 active:scale-95"
+                  className="group/btn relative omd-btn-primary px-6 py-3 font-mono text-xs font-bold uppercase tracking-wider rounded-xl shadow-brand hover:bg-brand-deep cursor-pointer transition-all duration-200 active:scale-95 overflow-hidden inline-flex items-center gap-2"
                 >
-                  <span>{t.projectsPage?.readCaseStudy || "Lihat Studi Kasus"}</span>
-                  <IconArrowUpRight className="w-4 h-4 stroke-[2.5]" />
+                  {/* Shimmer light sweep */}
+                  <span className="absolute inset-0 -translate-x-full group-hover/btn:translate-x-full transition-transform duration-700 ease-out bg-gradient-to-r from-transparent via-white/25 to-transparent pointer-events-none" />
+
+                  <span className="relative z-10">
+                    {t.projectsPage?.readCaseStudy || "Lihat Studi Kasus"}
+                  </span>
+
+                  {/* Animated Arrow (Fly out & Fly in micro-interaction) */}
+                  <div className="relative z-10 w-4 h-4 overflow-hidden">
+                    <IconArrowUpRight className="w-4 h-4 stroke-[2.5] transition-transform duration-300 ease-out group-hover/btn:translate-x-4 group-hover/btn:-translate-y-4" />
+                    <IconArrowUpRight className="absolute inset-0 w-4 h-4 stroke-[2.5] -translate-x-4 translate-y-4 transition-transform duration-300 ease-out group-hover/btn:translate-x-0 group-hover/btn:translate-y-0" />
+                  </div>
                 </Link>
 
                 {project.link && project.link !== "#" && (
@@ -387,7 +400,7 @@ function HeroBentoCard({ project }: { project: Project }) {
                     alt={project.name}
                     fill
                     sizes="(max-width: 1024px) 100vw, 60vw"
-                    className="object-cover object-top transition-transform duration-700 ease-out group-hover/hero:scale-105"
+                    className="object-cover object-center transition-transform duration-700 ease-out group-hover/hero:scale-105"
                     priority
                     unoptimized={imageUrl.startsWith("/projects")}
                   />
@@ -469,7 +482,7 @@ function StandardBentoCard({
                   alt={project.name}
                   fill
                   sizes="(max-width: 768px) 100vw, 50vw"
-                  className="object-cover object-top transition-transform duration-700 ease-out group-hover/card:scale-105"
+                  className="object-cover object-center transition-transform duration-700 ease-out group-hover/card:scale-105"
                   unoptimized={imageUrl.startsWith("/projects")}
                 />
               </div>
@@ -523,10 +536,20 @@ function StandardBentoCard({
 
             <Link
               href={`/projects/${slug}`}
-              className="inline-flex items-center gap-1.5 font-mono text-xs font-bold text-brand hover:text-brand-deep transition-colors uppercase tracking-wider shrink-0"
+              className="group/btn relative inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg font-mono text-xs font-bold uppercase tracking-wider shrink-0 overflow-hidden text-brand bg-brand/10 dark:bg-brand/15 hover:!bg-brand hover:!text-white border border-brand/20 dark:border-brand/30 hover:border-brand transition-all duration-200 ease-out shadow-xs hover:shadow-[0_4px_16px_rgba(240,83,28,0.35)] active:scale-95 group-hover/card:border-brand/40"
             >
-              <span>{t.projectsPage?.readCaseStudy || "Detail"}</span>
-              <IconArrowUpRight className="w-3.5 h-3.5 stroke-[2.5]" />
+              {/* Shimmer light sweep */}
+              <span className="absolute inset-0 -translate-x-full group-hover/btn:translate-x-full transition-transform duration-700 ease-out bg-gradient-to-r from-transparent via-white/25 to-transparent pointer-events-none" />
+
+              <span className="relative z-10">
+                {t.projectsPage?.readCaseStudy || "Detail"}
+              </span>
+
+              {/* Animated Arrow (Fly out & Fly in micro-interaction) */}
+              <div className="relative z-10 w-3.5 h-3.5 overflow-hidden">
+                <IconArrowUpRight className="w-3.5 h-3.5 stroke-[2.5] transition-transform duration-300 ease-out group-hover/btn:translate-x-3.5 group-hover/btn:-translate-y-3.5" />
+                <IconArrowUpRight className="absolute inset-0 w-3.5 h-3.5 stroke-[2.5] -translate-x-3.5 translate-y-3.5 transition-transform duration-300 ease-out group-hover/btn:translate-x-0 group-hover/btn:translate-y-0" />
+              </div>
             </Link>
           </div>
         </div>

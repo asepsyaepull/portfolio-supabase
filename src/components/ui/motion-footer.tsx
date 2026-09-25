@@ -291,6 +291,7 @@ export function CinematicFooter({
   },
 }: CinematicFooterProps) {
   const pathname = usePathname();
+  const wrapperRef = useRef<HTMLDivElement>(null);
   const footerRef = useRef<HTMLElement>(null);
   const giantTextRef = useRef<HTMLDivElement>(null);
   const headingRef = useRef<HTMLHeadingElement>(null);
@@ -298,11 +299,12 @@ export function CinematicFooter({
 
   useEffect(() => {
     if (typeof window === "undefined") return;
-    if (!footerRef.current) return;
+    const triggerEl = wrapperRef.current || footerRef.current;
+    if (!triggerEl) return;
 
     // React strict mode compatible GSAP context cleanup
     const ctx = gsap.context(() => {
-      // 1. Background Parallax for Giant Text (Shifted to center-right)
+      // 1. Background Parallax for Giant Text
       if (giantTextRef.current) {
         gsap.fromTo(
           giantTextRef.current,
@@ -313,7 +315,7 @@ export function CinematicFooter({
             opacity: 1,
             ease: "none",
             scrollTrigger: {
-              trigger: footerRef.current,
+              trigger: triggerEl,
               start: "top bottom",
               end: "bottom bottom",
               scrub: 1,
@@ -322,30 +324,28 @@ export function CinematicFooter({
         );
       }
 
-      // 2. Reliable Content Reveal:
-      // Uses "once: true" and trigger at top 85% so buttons ALWAYS appear and stay visible.
-      // Never stuck at opacity 0 even if user doesn't scroll to the exact bottom pixel!
+      // 2. Parallax Content Reveal
       const targets = [headingRef.current, linksRef.current].filter(Boolean);
       if (targets.length > 0) {
         gsap.fromTo(
           targets,
-          { y: 30, opacity: 0 },
+          { y: 35, opacity: 0.5 },
           {
             y: 0,
             opacity: 1,
-            duration: 0.75,
-            stagger: 0.12,
+            duration: 0.8,
+            stagger: 0.1,
             ease: "power2.out",
             scrollTrigger: {
-              trigger: footerRef.current,
+              trigger: triggerEl,
               start: "top 85%",
-              toggleActions: "play none none none",
-              once: true,
+              end: "bottom bottom",
+              scrub: 1,
             },
           }
         );
       }
-    }, footerRef);
+    }, wrapperRef);
 
     // Refresh ScrollTrigger positions when page transitions or dynamic content loads
     const timer = setTimeout(() => {
@@ -366,10 +366,16 @@ export function CinematicFooter({
     <>
       <style dangerouslySetInnerHTML={{ __html: STYLES }} />
 
-      <footer
-        ref={footerRef}
-        className="relative z-20 flex min-h-[auto] lg:min-h-screen w-full flex-col justify-between overflow-hidden bg-background text-foreground cinematic-footer-wrapper py-10 md:py-16"
+      {/* The Parallax Curtain Reveal Wrapper */}
+      <div
+        ref={wrapperRef}
+        className="relative w-full min-h-screen lg:min-h-[100dvh] z-0 overflow-x-clip"
+        style={{ clipPath: "polygon(0% 0, 100% 0%, 100% 100%, 0 100%)" }}
       >
+        <footer
+          ref={footerRef}
+          className="fixed bottom-0 left-0 flex min-h-screen lg:min-h-[100dvh] w-full flex-col justify-between overflow-hidden bg-background text-foreground cinematic-footer-wrapper py-8 sm:py-10 md:py-14 z-0"
+        >
         {/* Ambient Light & Grid Background */}
         <div className="footer-aurora absolute left-1/2 top-1/2 h-[65vh] w-[85vw] -translate-x-1/2 -translate-y-1/2 animate-footer-breathe rounded-[50%] blur-[90px] pointer-events-none z-0" />
         <div className="footer-bg-grid absolute inset-0 z-0 pointer-events-none" />
@@ -383,7 +389,7 @@ export function CinematicFooter({
         </div>
 
         {/* 1. Diagonal Sleek Marquee (Top of footer) */}
-        <div className="pt-12 md:pt-20">
+        <div className="pt-12 md:pt-20 overflow-hidden w-full">
           <div className="relative left-0 w-full overflow-hidden border-y border-border/50 bg-background/70 backdrop-blur-md py-3 md:py-4 z-10 -rotate-1 scale-102 shadow-sm">
             <div className="flex w-max animate-footer-scroll-marquee text-xs md:text-sm font-bold tracking-[0.25em] text-muted-foreground uppercase">
               <MarqueeItem items={marqueeItems} />
@@ -497,8 +503,9 @@ export function CinematicFooter({
           </MagneticButton>
         </div>
       </footer>
-    </>
-  );
+    </div>
+  </>
+);
 }
 
 export default CinematicFooter;

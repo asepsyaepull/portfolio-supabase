@@ -45,7 +45,7 @@ export const aboutPageEn: AboutPageDictionary = {
       gpa: "Final Score: 96.93",
     },
   ],
-  journeyTitle: "Professional Track Record",
+  journeyTitle: "Work Experiences",
   statusBadge: "Available for Strategic Contracts & Full-time Roles",
   experienceYears: "7+ Years Experience",
   location: "Jakarta, Indonesia",

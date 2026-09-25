@@ -17,9 +17,9 @@ export const HeroSection = () => {
         titleGlitch={t.hero.titleGlitch}
         subtitle={t.hero.subtitle}
         ctaText={t.hero.ctaText}
-        ctaHref="#work"
+        ctaHref="#selected-work"
         secondaryCtaText={t.hero.secondaryCtaText}
-        secondaryCtaHref="/contact"
+        secondaryCtaHref="#about"
       />
     </section>
   );

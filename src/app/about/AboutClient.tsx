@@ -1,28 +1,28 @@
 "use client";
 
-import React, { useRef, useState, useEffect } from "react";
-import { motion, useScroll, useSpring, useTransform, useReducedMotion } from "framer-motion";
-import Image from "next/image";
-import Link from "next/link";
 import { useLanguage } from "@/context/language-context";
+import { cn } from "@/lib/utils";
+import { ExperienceItemLocale } from "@/locales/types";
 import {
-  IconDownload,
-  IconMail,
   IconArrowUpRight,
-  IconMapPin,
-  IconPalette,
-  IconCode,
-  IconSparkles,
+  IconArrowsRightLeft,
   IconBrandFigma,
   IconBrandFramer,
-  IconBrandReact,
   IconBrandNextjs,
-  IconBrandTypescript,
+  IconBrandReact,
   IconBrandTailwind,
-  IconArrowsRightLeft,
+  IconBrandTypescript,
+  IconCode,
+  IconDownload,
+  IconMail,
+  IconMapPin,
+  IconPalette,
+  IconSparkles,
 } from "@tabler/icons-react";
-import { ExperienceItemLocale } from "@/locales/types";
-import { cn } from "@/lib/utils";
+import { motion, useReducedMotion, useScroll, useSpring, useTransform } from "framer-motion";
+import Image from "next/image";
+import Link from "next/link";
+import { useEffect, useRef, useState } from "react";
 
 export default function AboutClient() {
   const { t, locale } = useLanguage();
@@ -45,8 +45,7 @@ export default function AboutClient() {
             className="lg:col-span-7 flex flex-col items-start text-left"
           >
             {/* Figma-style Brand Badge */}
-            <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-brand/10 border border-brand/20 text-brand font-mono tracking-widest text-xs font-bold uppercase mb-4">
-              <span className="w-2 h-2 rounded-full bg-brand animate-pulse" />
+            <div className="inline-flex items-center gap-2 py-1 rounded-full text-brand font-mono tracking-widest text-xs font-bold uppercase mb-4">
               <span>{about.badge}</span>
             </div>
 
@@ -163,7 +162,7 @@ export default function AboutClient() {
         <div className="mb-24 md:mb-32">
           {/* Section Header */}
           <div className="mb-10 text-start">
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-brand/10 border border-brand/20 text-brand font-mono tracking-widest text-xs font-bold uppercase mb-3">
+            <div className="inline-flex items-center gap-2 py-1 rounded-full text-brand font-mono tracking-widest text-xs font-bold uppercase mb-3">
               <span>/ 02 CAPABILITIES</span>
             </div>
             <h2 className="heading-display font-display text-3xl sm:text-4xl md:text-5xl font-bold text-zinc-900 dark:text-white tracking-tight">
@@ -304,35 +303,6 @@ export default function AboutClient() {
               </div>
             </div>
           </div>
-
-          {/* Design-to-Code Craft Bridge Highlight */}
-          <div className="mt-8 rounded-2xl bg-white dark:bg-[#121215] border border-zinc-200 dark:border-zinc-800 p-5 sm:p-6 flex flex-col md:flex-row items-center justify-between gap-4 shadow-md">
-            <div className="flex items-center gap-4">
-              <div className="w-11 h-11 rounded-2xl bg-brand/10 border border-brand/20 flex items-center justify-center text-brand flex-shrink-0">
-                <IconSparkles className="w-5 h-5 text-brand" />
-              </div>
-              <div className="text-left">
-                <h4 className="font-bold text-sm sm:text-base text-zinc-900 dark:text-white">
-                  {locale === "id" ? "Sinergi Desain & Kode Tanpa Friksi" : "Design-to-Code Synergy"}
-                </h4>
-                <p className="text-xs sm:text-sm text-zinc-600 dark:text-zinc-400">
-                  {locale === "id"
-                    ? "Menghilangkan kesenjangan hand-off antara prototipe Figma dan komponen kode produksi."
-                    : "Zero-loss translation from interactive Figma specs to production React components."}
-                </p>
-              </div>
-            </div>
-
-            <div className="flex items-center gap-2 shrink-0 font-mono text-xs font-bold">
-              <span className="px-3 py-1.5 rounded-lg bg-zinc-100 dark:bg-zinc-900 text-zinc-800 dark:text-zinc-200 border border-zinc-200 dark:border-zinc-800">
-                Figma Tokens
-              </span>
-              <IconArrowsRightLeft className="w-4 h-4 text-brand" />
-              <span className="px-3 py-1.5 rounded-lg bg-zinc-100 dark:bg-zinc-900 text-brand border border-zinc-200 dark:border-zinc-800">
-                React Code
-              </span>
-            </div>
-          </div>
         </div>
 
         {/* ===================================================================
@@ -341,7 +311,7 @@ export default function AboutClient() {
         <div className="mb-24 md:mb-32">
           {/* Section Header */}
           <div className="mb-10 text-start">
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-brand/10 border border-brand/20 text-brand font-mono tracking-widest text-xs font-bold uppercase mb-3">
+            <div className="inline-flex items-center gap-2 py-1 rounded-full text-brand font-mono tracking-widest text-xs font-bold uppercase mb-3">
               <span>/ 03 ACADEMIC & TRAINING</span>
             </div>
             <h2 className="heading-display font-display text-3xl sm:text-4xl md:text-5xl font-bold text-zinc-900 dark:text-white tracking-tight">
@@ -395,8 +365,8 @@ export default function AboutClient() {
             =================================================================== */}
         <div className="mb-20">
           <div className="mb-12 text-start">
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-brand/10 border border-brand/20 text-brand font-mono tracking-widest text-xs font-bold uppercase mb-3">
-              <span>/ 04 TRACK RECORD</span>
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-brand font-mono tracking-widest text-xs font-bold uppercase mb-3">
+              <span>/ 04 EXPERIENCES</span>
             </div>
             <h2 className="heading-display font-display text-3xl sm:text-4xl md:text-5xl font-bold text-zinc-900 dark:text-white tracking-tight">
               {about.journeyTitle}

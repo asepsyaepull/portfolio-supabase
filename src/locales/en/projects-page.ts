@@ -30,7 +30,7 @@ export const projectsPageEn: ProjectsPageDictionary = {
   ctaButton: "Get in Touch",
   viewDetails: "View Details",
   tabCaseStudies: "Case Studies",
-  tabGallery: "UI Gallery & Visual Archive",
+  tabGallery: "UI Gallery & Design Explorations",
   galleryBadge: "/ DESIGN EXPLORATIONS & CRAFT",
   galleryTitlePrefix: "Visual",
   galleryTitleHighlight: "Archive.",

@@ -45,7 +45,7 @@ export const aboutPageId: AboutPageDictionary = {
       gpa: "Nilai Akhir: 96.93",
     },
   ],
-  journeyTitle: "Perjalanan Profesional",
+  journeyTitle: "Pengalaman Kerja",
   statusBadge: "Tersedia untuk Kontrak & Posisi Strategis",
   experienceYears: "7+ Tahun Pengalaman",
   location: "Jakarta, Indonesia",

@@ -6,11 +6,13 @@
 
 html {
   scroll-behavior: smooth;
+  overflow-x: clip;
 }
 
 body {
   background-color: var(--canvas);
   color: var(--ink);
+  overflow-x: clip;
 }
 
 

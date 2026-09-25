@@ -8,14 +8,23 @@ import React, { useEffect, useRef } from "react";
 ───────────────────────────────────────────── */
 export interface DotGridBackgroundProps {
   isFixed?: boolean;
+  mode?: "fixed" | "sticky" | "absolute";
   className?: string;
+  transparentBg?: boolean;
 }
 
 export function DotGridBackground({
   isFixed = true,
+  mode,
   className = "",
+  transparentBg = false,
 }: DotGridBackgroundProps) {
   const canvasRef = useRef<HTMLCanvasElement>(null);
+
+  const currentMode = mode || (isFixed ? "fixed" : "absolute");
+  const isSticky = currentMode === "sticky";
+  const isFixedMode = currentMode === "fixed";
+  const isViewportCanvas = isSticky || isFixedMode;
 
   useEffect(() => {
     const canvas = canvasRef.current;
@@ -67,12 +76,14 @@ export function DotGridBackground({
     const particles: Particle[] = [];
     const resize = () => {
       const parent = canvas.parentElement;
-      canvas.width = isFixed
+      canvas.width = isViewportCanvas
         ? window.innerWidth
         : parent
         ? parent.clientWidth
         : window.innerWidth;
-      canvas.height = isFixed
+      canvas.height = isSticky
+        ? window.innerHeight + 160
+        : isViewportCanvas
         ? window.innerHeight
         : parent
         ? parent.clientHeight
@@ -87,7 +98,7 @@ export function DotGridBackground({
 
     const onMouseMove = (e: MouseEvent) => {
       if (isMobile) return;
-      if (isFixed) {
+      if (isFixedMode) {
         mouseX = e.clientX;
         mouseY = e.clientY;
       } else {
@@ -100,6 +111,13 @@ export function DotGridBackground({
     const onMouseLeave = () => {
       mouseX = -1000;
       mouseY = -1000;
+    };
+
+    const onScroll = () => {
+      if (!isViewportCanvas && !prefersReducedMotion) {
+        // Redraw on scroll for absolute canvas
+        draw();
+      }
     };
 
     const prefersReducedMotion = window.matchMedia(
@@ -117,13 +135,23 @@ export function DotGridBackground({
         });
       }
 
-      // 2. Batch-draw calm, static slate dot-grid (fast single path call)
+      // 2. Batch-draw calm, static slate dot-grid with visible viewport culling
       ctx.fillStyle = DEFAULT_COLOR;
       ctx.shadowBlur = 0;
       ctx.shadowColor = "transparent";
       ctx.beginPath();
+
+      const scrollY = typeof window !== "undefined" ? window.scrollY : 0;
+      const windowH = typeof window !== "undefined" ? window.innerHeight : 800;
+      const minY = isViewportCanvas
+        ? 0
+        : Math.max(0, Math.floor((scrollY - 120) / SPACING) * SPACING);
+      const maxY = isViewportCanvas
+        ? canvas.height
+        : Math.min(canvas.height, Math.ceil((scrollY + windowH + 120) / SPACING) * SPACING);
+
       for (let x = 0; x < canvas.width; x += SPACING) {
-        for (let y = 0; y < canvas.height; y += SPACING) {
+        for (let y = minY; y <= maxY; y += SPACING) {
           // On desktop, skip dots within cursor hover radius so they can be highlighted
           if (!isMobile && mouseX >= 0 && mouseY >= 0) {
             const dx = x - mouseX;
@@ -143,11 +171,11 @@ export function DotGridBackground({
       if (!isMobile && mouseX >= 0 && mouseY >= 0) {
         const minX = Math.max(0, Math.floor((mouseX - HOVER_R) / SPACING) * SPACING);
         const maxX = Math.min(canvas.width, Math.ceil((mouseX + HOVER_R) / SPACING) * SPACING);
-        const minY = Math.max(0, Math.floor((mouseY - HOVER_R) / SPACING) * SPACING);
-        const maxY = Math.min(canvas.height, Math.ceil((mouseY + HOVER_R) / SPACING) * SPACING);
+        const hoverMinY = Math.max(0, Math.floor((mouseY - HOVER_R) / SPACING) * SPACING);
+        const hoverMaxY = Math.min(canvas.height, Math.ceil((mouseY + HOVER_R) / SPACING) * SPACING);
 
         for (let x = minX; x <= maxX; x += SPACING) {
-          for (let y = minY; y <= maxY; y += SPACING) {
+          for (let y = hoverMinY; y <= hoverMaxY; y += SPACING) {
             const dx = x - mouseX;
             const dy = y - mouseY;
             const distSq = dx * dx + dy * dy;
@@ -172,27 +200,47 @@ export function DotGridBackground({
     };
 
     window.addEventListener("resize", resize);
+    window.addEventListener("scroll", onScroll, { passive: true });
     window.addEventListener("mousemove", onMouseMove);
     window.addEventListener("mouseleave", onMouseLeave);
+
+    const parent = canvas.parentElement;
+    let resizeObserver: ResizeObserver | null = null;
+    if (parent && typeof ResizeObserver !== "undefined") {
+      resizeObserver = new ResizeObserver(() => {
+        resize();
+        draw();
+      });
+      resizeObserver.observe(parent);
+    }
+
     resize();
     draw();
     return () => {
       window.removeEventListener("resize", resize);
+      window.removeEventListener("scroll", onScroll);
       window.removeEventListener("mousemove", onMouseMove);
       window.removeEventListener("mouseleave", onMouseLeave);
+      if (resizeObserver) resizeObserver.disconnect();
       cancelAnimationFrame(raf);
     };
-  }, [isFixed]);
+  }, [currentMode, isViewportCanvas, isFixedMode]);
 
   return (
     <div
       className={className}
       style={{
-        position: isFixed ? "fixed" : "absolute",
-        inset: 0,
+        position: isSticky ? "sticky" : isFixedMode ? "fixed" : "absolute",
+        top: 0,
+        left: 0,
+        width: "100%",
+        height: isSticky ? "calc(100vh + 160px)" : "100%",
+        marginBottom: isSticky ? "calc(-100vh - 160px)" : undefined,
+        inset: isSticky ? undefined : 0,
+        overflow: "hidden",
         zIndex: 0,
         pointerEvents: "none",
-        background: "#F8FAFC",
+        background: transparentBg ? "transparent" : "#F8FAFC",
         colorScheme: "light",
       }}
     >

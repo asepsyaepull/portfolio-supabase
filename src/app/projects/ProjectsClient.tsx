@@ -125,8 +125,7 @@ export default function ProjectsClient({
           className="mb-10 md:mb-14 text-start"
         >
           {/* Flame Orange Brand Status Badge */}
-          <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-brand/10 border border-brand/20 text-brand font-mono tracking-widest text-xs font-bold uppercase mb-4">
-            <span className="w-2 h-2 rounded-full bg-brand animate-pulse" />
+          <div className="inline-flex items-center gap-2 py-1 rounded-full text-brand font-mono tracking-widest text-xs font-bold uppercase mb-4">
             <span>
               {viewMode === "CASE_STUDIES"
                 ? text.badge

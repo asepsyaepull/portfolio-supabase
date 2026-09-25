@@ -5,6 +5,6 @@ export const heroId: HeroDictionary = {
   titleGlitch: "Developer",
   subtitle:
     "Menjembatani antara desain UI/UX dan frontend. 7+ tahun membangun produk digital — dari ekosistem SaaS enterprise hingga aplikasi mobile dan web.",
-  ctaText: "Lihat Portofolio",
-  secondaryCtaText: "Hubungi Saya",
+  ctaText: "Lihat Proyek",
+  secondaryCtaText: "Tentang Saya",
 };
