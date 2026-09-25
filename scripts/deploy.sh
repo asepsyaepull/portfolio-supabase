@@ -9,8 +9,10 @@ echo "📥 Pulling latest changes from repository..."
 git fetch origin
 git reset --hard origin/main
 
-# Ensure uploads directory exists on host for bind mount
-mkdir -p public/uploads
+# Ensure uploads directory exists on host for bind mount with full write permissions for Docker (UID 1001: nextjs)
+mkdir -p public/uploads/covers public/uploads/gallery
+sudo chown -R 1001:1001 public/uploads 2>/dev/null || true
+sudo chmod -R 777 public/uploads 2>/dev/null || chmod -R 775 public/uploads 2>/dev/null || true
 
 # Execute database migration if psql is available on the host
 if command -v psql &> /dev/null && [ -f "doc/production_migration.sql" ]; then

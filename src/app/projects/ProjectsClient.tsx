@@ -22,6 +22,7 @@ import {
 import type { ProjectsPageDictionary } from "@/locales/types";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
+import { EmptyState } from "@/components/ui/empty-state";
 
 export interface ProjectItem {
   id: string | number;
@@ -64,7 +65,7 @@ export default function ProjectsClient({
   projects: ProjectItem[];
   galleries?: UIGalleryItem[];
 }) {
-  const { t } = useLanguage();
+  const { t, locale } = useLanguage();
   const text = t.projectsPage;
 
   // View Mode Switcher: "CASE_STUDIES" vs "UI_GALLERY"
@@ -244,11 +245,34 @@ export default function ProjectsClient({
         {viewMode === "CASE_STUDIES" && (
           <div>
             {projects.length === 0 ? (
-              <div className="p-12 rounded-3xl bg-white dark:bg-[#121215] border border-zinc-200 dark:border-zinc-800 text-center">
-                <p className="text-zinc-500 font-mono text-sm">
-                  {text.emptyProjects || "No projects found."}
-                </p>
-              </div>
+              <EmptyState
+                icon={<IconBriefcase className="w-7 h-7 stroke-[1.5]" />}
+                badge={
+                  locale === "en"
+                    ? "/ REPOSITORY: NO CASE STUDIES"
+                    : "/ STATUS: BELUM ADA STUDI KASUS"
+                }
+                title={
+                  locale === "en"
+                    ? "No Production Case Studies Available"
+                    : "Belum Ada Studi Kasus Produksi"
+                }
+                description={
+                  locale === "en"
+                    ? "Case studies are currently being curated or updated in the database. You can explore visual explorations in the UI Gallery or reach out directly for private portfolios."
+                    : "Daftar studi kasus sedang disinkronkan atau dalam proses kurasi. Anda dapat melihat eksplorasi antarmuka di tab Galeri UI atau menghubungi saya untuk portofolio privat."
+                }
+                action={{
+                  label:
+                    locale === "en" ? "Explore UI Gallery" : "Buka Galeri UI",
+                  onClick: () => setViewMode("UI_GALLERY"),
+                  icon: <IconPhoto className="w-4 h-4" />,
+                }}
+                secondaryAction={{
+                  label: locale === "en" ? "Get in Touch" : "Hubungi Saya",
+                  href: "/contact",
+                }}
+              />
             ) : (
               <div className="flex flex-col gap-12 md:gap-16">
                 {projects.map((project, idx) => (
@@ -273,11 +297,36 @@ export default function ProjectsClient({
         {viewMode === "UI_GALLERY" && (
           <div>
             {galleries.length === 0 ? (
-              <div className="p-12 rounded-3xl bg-white dark:bg-[#121215] border border-zinc-200 dark:border-zinc-800 text-center">
-                <p className="text-zinc-500 font-mono text-sm">
-                  {text.emptyGallery || "No design explorations found."}
-                </p>
-              </div>
+              <EmptyState
+                icon={<IconPhoto className="w-7 h-7 stroke-[1.5]" />}
+                badge={
+                  locale === "en"
+                    ? "/ REPOSITORY: NO UI SHOTS"
+                    : "/ STATUS: BELUM ADA EKSPLORASI UI"
+                }
+                title={
+                  locale === "en"
+                    ? "No Design Explorations Published"
+                    : "Belum Ada Eksplorasi Desain"
+                }
+                description={
+                  locale === "en"
+                    ? "Visual interface explorations and design mockups are currently being prepared for showcase. You can review production case studies in the meantime."
+                    : "Shot eksplorasi antarmuka visual dan mockup sedang dipersiapkan untuk publikasi. Anda dapat meninjau studi kasus proyek produksi di tab sebelah."
+                }
+                action={{
+                  label:
+                    locale === "en"
+                      ? "View Case Studies"
+                      : "Lihat Studi Kasus",
+                  onClick: () => setViewMode("CASE_STUDIES"),
+                  icon: <IconBriefcase className="w-4 h-4" />,
+                }}
+                secondaryAction={{
+                  label: locale === "en" ? "Get in Touch" : "Hubungi Saya",
+                  href: "/contact",
+                }}
+              />
             ) : (
               <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                 {galleries.map((item, idx) => (

@@ -14,6 +14,7 @@ import {
 } from "@tabler/icons-react";
 import { FrameLabel } from "@/components/ui/figma-tag";
 import { useLanguage } from "@/context/language-context";
+import { EmptyState } from "@/components/ui/empty-state";
 import type { Project } from "@/types/database";
 
 export interface SelectedWorkBentoProps {
@@ -39,7 +40,7 @@ export function SelectedWorkBento({
   archiveTitle,
   archiveDescription,
 }: SelectedWorkBentoProps) {
-  const { t } = useLanguage();
+  const { t, locale } = useLanguage();
 
   const activeTitle = title || t.work.cinematicTitle || "PROJECTS";
   const activeSubtitle =
@@ -113,7 +114,7 @@ export function SelectedWorkBento({
             <span>
               {activeButtonText}{" "}
               <span className="text-brand font-mono">
-                ({projects.length > 0 ? `${projects.length}+` : "12+"})
+                ({projects.length > 0 ? `${projects.length}` : "0"})
               </span>
             </span>
             <IconArrowRight className="h-4 w-4 text-brand transition-transform group-hover:translate-x-1" />
@@ -122,50 +123,85 @@ export function SelectedWorkBento({
 
         {/* BENTO GRID SHOWCASE */}
         <div className="flex flex-col gap-6 lg:gap-8">
-          {/* 1. FLAGSHIP HERO PROJECT (Full Width Hero Bento) */}
-          {heroProject && (
-            <motion.div
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: "-50px" }}
-              transition={{ duration: 0.6 }}
-            >
-              <HeroBentoCard project={heroProject} />
-            </motion.div>
-          )}
-
-          {/* 2. DUAL SECONDARY CARDS (2-Column Split) */}
-          {secondaryProjects.length > 0 && (
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-8">
-              {secondaryProjects.map((project, idx) => (
+          {displayProjects.length === 0 ? (
+            <EmptyState
+              icon={<IconLayoutGrid className="w-7 h-7 stroke-[1.5]" />}
+              badge={
+                locale === "en"
+                  ? "/ REPOSITORY: NO FEATURED PROJECTS"
+                  : "/ STATUS: BELUM ADA PROYEK UNGGULAN"
+              }
+              title={
+                locale === "en"
+                  ? "No Featured Projects Published"
+                  : "Belum Ada Proyek Unggulan"
+              }
+              description={
+                locale === "en"
+                  ? "Featured case studies are currently being curated or updated in the database. Explore the entire project directory or get in touch."
+                  : "Studi kasus unggulan sedang dalam proses kurasi atau sinkronisasi database. Anda dapat menjelajahi seluruh arsip proyek atau menghubungi saya."
+              }
+              action={{
+                label:
+                  locale === "en"
+                    ? "Explore All Projects"
+                    : "Lihat Direktori Proyek",
+                href: buttonLink,
+                icon: <IconArrowRight className="w-4 h-4" />,
+              }}
+              secondaryAction={{
+                label: locale === "en" ? "Contact Me" : "Hubungi Saya",
+                href: "/contact",
+              }}
+            />
+          ) : (
+            <>
+              {/* 1. FLAGSHIP HERO PROJECT (Full Width Hero Bento) */}
+              {heroProject && (
                 <motion.div
-                  key={project.id || project.slug || idx}
-                  initial={{ opacity: 0, y: 28 }}
+                  initial={{ opacity: 0, y: 30 }}
                   whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true, margin: "-40px" }}
-                  transition={{ duration: 0.5, delay: idx * 0.1 }}
+                  viewport={{ once: true, margin: "-50px" }}
+                  transition={{ duration: 0.6 }}
                 >
-                  <StandardBentoCard project={project} index={idx + 2} />
+                  <HeroBentoCard project={heroProject} />
                 </motion.div>
-              ))}
-            </div>
-          )}
+              )}
 
-          {/* 3. TERTIARY PROJECTS (If 4 or 5 projects exist) */}
-          {tertiaryProjects.length > 0 && (
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-8">
-              {tertiaryProjects.map((project, idx) => (
-                <motion.div
-                  key={project.id || project.slug || idx}
-                  initial={{ opacity: 0, y: 28 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true, margin: "-40px" }}
-                  transition={{ duration: 0.5, delay: idx * 0.1 }}
-                >
-                  <StandardBentoCard project={project} index={idx + 4} />
-                </motion.div>
-              ))}
-            </div>
+              {/* 2. DUAL SECONDARY CARDS (2-Column Split) */}
+              {secondaryProjects.length > 0 && (
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-8">
+                  {secondaryProjects.map((project, idx) => (
+                    <motion.div
+                      key={project.id || project.slug || idx}
+                      initial={{ opacity: 0, y: 28 }}
+                      whileInView={{ opacity: 1, y: 0 }}
+                      viewport={{ once: true, margin: "-40px" }}
+                      transition={{ duration: 0.5, delay: idx * 0.1 }}
+                    >
+                      <StandardBentoCard project={project} index={idx + 2} />
+                    </motion.div>
+                  ))}
+                </div>
+              )}
+
+              {/* 3. TERTIARY PROJECTS (If 4 or 5 projects exist) */}
+              {tertiaryProjects.length > 0 && (
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-8">
+                  {tertiaryProjects.map((project, idx) => (
+                    <motion.div
+                      key={project.id || project.slug || idx}
+                      initial={{ opacity: 0, y: 28 }}
+                      whileInView={{ opacity: 1, y: 0 }}
+                      viewport={{ once: true, margin: "-40px" }}
+                      transition={{ duration: 0.5, delay: idx * 0.1 }}
+                    >
+                      <StandardBentoCard project={project} index={idx + 4} />
+                    </motion.div>
+                  ))}
+                </div>
+              )}
+            </>
           )}
 
           {/* 4. BOTTOM ARCHIVE CALLOUT BAR */}
@@ -212,17 +248,18 @@ export function SelectedWorkBento({
  */
 function HeroBentoCard({ project }: { project: Project }) {
   const { t } = useLanguage();
-  const slug = project.slug || "symbolix-ai";
+  const slug = project.slug || "";
   const imageUrl =
     project.image_url ||
     project.image ||
-    "https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=1600&auto=format&fit=crop";
+    "/og-image.jpg";
 
   const techList = Array.isArray(project.tech_stack)
     ? project.tech_stack
     : typeof project.tech_stack === "string"
     ? (project.tech_stack as string).split(",").map((s) => s.trim())
-    : ["React", "TypeScript", "Tailwind CSS", "Design Tokens"];
+    : [];
+
 
   return (
     <div className="relative w-full group/hero">
@@ -378,17 +415,17 @@ function StandardBentoCard({
 }) {
   const { t } = useLanguage();
   const displayNum = index < 10 ? `0${index}` : `${index}`;
-  const slug = project.slug || `project-${displayNum}`;
+  const slug = project.slug || "";
   const imageUrl =
     project.image_url ||
     project.image ||
-    "https://images.unsplash.com/photo-1460925895917-afdab827c52f?q=80&w=800&auto=format&fit=crop";
+    "/og-image.jpg";
 
   const techList = Array.isArray(project.tech_stack)
     ? project.tech_stack
     : typeof project.tech_stack === "string"
     ? (project.tech_stack as string).split(",").map((s) => s.trim())
-    : ["React", "TypeScript", "Figma"];
+    : [];
 
   return (
     <div className="relative w-full h-full group/card">

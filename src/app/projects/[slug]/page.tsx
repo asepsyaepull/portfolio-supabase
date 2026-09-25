@@ -7,10 +7,11 @@ import {
   IconCalendar,
   IconCode,
   IconExternalLink,
+  IconFileDescription,
   IconSparkles,
   IconTags,
   IconTools,
-  IconUser
+  IconUser,
 } from "@tabler/icons-react";
 import { Metadata, ResolvingMetadata } from "next";
 import Image from "next/image";
@@ -19,6 +20,7 @@ import { notFound } from "next/navigation";
 import ReactMarkdown from "react-markdown";
 import rehypeRaw from "rehype-raw";
 import remarkGfm from "remark-gfm";
+import { EmptyState } from "@/components/ui/empty-state";
 import {
   ProjectHeaderActions,
   ProjectImagePreview,
@@ -26,215 +28,6 @@ import {
 
 // Render dinamis langsung dari PostgreSQL VPS (hindari cache dummy saat build GH Actions)
 export const dynamic = "force-dynamic";
-
-// Fallback project details if database is unavailable or row is empty
-const FALLBACK_PROJECTS_MAP: Record<string, any> = {
-  "symbolix-ai": {
-    name: "Symbolix.ai",
-    slug: "symbolix-ai",
-    category: "UI/UX Design",
-    description:
-      "End-to-end UI/UX redesign and frontend implementation for an advanced ERP & POS system, converting complex business logic into intuitive, accessible interfaces.",
-    image:
-      "https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=1600&auto=format&fit=crop",
-    tech_stack: ["React", "TypeScript", "Tailwind CSS", "Design Tokens"],
-    problem:
-      "Enterprise users experienced slow order reconciliation and cognitive overload due to fragmented multi-module navigation across retail counters.",
-    solution:
-      "Unified transactional workflows into a consolidated POS interface with keyboard-first shortcut navigation, reducing checkout latency by 45%.",
-    role: "Lead UI/UX Designer & Frontend Engineer",
-    timeline: "2023 - 2024",
-    link: "https://symbolix.ai",
-    tags: "ERP, Retail POS, Design System, Enterprise UX",
-    tools: "Figma, React, TypeScript, Tailwind CSS, Turborepo",
-    long_description: `## Overview
-Symbolix.ai is an enterprise-grade ERP and Next-Gen POS platform designed to power omnichannel retail, multi-warehouse inventory logistics, and seamless accounting reconciliations.
-
-### The Challenge
-Retail cashiers and inventory analysts faced cumbersome multi-step modal journeys, inconsistent typography scales, and high latency during peak transaction hours, resulting in checkout bottlenecks.
-
-### The Solution & Architecture
-- **Unified Design Token System**: Developed strict token-based color, typography, and spacing variables ensuring 100% WCAG AAA accessibility across light and dark interfaces.
-- **Keyboard-First Transaction Engine**: Implemented shortcut keys for all core POS actions (item search, discount overrides, tender splitting) which reduced terminal time by 45%.
-- **Modular Frontend Architecture**: Engineered reusable React components with zero runtime CSS overhead, optimized bundle splitting, and client-side memory caching.
-
-### Key Metrics & Impact
-- **45% Faster** order completion rate during peak retail hours.
-- **30% Reduction** in employee onboarding time due to intuitive interface conventions.
-- **100% Type-Safe** codebase with end-to-end integration test coverage.`,
-  },
-  tractogo: {
-    name: "TRACtoGO",
-    slug: "tractogo",
-    category: "Mobile App",
-    description:
-      "Complete redesign of web and mobile applications for Indonesia's premier vehicle rental ecosystem, reducing design-to-development handoff time by 30%.",
-    image:
-      "https://images.unsplash.com/photo-1460925895917-afdab827c52f?q=80&w=800&auto=format&fit=crop",
-    tech_stack: ["React Native", "TypeScript", "Figma", "Redux Toolkit"],
-    problem:
-      "High drop-off rates during vehicle selection and multi-city rental scheduling on mobile viewports.",
-    solution:
-      "Architected streamlined 3-step reservation flow, synchronized fleet availability caching, and integrated interactive vehicle pickup mapping.",
-    role: "Senior Product Designer & Mobile Specialist",
-    timeline: "2022 - 2023",
-    link: "https://trac.astra.co.id",
-    tags: "Automotive, Fleet Rental, Mobile UX, Design Handoff",
-    tools: "Figma, React Native, TypeScript, Redux Toolkit, Mapbox",
-    long_description: `## Overview
-TRACtoGO is the official digital rental and fleet reservation platform for Astra TRAC, serving thousands of retail and corporate travelers across major Indonesian cities.
-
-### The Challenge
-The legacy mobile application suffered from fragmented booking funnels, complex vehicle specification comparisons, and drop-offs during airport terminal pickup coordination.
-
-### The Solution & Architecture
-- **Streamlined 3-Step Wizard**: Redesigned vehicle search, insurance tiering, and payment authorization into a progressive disclosure workflow.
-- **Interactive Fleet Locator**: Integrated smooth map-based station locators with real-time airport shuttle tracking.
-- **Design Handoff Acceleration**: Established a shared Figma-to-Code token repository, cutting handoff cycles by 30%.
-
-### Key Metrics & Impact
-- **35% Increase** in mobile app booking completion.
-- **30% Accelerated** sprint velocity between product design and engineering teams.`,
-  },
-  "isuzu-link": {
-    name: "Isuzu Link",
-    slug: "isuzu-link",
-    category: "Web App",
-    description:
-      "Design and development of customer-facing frontend features, telemetry dashboards, and service scheduling contributing to a 25% growth in user adoption.",
-    image:
-      "https://images.unsplash.com/photo-1481627834876-b7833e8f5570?q=80&w=800&auto=format&fit=crop",
-    tech_stack: ["Next.js", "TypeScript", "Tailwind CSS", "Charts.js"],
-    problem:
-      "Commercial vehicle fleet owners lacked centralized visibility over predictive maintenance schedules and dealer appointment statuses.",
-    solution:
-      "Engineered real-time fleet health dashboard with automated maintenance alerts and instantaneous dealer appointment booking.",
-    role: "Frontend Developer & UI Consultant",
-    timeline: "2021 - 2022",
-    link: "https://isuzu-astra.com",
-    tags: "Fleet Telemetry, Automotive IoT, Dashboard, Next.js",
-    tools: "Next.js, TypeScript, Tailwind CSS, Chart.js, REST APIs",
-    long_description: `## Overview
-Isuzu Link connects commercial vehicle fleets with real-time telematics, diagnostic health telemetry, and authorized dealer maintenance networks.
-
-### The Challenge
-Fleet managers struggled to track vehicle status, leading to unpredicted downtime, missed periodic service intervals, and higher operating expenses.
-
-### The Solution & Architecture
-- **Real-Time Telemetry Visualizations**: Designed dynamic vehicle status widgets showing fuel efficiency, engine error alerts, and GPS location.
-- **Direct Service Booking**: Built a responsive dealer workshop scheduling system that balanced bay availability in real time.
-- **Accessible Dashboard**: Developed high-contrast data visualizations adhering to dark-mode enterprise workstation environments.
-
-### Key Metrics & Impact
-- **25% Growth** in active fleet owner adoption within the first two quarters.
-- **40% Reduction** in unscheduled commercial vehicle downtime.`,
-  },
-  "pt-liftech": {
-    name: "PT Liftech Digital Transformation",
-    slug: "pt-liftech",
-    category: "Digital Transformation",
-    description:
-      "Full-cycle digital transformation from UX auditing and wireframing to technical deployment.",
-    image:
-      "https://images.unsplash.com/photo-1558655146-d09347e92766?q=80&w=800&auto=format&fit=crop",
-    tech_stack: ["TypeScript", "Next.js", "Tailwind CSS"],
-    problem:
-      "Legacy manual paper workflows caused operational bottlenecks and slow turnaround time across nationwide industrial elevator servicing.",
-    solution:
-      "Designed and deployed responsive technician portal and automated scheduling system, cutting report turnaround from 48h to real-time.",
-    role: "Lead UI/UX Consultant & Frontend Architect",
-    timeline: "2023",
-    link: "#",
-    tags: "Industrial UX, Digital Transformation, Workflow Automation",
-    tools: "Figma, Next.js, TypeScript, Tailwind CSS",
-    long_description: `## Overview
-PT Liftech is an industrial heavy equipment and elevator engineering firm serving major infrastructure hubs across Indonesia.
-
-### The Challenge
-Field inspection reports were manually transcribed from physical carbon copies, leading to dispatch delays and fragmented inventory logs.
-
-### The Solution & Architecture
-- **Field Technician PWA**: Built an offline-ready mobile web portal with instant equipment ID scanning and automated report generation.
-- **Central Dispatch Console**: Created real-time telemetry dashboard for dispatch coordinators to monitor technician status.
-
-### Key Metrics & Impact
-- **100% Paperless** transition across all field service teams.
-- **60% Acceleration** in customer maintenance certification issuance.`,
-  },
-  "oms-crewdible": {
-    name: "OMS Crewdible",
-    slug: "oms-crewdible",
-    category: "Web App",
-    description:
-      "Order Management System revamp increasing conversion rates by 24% with full responsive performance.",
-    image:
-      "https://images.unsplash.com/photo-1677442136019-21780ecad995?q=80&w=1600&auto=format&fit=crop",
-    tech_stack: ["React", "Node.js", "TypeScript", "Tailwind CSS"],
-    problem:
-      "Merchants on Crewdible experienced fragmented multi-warehouse inventory views and delayed bulk order processing during flash sales.",
-    solution:
-      "Revamped user flows for order batching, automated stock synchronization across e-commerce marketplaces, and introduced consolidated order tables.",
-    role: "Senior UI/UX Designer & Frontend Engineer",
-    timeline: "2022",
-    link: "https://crewdible.com",
-    tags: "E-Commerce, Logistics, Order Management, SaaS",
-    tools: "Figma, React, Node.js, TypeScript",
-    long_description: `## Overview
-Crewdible operates an e-commerce fulfillment network providing on-demand warehousing and order fulfillment for micro and enterprise online sellers.
-
-### The Challenge
-When landing on the Crewdible dashboard for the first time, new users had difficulty finding marketplace product settings and getting detailed information on transactions.
-
-### The Solution & Architecture
-- **Consolidated Batch Order Processing**: Redesigned bulk dispatch interface reducing clicks per order by 50%.
-- **Real-Time Stock Alerts**: Integrated proactive threshold notifications preventing out-of-stock cancellations.
-
-### Key Metrics & Impact
-- **24% Increase** in order fulfillment conversion rate.
-- **35% Drop** in merchant support tickets regarding inventory discrepancy.`,
-  },
-  "qr-digital-menu": {
-    name: "QR Digital Menu",
-    slug: "qr-digital-menu",
-    category: "Product Designer",
-    description:
-      "Contactless restaurant dining and ordering interface featuring instant table QR scanning, custom modifiers, and split bill checkout.",
-    image:
-      "https://images.unsplash.com/photo-1555396273-367ea4eb4db5?q=80&w=800&auto=format&fit=crop",
-    tech_stack: ["React", "TypeScript", "Tailwind CSS", "Framer Motion"],
-    problem:
-      "Dine-in restaurants suffered from order bottlenecks during peak rush hours, with high waiter dependency for menu inquiries.",
-    solution:
-      "Engineered lightweight zero-download mobile web menu with dynamic item modifiers and seamless table-side ordering.",
-    role: "Lead Product Designer",
-    timeline: "2023",
-    link: "#",
-    tags: "F&B, QR Ordering, Mobile Web, Micro-interactions",
-    tools: "Figma, React, TypeScript, Tailwind CSS",
-    long_description: `## Overview
-QR Digital Menu is a zero-friction, contactless dining web application designed for fast-paced modern restaurants and cafes.
-
-### The Challenge
-Patrons experienced wait times during peak dinner hours waiting for paper menus and waiter dispatch, hurting table turnover rate.
-
-### The Solution & Architecture
-- **Fast Loading Mobile Web Experience**: Optimized bundle under 60KB for instant loading via camera QR scan.
-- **Visual Modifier Engine**: Interactive dish customization with live price updates.
-
-### Key Metrics & Impact
-- **18% Increase** in average order value via suggestive modifier upselling.
-- **22% Improvement** in table turnover during peak rush.`,
-  },
-};
-
-// Aliases for legacy and DB slugs
-FALLBACK_PROJECTS_MAP["crewdible-oms-redesign"] =
-  FALLBACK_PROJECTS_MAP["oms-crewdible"];
-FALLBACK_PROJECTS_MAP[
-  "tractogo-web-dan-mobile-application-ux-enhancement"
-] = FALLBACK_PROJECTS_MAP["tractogo"];
-FALLBACK_PROJECTS_MAP["isuzu-link-mobile-apps"] =
-  FALLBACK_PROJECTS_MAP["isuzu-link"];
 
 // Helper: Extract prominent metrics from markdown or problem/solution
 interface ProjectMetric {
@@ -372,16 +165,10 @@ function cleanMarkdownDescription(markdown?: string, displayImage?: string): str
 // Generate Static Params for build time optimization
 export async function generateStaticParams() {
   const { data: projects } = await from("projects").select("slug");
-  const slugs = new Set<string>();
-
-  if (projects && projects.length > 0) {
-    projects.forEach((p: any) => {
-      if (p.slug) slugs.add(p.slug);
-    });
-  }
-  Object.keys(FALLBACK_PROJECTS_MAP).forEach((slug) => slugs.add(slug));
-
-  return Array.from(slugs).map((slug) => ({ slug }));
+  if (!projects || projects.length === 0) return [];
+  return projects
+    .filter((p: any) => Boolean(p.slug))
+    .map((p: any) => ({ slug: p.slug }));
 }
 
 export async function generateMetadata(
@@ -395,36 +182,34 @@ export async function generateMetadata(
     .eq("slug", slug)
     .single();
 
-  const activeProject = project || FALLBACK_PROJECTS_MAP[slug];
-
-  if (!activeProject) {
+  if (!project) {
     return {
       title: "Project Not Found | Asep Syaepul",
     };
   }
 
   const projectImage =
-    activeProject.image || activeProject.image_url || "/og-image.jpg";
+    project.image || project.image_url || "/og-image.jpg";
 
   return {
-    title: `${activeProject.name} — Case Study | Asep Syaepul`,
-    description: activeProject.description,
+    title: `${project.name} — Case Study | Asep Syaepul`,
+    description: project.description,
     openGraph: {
-      title: `${activeProject.name} — UI/UX & Frontend Case Study | Asep Syaepul`,
-      description: activeProject.description,
+      title: `${project.name} — UI/UX & Frontend Case Study | Asep Syaepul`,
+      description: project.description,
       images: [
         {
           url: projectImage,
           width: 1200,
           height: 630,
-          alt: activeProject.name || "Project preview",
+          alt: project.name || "Project preview",
         },
       ],
     },
     twitter: {
       card: "summary_large_image",
-      title: `${activeProject.name} | Asep Syaepul`,
-      description: activeProject.description,
+      title: `${project.name} | Asep Syaepul`,
+      description: project.description,
       images: [projectImage],
     },
   };
@@ -437,13 +222,11 @@ export default async function ProjectDetailPage({
 }) {
   const { slug } = await params;
 
-  // Fetch active project
-  const { data: dbProject } = await from("projects")
+  // Fetch active project from PostgreSQL database
+  const { data: project } = await from("projects")
     .select("*")
     .eq("slug", slug)
     .single();
-
-  const project = dbProject || FALLBACK_PROJECTS_MAP[slug];
 
   if (!project) {
     notFound();
@@ -455,9 +238,7 @@ export default async function ProjectDetailPage({
     .order("order_index", { ascending: true })
     .order("created_at", { ascending: false });
 
-  const fallbackList = Object.values(FALLBACK_PROJECTS_MAP);
-  const projectList =
-    allDbProjects && allDbProjects.length > 0 ? allDbProjects : fallbackList;
+  const projectList = allDbProjects || [];
 
   const currentIndex = projectList.findIndex((p: any) => p.slug === slug);
   const prevProject =
@@ -644,37 +425,83 @@ export default async function ProjectDetailPage({
           {/* Main Case Study Column (Left: 67%) */}
           <div className="lg:col-span-8 flex flex-col gap-8">
             <div className="p-6 sm:p-8 lg:p-9 rounded-3xl bg-white/95 dark:bg-[#121215]/95 backdrop-blur-md border border-zinc-200/80 dark:border-zinc-800 shadow-sm">
-              <article className="prose prose-zinc dark:prose-invert prose-lg max-w-none text-zinc-700 dark:text-zinc-300 font-body text-[16px] sm:text-[17px] lg:text-[16px] leading-[1.8] sm:leading-[1.85] prose-headings:font-display prose-headings:tracking-tight prose-headings:font-bold prose-h1:text-2xl sm:prose-h1:text-2xl lg:prose-h1:text-3xl prose-h1:mt-12 prose-h1:mb-5 prose-h1:pb-3 prose-h1:border-b prose-h1:border-zinc-200/60 dark:prose-h1:border-zinc-800/60 prose-h2:text-xl sm:prose-h2:text-2xl lg:prose-h2:text-3xl prose-h2:mt-12 prose-h2:mb-5 prose-h2:pb-3 prose-h2:border-b prose-h2:border-zinc-200/60 dark:prose-h2:border-zinc-800/60 prose-h3:text-lg sm:prose-h3:text-xl lg:prose-h3:text-2xl prose-h3:mt-8 prose-h3:mb-3 prose-p:my-5 sm:prose-p:my-6 prose-ul:my-6 prose-ul:space-y-2.5 prose-ol:my-6 prose-ol:space-y-2.5 prose-li:my-1.5 prose-li:leading-relaxed prose-strong:text-zinc-900 dark:prose-strong:text-white prose-a:text-brand hover:prose-a:text-brand-deep prose-img:rounded-2xl prose-img:shadow-md prose-code:font-mono prose-code:text-brand prose-code:bg-zinc-100 dark:prose-code:bg-zinc-900 prose-code:px-1.5 prose-code:py-0.5 prose-code:rounded-md prose-blockquote:border-l-4 prose-blockquote:border-brand prose-blockquote:bg-zinc-50 dark:prose-blockquote:bg-zinc-900/40 prose-blockquote:py-2 prose-blockquote:px-5 prose-blockquote:rounded-r-xl">
-                <ReactMarkdown
-                  remarkPlugins={[remarkGfm]}
-                  rehypePlugins={[rehypeRaw]}
-                  components={{
-                    aside: ({ node, ...props }) => (
-                      <aside
-                        {...props}
-                        className="my-5 p-4 rounded-xl bg-zinc-100/90 dark:bg-zinc-900/90 border border-zinc-200 dark:border-zinc-800 text-sm text-zinc-700 dark:text-zinc-300 font-mono not-prose"
-                      />
-                    ),
-                    img: ({ node, ...props }) => {
-                      const src = props.src?.replace(/ /g, "%20") || "";
-                      return (
-                        <span className="block my-6 overflow-hidden rounded-2xl border border-zinc-200 dark:border-zinc-800">
-                          {/* eslint-disable-next-line @next/next/no-img-element */}
-                          <img
-                            {...props}
-                            src={src}
-                            loading="lazy"
-                            alt={props.alt || "Case study graphic"}
-                            className="w-full h-auto object-cover"
-                          />
-                        </span>
-                      );
-                    },
+              {cleanLongDescription ? (
+                <article className="prose prose-zinc dark:prose-invert prose-lg max-w-none text-zinc-700 dark:text-zinc-300 font-body text-[16px] sm:text-[17px] lg:text-[16px] leading-[1.8] sm:leading-[1.85] prose-headings:font-display prose-headings:tracking-tight prose-headings:font-bold prose-h1:text-2xl sm:prose-h1:text-2xl lg:prose-h1:text-3xl prose-h1:mt-12 prose-h1:mb-5 prose-h1:pb-3 prose-h1:border-b prose-h1:border-zinc-200/60 dark:prose-h1:border-zinc-800/60 prose-h2:text-xl sm:prose-h2:text-2xl lg:prose-h2:text-3xl prose-h2:mt-12 prose-h2:mb-5 prose-h2:pb-3 prose-h2:border-b prose-h2:border-zinc-200/60 dark:prose-h2:border-zinc-800/60 prose-h3:text-lg sm:prose-h3:text-xl lg:prose-h3:text-2xl prose-h3:mt-8 prose-h3:mb-3 prose-p:my-5 sm:prose-p:my-6 prose-ul:my-6 prose-ul:space-y-2.5 prose-ol:my-6 prose-ol:space-y-2.5 prose-li:my-1.5 prose-li:leading-relaxed prose-strong:text-zinc-900 dark:prose-strong:text-white prose-a:text-brand hover:prose-a:text-brand-deep prose-img:rounded-2xl prose-img:shadow-md prose-code:font-mono prose-code:text-brand prose-code:bg-zinc-100 dark:prose-code:bg-zinc-900 prose-code:px-1.5 prose-code:py-0.5 prose-code:rounded-md prose-blockquote:border-l-4 prose-blockquote:border-brand prose-blockquote:bg-zinc-50 dark:prose-blockquote:bg-zinc-900/40 prose-blockquote:py-2 prose-blockquote:px-5 prose-blockquote:rounded-r-xl">
+                  <ReactMarkdown
+                    remarkPlugins={[remarkGfm]}
+                    rehypePlugins={[rehypeRaw]}
+                    components={{
+                      aside: ({ node, ...props }) => (
+                        <aside
+                          {...props}
+                          className="my-5 p-4 rounded-xl bg-zinc-100/90 dark:bg-zinc-900/90 border border-zinc-200 dark:border-zinc-800 text-sm text-zinc-700 dark:text-zinc-300 font-mono not-prose"
+                        />
+                      ),
+                      img: ({ node, ...props }) => {
+                        const src = props.src?.replace(/ /g, "%20") || "";
+                        return (
+                          <span className="block my-6 overflow-hidden rounded-2xl border border-zinc-200 dark:border-zinc-800">
+                            {/* eslint-disable-next-line @next/next/no-img-element */}
+                            <img
+                              {...props}
+                              src={src}
+                              loading="lazy"
+                              alt={props.alt || "Case study graphic"}
+                              className="w-full h-auto object-cover"
+                            />
+                          </span>
+                        );
+                      },
+                    }}
+                  >
+                    {cleanLongDescription}
+                  </ReactMarkdown>
+                </article>
+              ) : project.problem || project.solution ? (
+                <div className="space-y-8 text-start">
+                  <div>
+                    <h2 className="heading-display font-display text-2xl font-bold text-zinc-900 dark:text-white mb-3">
+                      Overview
+                    </h2>
+                    <p className="text-zinc-600 dark:text-zinc-400 leading-relaxed font-body">
+                      {project.description}
+                    </p>
+                  </div>
+                  {project.problem && (
+                    <div className="p-6 rounded-2xl bg-zinc-50 dark:bg-zinc-900/60 border border-zinc-200 dark:border-zinc-800">
+                      <h3 className="font-mono text-xs font-bold uppercase tracking-wider text-rose-500 mb-2">
+                        The Challenge / Tantangan
+                      </h3>
+                      <p className="text-sm text-zinc-700 dark:text-zinc-300 leading-relaxed">
+                        {project.problem}
+                      </p>
+                    </div>
+                  )}
+                  {project.solution && (
+                    <div className="p-6 rounded-2xl bg-zinc-50 dark:bg-zinc-900/60 border border-zinc-200 dark:border-zinc-800">
+                      <h3 className="font-mono text-xs font-bold uppercase tracking-wider text-emerald-500 mb-2">
+                        The Solution & Impact / Solusi
+                      </h3>
+                      <p className="text-sm text-zinc-700 dark:text-zinc-300 leading-relaxed">
+                        {project.solution}
+                      </p>
+                    </div>
+                  )}
+                </div>
+              ) : (
+                <EmptyState
+                  icon={<IconFileDescription className="w-7 h-7 stroke-[1.5]" />}
+                  badge="/ DOKUMENTASI KONTEN PROYEK"
+                  title="Dokumentasi Detail Sedang Disiapkan"
+                  description="Uraian studi kasus lengkap untuk proyek ini sedang dalam tahap dokumentasi & kurasi. Anda dapat meninjau spesifikasi, disiplin, dan teknologi yang digunakan pada panel samping."
+                  compact
+                  action={{
+                    label: "Kembali ke Direktori Proyek",
+                    href: "/projects",
+                    icon: <IconArrowLeft className="w-4 h-4" />,
                   }}
-                >
-                  {cleanLongDescription}
-                </ReactMarkdown>
-              </article>
+                />
+              )}
             </div>
           </div>
 

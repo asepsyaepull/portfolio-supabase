@@ -3,7 +3,7 @@ import { CommonDictionary } from "../types";
 export const commonId: CommonDictionary = {
   nav: {
     home: "Beranda",
-    about: "Tentang Saya",
+    about: "Tentang",
     work: "Proyek",
     experience: "Pengalaman",
     contact: "Kontak",

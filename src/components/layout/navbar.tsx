@@ -4,7 +4,7 @@ import React, { useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { LayoutGroup, motion } from "framer-motion";
-import { IconDownload, IconMenu2, IconX } from "@tabler/icons-react";
+import { IconMail, IconMenu2, IconX } from "@tabler/icons-react";
 import { ScrollRuler } from "./scroll-ruler";
 import { cn } from "@/lib/utils";
 import { useLanguage } from "@/context/language-context";
@@ -107,8 +107,8 @@ export function Navbar() {
               rel="noopener noreferrer"
               className="hidden h-[34px] items-center justify-center gap-1.5 rounded-full bg-brand px-3.5 font-mono text-[11.5px] font-bold uppercase tracking-wider text-white shadow-brand transition-all duration-200 hover:bg-brand-deep hover:shadow-lg active:scale-95 md:inline-flex"
             >
-              <IconDownload className="h-3.5 w-3.5 shrink-0" aria-hidden />
-              <span>{t.common.buttons.downloadCv}</span>
+              <IconMail className="h-3.5 w-3.5 shrink-0" aria-hidden />
+              <span>{t.common.buttons.talkWithMe}</span>
             </a>
 
             {/* Mobile hamburger button */}
@@ -172,8 +172,8 @@ export function Navbar() {
               onClick={() => setIsMobileMenuOpen(false)}
               className="mt-2 flex h-10 items-center justify-center gap-2 rounded-xl bg-brand font-mono text-xs font-bold uppercase tracking-wider text-white shadow-brand transition-all hover:bg-brand-deep"
             >
-              <IconDownload className="h-4 w-4" aria-hidden />
-              <span>{t.common.buttons.downloadCv}</span>
+              <IconMail className="h-4 w-4" aria-hidden />
+              <span>{t.common.buttons.talkWithMe}</span>
             </a>
           </div>
         </div>

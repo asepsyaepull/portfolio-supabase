@@ -16,60 +16,7 @@ export default async function AdminGalleryPage() {
     console.error("Error fetching ui_gallery in admin:", error);
   }
 
-  // Fallback demo data if DB table is empty/unmigrated
-  const fallbackGalleries = [
-    {
-      id: "g1",
-      title: "Fintech Telemetry & Liquidity Dashboard",
-      slug: "fintech-telemetry-dashboard",
-      category: "Web Dashboard",
-      description:
-        "Eksplorasi antarmuka analitik keuangan dense-data dengan palet gelap, grafik real-time telemetry, dan panel liquiditas interaktif.",
-      image_url:
-        "https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=1600&auto=format&fit=crop",
-      tools: ["Figma", "AutoLayout", "Tailwind CSS", "Design Tokens"],
-      aspect_ratio: "16/10",
-      figma_url: "https://figma.com",
-      preview_url: null,
-      is_featured: true,
-      order_index: 1,
-    },
-    {
-      id: "g2",
-      title: "AetherPay - Minimalist Mobile Wallet & Split Bill",
-      slug: "aetherpay-mobile-wallet",
-      category: "Mobile App",
-      description:
-        "Konsep aplikasi dompet digital iOS dengan interaksi split bill gestural, micro-haptics feedback, dan hierarki tipografi ultra-bersih.",
-      image_url:
-        "https://images.unsplash.com/photo-1563986768609-322da13575f3?q=80&w=1600&auto=format&fit=crop",
-      tools: ["Figma", "iOS HIG", "Design System", "Prototyping"],
-      aspect_ratio: "4/3",
-      figma_url: "https://figma.com",
-      preview_url: null,
-      is_featured: true,
-      order_index: 2,
-    },
-    {
-      id: "g3",
-      title: "Pulse AI - Developer Cloud Platform Landing Page",
-      slug: "pulse-ai-cloud-landing",
-      category: "Landing Page",
-      description:
-        "Desain halaman arahan developer tool modern beraksen gelap dengan glow aksen oranye, animated code terminal preview, dan bento feature grid.",
-      image_url:
-        "https://images.unsplash.com/photo-1507238691740-187a5b1d37b8?q=80&w=1600&auto=format&fit=crop",
-      tools: ["Figma", "Tailwind CSS", "Framer Motion"],
-      aspect_ratio: "16/10",
-      figma_url: "https://figma.com",
-      preview_url: "https://pulse-ai.preview.com",
-      is_featured: true,
-      order_index: 3,
-    },
-  ];
-
-  const displayGalleries =
-    galleries && galleries.length > 0 ? galleries : fallbackGalleries;
+  const displayGalleries = (galleries as any[]) || [];
 
   return (
     <div className="flex flex-col gap-6 pb-20">
@@ -97,9 +44,9 @@ export default async function AdminGalleryPage() {
       </div>
 
       {error && (
-        <div className="bg-amber-500/10 border border-amber-500/20 text-amber-600 dark:text-amber-400 p-4 rounded-2xl text-xs font-mono">
-          <p className="font-bold">Info Koneksi Database:</p>
-          <p className="mt-0.5">{error.message}. (Menampilkan fallback visual data).</p>
+        <div className="bg-red-500/10 border border-red-500/20 text-red-600 dark:text-red-400 p-4 rounded-2xl text-xs font-mono">
+          <p className="font-bold">Gagal memuat galeri dari database:</p>
+          <p className="mt-0.5">{error.message}</p>
         </div>
       )}
 

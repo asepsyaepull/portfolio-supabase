@@ -12,6 +12,8 @@ import {
 } from "@tabler/icons-react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
 import * as React from "react";
 import { useEffect, useRef } from "react";
 
@@ -31,18 +33,18 @@ const STYLES = `
   -webkit-font-smoothing: antialiased;
 
   /* Dynamic Variables using standard shadcn/tailwind tokens with HSL fallbacks */
-  --pill-bg-1: color-mix(in srgb, hsl(var(--foreground)) 5%, transparent);
-  --pill-bg-2: color-mix(in srgb, hsl(var(--foreground)) 2%, transparent);
+  --pill-bg-1: color-mix(in srgb, hsl(var(--foreground)) 6%, transparent);
+  --pill-bg-2: color-mix(in srgb, hsl(var(--foreground)) 3%, transparent);
   --pill-shadow: color-mix(in srgb, hsl(var(--background)) 50%, transparent);
-  --pill-highlight: color-mix(in srgb, hsl(var(--foreground)) 12%, transparent);
+  --pill-highlight: color-mix(in srgb, hsl(var(--foreground)) 14%, transparent);
   --pill-inset-shadow: color-mix(in srgb, hsl(var(--background)) 80%, transparent);
-  --pill-border: color-mix(in srgb, hsl(var(--foreground)) 10%, transparent);
+  --pill-border: color-mix(in srgb, hsl(var(--foreground)) 12%, transparent);
 
-  --pill-bg-1-hover: color-mix(in srgb, hsl(var(--foreground)) 12%, transparent);
-  --pill-bg-2-hover: color-mix(in srgb, hsl(var(--foreground)) 5%, transparent);
-  --pill-border-hover: color-mix(in srgb, hsl(var(--foreground)) 28%, transparent);
+  --pill-bg-1-hover: color-mix(in srgb, hsl(var(--foreground)) 14%, transparent);
+  --pill-bg-2-hover: color-mix(in srgb, hsl(var(--foreground)) 7%, transparent);
+  --pill-border-hover: color-mix(in srgb, hsl(var(--foreground)) 32%, transparent);
   --pill-shadow-hover: color-mix(in srgb, hsl(var(--background)) 70%, transparent);
-  --pill-highlight-hover: color-mix(in srgb, hsl(var(--foreground)) 28%, transparent);
+  --pill-highlight-hover: color-mix(in srgb, hsl(var(--foreground)) 32%, transparent);
 }
 
 @keyframes footer-breathe {
@@ -97,6 +99,7 @@ const STYLES = `
 /* Glass Pill Theming */
 .footer-glass-pill {
   background: linear-gradient(145deg, var(--pill-bg-1) 0%, var(--pill-bg-2) 100%);
+  background-color: color-mix(in srgb, hsl(var(--foreground)) 5%, transparent);
   box-shadow:
       0 10px 30px -10px var(--pill-shadow),
       inset 0 1px 1px var(--pill-highlight),
@@ -104,7 +107,10 @@ const STYLES = `
   border: 1px solid var(--pill-border);
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
-  transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .footer-glass-pill:hover {
@@ -118,20 +124,20 @@ const STYLES = `
 
 /* Giant Background Text Masking */
 .footer-giant-bg-text {
-  font-size: clamp(80px, 20vw, 240px);
+  font-size: clamp(60px, 14vw, 260px);
   line-height: 0.75;
   font-weight: 900;
   letter-spacing: -0.05em;
   color: transparent;
   -webkit-text-stroke: 1px color-mix(in srgb, hsl(var(--foreground)) 8%, transparent);
-  background: linear-gradient(180deg, color-mix(in srgb, hsl(var(--foreground)) 12%, transparent) 0%, transparent 65%);
+  background: linear-gradient(180deg, color-mix(in srgb, hsl(var(--foreground)) 14%, transparent) 0%, transparent 65%);
   -webkit-background-clip: text;
   background-clip: text;
 }
 
 /* Metallic Text Glow */
 .footer-text-glow {
-  background: linear-gradient(180deg, hsl(var(--foreground)) 0%, color-mix(in srgb, hsl(var(--foreground)) 45%, transparent) 100%);
+  background: linear-gradient(180deg, hsl(var(--foreground)) 0%, color-mix(in srgb, hsl(var(--foreground)) 50%, transparent) 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -140,12 +146,18 @@ const STYLES = `
 `;
 
 // -------------------------------------------------------------------------
-// 2. MAGNETIC BUTTON PRIMITIVE (Zero Dependency)
+// 2. MAGNETIC BUTTON PRIMITIVE (High Performance & Touch Safe)
 // -------------------------------------------------------------------------
-type MagneticButtonProps = React.ButtonHTMLAttributes<HTMLButtonElement> &
-  React.AnchorHTMLAttributes<HTMLAnchorElement> & {
-    as?: React.ElementType;
-  };
+type MagneticButtonProps = {
+  className?: string;
+  children?: React.ReactNode;
+  as?: any;
+  href?: string;
+  target?: string;
+  rel?: string;
+  onClick?: (e: React.MouseEvent<HTMLElement>) => void;
+  [key: string]: any;
+};
 
 const MagneticButton = React.forwardRef<HTMLElement, MagneticButtonProps>(
   ({ className, children, as: Component = "button", ...props }, forwardedRef) => {
@@ -155,6 +167,9 @@ const MagneticButton = React.forwardRef<HTMLElement, MagneticButtonProps>(
       if (typeof window === "undefined") return;
       const element = localRef.current;
       if (!element) return;
+
+      // Disable magnetic tracking on touch devices for zero lag and clean tapping
+      if (window.matchMedia("(pointer: coarse)").matches) return;
 
       const ctx = gsap.context(() => {
         const handleMouseMove = (e: MouseEvent) => {
@@ -167,11 +182,9 @@ const MagneticButton = React.forwardRef<HTMLElement, MagneticButtonProps>(
           gsap.to(element, {
             x: x * 0.35,
             y: y * 0.35,
-            rotationX: -y * 0.12,
-            rotationY: x * 0.12,
             scale: 1.04,
             ease: "power2.out",
-            duration: 0.35,
+            duration: 0.3,
           });
         };
 
@@ -179,19 +192,17 @@ const MagneticButton = React.forwardRef<HTMLElement, MagneticButtonProps>(
           gsap.to(element, {
             x: 0,
             y: 0,
-            rotationX: 0,
-            rotationY: 0,
             scale: 1,
-            ease: "elastic.out(1, 0.3)",
-            duration: 1.1,
+            ease: "elastic.out(1, 0.4)",
+            duration: 0.8,
           });
         };
 
-        element.addEventListener("mousemove", handleMouseMove as EventListener);
+        element.addEventListener("mousemove", handleMouseMove);
         element.addEventListener("mouseleave", handleMouseLeave);
 
         return () => {
-          element.removeEventListener("mousemove", handleMouseMove as EventListener);
+          element.removeEventListener("mousemove", handleMouseMove);
           element.removeEventListener("mouseleave", handleMouseLeave);
         };
       }, element);
@@ -201,12 +212,12 @@ const MagneticButton = React.forwardRef<HTMLElement, MagneticButtonProps>(
 
     return (
       <Component
-        ref={(node: HTMLElement) => {
+        ref={(node: HTMLElement | null) => {
           (localRef as React.MutableRefObject<HTMLElement | null>).current = node;
           if (typeof forwardedRef === "function") forwardedRef(node);
           else if (forwardedRef) (forwardedRef as React.MutableRefObject<HTMLElement | null>).current = node;
         }}
-        className={cn("cursor-pointer", className)}
+        className={cn("cursor-pointer select-none", className)}
         {...props}
       >
         {children}
@@ -279,57 +290,73 @@ export function CinematicFooter({
     contact: "Contact",
   },
 }: CinematicFooterProps) {
-  const wrapperRef = useRef<HTMLDivElement>(null);
+  const pathname = usePathname();
+  const footerRef = useRef<HTMLElement>(null);
   const giantTextRef = useRef<HTMLDivElement>(null);
   const headingRef = useRef<HTMLHeadingElement>(null);
   const linksRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     if (typeof window === "undefined") return;
-    if (!wrapperRef.current) return;
+    if (!footerRef.current) return;
 
     // React strict mode compatible GSAP context cleanup
     const ctx = gsap.context(() => {
-      // Background Parallax
-      gsap.fromTo(
-        giantTextRef.current,
-        { xPercent: -50, y: "10vh", scale: 0.8, opacity: 0 },
-        {
-          xPercent: -50,
-          y: "0vh",
-          scale: 1,
-          opacity: 1,
-          ease: "power1.out",
-          scrollTrigger: {
-            trigger: wrapperRef.current,
-            start: "top 80%",
-            end: "bottom bottom",
-            scrub: 1,
-          },
-        }
-      );
+      // 1. Background Parallax for Giant Text (Shifted to center-right)
+      if (giantTextRef.current) {
+        gsap.fromTo(
+          giantTextRef.current,
+          { xPercent: -50, y: "15%", opacity: 0.35 },
+          {
+            xPercent: -50,
+            y: "-8%",
+            opacity: 1,
+            ease: "none",
+            scrollTrigger: {
+              trigger: footerRef.current,
+              start: "top bottom",
+              end: "bottom bottom",
+              scrub: 1,
+            },
+          }
+        );
+      }
 
-      // Staggered Content Reveal
-      gsap.fromTo(
-        [headingRef.current, linksRef.current],
-        { y: 50, opacity: 0 },
-        {
-          y: 0,
-          opacity: 1,
-          stagger: 0.15,
-          ease: "power3.out",
-          scrollTrigger: {
-            trigger: wrapperRef.current,
-            start: "top 40%",
-            end: "bottom bottom",
-            scrub: 1,
-          },
-        }
-      );
-    }, wrapperRef);
+      // 2. Reliable Content Reveal:
+      // Uses "once: true" and trigger at top 85% so buttons ALWAYS appear and stay visible.
+      // Never stuck at opacity 0 even if user doesn't scroll to the exact bottom pixel!
+      const targets = [headingRef.current, linksRef.current].filter(Boolean);
+      if (targets.length > 0) {
+        gsap.fromTo(
+          targets,
+          { y: 30, opacity: 0 },
+          {
+            y: 0,
+            opacity: 1,
+            duration: 0.75,
+            stagger: 0.12,
+            ease: "power2.out",
+            scrollTrigger: {
+              trigger: footerRef.current,
+              start: "top 85%",
+              toggleActions: "play none none none",
+              once: true,
+            },
+          }
+        );
+      }
+    }, footerRef);
 
-    return () => ctx.revert();
-  }, []);
+    // Refresh ScrollTrigger positions when page transitions or dynamic content loads
+    const timer = setTimeout(() => {
+      ScrollTrigger.refresh();
+    }, 150);
+
+    return () => {
+      clearTimeout(timer);
+      ctx.revert();
+    };
+  }, [pathname]);
 
   const scrollToTop = () => {
     window.scrollTo({ top: 0, behavior: "smooth" });
@@ -339,147 +366,137 @@ export function CinematicFooter({
     <>
       <style dangerouslySetInnerHTML={{ __html: STYLES }} />
 
-      {/*
-        The "Curtain Reveal" Wrapper:
-        It sits in standard flow. Because it has clip-path, its contents
-        are ONLY visible within its bounding box.
-      */}
-      <div
-        ref={wrapperRef}
-        className="relative min-h-screen w-full"
-        style={{ clipPath: "polygon(0% 0, 100% 0%, 100% 100%, 0 100%)" }}
+      <footer
+        ref={footerRef}
+        className="relative z-20 flex min-h-[auto] lg:min-h-screen w-full flex-col justify-between overflow-hidden bg-background text-foreground cinematic-footer-wrapper py-10 md:py-16"
       >
-        {/* The actual footer stays fixed to the viewport underneath everything */}
-        <footer className="fixed bottom-0 left-0 flex min-h-screen w-full flex-col justify-between overflow-hidden bg-background text-foreground cinematic-footer-wrapper py-6">
+        {/* Ambient Light & Grid Background */}
+        <div className="footer-aurora absolute left-1/2 top-1/2 h-[65vh] w-[85vw] -translate-x-1/2 -translate-y-1/2 animate-footer-breathe rounded-[50%] blur-[90px] pointer-events-none z-0" />
+        <div className="footer-bg-grid absolute inset-0 z-0 pointer-events-none" />
 
-          {/* Ambient Light & Grid Background */}
-          <div className="footer-aurora absolute left-1/2 top-1/2 h-[65vh] w-[85vw] -translate-x-1/2 -translate-y-1/2 animate-footer-breathe rounded-[50%] blur-[90px] pointer-events-none z-0" />
-          <div className="footer-bg-grid absolute inset-0 z-0 pointer-events-none" />
+        {/* Giant background text */}
+        <div
+          ref={giantTextRef}
+          className="footer-giant-bg-text absolute left-1/2 -bottom-[5vh] text-center whitespace-nowrap z-0 pointer-events-none select-none tracking-tighter"
+        >
+          {giantText}
+        </div>
 
-          {/* Giant background text */}
-          <div
-            ref={giantTextRef}
-            className="footer-giant-bg-text absolute -bottom-[3vh] left-1/2 -translate-x-1/2 text-center whitespace-nowrap z-0 pointer-events-none select-none tracking-tighter"
-          >
-            {giantText}
-          </div>
-
-          {/* 1. Diagonal Sleek Marquee (Top of footer) */}
-          <div className="relative top-4 md:top-28 left-0 w-full overflow-hidden border-y border-border/50 bg-background/70 backdrop-blur-md py-3 md:py-4 z-10 -rotate-1 md:-rotate-2 scale-105 shadow-2xl">
+        {/* 1. Diagonal Sleek Marquee (Top of footer) */}
+        <div className="pt-12 md:pt-20">
+          <div className="relative left-0 w-full overflow-hidden border-y border-border/50 bg-background/70 backdrop-blur-md py-3 md:py-4 z-10 -rotate-1 scale-102 shadow-sm">
             <div className="flex w-max animate-footer-scroll-marquee text-xs md:text-sm font-bold tracking-[0.25em] text-muted-foreground uppercase">
               <MarqueeItem items={marqueeItems} />
               <MarqueeItem items={marqueeItems} />
             </div>
           </div>
+        </div>
 
-          {/* 2. Main Center Content */}
-          <div className="relative z-10 flex flex-1 flex-col items-center justify-center px-4 md:px-6 my-auto w-full max-w-5xl mx-auto">
-            <h2
-              ref={headingRef}
-              className="text-4xl sm:text-6xl md:text-8xl font-black footer-text-glow tracking-tighter mb-8 md:mb-12 text-center"
-            >
-              {heading}
-            </h2>
+        {/* 2. Main Center Content */}
+        <div className="relative z-10 flex flex-1 flex-col items-center justify-center px-4 md:px-6 my-auto w-full max-w-5xl mx-auto">
+          <h2
+            ref={headingRef}
+            className="text-3xl sm:text-5xl md:text-7xl lg:text-8xl font-black footer-text-glow tracking-tighter mb-8 md:mb-10 text-center opacity-100"
+          >
+            {heading}
+          </h2>
 
-            {/* Interactive Magnetic Pills Layout */}
-            <div ref={linksRef} className="flex flex-col items-center gap-4 md:gap-6 w-full">
-              {/* Primary Action Links */}
-              <div className="flex flex-wrap justify-center gap-3 md:gap-4 w-full">
-                <MagneticButton
-                  as="a"
-                  href={`mailto:${email}`}
-                  className="footer-glass-pill px-6 md:px-10 py-3.5 md:py-5 rounded-full text-foreground font-bold text-sm md:text-base flex items-center gap-3 group"
-                >
-                  <IconMail className="w-5 h-5 text-muted-foreground group-hover:text-foreground transition-colors" />
-                  <span>{contactBtnText}</span>
-                  <IconSparkles className="w-4 h-4 text-brand opacity-80 group-hover:opacity-100 transition-opacity" />
-                </MagneticButton>
+          {/* Interactive Magnetic Pills Layout */}
+          <div ref={linksRef} className="flex flex-col items-center gap-4 md:gap-6 w-full opacity-100">
+            {/* Primary Action Links */}
+            <div className="flex flex-wrap justify-center gap-3 md:gap-4 w-full">
+              <MagneticButton
+                as="a"
+                href={`mailto:${email}`}
+                className="footer-glass-pill px-6 md:px-10 py-3.5 md:py-5 rounded-full text-foreground font-bold text-sm md:text-base flex items-center gap-3 group"
+              >
+                <IconMail className="w-5 h-5 text-muted-foreground group-hover:text-foreground transition-colors" />
+                <span>{contactBtnText || "Get in Touch"}</span>
+                <IconSparkles className="w-4 h-4 text-brand opacity-80 group-hover:opacity-100 transition-opacity" />
+              </MagneticButton>
 
-                <MagneticButton
-                  as="a"
-                  href={cvUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="footer-glass-pill px-6 md:px-10 py-3.5 md:py-5 rounded-full text-foreground font-bold text-sm md:text-base flex items-center gap-3 group"
-                >
-                  <IconFileText className="w-5 h-5 text-muted-foreground group-hover:text-foreground transition-colors" />
-                  <span>{cvBtnText}</span>
-                  <IconExternalLink className="w-3.5 h-3.5 opacity-60 group-hover:opacity-100 transition-opacity" />
-                </MagneticButton>
-              </div>
-
-              {/* Secondary Social / Quick Links */}
-              <div className="flex flex-wrap justify-center gap-2.5 md:gap-5 w-full mt-1">
-                <MagneticButton
-                  as="a"
-                  href={githubUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="footer-glass-pill px-5 md:px-6 py-2.5 md:py-3 rounded-full text-muted-foreground font-medium text-xs md:text-sm hover:text-foreground flex items-center gap-2"
-                >
-                  <IconBrandGithub className="w-4 h-4" />
-                  <span>GitHub</span>
-                </MagneticButton>
-
-                <MagneticButton
-                  as="a"
-                  href={linkedinUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="footer-glass-pill px-5 md:px-6 py-2.5 md:py-3 rounded-full text-muted-foreground font-medium text-xs md:text-sm hover:text-foreground flex items-center gap-2"
-                >
-                  <IconBrandLinkedin className="w-4 h-4" />
-                  <span>LinkedIn</span>
-                </MagneticButton>
-
-                <MagneticButton
-                  as="a"
-                  href="/projects"
-                  className="footer-glass-pill px-5 md:px-6 py-2.5 md:py-3 rounded-full text-muted-foreground font-medium text-xs md:text-sm hover:text-foreground"
-                >
-                  {navLinks.projects || "Projects"}
-                </MagneticButton>
-
-                <MagneticButton
-                  as="a"
-                  href="/about"
-                  className="footer-glass-pill px-5 md:px-6 py-2.5 md:py-3 rounded-full text-muted-foreground font-medium text-xs md:text-sm hover:text-foreground"
-                >
-                  {navLinks.about || "About"}
-                </MagneticButton>
-
-                <MagneticButton
-                  as="a"
-                  href="/contact"
-                  className="footer-glass-pill px-5 md:px-6 py-2.5 md:py-3 rounded-full text-muted-foreground font-medium text-xs md:text-sm hover:text-foreground"
-                >
-                  {navLinks.contact || "Contact"}
-                </MagneticButton>
-              </div>
-            </div>
-          </div>
-
-          {/* 3. Bottom Bar / Credits */}
-          <div className="relative z-20 w-full pb-4 md:pb-8 px-6 md:px-12 flex flex-col md:flex-row items-center justify-between gap-4 md:gap-6 mt-auto">
-
-            {/* Copyright */}
-            <div className="text-muted-foreground text-[10px] md:text-xs font-semibold tracking-widest uppercase order-2 md:order-1 text-center md:text-left">
-              © {new Date().getFullYear()} {creatorName}. All rights reserved.
+              <MagneticButton
+                as="a"
+                href={cvUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="footer-glass-pill px-6 md:px-10 py-3.5 md:py-5 rounded-full text-foreground font-bold text-sm md:text-base flex items-center gap-3 group"
+              >
+                <IconFileText className="w-5 h-5 text-muted-foreground group-hover:text-foreground transition-colors" />
+                <span>{cvBtnText || "Download CV"}</span>
+                <IconExternalLink className="w-3.5 h-3.5 opacity-60 group-hover:opacity-100 transition-opacity" />
+              </MagneticButton>
             </div>
 
-            {/* Back to top */}
-            <MagneticButton
-              as="button"
-              onClick={scrollToTop}
-              aria-label="Back to top"
-              className="w-10 h-10 md:w-12 md:h-12 rounded-full footer-glass-pill flex items-center justify-center text-muted-foreground hover:text-foreground group order-3"
-            >
-              <IconArrowUp className="w-4 h-4 md:w-5 md:h-5 transform group-hover:-translate-y-1.5 transition-transform duration-300" />
-            </MagneticButton>
+            {/* Secondary Social / Quick Links */}
+            <div className="flex flex-wrap justify-center gap-2.5 md:gap-4 w-full mt-1">
+              <MagneticButton
+                as="a"
+                href={githubUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="footer-glass-pill px-5 md:px-6 py-2.5 md:py-3 rounded-full text-muted-foreground font-medium text-xs md:text-sm hover:text-foreground flex items-center gap-2"
+              >
+                <IconBrandGithub className="w-4 h-4" />
+                <span>GitHub</span>
+              </MagneticButton>
 
+              <MagneticButton
+                as="a"
+                href={linkedinUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="footer-glass-pill px-5 md:px-6 py-2.5 md:py-3 rounded-full text-muted-foreground font-medium text-xs md:text-sm hover:text-foreground flex items-center gap-2"
+              >
+                <IconBrandLinkedin className="w-4 h-4" />
+                <span>LinkedIn</span>
+              </MagneticButton>
+
+              <MagneticButton
+                as={Link}
+                href="/projects"
+                className="footer-glass-pill px-5 md:px-6 py-2.5 md:py-3 rounded-full text-muted-foreground font-medium text-xs md:text-sm hover:text-foreground"
+              >
+                {navLinks.projects || "Projects"}
+              </MagneticButton>
+
+              <MagneticButton
+                as={Link}
+                href="/about"
+                className="footer-glass-pill px-5 md:px-6 py-2.5 md:py-3 rounded-full text-muted-foreground font-medium text-xs md:text-sm hover:text-foreground"
+              >
+                {navLinks.about || "About"}
+              </MagneticButton>
+
+              <MagneticButton
+                as={Link}
+                href="/contact"
+                className="footer-glass-pill px-5 md:px-6 py-2.5 md:py-3 rounded-full text-muted-foreground font-medium text-xs md:text-sm hover:text-foreground"
+              >
+                {navLinks.contact || "Contact"}
+              </MagneticButton>
+            </div>
           </div>
-        </footer>
-      </div>
+        </div>
+
+        {/* 3. Bottom Bar / Credits */}
+        <div className="relative z-20 w-full pt-8 md:pt-12 px-6 md:px-12 flex flex-col md:flex-row items-center justify-between gap-4 md:gap-6 mt-auto">
+          {/* Copyright */}
+          <div className="text-muted-foreground text-[10px] md:text-xs font-semibold tracking-widest uppercase order-2 md:order-1 text-center md:text-left">
+            © {new Date().getFullYear()} {creatorName}. All rights reserved.
+          </div>
+
+          {/* Back to top */}
+          <MagneticButton
+            as="button"
+            onClick={scrollToTop}
+            aria-label="Back to top"
+            className="w-10 h-10 md:w-12 md:h-12 rounded-full footer-glass-pill flex items-center justify-center text-muted-foreground hover:text-foreground group order-3"
+          >
+            <IconArrowUp className="w-4 h-4 md:w-5 md:h-5 transform group-hover:-translate-y-1.5 transition-transform duration-300" />
+          </MagneticButton>
+        </div>
+      </footer>
     </>
   );
 }
