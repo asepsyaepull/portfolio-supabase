@@ -75,7 +75,7 @@ export default function MarkdownEditor({ value, onChange, label }: MarkdownEdito
         />
       </div>
       {uploading && (
-        <p className="text-xs text-lime-600 dark:text-lime-500 font-medium animate-pulse">
+        <p className="text-xs text-brand font-medium animate-pulse">
           Mengunggah gambar...
         </p>
       )}

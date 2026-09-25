@@ -13,10 +13,15 @@ export default async function AdminContactsPage() {
   return (
     <div className="flex flex-col gap-6 pb-20">
       <div className="flex items-center justify-between">
-        <h1 className="text-2xl font-bold text-zinc-900 dark:text-white">
-          Inbox
-        </h1>
-        <span className="bg-lime-100 text-lime-700 dark:bg-lime-900/30 dark:text-lime-500 px-3 py-1 rounded-full text-sm font-bold">
+        <div>
+          <div className="inline-flex items-center gap-2 px-3 py-0.5 rounded-full bg-brand/10 text-brand font-mono text-[11px] font-bold uppercase tracking-wider mb-1">
+            <span>/ INBOX CMS</span>
+          </div>
+          <h1 className="text-2xl sm:text-3xl font-bold text-zinc-900 dark:text-white tracking-tight">
+            Pesan Masuk
+          </h1>
+        </div>
+        <span className="bg-brand/10 text-brand border border-brand/20 px-3 py-1 rounded-full text-xs font-mono font-bold">
           {contacts?.length || 0} messages
         </span>
       </div>
@@ -32,7 +37,7 @@ export default async function AdminContactsPage() {
         {contacts?.map((msg: any) => (
           <div
             key={msg.id}
-            className="bg-white dark:bg-zinc-900 rounded-2xl border border-zinc-200 dark:border-zinc-800 p-6 flex flex-col gap-4"
+            className="bg-white dark:bg-[#121215] rounded-3xl border border-zinc-200 dark:border-zinc-800 p-6 flex flex-col gap-4 shadow-sm"
           >
             <div className="flex flex-col sm:flex-row sm:items-start justify-between gap-4">
               <div className="flex flex-col gap-1">
@@ -46,7 +51,7 @@ export default async function AdminContactsPage() {
                   <span>•</span>
                   <a
                     href={`mailto:${msg.email}`}
-                    className="flex items-center gap-1 hover:text-lime-600 dark:hover:text-lime-500 transition-colors"
+                    className="flex items-center gap-1 hover:text-brand transition-colors"
                   >
                     <IconMail size={14} />
                     {msg.email}
@@ -68,7 +73,7 @@ export default async function AdminContactsPage() {
                 <div className="flex items-center gap-1.5">
                   <a
                     href={`mailto:${msg.email}?subject=Re: ${msg.subject}`}
-                    className="p-2 text-lime-600 hover:text-lime-700 bg-lime-50 hover:bg-lime-100 dark:text-lime-500 dark:bg-lime-950/30 dark:hover:bg-lime-900/50 rounded-lg transition-colors"
+                    className="p-2 text-brand hover:text-brand-deep bg-brand/10 hover:bg-brand/20 rounded-xl transition-colors"
                     title="Reply"
                   >
                     <IconArrowBackUp size={16} />
@@ -85,11 +90,11 @@ export default async function AdminContactsPage() {
         ))}
 
         {(!contacts || contacts.length === 0) && (
-          <div className="bg-white dark:bg-zinc-900 rounded-2xl border border-zinc-200 dark:border-zinc-800 p-12 text-center flex flex-col items-center justify-center gap-3">
-            <div className="h-16 w-16 bg-zinc-50 dark:bg-zinc-800 rounded-full flex items-center justify-center text-zinc-400 mb-2">
-              <IconMail size={32} />
+          <div className="bg-white dark:bg-[#121215] rounded-3xl border border-zinc-200 dark:border-zinc-800 p-12 text-center flex flex-col items-center justify-center gap-3">
+            <div className="h-16 w-16 bg-zinc-50 dark:bg-zinc-900 rounded-2xl flex items-center justify-center text-zinc-400 mb-1 border border-zinc-200 dark:border-zinc-800">
+              <IconMail size={32} className="text-brand/50" />
             </div>
-            <p className="text-zinc-500 dark:text-zinc-400 font-medium">
+            <p className="text-zinc-900 dark:text-white font-bold text-sm">
               Belum ada pesan masuk
             </p>
           </div>

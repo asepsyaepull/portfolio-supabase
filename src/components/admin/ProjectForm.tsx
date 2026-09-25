@@ -219,25 +219,25 @@ export default function ProjectForm({
   const completedCount = SECTIONS.filter((s) => sectionComplete(s.key)).length;
 
   const inputClass =
-    "w-full px-4 py-3 rounded-xl bg-zinc-50 dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 focus:outline-none focus:ring-2 focus:ring-lime-500/50 dark:text-white transition-colors";
+    "w-full px-4 py-3 rounded-xl bg-zinc-50 dark:bg-zinc-900/80 border border-zinc-200 dark:border-zinc-800 text-zinc-900 dark:text-white focus:outline-none focus:border-brand focus:ring-1 focus:ring-brand text-sm transition-colors";
 
   const labelClass = "text-sm font-semibold text-zinc-700 dark:text-zinc-300";
 
   return (
-    <form onSubmit={handleSubmit} className="flex flex-col gap-4 pb-24">
+    <form onSubmit={handleSubmit} className="flex flex-col gap-5 pb-24 font-sans">
       {/* Progress bar */}
-      <div className="bg-white dark:bg-zinc-900 rounded-2xl border border-zinc-200 dark:border-zinc-800 p-4">
+      <div className="bg-white dark:bg-[#121215] rounded-3xl border border-zinc-200 dark:border-zinc-800 p-5 shadow-sm">
         <div className="flex items-center justify-between mb-2">
           <span className="text-sm font-semibold text-zinc-700 dark:text-zinc-300">
-            Kelengkapan
+            Kelengkapan Informasi Proyek
           </span>
-          <span className="text-sm font-bold text-lime-600 dark:text-lime-500">
+          <span className="text-sm font-mono font-bold text-brand bg-brand/10 px-2.5 py-0.5 rounded-md">
             {completedCount}/{SECTIONS.length} section
           </span>
         </div>
-        <div className="h-2 bg-zinc-100 dark:bg-zinc-800 rounded-full overflow-hidden">
+        <div className="h-2 bg-zinc-100 dark:bg-zinc-800/80 rounded-full overflow-hidden">
           <div
-            className="h-full bg-lime-500 rounded-full transition-all duration-500"
+            className="h-full bg-brand rounded-full transition-all duration-500 shadow-[0_0_12px_rgba(240,83,28,0.5)]"
             style={{ width: `${(completedCount / SECTIONS.length) * 100}%` }}
           />
         </div>
@@ -283,7 +283,7 @@ export default function ProjectForm({
                 type="button"
                 onClick={generateSlug}
                 title="Generate dari nama"
-                className="p-3 rounded-xl bg-zinc-100 dark:bg-zinc-800 hover:bg-zinc-200 dark:hover:bg-zinc-700 text-zinc-500 hover:text-zinc-700 dark:hover:text-zinc-300 transition-colors"
+                className="p-3 rounded-xl bg-zinc-100 dark:bg-zinc-800 hover:bg-brand/10 text-zinc-500 hover:text-brand transition-colors"
               >
                 <IconRefresh size={18} />
               </button>
@@ -326,7 +326,7 @@ export default function ProjectForm({
                 name="is_featured"
                 checked={formData.is_featured}
                 onChange={handleChange}
-                className="w-5 h-5 rounded text-lime-600 focus:ring-lime-500 bg-zinc-50 dark:bg-zinc-800 border-zinc-200 dark:border-zinc-700"
+                className="w-5 h-5 rounded text-brand focus:ring-brand accent-[#F0531C] bg-zinc-50 dark:bg-zinc-800 border-zinc-200 dark:border-zinc-700"
               />
               <span className={labelClass}>⭐ Featured (tampil di homepage)</span>
             </label>
@@ -544,7 +544,7 @@ export default function ProjectForm({
             <button
               type="button"
               onClick={() => setShowPreview(true)}
-              className="flex items-center gap-2 px-4 py-2 bg-zinc-100 dark:bg-zinc-800 hover:bg-zinc-200 dark:hover:bg-zinc-700 text-zinc-700 dark:text-zinc-300 rounded-xl text-sm font-bold transition-colors"
+              className="flex items-center gap-2 px-4 py-2 bg-zinc-100 dark:bg-zinc-800 hover:bg-brand/10 text-zinc-700 dark:text-zinc-300 hover:text-brand rounded-xl text-sm font-bold transition-colors"
             >
               <IconEye size={16} />
               Preview Markdown
@@ -565,7 +565,7 @@ export default function ProjectForm({
       />
 
       {/* Sticky submit bar */}
-      <div className="fixed bottom-0 left-0 right-0 md:left-64 z-50 bg-white/80 dark:bg-zinc-900/80 backdrop-blur-lg border-t border-zinc-200 dark:border-zinc-800 px-6 py-4">
+      <div className="fixed bottom-0 left-0 right-0 md:left-64 z-50 bg-white/80 dark:bg-[#121215]/80 backdrop-blur-lg border-t border-zinc-200 dark:border-zinc-800 px-6 py-4">
         <div className="max-w-6xl mx-auto flex items-center justify-between">
           <div className="text-sm text-zinc-500 dark:text-zinc-400">
             {isDirty ? (
@@ -579,10 +579,10 @@ export default function ProjectForm({
           <button
             type="submit"
             disabled={loading || !isDirty}
-            className="flex items-center gap-2 bg-lime-600 hover:bg-lime-700 text-white px-6 py-3 rounded-xl font-bold transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+            className="flex items-center gap-2 bg-brand hover:bg-brand-deep text-white px-7 py-3 rounded-xl font-semibold text-sm shadow-brand shadow-[0_12px_26px_-12px_#F0531C] active:scale-95 transition-all disabled:opacity-50 disabled:cursor-not-allowed"
           >
-            <IconDeviceFloppy size={20} />
-            {loading ? loadingLabel : submitLabel}
+            <IconDeviceFloppy size={18} />
+            <span>{loading ? loadingLabel : submitLabel}</span>
           </button>
         </div>
       </div>
@@ -593,7 +593,7 @@ export default function ProjectForm({
 // --- Sub-components ---
 
 function Required() {
-  return <span className="text-red-400 ml-0.5">*</span>;
+  return <span className="text-brand ml-0.5">*</span>;
 }
 
 function Hint({ children }: { children: React.ReactNode }) {
@@ -619,17 +619,17 @@ function SectionAccordion({
   children: React.ReactNode;
 }) {
   return (
-    <div className="bg-white dark:bg-zinc-900 rounded-2xl border border-zinc-200 dark:border-zinc-800 shadow-sm relative">
+    <div className="bg-white dark:bg-[#121215] rounded-3xl border border-zinc-200 dark:border-zinc-800 shadow-sm relative overflow-hidden">
       <button
         type="button"
         onClick={onToggle}
-        className="w-full flex items-center justify-between px-6 py-4 hover:bg-zinc-50 dark:hover:bg-zinc-800/50 transition-colors rounded-2xl"
+        className="w-full flex items-center justify-between px-6 py-4 hover:bg-zinc-50/70 dark:hover:bg-zinc-800/40 transition-colors"
       >
         <div className="flex items-center gap-3">
           {complete ? (
             <IconCircleCheck
               size={22}
-              className="text-lime-500 dark:text-lime-400"
+              className="text-emerald-500 dark:text-emerald-400"
             />
           ) : (
             <IconCircleDashed
@@ -654,7 +654,7 @@ function SectionAccordion({
         />
       </button>
       {open && (
-        <div className="px-6 pb-6 pt-2 border-t border-zinc-100 dark:border-zinc-800">
+        <div className="px-6 pb-6 pt-4 border-t border-zinc-100 dark:border-zinc-800/80">
           {children}
         </div>
       )}
@@ -718,19 +718,19 @@ function ImageUploadField({
           className={`border-2 border-dashed rounded-2xl p-8 flex flex-col items-center justify-center gap-2 transition-colors cursor-pointer ${
             dragOver
               ? "border-brand bg-brand/10 dark:bg-brand/10"
-              : "border-zinc-200 dark:border-zinc-700 hover:border-zinc-300 dark:hover:border-zinc-600"
+              : "border-zinc-200 dark:border-zinc-800 bg-zinc-50/50 dark:bg-zinc-900/40 hover:border-brand/40"
           }`}
         >
           <IconUpload
             size={32}
-            className="text-zinc-400 dark:text-zinc-500"
+            className="text-brand/60"
           />
           <p className="text-sm text-zinc-500 dark:text-zinc-400 text-center">
             {uploading
               ? "Mengunggah..."
               : "Drag & drop gambar di sini, atau"}
           </p>
-          <label className="px-4 py-2 bg-zinc-100 dark:bg-zinc-800 hover:bg-zinc-200 dark:hover:bg-zinc-700 rounded-xl cursor-pointer transition-colors text-sm font-semibold text-zinc-700 dark:text-zinc-300">
+          <label className="px-4 py-2 bg-zinc-900 hover:bg-black dark:bg-zinc-800 dark:hover:bg-zinc-700 text-white rounded-xl cursor-pointer transition-colors text-sm font-semibold shadow-sm active:scale-95">
             Pilih File
             <input
               type="file"
@@ -872,7 +872,7 @@ function IconPicker({
 
       {/* Dropdown */}
       {open && (
-        <div className="absolute z-50 mt-2 w-full bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-700 rounded-xl shadow-xl max-h-72 flex flex-col overflow-hidden">
+        <div className="absolute z-50 mt-2 w-full bg-white dark:bg-[#121215] border border-zinc-200 dark:border-zinc-800 rounded-2xl shadow-xl max-h-72 flex flex-col overflow-hidden">
           {/* Search */}
           <div className="p-2 border-b border-zinc-100 dark:border-zinc-800">
             <input
@@ -880,7 +880,7 @@ function IconPicker({
               value={search}
               onChange={(e) => setSearch(e.target.value)}
               placeholder="Cari icon..."
-              className="w-full px-3 py-2 text-sm rounded-lg bg-zinc-50 dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 focus:outline-none focus:ring-2 focus:ring-lime-500/50 dark:text-white"
+              className="w-full px-3 py-2 text-sm rounded-lg bg-zinc-50 dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 focus:outline-none focus:border-brand focus:ring-1 focus:ring-brand dark:text-white"
               autoFocus
             />
           </div>
@@ -898,8 +898,8 @@ function IconPicker({
                 }}
                 className={`w-full flex items-center gap-3 px-4 py-2.5 text-sm text-left transition-colors ${
                   value === option.value
-                    ? "bg-lime-50 dark:bg-lime-900/20 text-lime-700 dark:text-lime-400 font-semibold"
-                    : "text-zinc-700 dark:text-zinc-300 hover:bg-zinc-50 dark:hover:bg-zinc-800"
+                    ? "bg-brand/10 text-brand font-semibold"
+                    : "text-zinc-700 dark:text-zinc-300 hover:bg-zinc-50 dark:hover:bg-zinc-800/60"
                 }`}
               >
                 <span className="w-6 flex justify-center shrink-0">

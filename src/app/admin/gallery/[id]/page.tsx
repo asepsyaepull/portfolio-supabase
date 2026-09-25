@@ -88,16 +88,19 @@ export default function EditGalleryShotPage({
       <div className="flex items-center gap-4">
         <Link
           href="/admin/gallery"
-          className="p-2.5 rounded-xl bg-zinc-100 dark:bg-zinc-800 text-zinc-600 dark:text-zinc-400 hover:text-brand hover:bg-brand/10 transition-colors"
+          className="p-2.5 rounded-xl bg-zinc-100 dark:bg-zinc-800 text-zinc-600 dark:text-zinc-400 hover:text-brand hover:bg-brand/10 transition-colors shrink-0"
           title="Kembali ke Gallery"
         >
           <IconArrowLeft size={20} />
         </Link>
         <div>
-          <h1 className="text-2xl font-bold text-zinc-900 dark:text-white tracking-tight">
+          <div className="inline-flex items-center gap-2 px-3 py-0.5 rounded-full bg-brand/10 text-brand font-mono text-[11px] font-bold uppercase tracking-wider mb-1">
+            <span>/ GALLERY CMS</span>
+          </div>
+          <h1 className="text-2xl sm:text-3xl font-bold text-zinc-900 dark:text-white tracking-tight">
             Edit Desain Shot
           </h1>
-          <p className="text-xs text-zinc-500 dark:text-zinc-400 mt-0.5">
+          <p className="text-xs sm:text-sm text-zinc-500 dark:text-zinc-400 mt-0.5">
             Perbarui visual, deskripsi, atau tautan figma untuk &ldquo;{initialData?.title}&rdquo;.
           </p>
         </div>

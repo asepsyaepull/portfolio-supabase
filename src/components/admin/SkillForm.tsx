@@ -64,6 +64,7 @@ const SKILL_ICONS = [
 
 const COLORS = [
   { value: "text-zinc-500", label: "Zinc (Default)" },
+  { value: "text-[#F0531C]", label: "Flame Orange (Brand)" },
   { value: "text-yellow-400", label: "Yellow (JS/Python)" },
   { value: "text-blue-500", label: "Blue (React/TS/Go)" },
   { value: "text-sky-400", label: "Sky (Tailwind)" },
@@ -100,15 +101,15 @@ export default function SkillForm({
   };
 
   const inputClass =
-    "w-full px-4 py-3 rounded-xl bg-zinc-50 dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 focus:outline-none focus:ring-2 focus:ring-lime-500/50 dark:text-white transition-colors";
+    "w-full px-4 py-3 rounded-xl bg-zinc-50 dark:bg-zinc-900/80 border border-zinc-200 dark:border-zinc-800 text-zinc-900 dark:text-white focus:outline-none focus:border-brand focus:ring-1 focus:ring-brand text-sm transition-colors";
 
   return (
-    <form onSubmit={handleSubmit} className="flex flex-col gap-6">
-      <div className="bg-white dark:bg-zinc-900 p-6 md:p-8 rounded-3xl border border-zinc-200 dark:border-zinc-800 shadow-sm flex flex-col gap-6">
+    <form onSubmit={handleSubmit} className="flex flex-col gap-6 font-sans">
+      <div className="bg-white dark:bg-[#121215] p-6 md:p-8 rounded-3xl border border-zinc-200 dark:border-zinc-800 shadow-sm flex flex-col gap-6">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           <div className="flex flex-col gap-2">
             <label className="text-sm font-semibold text-zinc-700 dark:text-zinc-300">
-              Skill Name <span className="text-red-400">*</span>
+              Skill Name <span className="text-brand">*</span>
             </label>
             <input
               required
@@ -125,7 +126,7 @@ export default function SkillForm({
 
           <div className="flex flex-col gap-2">
             <label className="text-sm font-semibold text-zinc-700 dark:text-zinc-300">
-              Icon <span className="text-red-400">*</span>
+              Icon <span className="text-brand">*</span>
             </label>
             <SkillIconPicker
               value={formData.icon_name}
@@ -178,13 +179,13 @@ export default function SkillForm({
         </div>
 
         {/* Live Preview */}
-        <div className="mt-4 p-6 rounded-2xl border border-zinc-200 dark:border-zinc-800 bg-zinc-50 dark:bg-zinc-950 flex flex-col items-center justify-center gap-4">
-          <p className="text-sm font-bold text-zinc-500 uppercase tracking-widest">Preview</p>
-          <div className="flex items-center gap-3 p-4 bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded-2xl shadow-sm min-w-[200px]">
-            <div className={`p-3 bg-zinc-50 dark:bg-zinc-800 rounded-xl ${formData.color_class}`}>
+        <div className="mt-4 p-6 rounded-2xl border border-zinc-200 dark:border-zinc-800 bg-zinc-50/60 dark:bg-zinc-950/40 flex flex-col items-center justify-center gap-4">
+          <p className="text-xs font-mono font-bold text-zinc-400 uppercase tracking-widest">Live Card Preview</p>
+          <div className="flex items-center gap-3.5 p-4 bg-white dark:bg-[#121215] border border-zinc-200 dark:border-zinc-800 rounded-2xl shadow-sm min-w-[220px]">
+            <div className={`p-3 bg-zinc-50 dark:bg-zinc-900 rounded-xl border border-zinc-100 dark:border-zinc-800/80 ${formData.color_class}`}>
               {SKILL_ICONS.find((i) => i.value === formData.icon_name)?.icon || <SiJavascript size={24} />}
             </div>
-            <span className="font-bold text-zinc-900 dark:text-white">
+            <span className="font-bold text-sm text-zinc-900 dark:text-white">
               {formData.name || "Skill Name"}
             </span>
           </div>
@@ -195,10 +196,10 @@ export default function SkillForm({
         <button
           type="submit"
           disabled={loading || !isDirty}
-          className="flex items-center gap-2 bg-lime-600 hover:bg-lime-700 text-white px-6 py-3 rounded-xl font-bold transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+          className="flex items-center gap-2 bg-brand hover:bg-brand-deep text-white px-7 py-3 rounded-xl font-semibold text-sm shadow-brand shadow-[0_12px_26px_-12px_#F0531C] active:scale-95 transition-all disabled:opacity-50 disabled:cursor-not-allowed"
         >
-          <IconDeviceFloppy size={20} />
-          {loading ? loadingLabel : submitLabel}
+          <IconDeviceFloppy size={18} />
+          <span>{loading ? loadingLabel : submitLabel}</span>
         </button>
       </div>
     </form>
@@ -250,14 +251,14 @@ function SkillIconPicker({
       </button>
 
       {open && (
-        <div className="absolute z-50 mt-2 w-full bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-700 rounded-xl shadow-xl max-h-72 flex flex-col overflow-hidden">
+        <div className="absolute z-50 mt-2 w-full bg-white dark:bg-[#121215] border border-zinc-200 dark:border-zinc-800 rounded-2xl shadow-xl max-h-72 flex flex-col overflow-hidden">
           <div className="p-2 border-b border-zinc-100 dark:border-zinc-800">
             <input
               type="text"
               value={search}
               onChange={(e) => setSearch(e.target.value)}
               placeholder="Cari icon..."
-              className="w-full px-3 py-2 text-sm rounded-lg bg-zinc-50 dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 focus:outline-none focus:ring-2 focus:ring-lime-500/50 dark:text-white"
+              className="w-full px-3 py-2 text-sm rounded-lg bg-zinc-50 dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 focus:outline-none focus:border-brand focus:ring-1 focus:ring-brand dark:text-white"
               autoFocus
             />
           </div>
@@ -273,8 +274,8 @@ function SkillIconPicker({
                 }}
                 className={`w-full flex items-center gap-3 px-4 py-2.5 text-sm text-left transition-colors ${
                   value === option.value
-                    ? "bg-lime-50 dark:bg-lime-900/20 text-lime-700 dark:text-lime-400 font-semibold"
-                    : "text-zinc-700 dark:text-zinc-300 hover:bg-zinc-50 dark:hover:bg-zinc-800"
+                    ? "bg-brand/10 text-brand font-semibold"
+                    : "text-zinc-700 dark:text-zinc-300 hover:bg-zinc-50 dark:hover:bg-zinc-800/60"
                 }`}
               >
                 <span className="w-6 flex justify-center shrink-0">{option.icon}</span>
