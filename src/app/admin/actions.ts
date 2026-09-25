@@ -1,6 +1,7 @@
 "use server";
 
 import { from } from "@/lib/pg-client";
+import { revalidatePath } from "next/cache";
 
 export async function updateOrderIndex(
   table: "projects" | "skills" | "ui_gallery",
@@ -14,5 +15,19 @@ export async function updateOrderIndex(
       return { error: String(error) };
     }
   }
+
+  if (table === "projects") {
+    revalidatePath("/admin/projects");
+    revalidatePath("/projects");
+    revalidatePath("/");
+  } else if (table === "skills") {
+    revalidatePath("/admin/skills");
+    revalidatePath("/");
+  } else if (table === "ui_gallery") {
+    revalidatePath("/admin/gallery");
+    revalidatePath("/projects");
+    revalidatePath("/");
+  }
+
   return { error: null };
 }

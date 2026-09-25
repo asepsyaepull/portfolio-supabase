@@ -9,7 +9,7 @@ export const commonEn: CommonDictionary = {
     contact: "Contact",
   },
   buttons: {
-    downloadCv: "Download CV",
+    downloadCv: "Hire Me",
     emailMe: "Email Me",
     talkWithMe: "Get in Touch",
     startProject: "Start Project",

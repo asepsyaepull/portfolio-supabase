@@ -440,14 +440,14 @@ export default async function ProjectDetailPage({
                       img: ({ node, ...props }) => {
                         const src = props.src?.replace(/ /g, "%20") || "";
                         return (
-                          <span className="block my-6 overflow-hidden rounded-2xl border border-zinc-200 dark:border-zinc-800">
+                          <span className="block rounded-2xl">
                             {/* eslint-disable-next-line @next/next/no-img-element */}
                             <img
                               {...props}
                               src={src}
                               loading="lazy"
                               alt={props.alt || "Case study graphic"}
-                              className="w-full h-auto object-cover"
+                              className="w-full object-cover"
                             />
                           </span>
                         );

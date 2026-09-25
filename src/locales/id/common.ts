@@ -9,7 +9,7 @@ export const commonId: CommonDictionary = {
     contact: "Kontak",
   },
   buttons: {
-    downloadCv: "Unduh CV",
+    downloadCv: "Rekrut Saya",
     emailMe: "Kirim Email",
     talkWithMe: "Hubungi Saya",
     startProject: "Mulai Proyek",

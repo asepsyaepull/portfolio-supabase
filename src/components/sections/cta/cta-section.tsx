@@ -94,13 +94,13 @@ export function CtaSection() {
                 >
                   {t.cta.talkButton}
                 </a>
-                <button
+                {/* <button
                   type="button"
                   onClick={() => setIsPricingModalOpen(true)}
                   className="group inline-flex items-center gap-2 font-mono text-[13px] font-bold text-white/90 underline decoration-white/40 underline-offset-4 transition-colors hover:text-white hover:decoration-white cursor-pointer"
                 >
                   <span>{t.cta.pricingEstimateButton}</span>
-                </button>
+                </button> */}
               </motion.div>
             </div>
           </div>

@@ -32,8 +32,7 @@ class QueryBuilder {
   private op: "select" | "insert" | "update" | "delete" = "select";
   private selectCols = "*";
   private wheres: { col: string; op: string; val: any }[] = [];
-  private orderByCol = "";
-  private orderAsc = true;
+  private orderBys: { col: string; asc: boolean; nulls?: "first" | "last" }[] = [];
   private limitN = 0;
   private insertData: any = null;
   private updateData: any = null;
@@ -80,9 +79,12 @@ class QueryBuilder {
     return this;
   }
 
-  order(col: string, opts?: { ascending?: boolean }): this {
-    this.orderByCol = col;
-    this.orderAsc = opts?.ascending !== false;
+  order(col: string, opts?: { ascending?: boolean; nullsFirst?: boolean }): this {
+    this.orderBys.push({
+      col,
+      asc: opts?.ascending !== false,
+      nulls: opts?.nullsFirst ? "first" : undefined,
+    });
     return this;
   }
 
@@ -139,8 +141,16 @@ class QueryBuilder {
     const { sql: where, params } = whereClause(this.wheres);
     let sql = `SELECT ${this.selectCols} FROM ${t}`;
     if (where) sql += ` ${where}`;
-    if (this.orderByCol) {
-      sql += ` ORDER BY ${escIdent(this.orderByCol)} ${this.orderAsc ? "ASC" : "DESC"}`;
+    if (this.orderBys.length > 0) {
+      const orderSql = this.orderBys
+        .map((o) => {
+          let s = `${escIdent(o.col)} ${o.asc ? "ASC" : "DESC"}`;
+          if (o.nulls === "first") s += " NULLS FIRST";
+          else if (o.nulls === "last") s += " NULLS LAST";
+          return s;
+        })
+        .join(", ");
+      sql += ` ORDER BY ${orderSql}`;
     }
     if (this.limitN) sql += ` LIMIT ${this.limitN}`;
 

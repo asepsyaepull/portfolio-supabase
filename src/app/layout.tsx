@@ -63,7 +63,7 @@ export default function RootLayout({
       <head>
         <script
           dangerouslySetInnerHTML={{
-            __html: `(function(){try{if(sessionStorage.getItem('asyaepul_portfolio_hello_v1')==='true'&&!location.search.includes('intro=true')){document.documentElement.classList.add('preloader-done');}}catch(e){}})();`,
+            __html: `(function(){try{if('scrollRestoration' in history){history.scrollRestoration='manual';}if(sessionStorage.getItem('asyaepul_portfolio_hello_v1')==='true'&&!location.search.includes('intro=true')){document.documentElement.classList.add('preloader-done');}}catch(e){}})();`,
           }}
         />
       </head>

@@ -5,6 +5,7 @@ import { usePathname } from "next/navigation";
 import { Navbar } from "./navbar";
 import { Footer } from "./footer";
 import { DotGridBackground } from "@/components/ui/dot-grid-background";
+import { ScrollReset } from "./scroll-reset";
 
 import { HelloPreloader } from "@/components/ui/hello-preloader";
 
@@ -23,6 +24,7 @@ export function AppShell({ children }: AppShellProps) {
 
   return (
     <LanguageProvider>
+      <ScrollReset />
       <div className="relative flex min-h-screen flex-col bg-[#F8FAFC] overflow-x-clip">
         <a
           href="#main-content"

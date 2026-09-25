@@ -1,6 +1,7 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { useRouter } from "next/navigation";
 import {
   DndContext,
   closestCenter,
@@ -37,11 +38,16 @@ export default function SortableGalleryList({
 }: {
   initialGalleries: UIGallery[];
 }) {
+  const router = useRouter();
   const [galleries, setGalleries] = useState(initialGalleries);
   const [isSaving, setIsSaving] = useState(false);
 
+  useEffect(() => {
+    setGalleries(initialGalleries);
+  }, [initialGalleries]);
+
   const sensors = useSensors(
-    useSensor(PointerSensor, { activationConstraint: { distance: 8 } }),
+    useSensor(PointerSensor, { activationConstraint: { distance: 5 } }),
     useSensor(KeyboardSensor, {
       coordinateGetter: sortableKeyboardCoordinates,
     })
@@ -50,31 +56,47 @@ export default function SortableGalleryList({
   const handleDragEnd = async (event: DragEndEvent) => {
     const { active, over } = event;
 
-    if (over && active.id !== over.id) {
-      const oldIndex = galleries.findIndex((g) => g.id === active.id);
-      const newIndex = galleries.findIndex((g) => g.id === over.id);
+    if (!over || active.id === over.id) {
+      return;
+    }
 
-      const newGalleries = arrayMove(galleries, oldIndex, newIndex);
+    const oldIndex = galleries.findIndex((g) => g.id === active.id);
+    const newIndex = galleries.findIndex((g) => g.id === over.id);
 
-      const updatedGalleries = newGalleries.map((item, index) => ({
-        ...item,
-        order_index: index,
-      }));
+    if (oldIndex === -1 || newIndex === -1) {
+      return;
+    }
 
-      setGalleries(updatedGalleries);
+    const previousGalleries = galleries;
+    const newGalleries = arrayMove(galleries, oldIndex, newIndex);
 
-      setIsSaving(true);
-      const payload = updatedGalleries.map((g) => ({
-        id: g.id,
-        order_index: g.order_index || 0,
-      }));
+    const updatedGalleries = newGalleries.map((item, index) => ({
+      ...item,
+      order_index: index,
+    }));
+
+    setGalleries(updatedGalleries);
+    setIsSaving(true);
+
+    const payload = updatedGalleries.map((g) => ({
+      id: g.id,
+      order_index: g.order_index ?? 0,
+    }));
+
+    try {
       const result = await updateOrderIndex("ui_gallery", payload);
 
       if (result?.error) {
+        setGalleries(previousGalleries);
         toast.error("Gagal menyimpan urutan baru galeri");
       } else {
         toast.success("Urutan desain galeri diperbarui");
+        router.refresh();
       }
+    } catch {
+      setGalleries(previousGalleries);
+      toast.error("Terjadi kesalahan saat menyimpan urutan galeri");
+    } finally {
       setIsSaving(false);
     }
   };
@@ -131,7 +153,7 @@ function SortableGalleryRow({ item }: { item: UIGallery }) {
   } = useSortable({ id: item.id });
 
   const style = {
-    transform: CSS.Transform.toString(transform),
+    transform: CSS.Translate.toString(transform),
     transition,
     zIndex: isDragging ? 50 : 1,
   };
@@ -142,17 +164,19 @@ function SortableGalleryRow({ item }: { item: UIGallery }) {
       style={style}
       className={`grid grid-cols-12 gap-4 px-6 py-4 items-center transition-colors ${
         isDragging
-          ? "bg-zinc-100 dark:bg-zinc-800/80 shadow-xl opacity-90"
+          ? "bg-zinc-100 dark:bg-zinc-800/80 shadow-xl opacity-90 relative"
           : "hover:bg-zinc-50/60 dark:hover:bg-zinc-900/40"
       }`}
     >
       {/* Col 1: Drag Grip + Thumbnail + Title */}
       <div className="col-span-6 md:col-span-5 flex items-center gap-3 min-w-0">
         <button
+          type="button"
           {...attributes}
           {...listeners}
-          className="cursor-grab active:cursor-grabbing text-zinc-400 hover:text-zinc-600 dark:hover:text-zinc-200 p-1 rounded-md transition-colors"
+          className="cursor-grab active:cursor-grabbing text-zinc-400 hover:text-zinc-600 dark:hover:text-zinc-200 p-1.5 rounded-md touch-none shrink-0 transition-colors focus:outline-none"
           title="Drag untuk mengubah urutan"
+          aria-label={`Reorder ${item.title}`}
         >
           <IconGripVertical size={18} />
         </button>

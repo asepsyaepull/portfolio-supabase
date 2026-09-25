@@ -1,6 +1,7 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { useRouter } from "next/navigation";
 import {
   DndContext,
   closestCenter,
@@ -31,13 +32,18 @@ export default function SortableSkillsList({
 }: {
   initialSkills: Skill[];
 }) {
+  const router = useRouter();
   const [skills, setSkills] = useState(initialSkills);
   const [isSaving, setIsSaving] = useState(false);
+
+  useEffect(() => {
+    setSkills(initialSkills);
+  }, [initialSkills]);
 
   const sensors = useSensors(
     useSensor(PointerSensor, {
       activationConstraint: {
-        distance: 8,
+        distance: 5,
       },
     }),
     useSensor(KeyboardSensor, {
@@ -48,31 +54,47 @@ export default function SortableSkillsList({
   const handleDragEnd = async (event: DragEndEvent) => {
     const { active, over } = event;
 
-    if (over && active.id !== over.id) {
-      const oldIndex = skills.findIndex((s) => s.id === active.id);
-      const newIndex = skills.findIndex((s) => s.id === over.id);
+    if (!over || active.id === over.id) {
+      return;
+    }
 
-      const newSkills = arrayMove(skills, oldIndex, newIndex);
+    const oldIndex = skills.findIndex((s) => s.id === active.id);
+    const newIndex = skills.findIndex((s) => s.id === over.id);
 
-      const updatedSkills = newSkills.map((skill, index) => ({
-        ...skill,
-        order_index: index,
-      }));
+    if (oldIndex === -1 || newIndex === -1) {
+      return;
+    }
 
-      setSkills(updatedSkills);
+    const previousSkills = skills;
+    const newSkills = arrayMove(skills, oldIndex, newIndex);
 
-      setIsSaving(true);
-      const payload = updatedSkills.map((s) => ({
-        id: s.id,
-        order_index: s.order_index || 0,
-      }));
+    const updatedSkills = newSkills.map((skill, index) => ({
+      ...skill,
+      order_index: index,
+    }));
+
+    setSkills(updatedSkills);
+    setIsSaving(true);
+
+    const payload = updatedSkills.map((s) => ({
+      id: s.id,
+      order_index: s.order_index ?? 0,
+    }));
+
+    try {
       const result = await updateOrderIndex("skills", payload);
 
       if (result?.error) {
+        setSkills(previousSkills);
         toast.error("Gagal menyimpan urutan baru");
       } else {
         toast.success("Urutan keahlian berhasil diperbarui");
+        router.refresh();
       }
+    } catch {
+      setSkills(previousSkills);
+      toast.error("Terjadi kesalahan saat menyimpan urutan");
+    } finally {
       setIsSaving(false);
     }
   };
@@ -136,10 +158,12 @@ function SortableSkillCard({ skill }: { skill: Skill }) {
     >
       <div className="flex items-center gap-3.5 min-w-0">
         <button
+          type="button"
           {...attributes}
           {...listeners}
           className="text-zinc-300 hover:text-zinc-600 dark:text-zinc-700 dark:hover:text-zinc-400 cursor-grab active:cursor-grabbing touch-none shrink-0"
           title="Drag to reorder"
+          aria-label={`Reorder ${skill.name}`}
         >
           <IconGripVertical size={18} />
         </button>

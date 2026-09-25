@@ -421,7 +421,7 @@ function GalleryCard({
               alt={item.title}
               fill
               sizes="(max-width: 768px) 100vw, 50vw"
-              className="object-cover object-top transition-transform duration-700 ease-out group-hover/img:scale-105"
+              className="object-cover object-center transition-transform duration-700 ease-out group-hover/img:scale-105"
             />
 
             {/* Dark glassmorphic hover overlay */}
@@ -860,7 +860,7 @@ function StudioCard({
                       alt={project.name}
                       fill
                       sizes="(max-width: 768px) 100vw, 50vw"
-                      className="object-cover object-top transition-transform duration-700 ease-out group-hover/shot:scale-105"
+                      className="object-cover object-center transition-transform duration-700 ease-out group-hover/shot:scale-105"
                     />
                   ) : (
                     <div className="w-full h-full flex flex-col items-center justify-center gap-2 bg-gradient-to-br from-zinc-200 dark:from-zinc-900 to-zinc-100 dark:to-zinc-950 text-zinc-400 dark:text-zinc-600">

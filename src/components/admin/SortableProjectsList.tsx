@@ -1,6 +1,7 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { useRouter } from "next/navigation";
 import {
   DndContext,
   closestCenter,
@@ -30,11 +31,20 @@ export default function SortableProjectsList({
 }: {
   initialProjects: Project[];
 }) {
+  const router = useRouter();
   const [projects, setProjects] = useState(initialProjects);
   const [isSaving, setIsSaving] = useState(false);
 
+  useEffect(() => {
+    setProjects(initialProjects);
+  }, [initialProjects]);
+
   const sensors = useSensors(
-    useSensor(PointerSensor, { activationConstraint: { distance: 8 } }),
+    useSensor(PointerSensor, {
+      activationConstraint: {
+        distance: 5,
+      },
+    }),
     useSensor(KeyboardSensor, {
       coordinateGetter: sortableKeyboardCoordinates,
     })
@@ -43,31 +53,47 @@ export default function SortableProjectsList({
   const handleDragEnd = async (event: DragEndEvent) => {
     const { active, over } = event;
 
-    if (over && active.id !== over.id) {
-      const oldIndex = projects.findIndex((p) => p.id === active.id);
-      const newIndex = projects.findIndex((p) => p.id === over.id);
+    if (!over || active.id === over.id) {
+      return;
+    }
 
-      const newProjects = arrayMove(projects, oldIndex, newIndex);
+    const oldIndex = projects.findIndex((p) => p.id === active.id);
+    const newIndex = projects.findIndex((p) => p.id === over.id);
 
-      const updatedProjects = newProjects.map((project, index) => ({
-        ...project,
-        order_index: index,
-      }));
+    if (oldIndex === -1 || newIndex === -1) {
+      return;
+    }
 
-      setProjects(updatedProjects);
+    const previousProjects = projects;
+    const newProjects = arrayMove(projects, oldIndex, newIndex);
 
-      setIsSaving(true);
-      const payload = updatedProjects.map((p) => ({
-        id: p.id,
-        order_index: p.order_index || 0,
-      }));
+    const updatedProjects = newProjects.map((project, index) => ({
+      ...project,
+      order_index: index,
+    }));
+
+    setProjects(updatedProjects);
+    setIsSaving(true);
+
+    const payload = updatedProjects.map((p) => ({
+      id: p.id,
+      order_index: p.order_index ?? 0,
+    }));
+
+    try {
       const result = await updateOrderIndex("projects", payload);
 
       if (result?.error) {
+        setProjects(previousProjects);
         toast.error("Gagal menyimpan urutan baru proyek");
       } else {
         toast.success("Urutan proyek berhasil diperbarui");
+        router.refresh();
       }
+    } catch {
+      setProjects(previousProjects);
+      toast.error("Terjadi kesalahan saat menyimpan urutan proyek");
+    } finally {
       setIsSaving(false);
     }
   };
@@ -126,7 +152,7 @@ function SortableProjectRow({ project }: { project: Project }) {
   });
 
   const style = {
-    transform: CSS.Transform.toString(transform),
+    transform: CSS.Translate.toString(transform),
     transition,
     zIndex: isDragging ? 50 : 1,
   };
@@ -137,16 +163,18 @@ function SortableProjectRow({ project }: { project: Project }) {
       style={style}
       className={`grid grid-cols-12 gap-4 px-6 py-4 text-sm items-center transition-colors ${
         isDragging
-          ? "bg-zinc-100 dark:bg-zinc-800/80 shadow-xl opacity-90"
+          ? "bg-zinc-100 dark:bg-zinc-800/80 shadow-xl opacity-90 relative"
           : "hover:bg-zinc-50/60 dark:hover:bg-zinc-900/40"
       }`}
     >
       <div className="col-span-6 md:col-span-5 flex items-center gap-3 min-w-0">
         <button
+          type="button"
           {...attributes}
           {...listeners}
-          className="text-zinc-400 hover:text-zinc-600 dark:hover:text-zinc-200 p-1 rounded-md cursor-grab active:cursor-grabbing shrink-0 transition-colors"
+          className="text-zinc-400 hover:text-zinc-600 dark:hover:text-zinc-200 p-1.5 rounded-md cursor-grab active:cursor-grabbing touch-none shrink-0 transition-colors focus:outline-none"
           title="Drag up or down to reorder"
+          aria-label={`Reorder ${project.name}`}
         >
           <IconGripVertical size={18} />
         </button>
