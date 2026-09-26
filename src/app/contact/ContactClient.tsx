@@ -10,30 +10,72 @@ import {
   IconBrandGithub,
   IconBrandLinkedin,
   IconCheck,
+  IconChevronDown,
   IconCopy,
   IconDownload,
   IconMail,
   IconMapPin,
   IconSend,
   IconShieldCheck,
-  IconSparkles
+  IconSparkles,
+  IconX,
 } from "@tabler/icons-react";
-import { motion } from "framer-motion";
-import React, { useRef, useState, useTransition } from "react";
+import { AnimatePresence, motion, useMotionTemplate, useMotionValue } from "framer-motion";
+import React, { useEffect, useRef, useState, useTransition } from "react";
 import { toast } from "sonner";
 import { submitContactForm } from "./actions";
 
 const EMAIL_ADDRESS = "mail.asepsyaepul@gmail.com";
 
 export default function ContactClient() {
-  const { t } = useLanguage();
+  const { t, locale } = useLanguage();
   const contact = t.contactPage;
   const formRef = useRef<HTMLFormElement>(null);
+  const scopeDropdownRef = useRef<HTMLDivElement>(null);
 
   const [isPending, startTransition] = useTransition();
   const [copied, setCopied] = useState(false);
   const [selectedScope, setSelectedScope] = useState<string>("");
   const [subjectValue, setSubjectValue] = useState<string>("");
+  const [isScopeOpen, setIsScopeOpen] = useState(false);
+  const [isScopeHovered, setIsScopeHovered] = useState(false);
+
+  const dropdownMouseX = useMotionValue(0);
+  const dropdownMouseY = useMotionValue(0);
+
+  function handleDropdownMouseMove({
+    currentTarget,
+    clientX,
+    clientY,
+  }: React.MouseEvent<HTMLDivElement>) {
+    const { left, top } = currentTarget.getBoundingClientRect();
+    dropdownMouseX.set(clientX - left);
+    dropdownMouseY.set(clientY - top);
+  }
+
+  useEffect(() => {
+    function handleClickOutside(event: MouseEvent) {
+      if (
+        scopeDropdownRef.current &&
+        !scopeDropdownRef.current.contains(event.target as Node)
+      ) {
+        setIsScopeOpen(false);
+      }
+    }
+
+    function handleKeyDown(event: KeyboardEvent) {
+      if (event.key === "Escape") {
+        setIsScopeOpen(false);
+      }
+    }
+
+    document.addEventListener("mousedown", handleClickOutside);
+    document.addEventListener("keydown", handleKeyDown);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+      document.removeEventListener("keydown", handleKeyDown);
+    };
+  }, []);
 
   const handleCopyEmail = async () => {
     try {
@@ -66,6 +108,7 @@ export default function ContactClient() {
         formRef.current?.reset();
         setSelectedScope("");
         setSubjectValue("");
+        setIsScopeOpen(false);
       }
     });
   };
@@ -273,31 +316,139 @@ export default function ContactClient() {
                     </div>
                   </div>
 
-                  {/* Scope Selection Chips */}
-                  <div className="mb-7">
-                    <label className="block font-mono text-[11px] font-bold uppercase tracking-wider text-zinc-500 dark:text-zinc-400 mb-1.5">
-                      {contact.scopeTitle}
+                  {/* Scope Selection Dropdown */}
+                  <div className="relative z-30 mb-6" ref={scopeDropdownRef}>
+                    <label
+                      htmlFor="scope-dropdown-trigger"
+                      className="block font-mono text-[11px] font-bold uppercase tracking-wider text-zinc-500 dark:text-zinc-400 mb-1.5 cursor-pointer"
+                    >
+                      {contact.scopeTitle.replace(/:$/, "")}
                     </label>
-                    <div className="flex flex-wrap gap-2">
-                      {contact.scopeChips.map((chip) => {
-                        const isActive = selectedScope === chip;
-                        return (
-                          <button
-                            key={chip}
-                            type="button"
-                            onClick={() => handleScopeSelect(chip)}
+
+                    <input type="hidden" name="scope" value={selectedScope} />
+
+                    <motion.div
+                      style={{
+                        background: useMotionTemplate`
+                          radial-gradient(
+                            ${isScopeHovered ? "100px" : "0px"} circle at ${dropdownMouseX}px ${dropdownMouseY}px,
+                            rgba(240, 83, 28, 0.35),
+                            transparent 80%
+                          )
+                        `,
+                      }}
+                      onMouseMove={handleDropdownMouseMove}
+                      onMouseEnter={() => setIsScopeHovered(true)}
+                      onMouseLeave={() => setIsScopeHovered(false)}
+                      className="p-[1.5px] rounded-xl transition duration-300"
+                    >
+                      <button
+                        id="scope-dropdown-trigger"
+                        type="button"
+                        aria-haspopup="listbox"
+                        aria-expanded={isScopeOpen}
+                        disabled={isPending}
+                        onClick={() => setIsScopeOpen((prev) => !prev)}
+                        className={cn(
+                          "flex h-12 w-full items-center justify-between rounded-xl border px-4 py-2 text-sm shadow-sm transition-all duration-200 cursor-pointer select-none",
+                          "bg-white/90 dark:bg-[#121215]/90 text-left",
+                          isScopeOpen
+                            ? "border-brand ring-2 ring-brand/20 dark:border-brand"
+                            : "border-zinc-200 dark:border-zinc-800 hover:border-zinc-300 dark:hover:border-zinc-700",
+                          isPending && "opacity-50 cursor-not-allowed"
+                        )}
+                      >
+                        <div className="flex items-center gap-2.5 min-w-0">
+                          {selectedScope ? (
+                            <>
+                              <span className="w-2 h-2 rounded-full bg-brand shadow-[0_0_8px_#F0531C] shrink-0" />
+                              <span className="font-mono text-xs sm:text-sm font-bold text-zinc-900 dark:text-white truncate">
+                                {selectedScope}
+                              </span>
+                            </>
+                          ) : (
+                            <span className="text-zinc-400 dark:text-zinc-500 text-sm font-sans truncate">
+                              {locale === "id"
+                                ? "Pilih kebutuhan / cakupan proyek..."
+                                : "Select project scope / service..."}
+                            </span>
+                          )}
+                        </div>
+
+                        <div className="flex items-center gap-1.5 shrink-0 ml-2">
+                          {selectedScope && !isPending && (
+                            <span
+                              role="button"
+                              tabIndex={0}
+                              aria-label={locale === "id" ? "Hapus pilihan" : "Clear selection"}
+                              onClick={(e) => {
+                                e.stopPropagation();
+                                setSelectedScope("");
+                                setSubjectValue("");
+                              }}
+                              className="p-1 rounded-md text-zinc-400 hover:text-zinc-700 dark:hover:text-zinc-200 hover:bg-zinc-100 dark:hover:bg-zinc-800 transition-colors"
+                            >
+                              <IconX className="w-3.5 h-3.5 stroke-[2.5]" />
+                            </span>
+                          )}
+                          <IconChevronDown
                             className={cn(
-                              "px-3 py-1.5 rounded-lg text-xs font-mono font-bold transition-all duration-200 border cursor-pointer",
-                              isActive
-                                ? "bg-brand text-white border-brand shadow-[0_4px_14px_-2px_#F0531C] scale-[1.02]"
-                                : "bg-zinc-100/90 dark:bg-zinc-900/80 hover:bg-zinc-200 dark:hover:bg-zinc-800 text-zinc-700 dark:text-zinc-300 border-zinc-200 dark:border-zinc-800 hover:border-brand/40"
+                              "w-4 h-4 text-zinc-400 dark:text-zinc-500 transition-transform duration-200 stroke-[2.5]",
+                              isScopeOpen && "rotate-180 text-brand"
                             )}
-                          >
-                            {chip}
-                          </button>
-                        );
-                      })}
-                    </div>
+                          />
+                        </div>
+                      </button>
+                    </motion.div>
+
+                    {/* Dropdown Menu Options */}
+                    <AnimatePresence>
+                      {isScopeOpen && (
+                        <motion.div
+                          initial={{ opacity: 0, y: -6, scale: 0.98 }}
+                          animate={{ opacity: 1, y: 0, scale: 1 }}
+                          exit={{ opacity: 0, y: -6, scale: 0.98 }}
+                          transition={{ duration: 0.16, ease: "easeOut" }}
+                          role="listbox"
+                          className="absolute left-0 right-0 top-full mt-2 z-50 max-h-64 overflow-y-auto rounded-2xl border border-zinc-200/90 dark:border-zinc-800/90 bg-white/95 dark:bg-[#141417]/95 backdrop-blur-xl p-1.5 shadow-2xl space-y-1"
+                        >
+                          {contact.scopeChips.map((chip) => {
+                            const isActive = selectedScope === chip;
+                            return (
+                              <button
+                                key={chip}
+                                type="button"
+                                role="option"
+                                aria-selected={isActive}
+                                onClick={() => {
+                                  handleScopeSelect(chip);
+                                  setIsScopeOpen(false);
+                                }}
+                                className={cn(
+                                  "w-full px-3.5 py-2.5 rounded-xl text-left text-xs font-mono transition-all duration-150 flex items-center justify-between cursor-pointer",
+                                  isActive
+                                    ? "bg-brand/10 text-brand font-bold border border-brand/20 shadow-sm"
+                                    : "text-zinc-700 dark:text-zinc-300 hover:bg-zinc-100 dark:hover:bg-zinc-800/80 hover:text-zinc-900 dark:hover:text-white border border-transparent"
+                                )}
+                              >
+                                <div className="flex items-center gap-2.5 min-w-0">
+                                  <span
+                                    className={cn(
+                                      "w-1.5 h-1.5 rounded-full shrink-0 transition-colors",
+                                      isActive ? "bg-brand" : "bg-zinc-300 dark:bg-zinc-600"
+                                    )}
+                                  />
+                                  <span className="truncate">{chip}</span>
+                                </div>
+                                {isActive && (
+                                  <IconCheck className="w-4 h-4 text-brand stroke-[2.5] shrink-0 ml-2" />
+                                )}
+                              </button>
+                            );
+                          })}
+                        </motion.div>
+                      )}
+                    </AnimatePresence>
                   </div>
 
                   {/* Subject */}
