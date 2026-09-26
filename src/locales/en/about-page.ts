@@ -10,6 +10,30 @@ export const aboutPageEn: AboutPageDictionary = {
     ", a UI/UX Designer & Frontend Developer with 7+ years of experience designing and building production-scale digital product ecosystems.",
   bio2: "Bridging the gap between high-fidelity design and frontend development. My approach combines targeted user research with clean, structured code implementation, ensuring every interface component fulfills a real functional purpose and delivers optimal performance.",
   skillsTitle: "Core Disciplines & Capabilities",
+  capabilitiesBadge: "/ 02 CAPABILITIES",
+  capabilitiesShowcase: {
+    primaryStackLabel: "Primary Stack",
+    design: {
+      label: "UI/UX Design",
+      tag: "01 DESIGN-SYSTEMS.SPEC",
+      subtitle: "Design Systems · Research · Prototyping",
+      description:
+        "Architecting systematic design tokens, scalable component architecture, and high-fidelity interaction flows bridging user needs with business goals.",
+      status: "7+ YOE · Senior Level",
+      ratingText: "Design Standard: Production-Ready & Scalable",
+      levels: ["Senior", "Advanced", "Advanced", "Core Spec"],
+    },
+    dev: {
+      label: "Frontend Dev",
+      tag: "02 ENGINEERING-ARCHITECTURE.SPEC",
+      subtitle: "Next.js · TypeScript · Web Performance",
+      description:
+        "Engineering enterprise-grade frontend applications with modular React architecture, type-safe TypeScript, responsive styling, and sub-second Web Vitals.",
+      status: "Production Core · Type-Safe",
+      ratingText: "Architecture Standard: Enterprise-Grade Tested",
+      levels: ["Production Core", "Proficient", "Core Spec", "Optimized"],
+    },
+  },
   designTitle: "UI/UX & Product Design",
   designSkills: [
     { label: "User Research & Usability Testing", percent: 95 },
@@ -25,6 +49,8 @@ export const aboutPageEn: AboutPageDictionary = {
     { label: "Core Web Vitals & Runtime Optimization", percent: 80 },
   ],
   foundationsTitle: "Education & Certifications",
+  academicBadge: "/ 03 ACADEMIC & TRAINING",
+  academicResultLabel: "Grade / Result",
   education: [
     {
       school: "Binus University",
@@ -46,6 +72,7 @@ export const aboutPageEn: AboutPageDictionary = {
     },
   ],
   journeyTitle: "Work Experiences",
+  experiencesBadge: "/ 04 EXPERIENCES",
   statusBadge: "Available for Strategic Contracts & Full-time Roles",
   experienceYears: "7+ Years Experience",
   location: "Jakarta, Indonesia",

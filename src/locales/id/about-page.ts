@@ -10,6 +10,30 @@ export const aboutPageId: AboutPageDictionary = {
     ", UI/UX Designer & Frontend Developer dengan 7+ tahun pengalaman dalam merancang dan membangun ekosistem produk digital berskala produksi.",
   bio2: "Menjembatani antara desain fidelitas tinggi dengan frontend development. Pendekatan yang saya terapkan yaitu memadukan riset pengguna yang terarah dengan implementasi kode yang terstruktur dan rapi, memastikan setiap komponen antarmuka memiliki tujuan fungsional nyata dan menghasilkan performa optimal.",
   skillsTitle: "Keahlian & Disiplin Utama",
+  capabilitiesBadge: "/ 02 KAPABILITAS",
+  capabilitiesShowcase: {
+    primaryStackLabel: "Stack Utama",
+    design: {
+      label: "Desain UI/UX",
+      tag: "01 SPESIFIKASI SISTEM DESAIN",
+      subtitle: "Sistem Desain · Riset Pengguna · Prototyping",
+      description:
+        "Merancang arsitektur informasi, alur interaksi pengguna yang intuitif, serta sistem desain terpadu yang konsisten dan skalabel untuk produk digital kompleks.",
+      status: "Pengalaman 7+ Tahun · Senior Level",
+      ratingText: "Standar Desain: Profesional & Siap Produksi",
+      levels: ["Senior", "Tingkat Lanjut", "Tingkat Lanjut", "Spesifikasi Inti"],
+    },
+    dev: {
+      label: "Pengembangan Frontend",
+      tag: "02 SPESIFIKASI ARSITEKTUR REKAYASA",
+      subtitle: "Next.js · TypeScript · Performa Web",
+      description:
+        "Mengembangkan aplikasi web modern berkinerja tinggi dengan ekosistem React, arsitektur kode tipe-aman (type-safe), dan optimalisasi Core Web Vitals berskala produksi.",
+      status: "Siap Produksi · Stack Inti",
+      ratingText: "Standar Rekayasa: Arsitektur Skala Enterprise",
+      levels: ["Inti Produksi", "Tingkat Mahir", "Spesifikasi Inti", "Performa Teroptimasi"],
+    },
+  },
   designTitle: "Desain UI/UX & Produk",
   designSkills: [
     { label: "Riset Pengguna & Usability Testing", percent: 95 },
@@ -25,6 +49,8 @@ export const aboutPageId: AboutPageDictionary = {
     { label: "Optimasi Web Vitals & Runtime Performance", percent: 80 },
   ],
   foundationsTitle: "Pendidikan & Sertifikasi",
+  academicBadge: "/ 03 PENDIDIKAN & PELATIHAN",
+  academicResultLabel: "Predikat / Hasil",
   education: [
     {
       school: "Binus University",
@@ -46,6 +72,7 @@ export const aboutPageId: AboutPageDictionary = {
     },
   ],
   journeyTitle: "Pengalaman Kerja",
+  experiencesBadge: "/ 04 PENGALAMAN KERJA",
   statusBadge: "Tersedia untuk Kontrak & Posisi Strategis",
   experienceYears: "7+ Tahun Pengalaman",
   location: "Jakarta, Indonesia",

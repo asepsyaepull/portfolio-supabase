@@ -285,6 +285,22 @@ export interface SkillItemData {
   percent: number;
 }
 
+export interface DisciplineShowcase {
+  label: string;
+  tag: string;
+  subtitle: string;
+  description: string;
+  status: string;
+  ratingText: string;
+  levels: string[];
+}
+
+export interface CapabilitiesShowcaseDictionary {
+  primaryStackLabel: string;
+  design: DisciplineShowcase;
+  dev: DisciplineShowcase;
+}
+
 export interface AboutPageDictionary {
   badge: string;
   headlineMain: string;
@@ -294,13 +310,18 @@ export interface AboutPageDictionary {
   bio1Suffix: string;
   bio2: string;
   skillsTitle: string;
+  capabilitiesBadge?: string;
+  capabilitiesShowcase?: CapabilitiesShowcaseDictionary;
   designTitle: string;
   designSkills: SkillItemData[];
   devTitle: string;
   devSkills: SkillItemData[];
   foundationsTitle: string;
+  academicBadge?: string;
+  academicResultLabel?: string;
   education: EducationItem[];
   journeyTitle: string;
+  experiencesBadge?: string;
   statusBadge?: string;
   experienceYears?: string;
   location?: string;

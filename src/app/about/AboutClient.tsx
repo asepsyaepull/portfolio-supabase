@@ -5,29 +5,164 @@ import { cn } from "@/lib/utils";
 import { ExperienceItemLocale } from "@/locales/types";
 import {
   IconArrowUpRight,
-  IconArrowsRightLeft,
   IconBrandFigma,
   IconBrandFramer,
   IconBrandNextjs,
   IconBrandReact,
   IconBrandTailwind,
   IconBrandTypescript,
-  IconCode,
   IconDownload,
   IconMail,
   IconMapPin,
-  IconPalette,
-  IconSparkles,
 } from "@tabler/icons-react";
 import { motion, useReducedMotion, useScroll, useSpring, useTransform } from "framer-motion";
 import Image from "next/image";
 import Link from "next/link";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
+import SpatialProductShowcase, { ProductData } from "@/components/ui/spatial-product-showcase";
+import {
+  Compass,
+  Layers,
+  Workflow,
+  Palette,
+  Globe,
+  ShieldCheck,
+  Layout,
+  Zap,
+} from "lucide-react";
 
 export default function AboutClient() {
   const { t, locale } = useLanguage();
   const about = t.aboutPage;
   const experiences = t.experience.items;
+
+  const showcase = about.capabilitiesShowcase;
+
+  const capabilitiesData: Record<string, ProductData> = useMemo(
+    () => ({
+      design: {
+        id: "design",
+        label: showcase?.design.label || "UI/UX Design",
+        tag: showcase?.design.tag || "01 DESIGN-SYSTEMS.SPEC",
+        title: about.designTitle,
+        subtitle: showcase?.design.subtitle || "Design Systems · Research · Prototyping",
+        description: showcase?.design.description || about.bio2,
+        image: "/assets/images/spatial-design-system.jpg",
+        primaryStackLabel: showcase?.primaryStackLabel || "Primary Stack",
+        colors: {
+          gradient: "from-[#F0531C] to-amber-700",
+          glow: "bg-[#F0531C]",
+          ring: "border-l-[#F0531C]/60",
+          barColor: "bg-[#F0531C]",
+          textAccent: "text-[#F0531C]",
+        },
+        stats: {
+          connectionStatus: showcase?.design.status || "7+ YOE · Lead Design Spec",
+          batteryLevel: 95,
+          ratingText: showcase?.design.ratingText || "95% Design Mastery Rating",
+        },
+        features: [
+          {
+            label:
+              about.designSkills[0]?.label ||
+              "User Research & Usability Testing",
+            value: about.designSkills[0]?.percent || 95,
+            icon: Compass,
+            level: showcase?.design.levels[0] || "Senior",
+          },
+          {
+            label:
+              about.designSkills[1]?.label ||
+              "Interactive Flows & High-Fidelity Prototyping",
+            value: about.designSkills[1]?.percent || 90,
+            icon: Layers,
+            level: showcase?.design.levels[1] || "Advanced",
+          },
+          {
+            label:
+              about.designSkills[2]?.label ||
+              "Information Architecture & User Journeys",
+            value: about.designSkills[2]?.percent || 85,
+            icon: Workflow,
+            level: showcase?.design.levels[2] || "Advanced",
+          },
+          {
+            label:
+              about.designSkills[3]?.label ||
+              "Design Systems & Token Architecture",
+            value: about.designSkills[3]?.percent || 95,
+            icon: Palette,
+            level: showcase?.design.levels[3] || "Core Spec",
+          },
+        ],
+        tools: [
+          { name: "Figma", icon: IconBrandFigma },
+          { name: "Framer", icon: IconBrandFramer },
+        ],
+      },
+      dev: {
+        id: "dev",
+        label: showcase?.dev.label || "Frontend Engineering",
+        tag: showcase?.dev.tag || "02 ENGINEERING-ARCHITECTURE.SPEC",
+        title: about.devTitle,
+        subtitle: showcase?.dev.subtitle || "Next.js · TypeScript · Web Performance",
+        description: showcase?.dev.description || about.bio2,
+        image: "/assets/images/spatial-frontend-code.jpg",
+        primaryStackLabel: showcase?.primaryStackLabel || "Primary Stack",
+        colors: {
+          gradient: "from-blue-600 to-cyan-800",
+          glow: "bg-cyan-500",
+          ring: "border-r-cyan-500/60",
+          barColor: "bg-cyan-600 dark:bg-cyan-500",
+          textAccent: "text-cyan-600 dark:text-cyan-400",
+        },
+        stats: {
+          connectionStatus: showcase?.dev.status || "Production Core · Type-Safe",
+          batteryLevel: 92,
+          ratingText: showcase?.dev.ratingText || "92% Production Reliability",
+        },
+        features: [
+          {
+            label:
+              about.devSkills[0]?.label || "React.js & Next.js Ecosystem",
+            value: about.devSkills[0]?.percent || 90,
+            icon: Globe,
+            level: showcase?.dev.levels[0] || "Production Core",
+          },
+          {
+            label:
+              about.devSkills[1]?.label ||
+              "TypeScript (Type-Safe Architecture)",
+            value: about.devSkills[1]?.percent || 85,
+            icon: ShieldCheck,
+            level: showcase?.dev.levels[1] || "Proficient",
+          },
+          {
+            label:
+              about.devSkills[2]?.label || "Tailwind CSS & Modular Design",
+            value: about.devSkills[2]?.percent || 95,
+            icon: Layout,
+            level: showcase?.dev.levels[2] || "Core Spec",
+          },
+          {
+            label:
+              about.devSkills[3]?.label ||
+              "Core Web Vitals & Runtime Optimization",
+            value: about.devSkills[3]?.percent || 80,
+            icon: Zap,
+            level: showcase?.dev.levels[3] || "Optimized",
+          },
+        ],
+        tools: [
+          { name: "React", icon: IconBrandReact },
+          { name: "Next.js", icon: IconBrandNextjs },
+          { name: "TypeScript", icon: IconBrandTypescript },
+          { name: "Tailwind", icon: IconBrandTailwind },
+        ],
+      },
+    }),
+    [about, showcase]
+  );
 
   return (
     <div className="relative min-h-screen pt-28 sm:pt-32 pb-24 text-zinc-900 dark:text-white">
@@ -121,7 +256,7 @@ export default function AboutClient() {
                     fill
                     sizes="(max-width: 768px) 100vw, 40vw"
                     priority
-                    className="object-cover object-top"
+                    className="object-cover"
                   />
                   {/* Subtle Vignette Overlay */}
                   <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-80" />
@@ -157,152 +292,26 @@ export default function AboutClient() {
         </div>
 
         {/* ===================================================================
-            2. SKILLS MATRIX & CORE DISCIPLINES BENTO
+            2. SKILLS MATRIX & CORE DISCIPLINES SPATIAL SHOWCASE
             =================================================================== */}
         <div className="mb-24 md:mb-32">
           {/* Section Header */}
-          <div className="mb-10 text-start">
+          <div className="mb-8 text-start">
             <div className="inline-flex items-center gap-2 py-1 rounded-full text-brand font-mono tracking-widest text-xs font-bold uppercase mb-3">
-              <span>/ 02 CAPABILITIES</span>
+              <span>{about.capabilitiesBadge || "/ 02 CAPABILITIES"}</span>
             </div>
             <h2 className="heading-display font-display text-3xl sm:text-4xl md:text-5xl font-bold text-zinc-900 dark:text-white tracking-tight">
               {about.skillsTitle}
             </h2>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-10">
-            {/* Card 1: UI/UX & Product Design */}
-            <div className="relative w-full">
-              {/* Figma Layer Selection Tab */}
-              <div className="absolute -top-3.5 left-4 sm:left-6 font-mono text-[11px] font-bold text-brand bg-white dark:bg-[#121214] px-3 py-1 rounded-md border border-brand/30 shadow-sm flex items-center gap-1.5 z-20 tracking-wider">
-                <IconPalette className="w-3.5 h-3.5 text-brand" />
-                <span>02 design-systems.spec</span>
-              </div>
-
-              <div className="group relative rounded-3xl bg-white dark:bg-[#121215] border border-zinc-200 dark:border-zinc-800 p-6 sm:p-8 shadow-xl hover:shadow-2xl hover:border-brand/40 dark:hover:border-brand/40 transition-all duration-300">
-                <div className="flex items-center justify-between mb-6">
-                  <div>
-                    <h3 className="heading-display font-display text-2xl font-bold text-zinc-900 dark:text-white">
-                      {about.designTitle}
-                    </h3>
-                    <p className="font-mono text-xs text-brand font-bold tracking-wider mt-1 uppercase">
-                      Design Systems · Research · Prototyping
-                    </p>
-                  </div>
-                  <div className="w-10 h-10 rounded-xl bg-brand/10 border border-brand/20 flex items-center justify-center text-brand">
-                    <IconPalette className="w-5 h-5 text-brand" />
-                  </div>
-                </div>
-
-                {/* Craft Items */}
-                <div className="space-y-3 mb-8">
-                  {about.designSkills.map((skill) => (
-                    <div
-                      key={skill.label}
-                      className="p-3.5 rounded-xl bg-zinc-50 dark:bg-zinc-900/60 border border-zinc-200/80 dark:border-zinc-800/80 flex items-center justify-between gap-3 transition-colors hover:border-brand/40"
-                    >
-                      <div className="flex items-center gap-2.5">
-                        <span className="w-1.5 h-1.5 rounded-full bg-brand" />
-                        <span className="text-xs sm:text-sm font-semibold text-zinc-800 dark:text-zinc-200">
-                          {skill.label}
-                        </span>
-                      </div>
-                      <span className="font-mono text-[11px] font-bold px-2.5 py-0.5 rounded-md bg-brand/10 text-brand border border-brand/20">
-                        {skill.percent >= 90 ? "Lead / Senior" : "Advanced"}
-                      </span>
-                    </div>
-                  ))}
-                </div>
-
-                {/* Tools row */}
-                <div className="pt-4 border-t border-zinc-200 dark:border-zinc-800 flex items-center justify-between">
-                  <span className="font-mono text-[11px] uppercase tracking-wider text-zinc-400 dark:text-zinc-500">
-                    Primary Tools
-                  </span>
-                  <div className="flex items-center gap-4">
-                    <span className="inline-flex items-center gap-1.5 text-xs font-mono font-medium text-zinc-600 dark:text-zinc-400 hover:text-brand transition-colors">
-                      <IconBrandFigma className="w-4 h-4 text-zinc-700 dark:text-zinc-300" />
-                      Figma
-                    </span>
-                    <span className="inline-flex items-center gap-1.5 text-xs font-mono font-medium text-zinc-600 dark:text-zinc-400 hover:text-brand transition-colors">
-                      <IconBrandFramer className="w-4 h-4 text-zinc-700 dark:text-zinc-300" />
-                      Framer
-                    </span>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            {/* Card 2: Frontend Engineering */}
-            <div className="relative w-full">
-              {/* Code Selection Tab */}
-              <div className="absolute -top-3.5 left-4 sm:left-6 font-mono text-[11px] font-bold text-brand bg-white dark:bg-[#121214] px-3 py-1 rounded-md border border-brand/30 shadow-sm flex items-center gap-1.5 z-20 tracking-wider">
-                <IconCode className="w-3.5 h-3.5 text-brand" />
-                <span>03 engineering.spec</span>
-              </div>
-
-              <div className="group relative rounded-3xl bg-white dark:bg-[#121215] border border-zinc-200 dark:border-zinc-800 p-6 sm:p-8 shadow-xl hover:shadow-2xl hover:border-brand/40 dark:hover:border-brand/40 transition-all duration-300">
-                <div className="flex items-center justify-between mb-6">
-                  <div>
-                    <h3 className="heading-display font-display text-2xl font-bold text-zinc-900 dark:text-white">
-                      {about.devTitle}
-                    </h3>
-                    <p className="font-mono text-xs text-brand font-bold tracking-wider mt-1 uppercase">
-                      Next.js · TypeScript · Web Performance
-                    </p>
-                  </div>
-                  <div className="w-10 h-10 rounded-xl bg-brand/10 border border-brand/20 flex items-center justify-center text-brand">
-                    <IconCode className="w-5 h-5 text-brand" />
-                  </div>
-                </div>
-
-                {/* Craft Items */}
-                <div className="space-y-3 mb-8">
-                  {about.devSkills.map((skill) => (
-                    <div
-                      key={skill.label}
-                      className="p-3.5 rounded-xl bg-zinc-50 dark:bg-zinc-900/60 border border-zinc-200/80 dark:border-zinc-800/80 flex items-center justify-between gap-3 transition-colors hover:border-brand/40"
-                    >
-                      <div className="flex items-center gap-2.5">
-                        <span className="w-1.5 h-1.5 rounded-full bg-brand" />
-                        <span className="text-xs sm:text-sm font-semibold text-zinc-800 dark:text-zinc-200">
-                          {skill.label}
-                        </span>
-                      </div>
-                      <span className="font-mono text-[11px] font-bold px-2.5 py-0.5 rounded-md bg-brand/10 text-brand border border-brand/20">
-                        {skill.percent >= 90 ? "Production Core" : "Proficient"}
-                      </span>
-                    </div>
-                  ))}
-                </div>
-
-                {/* Tools row */}
-                <div className="pt-4 border-t border-zinc-200 dark:border-zinc-800 flex items-center justify-between">
-                  <span className="font-mono text-[11px] uppercase tracking-wider text-zinc-400 dark:text-zinc-500">
-                    Tech Stack
-                  </span>
-                  <div className="flex items-center gap-3">
-                    <span className="inline-flex items-center gap-1 text-xs font-mono font-medium text-zinc-600 dark:text-zinc-400 hover:text-brand transition-colors">
-                      <IconBrandReact className="w-4 h-4 text-zinc-700 dark:text-zinc-300" />
-                      React
-                    </span>
-                    <span className="inline-flex items-center gap-1 text-xs font-mono font-medium text-zinc-600 dark:text-zinc-400 hover:text-brand transition-colors">
-                      <IconBrandNextjs className="w-4 h-4 text-zinc-700 dark:text-zinc-300" />
-                      Next.js
-                    </span>
-                    <span className="inline-flex items-center gap-1 text-xs font-mono font-medium text-zinc-600 dark:text-zinc-400 hover:text-brand transition-colors">
-                      <IconBrandTypescript className="w-4 h-4 text-zinc-700 dark:text-zinc-300" />
-                      TS
-                    </span>
-                    <span className="inline-flex items-center gap-1 text-xs font-mono font-medium text-zinc-600 dark:text-zinc-400 hover:text-brand transition-colors">
-                      <IconBrandTailwind className="w-4 h-4 text-zinc-700 dark:text-zinc-300" />
-                      Tailwind
-                    </span>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
+          {/* Spatial Capabilities Showcase */}
+          <SpatialProductShowcase
+            data={capabilitiesData}
+            defaultActiveId="design"
+            switcherPosition="inline"
+            isEmbedded={true}
+          />
         </div>
 
         {/* ===================================================================
@@ -312,7 +321,7 @@ export default function AboutClient() {
           {/* Section Header */}
           <div className="mb-10 text-start">
             <div className="inline-flex items-center gap-2 py-1 rounded-full text-brand font-mono tracking-widest text-xs font-bold uppercase mb-3">
-              <span>/ 03 ACADEMIC & TRAINING</span>
+              <span>{about.academicBadge || "/ 03 ACADEMIC & TRAINING"}</span>
             </div>
             <h2 className="heading-display font-display text-3xl sm:text-4xl md:text-5xl font-bold text-zinc-900 dark:text-white tracking-tight">
               {about.foundationsTitle}
@@ -346,14 +355,14 @@ export default function AboutClient() {
                     </p>
                   </div>
 
-                  <div className="pt-4 border-t border-zinc-100 dark:border-zinc-800/80 flex items-center justify-between">
+                  {/* <div className="pt-4 border-t border-zinc-100 dark:border-zinc-800/80 flex items-center justify-between">
                     <span className="font-mono text-[10px] uppercase text-zinc-400">
-                      {locale === "id" ? "Predikat / Hasil" : "Grade / Result"}
+                      {about.academicResultLabel || (locale === "id" ? "Predikat / Hasil" : "Grade / Result")}
                     </span>
                     <span className="inline-block px-3 py-1 rounded-full bg-zinc-100 dark:bg-zinc-900 text-zinc-800 dark:text-zinc-200 font-mono text-xs font-bold border border-zinc-200 dark:border-zinc-800">
                       {edu.gpa}
                     </span>
-                  </div>
+                  </div> */}
                 </div>
               );
             })}
@@ -366,7 +375,7 @@ export default function AboutClient() {
         <div className="mb-20">
           <div className="mb-12 text-start">
             <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-brand font-mono tracking-widest text-xs font-bold uppercase mb-3">
-              <span>/ 04 EXPERIENCES</span>
+              <span>{about.experiencesBadge || "/ 04 EXPERIENCES"}</span>
             </div>
             <h2 className="heading-display font-display text-3xl sm:text-4xl md:text-5xl font-bold text-zinc-900 dark:text-white tracking-tight">
               {about.journeyTitle}
