@@ -34,13 +34,11 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   ];
 
   try {
-    const { data: projects } = await from("projects")
-      .select("slug, updated_at, is_active")
-      .eq("is_active", true);
+    const { data: projects } = await from("projects").select("*");
 
     if (projects && projects.length > 0) {
       const projectRoutes = projects
-        .filter((p: any) => Boolean(p.slug))
+        .filter((p: any) => Boolean(p.slug) && p.is_active !== false)
         .map((p: any) => ({
           url: `${baseUrl}/projects/${p.slug}`,
           lastModified: p.updated_at ? new Date(p.updated_at) : new Date(),

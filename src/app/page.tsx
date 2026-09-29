@@ -12,39 +12,33 @@ export const metadata: Metadata = {
 };
 
 export default async function Home() {
-  // 1. Fetch featured projects that are active
-  const { data: featuredProjects, error } = await from("projects")
+  const { data: allProjects, error } = await from("projects")
     .select("*")
-    .eq("is_featured", true)
-    .eq("is_active", true)
     .order("order_index", { ascending: true })
     .order("created_at", { ascending: false });
 
   if (error) {
-    console.error("Error fetching featured projects:", error);
+    console.error("Error fetching projects on Home:", error);
   }
 
-  let projects: Project[] = (featuredProjects as Project[]) || [];
+  const rawProjects = (allProjects as Project[]) || [];
 
-  // 2. If no projects are explicitly featured yet, fallback to active DB projects
-  if (projects.length === 0) {
-    const { data: recentProjects, error: recentError } = await from("projects")
-      .select("*")
-      .eq("is_active", true)
-      .order("order_index", { ascending: true })
-      .order("created_at", { ascending: false })
-      .limit(6);
+  // Filter only active projects (hide only if explicitly is_active === false)
+  const activeProjects = rawProjects.filter(
+    (p: any) => p.is_active !== false
+  );
 
-    if (recentError) {
-      console.error("Error fetching recent projects:", recentError);
-    }
+  // 1. Featured projects from active projects
+  let featured = activeProjects.filter((p) => Boolean(p.is_featured));
 
-    projects = (recentProjects as Project[]) || [];
+  // 2. Fallback to active projects if none are marked featured yet
+  if (featured.length === 0) {
+    featured = activeProjects.slice(0, 6);
   }
 
   return (
     <HomeClient
-      featuredProjects={projects}
+      featuredProjects={featured}
     />
   );
 }

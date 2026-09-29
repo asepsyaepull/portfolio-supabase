@@ -234,12 +234,13 @@ export default async function ProjectDetailPage({
 
   // Fetch active projects for Previous / Next navigation
   const { data: allDbProjects } = await from("projects")
-    .select("id, name, slug, category, image, description, is_active")
-    .eq("is_active", true)
+    .select("*")
     .order("order_index", { ascending: true })
     .order("created_at", { ascending: false });
 
-  const projectList = allDbProjects || [];
+  const projectList = ((allDbProjects as any[]) || []).filter(
+    (p: any) => p.is_active !== false
+  );
 
   const currentIndex = projectList.findIndex((p: any) => p.slug === slug);
   const prevProject =

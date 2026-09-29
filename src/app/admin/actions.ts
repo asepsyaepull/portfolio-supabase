@@ -60,9 +60,19 @@ export async function toggleProjectActive(
   is_active: boolean
 ) {
   try {
-    const { error } = await from("projects")
+    let { error } = await from("projects")
       .update({ is_active })
       .eq("id", id);
+
+    // Self-heal: If column is_active doesn't exist in remote database yet, add it automatically!
+    if (error && String(error).toLowerCase().includes("is_active")) {
+      const { query: rawQuery } = await import("@/lib/db");
+      await rawQuery("ALTER TABLE projects ADD COLUMN IF NOT EXISTS is_active boolean DEFAULT true;");
+      const retry = await from("projects")
+        .update({ is_active })
+        .eq("id", id);
+      error = retry.error;
+    }
 
     if (error) {
       return { error: String(error) };
