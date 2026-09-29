@@ -57,17 +57,20 @@ export default function GalleryForm({
   onSubmit: (data: GalleryFormData) => Promise<void>;
   isSubmitting?: boolean;
 }) {
+  const rawTools = initialData?.tools;
+  const initialTools = Array.isArray(rawTools)
+    ? rawTools.join(", ")
+    : typeof rawTools === "string"
+    ? rawTools
+    : "Figma, Tailwind CSS";
+
   const [formData, setFormData] = useState<GalleryFormData>({
     title: initialData?.title || "",
     slug: initialData?.slug || "",
     category: initialData?.category || "Web Dashboard",
     description: initialData?.description || "",
     image_url: initialData?.image_url || "",
-    tools: Array.isArray(initialData?.tools)
-      ? initialData.tools.join(", ")
-      : typeof initialData?.tools === "string"
-      ? initialData.tools
-      : "Figma, Tailwind CSS",
+    tools: initialTools,
     aspect_ratio: initialData?.aspect_ratio || "16/10",
     figma_url: initialData?.figma_url || "",
     preview_url: initialData?.preview_url || "",
@@ -76,8 +79,9 @@ export default function GalleryForm({
   });
 
   const [isAutoSlug, setIsAutoSlug] = useState(!initialData?.slug);
+  const initialImageUrl = initialData?.image_url;
   const [inputMode, setInputMode] = useState<"upload" | "url">(
-    initialData?.image_url && !initialData.image_url.startsWith("/uploads/")
+    initialImageUrl && !initialImageUrl.startsWith("/uploads/")
       ? "url"
       : "upload"
   );

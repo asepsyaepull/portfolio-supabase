@@ -383,7 +383,7 @@ export function CinematicFooter({
         {/* Giant background text */}
         <div
           ref={giantTextRef}
-          className="footer-giant-bg-text absolute left-1/2 -bottom-[5vh] text-center whitespace-nowrap z-0 pointer-events-none select-none tracking-tighter"
+          className="footer-giant-bg-text absolute left-1/2 -bottom-[1vh] md:-bottom-[5vh] text-center whitespace-nowrap z-0 pointer-events-none select-none tracking-tighter"
         >
           {giantText}
         </div>
