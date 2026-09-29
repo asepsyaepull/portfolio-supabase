@@ -35,10 +35,11 @@ export const metadata: Metadata = {
     siteName: "Asep Syaepul Portfolio",
     images: [
       {
-        url: "/og-image.jpg",
+        url: "/og-image.png?v=2026",
         width: 1200,
         height: 630,
-        alt: "Asep Syaepul Portfolio Thumbnail",
+        alt: "Asep Syaepul — UI/UX Designer & Frontend Developer Portfolio",
+        type: "image/png",
       },
     ],
     locale: "en_US",
@@ -49,7 +50,7 @@ export const metadata: Metadata = {
     title: "Asep Syaepul | UI/UX Designer & Frontend Developer",
     description:
       "Portfolio of Asep Syaepul — UI/UX Designer & Frontend Developer based in Jakarta. 7+ years crafting and engineering production-grade digital products: enterprise ERP, retail POS, and modern mobile apps.",
-    images: ["/og-image.jpg"],
+    images: ["/og-image.png?v=2026"],
   },
 };
 

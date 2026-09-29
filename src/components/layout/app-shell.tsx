@@ -18,9 +18,11 @@ interface AppShellProps {
 export function AppShell({ children }: AppShellProps) {
   const pathname = usePathname();
 
-  // Hide public navbar and footer on admin / login routes
+  // Hide public navbar and footer on admin / login / og-preview routes
   const isAdminOrLogin =
-    pathname?.startsWith("/admin") || pathname?.startsWith("/login");
+    pathname?.startsWith("/admin") ||
+    pathname?.startsWith("/login") ||
+    pathname?.startsWith("/og-preview");
 
   return (
     <LanguageProvider>
