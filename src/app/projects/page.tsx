@@ -38,8 +38,9 @@ export const metadata: Metadata = {
 export default async function ProjectsPage() {
   const { data: projects, error } = await from("projects")
     .select(
-      "id, name, slug, category, description, image, tech_stack, problem, solution, link, is_featured, role, timeline"
+      "id, name, slug, category, description, image, tech_stack, problem, solution, link, is_featured, is_active, role, timeline"
     )
+    .eq("is_active", true)
     .order("order_index", { ascending: true })
     .order("created_at", { ascending: false });
 
@@ -53,11 +54,12 @@ export default async function ProjectsPage() {
     });
   }
 
-  // Fetch UI gallery shots from PostgreSQL
+  // Fetch active UI gallery shots from PostgreSQL
   const { data: galleries, error: galleryError } = await from("ui_gallery")
     .select(
       "id, title, slug, category, description, image_url, thumbnail_url, tools, aspect_ratio, figma_url, preview_url, is_featured, order_index, created_at"
     )
+    .eq("is_featured", true)
     .order("order_index", { ascending: true })
     .order("created_at", { ascending: false });
 

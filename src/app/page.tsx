@@ -12,10 +12,11 @@ export const metadata: Metadata = {
 };
 
 export default async function Home() {
-  // 1. Fetch featured projects first
+  // 1. Fetch featured projects that are active
   const { data: featuredProjects, error } = await from("projects")
     .select("*")
     .eq("is_featured", true)
+    .eq("is_active", true)
     .order("order_index", { ascending: true })
     .order("created_at", { ascending: false });
 
@@ -25,10 +26,11 @@ export default async function Home() {
 
   let projects: Project[] = (featuredProjects as Project[]) || [];
 
-  // 2. If no projects are explicitly featured yet, fallback to available DB projects
+  // 2. If no projects are explicitly featured yet, fallback to active DB projects
   if (projects.length === 0) {
     const { data: recentProjects, error: recentError } = await from("projects")
       .select("*")
+      .eq("is_active", true)
       .order("order_index", { ascending: true })
       .order("created_at", { ascending: false })
       .limit(6);

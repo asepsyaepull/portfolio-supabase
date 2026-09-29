@@ -228,13 +228,14 @@ export default async function ProjectDetailPage({
     .eq("slug", slug)
     .single();
 
-  if (!project) {
+  if (!project || project.is_active === false) {
     notFound();
   }
 
-  // Fetch all projects for Previous / Next navigation
+  // Fetch active projects for Previous / Next navigation
   const { data: allDbProjects } = await from("projects")
-    .select("id, name, slug, category, image, description")
+    .select("id, name, slug, category, image, description, is_active")
+    .eq("is_active", true)
     .order("order_index", { ascending: true })
     .order("created_at", { ascending: false });
 

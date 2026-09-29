@@ -21,6 +21,7 @@ CREATE TABLE IF NOT EXISTS projects (
   link text,
   icon_name text,
   is_featured boolean DEFAULT false,
+  is_active boolean DEFAULT true,
   order_index integer DEFAULT 0,
   created_at timestamptz DEFAULT now()
 );

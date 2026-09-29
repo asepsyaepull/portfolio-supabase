@@ -1,5 +1,5 @@
 export interface Project {
-  id: number;
+  id: string | number;
   name: string;
   slug: string;
   category: string;
@@ -7,6 +7,7 @@ export interface Project {
   image: string;
   tech_stack: string[];
   is_featured: boolean;
+  is_active?: boolean;
   role?: string;
   timeline?: string;
   tags?: string;

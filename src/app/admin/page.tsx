@@ -26,7 +26,7 @@ export default async function AdminDashboardPage() {
       .eq("is_featured", true),
     from("ui_gallery").select("*", { count: "exact", head: true }),
     from("projects")
-      .select("id, name, slug, category, is_featured, created_at")
+      .select("id, name, slug, category, is_featured, is_active, created_at")
       .order("created_at", { ascending: false })
       .limit(4),
     from("ui_gallery")
@@ -155,11 +155,18 @@ export default async function AdminDashboardPage() {
                     {project.category}
                   </p>
                 </div>
-                {project.is_featured && (
-                  <span className="inline-flex px-2 py-0.5 rounded-full bg-brand/10 text-brand border border-brand/20 text-[10px] font-mono font-bold uppercase">
-                    Featured
-                  </span>
-                )}
+                <div className="flex items-center gap-1.5 shrink-0">
+                  {project.is_active === false && (
+                    <span className="inline-flex px-2 py-0.5 rounded-full bg-zinc-200 dark:bg-zinc-800 text-zinc-600 dark:text-zinc-400 text-[10px] font-mono font-bold uppercase">
+                      Draft
+                    </span>
+                  )}
+                  {project.is_featured && (
+                    <span className="inline-flex px-2 py-0.5 rounded-full bg-brand/10 text-brand border border-brand/20 text-[10px] font-mono font-bold uppercase">
+                      Featured
+                    </span>
+                  )}
+                </div>
               </Link>
             ))}
 

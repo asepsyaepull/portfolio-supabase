@@ -16,6 +16,7 @@ ALTER TABLE projects ADD COLUMN IF NOT EXISTS tools text;
 ALTER TABLE projects ADD COLUMN IF NOT EXISTS image_url text;
 ALTER TABLE projects ADD COLUMN IF NOT EXISTS image_overlap text DEFAULT 'none';
 ALTER TABLE projects ADD COLUMN IF NOT EXISTS icon_name text;
+ALTER TABLE projects ADD COLUMN IF NOT EXISTS is_active boolean DEFAULT true;
 
 -- 3. Buat tabel ui_gallery
 CREATE TABLE IF NOT EXISTS ui_gallery (

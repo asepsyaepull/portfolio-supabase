@@ -19,6 +19,8 @@ import {
   IconBoxAlignTopLeft,
   IconFileCode,
   IconEye,
+  IconStarFilled,
+  IconCheck,
 } from "@tabler/icons-react";
 import {
   SiReact,
@@ -34,6 +36,7 @@ import {
 } from "react-icons/si";
 import MarkdownEditor from "@/components/admin/MarkdownEditor";
 import MarkdownPreviewModal from "@/components/admin/MarkdownPreviewModal";
+import ToggleSwitch from "@/components/ui/ToggleSwitch";
 
 export interface ProjectFormData {
   name: string;
@@ -43,6 +46,7 @@ export interface ProjectFormData {
   image: string;
   tech_stack: string;
   is_featured: boolean;
+  is_active: boolean;
   role: string;
   timeline: string;
   tags: string;
@@ -63,6 +67,7 @@ export const emptyFormData: ProjectFormData = {
   image: "",
   tech_stack: "",
   is_featured: false,
+  is_active: true,
   role: "",
   timeline: "",
   tags: "",
@@ -319,17 +324,108 @@ export default function ProjectForm({
             )}
           </div>
 
-          <div className="flex items-end gap-4 pb-1">
-            <label className="flex items-center gap-3 cursor-pointer select-none">
-              <input
-                type="checkbox"
-                name="is_featured"
-                checked={formData.is_featured}
-                onChange={handleChange}
-                className="w-5 h-5 rounded text-brand focus:ring-brand accent-[#F0531C] bg-zinc-50 dark:bg-zinc-800 border-zinc-200 dark:border-zinc-700"
+          {/* Dual Toggle Controls: Project Status & Featured */}
+          <div className="md:col-span-2 grid grid-cols-1 sm:grid-cols-2 gap-4 pt-2 pb-1">
+            {/* 1. Project Active Status */}
+            <div
+              onClick={() => {
+                setIsDirty(true);
+                setFormData((prev) => ({
+                  ...prev,
+                  is_active: prev.is_active === false ? true : false,
+                }));
+              }}
+              className={`p-4 rounded-2xl border transition-all cursor-pointer flex items-center justify-between gap-3 ${
+                formData.is_active !== false
+                  ? "bg-emerald-500/5 dark:bg-emerald-500/10 border-emerald-500/30 dark:border-emerald-500/30"
+                  : "bg-zinc-50 dark:bg-zinc-900/60 border-zinc-200 dark:border-zinc-800"
+              }`}
+            >
+              <div className="min-w-0 pr-2">
+                <div className="flex items-center gap-2">
+                  <span className="text-sm font-bold text-zinc-900 dark:text-white">
+                    Status Proyek
+                  </span>
+                  <span
+                    className={`inline-flex items-center px-2 py-0.5 rounded-full text-[10px] font-mono font-bold uppercase tracking-wider ${
+                      formData.is_active !== false
+                        ? "bg-emerald-500/20 text-emerald-600 dark:text-emerald-400"
+                        : "bg-zinc-200 dark:bg-zinc-800 text-zinc-500"
+                    }`}
+                  >
+                    {formData.is_active !== false ? "Aktif / Live" : "Nonaktif / Draft"}
+                  </span>
+                </div>
+                <p className="text-xs text-zinc-500 dark:text-zinc-400 mt-1">
+                  {formData.is_active !== false
+                    ? "Tampil di website publik dan sitemap."
+                    : "Disembunyikan dari publik (hanya terlihat admin)."}
+                </p>
+              </div>
+
+              <ToggleSwitch
+                checked={formData.is_active !== false}
+                onChange={(checked) => {
+                  setIsDirty(true);
+                  setFormData((prev) => ({ ...prev, is_active: checked }));
+                }}
+                colorScheme="emerald"
+                size="md"
+                ariaLabel="Toggle Status Proyek"
+                iconOn={<IconCheck size={12} className="text-emerald-600 stroke-[3]" />}
               />
-              <span className={labelClass}>⭐ Featured (tampil di homepage)</span>
-            </label>
+            </div>
+
+            {/* 2. Featured Project */}
+            <div
+              onClick={() => {
+                setIsDirty(true);
+                setFormData((prev) => ({
+                  ...prev,
+                  is_featured: !prev.is_featured,
+                }));
+              }}
+              className={`p-4 rounded-2xl border transition-all cursor-pointer flex items-center justify-between gap-3 ${
+                formData.is_featured
+                  ? "bg-amber-500/5 dark:bg-amber-500/10 border-amber-500/30 dark:border-amber-500/30"
+                  : "bg-zinc-50 dark:bg-zinc-900/60 border-zinc-200 dark:border-zinc-800"
+              }`}
+            >
+              <div className="min-w-0 pr-2">
+                <div className="flex items-center gap-2">
+                  <span className="text-sm font-bold text-zinc-900 dark:text-white flex items-center gap-1.5">
+                    <span>⭐</span>
+                    <span>Karya Unggulan</span>
+                  </span>
+                  <span
+                    className={`inline-flex items-center px-2 py-0.5 rounded-full text-[10px] font-mono font-bold uppercase tracking-wider ${
+                      formData.is_featured
+                        ? "bg-amber-500/20 text-amber-600 dark:text-amber-400"
+                        : "bg-zinc-200 dark:bg-zinc-800 text-zinc-500"
+                    }`}
+                  >
+                    {formData.is_featured ? "Featured" : "Standar"}
+                  </span>
+                </div>
+                <p className="text-xs text-zinc-500 dark:text-zinc-400 mt-1">
+                  {formData.is_featured
+                    ? "Tampil di Beranda dan filter Featured teratas."
+                    : "Hanya tampil di daftar proyek biasa."}
+                </p>
+              </div>
+
+              <ToggleSwitch
+                checked={Boolean(formData.is_featured)}
+                onChange={(checked) => {
+                  setIsDirty(true);
+                  setFormData((prev) => ({ ...prev, is_featured: checked }));
+                }}
+                colorScheme="amber"
+                size="md"
+                ariaLabel="Toggle Featured"
+                iconOn={<IconStarFilled size={11} className="text-amber-500" />}
+              />
+            </div>
           </div>
 
           <div className="flex flex-col gap-1.5 md:col-span-2">

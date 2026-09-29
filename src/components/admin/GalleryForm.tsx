@@ -16,6 +16,7 @@ import {
 } from "@tabler/icons-react";
 import { toast } from "sonner";
 import { type UIGallery } from "@/types/database";
+import ToggleSwitch from "@/components/ui/ToggleSwitch";
 
 export interface GalleryFormData {
   title: string;
@@ -651,28 +652,51 @@ export default function GalleryForm({
             </p>
           </div>
 
-          {/* Featured Toggle */}
+          {/* Featured Toggle Card */}
           <div className="space-y-2 flex flex-col justify-end">
-            <label htmlFor="gallery-is-featured" className="flex items-center gap-3 p-4 rounded-xl bg-zinc-50 dark:bg-zinc-900/80 border border-zinc-200 dark:border-zinc-800 cursor-pointer">
-              <input
-                id="gallery-is-featured"
-                name="is_featured"
-                type="checkbox"
-                checked={formData.is_featured}
-                onChange={(e) =>
-                  setFormData({ ...formData, is_featured: e.target.checked })
-                }
-                className="w-5 h-5 rounded text-brand focus:ring-brand accent-[#F0531C]"
-              />
+            <div
+              onClick={() =>
+                setFormData({ ...formData, is_featured: !formData.is_featured })
+              }
+              className={`flex items-center justify-between gap-3 p-4 rounded-2xl border transition-all cursor-pointer ${
+                formData.is_featured
+                  ? "bg-brand/5 dark:bg-brand/10 border-brand/30"
+                  : "bg-zinc-50 dark:bg-zinc-900/60 border-zinc-200 dark:border-zinc-800"
+              }`}
+            >
               <div>
-                <span className="text-sm font-semibold text-zinc-900 dark:text-white block">
-                  Tampilkan di Galeri Publik
-                </span>
-                <span className="text-xs text-zinc-500 dark:text-zinc-400">
-                  Jika tidak dicentang, shot ini akan disembunyikan dari pengunjung.
+                <div className="flex items-center gap-2">
+                  <span className="text-sm font-bold text-zinc-900 dark:text-white">
+                    Tampilkan di Galeri Publik
+                  </span>
+                  <span
+                    className={`inline-flex items-center px-2 py-0.5 rounded-full text-[10px] font-mono font-bold uppercase tracking-wider ${
+                      formData.is_featured
+                        ? "bg-brand/15 text-brand"
+                        : "bg-zinc-200 dark:bg-zinc-800 text-zinc-500"
+                    }`}
+                  >
+                    {formData.is_featured ? "Aktif / Live" : "Hidden"}
+                  </span>
+                </div>
+                <span className="text-xs text-zinc-500 dark:text-zinc-400 mt-1 block">
+                  {formData.is_featured
+                    ? "Shot ini akan tampil di galeri portofolio publik."
+                    : "Shot ini disembunyikan dari pengunjung galeri."}
                 </span>
               </div>
-            </label>
+
+              <ToggleSwitch
+                checked={formData.is_featured}
+                onChange={(checked) =>
+                  setFormData({ ...formData, is_featured: checked })
+                }
+                colorScheme="brand"
+                size="md"
+                ariaLabel="Toggle Tampilkan di Galeri Publik"
+                iconOn={<IconCheck size={12} className="text-white stroke-[3]" />}
+              />
+            </div>
           </div>
         </div>
       </div>

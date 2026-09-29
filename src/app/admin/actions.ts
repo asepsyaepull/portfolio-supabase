@@ -31,3 +31,72 @@ export async function updateOrderIndex(
 
   return { error: null };
 }
+
+export async function toggleProjectFeatured(
+  id: string | number,
+  is_featured: boolean
+) {
+  try {
+    const { error } = await from("projects")
+      .update({ is_featured })
+      .eq("id", id);
+
+    if (error) {
+      return { error: String(error) };
+    }
+
+    revalidatePath("/admin/projects");
+    revalidatePath("/admin");
+    revalidatePath("/projects");
+    revalidatePath("/");
+    return { error: null, is_featured };
+  } catch (err: any) {
+    return { error: err.message || "Failed to update project featured status" };
+  }
+}
+
+export async function toggleProjectActive(
+  id: string | number,
+  is_active: boolean
+) {
+  try {
+    const { error } = await from("projects")
+      .update({ is_active })
+      .eq("id", id);
+
+    if (error) {
+      return { error: String(error) };
+    }
+
+    revalidatePath("/admin/projects");
+    revalidatePath("/admin");
+    revalidatePath("/projects");
+    revalidatePath("/");
+    return { error: null, is_active };
+  } catch (err: any) {
+    return { error: err.message || "Failed to update project active status" };
+  }
+}
+
+export async function toggleGalleryFeatured(
+  id: string | number,
+  is_featured: boolean
+) {
+  try {
+    const { error } = await from("ui_gallery")
+      .update({ is_featured })
+      .eq("id", id);
+
+    if (error) {
+      return { error: String(error) };
+    }
+
+    revalidatePath("/admin/gallery");
+    revalidatePath("/admin");
+    revalidatePath("/projects");
+    revalidatePath("/");
+    return { error: null, is_featured };
+  } catch (err: any) {
+    return { error: err.message || "Failed to update gallery featured status" };
+  }
+}

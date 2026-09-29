@@ -9,7 +9,7 @@ export async function getProjects() {
 
 export async function getProjectsList() {
   return from("projects")
-    .select("id, name, slug, category, is_featured, created_at")
+    .select("id, name, slug, category, is_featured, is_active, created_at")
     .order("created_at", { ascending: false });
 }
 

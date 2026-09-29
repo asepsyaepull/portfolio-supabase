@@ -34,7 +34,9 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   ];
 
   try {
-    const { data: projects } = await from("projects").select("slug, updated_at");
+    const { data: projects } = await from("projects")
+      .select("slug, updated_at, is_active")
+      .eq("is_active", true);
 
     if (projects && projects.length > 0) {
       const projectRoutes = projects

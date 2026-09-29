@@ -27,11 +27,13 @@ import {
   IconBrandFigma,
   IconExternalLink,
   IconEye,
+  IconCheck,
 } from "@tabler/icons-react";
 import DeleteGalleryButton from "@/components/admin/DeleteGalleryButton";
-import { updateOrderIndex } from "@/app/admin/actions";
+import { updateOrderIndex, toggleGalleryFeatured } from "@/app/admin/actions";
 import { toast } from "sonner";
 import { type UIGallery } from "@/types/database";
+import ToggleSwitch from "@/components/ui/ToggleSwitch";
 
 export default function SortableGalleryList({
   initialGalleries,
@@ -152,6 +154,38 @@ function SortableGalleryRow({ item }: { item: UIGallery }) {
     isDragging,
   } = useSortable({ id: item.id });
 
+  const router = useRouter();
+  const [isFeatured, setIsFeatured] = useState(item.is_featured !== false);
+  const [isToggling, setIsToggling] = useState(false);
+
+  useEffect(() => {
+    setIsFeatured(item.is_featured !== false);
+  }, [item.is_featured]);
+
+  const handleToggle = async (nextVal: boolean) => {
+    setIsFeatured(nextVal);
+    setIsToggling(true);
+    try {
+      const res = await toggleGalleryFeatured(item.id, nextVal);
+      if (res.error) {
+        setIsFeatured(!nextVal);
+        toast.error(`Gagal mengubah status: ${res.error}`);
+      } else {
+        toast.success(
+          nextVal
+            ? `Shot "${item.title}" kini aktif di galeri publik`
+            : `Shot "${item.title}" disembunyikan dari galeri`
+        );
+        router.refresh();
+      }
+    } catch {
+      setIsFeatured(!nextVal);
+      toast.error("Terjadi kesalahan saat mengubah status galeri");
+    } finally {
+      setIsToggling(false);
+    }
+  };
+
   const style = {
     transform: CSS.Translate.toString(transform),
     transition,
@@ -217,18 +251,33 @@ function SortableGalleryRow({ item }: { item: UIGallery }) {
         )}
       </div>
 
-      {/* Col 3: Featured status */}
-      <div className="col-span-3 md:col-span-2 flex justify-center">
-        {item.is_featured !== false ? (
-          <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-mono font-bold bg-brand/10 text-brand border border-brand/20">
-            <span className="w-1.5 h-1.5 rounded-full bg-brand" />
-            Active
+      {/* Col 3: Featured status interactive toggle */}
+      <div className="col-span-3 md:col-span-2 flex items-center justify-center">
+        <div className="flex items-center gap-2">
+          <ToggleSwitch
+            checked={isFeatured}
+            onChange={handleToggle}
+            loading={isToggling}
+            size="sm"
+            colorScheme="brand"
+            ariaLabel={`Toggle status ${item.title}`}
+            title={
+              isFeatured
+                ? "Tampil di Galeri Publik. Klik untuk sembunyikan."
+                : "Disembunyikan. Klik untuk tampilkan di galeri."
+            }
+            iconOn={<IconCheck size={9} className="text-white stroke-[3]" />}
+          />
+          <span
+            className={`text-[11px] font-mono font-medium hidden sm:inline ${
+              isFeatured
+                ? "text-brand font-bold"
+                : "text-zinc-400"
+            }`}
+          >
+            {isFeatured ? "Active" : "Hidden"}
           </span>
-        ) : (
-          <span className="inline-flex items-center px-2.5 py-1 rounded-full text-xs font-mono font-medium bg-zinc-100 dark:bg-zinc-800 text-zinc-500">
-            Hidden
-          </span>
-        )}
+        </div>
       </div>
 
       {/* Col 4: Action Buttons */}

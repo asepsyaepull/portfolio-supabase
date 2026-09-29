@@ -24,6 +24,7 @@ export default function NewProjectPage() {
         image: data.image,
         tech_stack: techStackArray,
         is_featured: data.is_featured,
+        is_active: data.is_active !== false,
         role: data.role,
         timeline: data.timeline,
         tags: data.tags,

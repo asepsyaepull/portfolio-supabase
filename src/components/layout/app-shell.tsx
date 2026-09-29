@@ -10,6 +10,7 @@ import { ScrollReset } from "./scroll-reset";
 import { HelloPreloader } from "@/components/ui/hello-preloader";
 
 import { LanguageProvider } from "@/context/language-context";
+import { cn } from "@/lib/utils";
 
 interface AppShellProps {
   children: React.ReactNode;
@@ -24,10 +25,17 @@ export function AppShell({ children }: AppShellProps) {
     pathname?.startsWith("/login") ||
     pathname?.startsWith("/og-preview");
 
+  const isOgPreview = pathname?.startsWith("/og-preview");
+
   return (
     <LanguageProvider>
       <ScrollReset />
-      <div className="relative flex min-h-screen flex-col bg-[#F8FAFC] overflow-x-clip">
+      <div
+        className={cn(
+          "relative flex min-h-screen flex-col overflow-x-clip",
+          isOgPreview ? "bg-[#0D1117]" : "bg-[#F8FAFC]"
+        )}
+      >
         <a
           href="#main-content"
           className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[100] focus:rounded-lg focus:bg-brand focus:px-4 focus:py-2 focus:text-sm focus:font-bold focus:text-white"
