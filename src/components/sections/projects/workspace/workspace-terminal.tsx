@@ -132,7 +132,7 @@ export function WorkspaceTerminal({
           <div className={getLogClass(currentLog.cls)}>
             <b className="mr-1.5 opacity-70">{currentLog.b}</b>
             <span>{typedCurrentText}</span>
-            <span className="ml-1 inline-block h-3 w-[2px] animate-pulse bg-brand" />
+            <span className="ml-1 inline-block h-3 w-[2px] bg-brand" />
           </div>
         )}
       </div>

@@ -229,7 +229,7 @@ export default function ProjectsClient({
           </div>
 
           <div className="font-mono text-xs text-zinc-500 dark:text-zinc-400 flex items-center gap-2">
-            <span className="w-2 h-2 rounded-full bg-brand/80 animate-pulse" />
+            <span className="w-2 h-2 rounded-full bg-brand/80" />
             <span>
               {viewMode === "CASE_STUDIES"
                 ? `${projects.length} Production Case Studies`
@@ -864,7 +864,7 @@ function StudioCard({
                     />
                   ) : (
                     <div className="w-full h-full flex flex-col items-center justify-center gap-2 bg-gradient-to-br from-zinc-200 dark:from-zinc-900 to-zinc-100 dark:to-zinc-950 text-zinc-400 dark:text-zinc-600">
-                      <IconLayoutGrid className="w-8 h-8 opacity-40 animate-pulse text-brand" />
+                      <IconLayoutGrid className="w-8 h-8 opacity-40 text-brand" />
                       <span className="font-mono text-xs uppercase tracking-wider">
                         Studio Canvas
                       </span>

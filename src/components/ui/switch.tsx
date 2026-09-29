@@ -1,7 +1,6 @@
 "use client";
 
 import React from "react";
-import { motion } from "framer-motion";
 import { cn } from "@/lib/utils";
 
 interface SwitchProps {
@@ -9,16 +8,18 @@ interface SwitchProps {
   onCheckedChange: () => void;
   label?: string;
   className?: string;
+  disabled?: boolean;
 }
 
 /**
- * Lever toggle switch with smooth spring layout animation.
+ * Accessible lever toggle switch with smooth hardware-accelerated CSS transition.
  */
 export function Switch({
   checked,
   onCheckedChange,
   label = "Toggle switch",
   className,
+  disabled = false,
 }: SwitchProps) {
   return (
     <button
@@ -26,19 +27,27 @@ export function Switch({
       role="switch"
       aria-checked={checked}
       aria-label={label}
-      onClick={onCheckedChange}
+      disabled={disabled}
+      onClick={(e) => {
+        e.stopPropagation();
+        if (!disabled) {
+          onCheckedChange();
+        }
+      }}
       className={cn(
-        "relative h-6 w-11 shrink-0 rounded-full border transition-colors duration-300 focus:outline-none focus-visible:ring-2 focus-visible:ring-brand",
-        checked ? "border-brand bg-brand" : "border-ink/20 bg-[#F1F6FA]",
+        "relative inline-flex h-6 w-11 shrink-0 cursor-pointer rounded-full p-0.5 transition-colors duration-200 ease-in-out focus:outline-none focus-visible:ring-2 focus-visible:ring-brand focus-visible:ring-offset-2",
+        checked
+          ? "bg-brand"
+          : "bg-zinc-300 dark:bg-zinc-700",
+        disabled && "opacity-40 cursor-not-allowed pointer-events-none",
         className
       )}
     >
-      <motion.span
-        layout
-        transition={{ type: "spring", stiffness: 500, damping: 30 }}
+      <span
+        aria-hidden="true"
         className={cn(
-          "absolute top-[3px] left-[3px] h-4 w-4 rounded-full bg-white shadow-md",
-          checked && "translate-x-5"
+          "pointer-events-none inline-block h-5 w-5 rounded-full bg-white shadow-md ring-0 transition-transform duration-200 ease-in-out",
+          checked ? "translate-x-5" : "translate-x-0"
         )}
       />
     </button>

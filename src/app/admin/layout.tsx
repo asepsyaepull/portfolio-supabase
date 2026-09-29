@@ -99,7 +99,7 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
             className="flex items-center justify-between px-3.5 py-2.5 rounded-xl text-[13px] font-sans font-medium text-zinc-600 dark:text-zinc-400 hover:text-brand hover:bg-zinc-100 dark:hover:bg-zinc-900 transition-colors border border-transparent hover:border-zinc-200 dark:hover:border-zinc-800"
           >
             <span className="flex items-center gap-2">
-              <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
+              <span className="w-2 h-2 rounded-full bg-emerald-500" />
               <span>Live Website</span>
             </span>
             <IconArrowUpRight size={14} className="text-zinc-400" />

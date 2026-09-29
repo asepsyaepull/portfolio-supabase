@@ -5,7 +5,7 @@ import type { Project } from "@/types/database";
 import dynamic from "next/dynamic";
 
 const SectionSkeleton = () => (
-  <div className="m-4 min-h-[60vh] animate-pulse rounded-lg bg-white/40" />
+  <div className="m-4 min-h-[60vh] rounded-lg bg-zinc-100/40 dark:bg-zinc-900/40" />
 );
 
 const WhatsupSection = dynamic(

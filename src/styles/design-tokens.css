@@ -431,7 +431,7 @@
 }
 
 .qhero-tagline-pulse {
-  animation: qhero-pulse 2s ease-in-out infinite;
+  animation: none;
 }
 
 /* Accessibility: Reduced motion query */
@@ -440,8 +440,7 @@
   .omd-confetto,
   .qhero-glitch,
   .qhero-glitch::before,
-  .qhero-glitch::after,
-  .qhero-tagline-pulse {
+  .qhero-glitch::after {
     animation: none !important;
   }
 }

@@ -30,7 +30,7 @@ export const projectsPageId: ProjectsPageDictionary = {
   ctaButton: "Hubungi Saya",
   viewDetails: "Lihat Detail",
   tabCaseStudies: "Studi Kasus",
-  tabGallery: "Galeri UI & Eksplorasi Desain",
+  tabGallery: "Eksplorasi Desain",
   galleryBadge: "/ EKSPLORASI DESAIN & CRAFT",
   galleryTitlePrefix: "Visual",
   galleryTitleHighlight: "Archive.",

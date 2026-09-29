@@ -328,7 +328,7 @@ export function AgentPipelineFlow({
           >
             <div className="flex items-center justify-between font-mono text-[9.5px] font-bold uppercase tracking-wider text-brand">
               <span>{cfg.node3.tag}</span>
-              <span className="flex h-1.5 w-1.5 rounded-full bg-brand animate-pulse" />
+              <span className="flex h-1.5 w-1.5 rounded-full bg-brand" />
             </div>
 
             {/* Title with 3 Animated Loading Dots */}
@@ -367,7 +367,7 @@ export function AgentPipelineFlow({
               >
                 <span
                   className={cn(
-                    "h-1.5 w-1.5 shrink-0 rounded-full animate-pulse",
+                    "h-1.5 w-1.5 shrink-0 rounded-full",
                     branch.statusColor === "green"
                       ? "bg-emerald-500 shadow-[0_0_6px_rgba(16,185,129,0.5)]"
                       : branch.statusColor === "yellow"

@@ -54,7 +54,7 @@ export function EmptyState({
       {/* Status Badge */}
       {badge && (
         <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-zinc-100 dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 text-zinc-600 dark:text-zinc-400 font-mono text-[10.5px] font-bold tracking-widest uppercase mb-5 select-none">
-          <span className="w-1.5 h-1.5 rounded-full bg-amber-500 animate-pulse" />
+          <span className="w-1.5 h-1.5 rounded-full bg-amber-500" />
           <span>{badge}</span>
         </div>
       )}

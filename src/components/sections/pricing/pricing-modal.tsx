@@ -302,7 +302,7 @@ ${s.closing}`;
                   <div className="flex flex-col items-start md:items-end gap-3">
                     {/* Founding Rate Pill */}
                     <div className="inline-flex items-center gap-2 rounded-full bg-white/80 px-3.5 py-1 text-xs font-medium text-ink shadow-sm backdrop-blur-sm">
-                      <span className="h-2 w-2 rounded-full bg-[#F0531C] animate-pulse" />
+                      <span className="h-2 w-2 rounded-full bg-[#F0531C]" />
                       <span className="font-mono font-bold text-[11px]">
                         {urgent ? t.pricing.prioritySlot : t.pricing.specialRate}
                       </span>

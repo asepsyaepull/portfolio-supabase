@@ -19,7 +19,7 @@ export function QuordixHeroTagline({ tagline, className }: QuordixHeroTaglinePro
   return (
     <span
       className={cn(
-        "qhero-tagline-pulse inline-flex items-center gap-1.5 text-xs sm:text-sm font-mono font-bold uppercase tracking-[0.28em] text-brand select-none mb-6",
+        "inline-flex items-center gap-1.5 text-xs sm:text-sm font-mono font-bold uppercase tracking-[0.28em] text-brand select-none mb-6",
         className
       )}
     >
