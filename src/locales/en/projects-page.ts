@@ -32,8 +32,8 @@ export const projectsPageEn: ProjectsPageDictionary = {
   tabCaseStudies: "Case Studies",
   tabGallery: "Design Explorations",
   galleryBadge: "/ DESIGN EXPLORATIONS & CRAFT",
-  galleryTitlePrefix: "Visual",
-  galleryTitleHighlight: "Archive.",
+  galleryTitlePrefix: "Design",
+  galleryTitleHighlight: "Explorations.",
   galleryDescription:
     "A curated collection of interface explorations, mobile & dashboard concepts, and component craft designed with typographic precision and aesthetic polish.",
   allGalleryFilter: "All Designs",

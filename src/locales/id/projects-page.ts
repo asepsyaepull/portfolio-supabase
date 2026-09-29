@@ -32,8 +32,8 @@ export const projectsPageId: ProjectsPageDictionary = {
   tabCaseStudies: "Studi Kasus",
   tabGallery: "Eksplorasi Desain",
   galleryBadge: "/ EKSPLORASI DESAIN & CRAFT",
-  galleryTitlePrefix: "Visual",
-  galleryTitleHighlight: "Archive.",
+  galleryTitlePrefix: "Eksplorasi",
+  galleryTitleHighlight: "Desain.",
   galleryDescription:
     "Kompilasi eksplorasi visual antarmuka, konsep mobile & web dashboard, serta komponen desain yang dikerjakan dengan presisi tipografi dan hierarki estetik.",
   allGalleryFilter: "Semua Desain",
